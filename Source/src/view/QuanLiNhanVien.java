@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -27,6 +28,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import process.*;
 
 public class QuanLiNhanVien extends JFrame implements ActionListener {
 
@@ -183,10 +185,6 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		tools.add(tools2, BorderLayout.SOUTH);
 		
 		JButton btnAdd = new JButton("Add");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		tools2.add(btnAdd);
 		
 		JButton btnUpdate = new JButton("Update");
@@ -203,20 +201,25 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		tools2.add(btnFind);
 		//nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
 		
-		if (loaddata == 1) {
+//		if (loaddata == 1) {
 			loaddata();
-			loaddata = 0;
-		}
+//			loaddata = 0;
+//		}
 	}
 	
 	public void loaddata() {
-		/*
-		Vector<NguoiChoi> nguoiChois = iuds.getListNguoiChoi("");
-		for (int i = 0; i < nguoiChois.size(); i++) {
-			Object[] oPerson = {nguoiChois.get(i).getName(),nguoiChois.get(i).getDate(),nguoiChois.get(i).getSex(),nguoiChois.get(i).getAddr()};
+		NhanVienProcess nhanVien = new NhanVienProcess();
+		Vector<NhanVien> nhanVien2 = nhanVien.getListNhanVien();
+		String sex;
+		for (int i = 0; i < nhanVien2.size(); i++) {
+			if (nhanVien2.get(i).getSex() == 1) {
+				sex = "Nam";
+			}else sex = "Nu";
+			Object[] oPerson = {nhanVien2.get(i).getpK(),nhanVien2.get(i).getName(),sex,nhanVien2.get(i).getDate(),nhanVien2.get(i).getPhone(),nhanVien2.get(i).getTrangthai()};
 			model.insertRow(0, oPerson);
 		}
-		*/
+		model.fireTableDataChanged();
+		
 	}
 	public void ChangeLanguage() {
 		//nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("name"));
