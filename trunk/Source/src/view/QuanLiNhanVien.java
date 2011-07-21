@@ -10,6 +10,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -32,29 +36,20 @@ public class QuanLiNhanVien extends JFrame {
 	private JTextField textField_Find;
 	private JScrollPane danhSach;
 	private JTable nhanVien;
+	private Integer loaddata = 1; // neu bang 1 thi load database vao table
+	static Locale locale;
+	ResourceBundle bundle;
 	
 	DefaultTableModel model;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					QuanLiNhanVien frame = new QuanLiNhanVien();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
+	
 	/**
 	 * Create the frame.
 	 */
 	public QuanLiNhanVien() {
+		locale = new Locale("vi", "VN");
+		bundle = ResourceBundle.getBundle("Project1/Languages",locale); // NOI18N
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		
@@ -75,6 +70,12 @@ public class QuanLiNhanVien extends JFrame {
 		
 		JMenu mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
+		
+		
+		ButtonGroup group2 = new ButtonGroup();
+		anh = new JRadioButtonMenuItem("English",false);
+		viet = new JRadioButtonMenuItem("Tieng Viet",true);
+		
 		
 		JRadioButtonMenuItem rdbtnmntmSortByAge = new JRadioButtonMenuItem("Sort by Age");
 		mnTools.add(rdbtnmntmSortByAge);
@@ -189,6 +190,34 @@ public class QuanLiNhanVien extends JFrame {
 		
 		JButton btnFind = new JButton("Find");
 		tools2.add(btnFind);
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
 	}
+	public void ChangeLanguage() {
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+	}
+
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					QuanLiNhanVien frame = new QuanLiNhanVien();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	
 
 }
