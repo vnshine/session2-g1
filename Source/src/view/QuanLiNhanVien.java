@@ -25,8 +25,10 @@ import javax.swing.JSeparator;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.border.BevelBorder;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class QuanLiNhanVien extends JFrame {
+public class QuanLiNhanVien extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField textField_PK;
@@ -36,6 +38,7 @@ public class QuanLiNhanVien extends JFrame {
 	private JTextField textField_Find;
 	private JScrollPane danhSach;
 	private JTable nhanVien;
+	private JRadioButtonMenuItem lenUS,lviVN;
 	private Integer loaddata = 1; // neu bang 1 thi load database vao table
 	static Locale locale;
 	ResourceBundle bundle;
@@ -47,8 +50,8 @@ public class QuanLiNhanVien extends JFrame {
 	 * Create the frame.
 	 */
 	public QuanLiNhanVien() {
-		locale = new Locale("vi", "VN");
-		bundle = ResourceBundle.getBundle("Project1/Languages",locale); // NOI18N
+		locale = new Locale("en", "US");
+		bundle = ResourceBundle.getBundle("view/Languages",locale); // NOI18N
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -71,12 +74,6 @@ public class QuanLiNhanVien extends JFrame {
 		JMenu mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
 		
-		
-		ButtonGroup group2 = new ButtonGroup();
-		anh = new JRadioButtonMenuItem("English",false);
-		viet = new JRadioButtonMenuItem("Tieng Viet",true);
-		
-		
 		JRadioButtonMenuItem rdbtnmntmSortByAge = new JRadioButtonMenuItem("Sort by Age");
 		mnTools.add(rdbtnmntmSortByAge);
 		
@@ -89,11 +86,16 @@ public class QuanLiNhanVien extends JFrame {
 		JMenu mnLanguages = new JMenu("Languages");
 		mnTools.add(mnLanguages);
 		
-		JRadioButtonMenuItem rdbtnmntmEnglish = new JRadioButtonMenuItem("English");
-		mnLanguages.add(rdbtnmntmEnglish);
-		
-		JRadioButtonMenuItem rdbtnmntmVietnam = new JRadioButtonMenuItem("VietNam");
-		mnLanguages.add(rdbtnmntmVietnam);
+		ButtonGroup group2 = new ButtonGroup();
+		lenUS = new JRadioButtonMenuItem("English",true);
+		lenUS.addActionListener(this);
+			
+		lviVN = new JRadioButtonMenuItem("Tieng Viet",false);
+		lviVN.addActionListener(this);
+		group2.add(lenUS);
+		group2.add(lviVN);
+		mnLanguages.add(lenUS);
+		mnLanguages.add(lviVN);
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -191,13 +193,37 @@ public class QuanLiNhanVien extends JFrame {
 		JButton btnFind = new JButton("Find");
 		tools2.add(btnFind);
 		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		
+		if (loaddata == 1) {
+			loaddata();
+			loaddata = 0;
+		}
+	}
+	
+	public void loaddata() {
+		/*
+		Vector<NguoiChoi> nguoiChois = iuds.getListNguoiChoi("");
+		for (int i = 0; i < nguoiChois.size(); i++) {
+			Object[] oPerson = {nguoiChois.get(i).getName(),nguoiChois.get(i).getDate(),nguoiChois.get(i).getSex(),nguoiChois.get(i).getAddr()};
+			model.insertRow(0, oPerson);
+		}
+		*/
 	}
 	public void ChangeLanguage() {
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("name"));
+		nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("age"));
 		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
 		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
 		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if (lviVN.isSelected()) {
+			
+			ChangeLanguage();
+		}
 	}
 
 	
