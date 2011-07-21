@@ -211,11 +211,13 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		NhanVienProcess nhanVien = new NhanVienProcess();
 		Vector<NhanVien> nhanVien2 = nhanVien.getListNhanVien();
 		String sex;
+		model.getDataVector().removeAllElements();
 		for (int i = 0; i < nhanVien2.size(); i++) {
 			if (nhanVien2.get(i).getSex() == 1) {
 				sex = "Nam";
 			}else sex = "Nu";
 			Object[] oPerson = {nhanVien2.get(i).getpK(),nhanVien2.get(i).getName(),sex,nhanVien2.get(i).getDate(),nhanVien2.get(i).getPhone(),nhanVien2.get(i).getTrangthai()};
+
 			model.insertRow(0, oPerson);
 		}
 		model.fireTableDataChanged();
