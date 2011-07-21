@@ -44,14 +44,15 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 	ResourceBundle bundle;
 	
 	DefaultTableModel model;
+	private JTextField textField_Status;
 	
 	
 	/**
 	 * Create the frame.
 	 */
 	public QuanLiNhanVien() {
-		locale = new Locale("en", "US");
-		bundle = ResourceBundle.getBundle("view/Languages",locale); // NOI18N
+		//locale = new Locale("en", "US");
+		//bundle = ResourceBundle.getBundle("view/Languages",locale); // NOI18N
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -174,10 +175,18 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		JLabel lblStatus = new JLabel("Status:");
 		tools1.add(lblStatus);
 		
+		textField_Status = new JTextField();
+		tools1.add(textField_Status);
+		textField_Status.setColumns(10);
+		
 		JPanel tools2 = new JPanel();
 		tools.add(tools2, BorderLayout.SOUTH);
 		
 		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		tools2.add(btnAdd);
 		
 		JButton btnUpdate = new JButton("Update");
@@ -192,7 +201,7 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		
 		JButton btnFind = new JButton("Find");
 		tools2.add(btnFind);
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		//nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
 		
 		if (loaddata == 1) {
 			loaddata();
@@ -210,11 +219,8 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		*/
 	}
 	public void ChangeLanguage() {
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("name"));
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("age"));
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
-		nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
+		//nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("name"));
+		//nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("age"));
 	}
 	
 	@Override
