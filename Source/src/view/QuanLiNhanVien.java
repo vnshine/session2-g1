@@ -121,11 +121,18 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		banner.add(editorPane);
 		
 		danhSach = new JScrollPane();
+		danhSach.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		Object[][] rowData = {};
 		String[] columnNames = {"PK","Name","Sex","Date","Phone Number","Status Number"};
 		model = new DefaultTableModel(rowData, columnNames); // assign data for table
 		nhanVien = new JTable(model);
-		nhanVien.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		nhanVien.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		nhanVien.getColumnModel().getColumn(0).setPreferredWidth(60);
+		nhanVien.getColumnModel().getColumn(1).setPreferredWidth(220);
+		nhanVien.getColumnModel().getColumn(2).setPreferredWidth(60);
+		nhanVien.getColumnModel().getColumn(3).setPreferredWidth(210);
+		nhanVien.getColumnModel().getColumn(4).setPreferredWidth(110);
+		nhanVien.getColumnModel().getColumn(5).setPreferredWidth(92);
 		nhanVien.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		danhSach.setViewportView(nhanVien);
 		contentPane.add(danhSach, BorderLayout.CENTER);
@@ -147,7 +154,7 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		toolsChonTrang.add(textField_SoTrang);
 		textField_SoTrang.setColumns(2);
 		
-		JButton btnNext = new JButton("Next >>");
+		JButton btnNext = new JButton("  Next >> ");
 		toolsChonTrang.add(btnNext);
 		
 		JPanel tools1 = new JPanel();
