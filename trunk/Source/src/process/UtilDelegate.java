@@ -8,7 +8,7 @@ public class UtilDelegate {
 		Connection con=null;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			String connectionUrl = "jdbc:sqlserver://localhost:1433;DatabaseName=XS;user=sa;password=123456";
+			String connectionUrl = "jdbc:sqlserver://localhost:1433;DatabaseName=NhatQuang;user=sa;password=123456";
 			 con = DriverManager.getConnection(connectionUrl);
 		}catch (ClassNotFoundException cE) {
 			System.out.println("Class Not Found Exception: "+ cE.toString());

@@ -33,7 +33,7 @@ public class NhanVienProcess {
 				person.setDate(date);
 				person.setPhone(phone);
 				person.setTrangthai(status);
-				System.out.println(name);
+				//System.out.println(name);
 				result.add(person);
 			}
 			
@@ -57,6 +57,20 @@ public class NhanVienProcess {
 				callP.setString(4,date);
 				callP.setString(5,phone);
 				callP.setInt(6,status);
+			    callP.execute(); 
+			
+			}catch (Exception e) {
+				
+			}finally{
+				UtilDelegate.closeConnection(con);
+			}
+	}
+	public void xemTrang(String sotrang) {
+		Connection con =UtilDelegate.getConnection();
+		PreparedStatement callP;
+			try{
+				callP = con.prepareStatement("{call xemtrang(?)}");
+				callP.setString(1,sotrang);
 			    callP.execute(); 
 			
 			}catch (Exception e) {

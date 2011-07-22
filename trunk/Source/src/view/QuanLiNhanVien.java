@@ -47,6 +47,7 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 	
 	DefaultTableModel model;
 	private JTextField textField_Status;
+	private JTextField textField_SoTrang;
 	
 	
 	/**
@@ -133,9 +134,25 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		contentPane.add(tools, BorderLayout.SOUTH);
 		tools.setLayout(new BorderLayout(0, 0));
 		
+		JPanel toolsChonTrang = new JPanel();
+		tools.add(toolsChonTrang, BorderLayout.NORTH);
+		
+		JButton button = new JButton("<< Previous");
+		toolsChonTrang.add(button);
+		
+		JLabel lblTrangS = new JLabel("Trang s\u1ED1 :");
+		toolsChonTrang.add(lblTrangS);
+		
+		textField_SoTrang = new JTextField();
+		toolsChonTrang.add(textField_SoTrang);
+		textField_SoTrang.setColumns(2);
+		
+		JButton btnNext = new JButton("Next >>");
+		toolsChonTrang.add(btnNext);
+		
 		JPanel tools1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) tools1.getLayout();
-		tools.add(tools1, BorderLayout.NORTH);
+		tools.add(tools1, BorderLayout.CENTER);
 		
 		JLabel lbl_PK = new JLabel("PK:");
 		tools1.add(lbl_PK);
