@@ -126,13 +126,15 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		String[] columnNames = {"PK","Name","Sex","Date","Phone Number","Status Number"};
 		model = new DefaultTableModel(rowData, columnNames); // assign data for table
 		nhanVien = new JTable(model);
-		nhanVien.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		nhanVien.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		/*
 		nhanVien.getColumnModel().getColumn(0).setPreferredWidth(60);
 		nhanVien.getColumnModel().getColumn(1).setPreferredWidth(220);
 		nhanVien.getColumnModel().getColumn(2).setPreferredWidth(60);
 		nhanVien.getColumnModel().getColumn(3).setPreferredWidth(210);
 		nhanVien.getColumnModel().getColumn(4).setPreferredWidth(110);
 		nhanVien.getColumnModel().getColumn(5).setPreferredWidth(92);
+		*/
 		nhanVien.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		danhSach.setViewportView(nhanVien);
 		contentPane.add(danhSach, BorderLayout.CENTER);
@@ -144,17 +146,24 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		JPanel toolsChonTrang = new JPanel();
 		tools.add(toolsChonTrang, BorderLayout.NORTH);
 		
-		JButton button = new JButton("<< Previous");
-		toolsChonTrang.add(button);
+		JButton btnPrev = new JButton("<< Previous");
+		btnPrev.addActionListener(this);
+		btnPrev.setActionCommand("btnPrev");
+		toolsChonTrang.add(btnPrev);
 		
 		JLabel lblTrangS = new JLabel("Trang s\u1ED1 :");
 		toolsChonTrang.add(lblTrangS);
 		
-		textField_SoTrang = new JTextField();
+		textField_SoTrang = new JTextField("1");
 		toolsChonTrang.add(textField_SoTrang);
 		textField_SoTrang.setColumns(2);
+
+		textField_SoTrang.disable();
+		
 		
 		JButton btnNext = new JButton("  Next >> ");
+		btnNext.addActionListener(this);
+		btnNext.setActionCommand("btnNext");
 		toolsChonTrang.add(btnNext);
 		
 		JPanel tools1 = new JPanel();
