@@ -20,7 +20,8 @@ public class UtilDelegate {
 		return con;
 	}
 	
-	public static void closeConnection(Connection connection){
+	public static void closeConnection(Connection connection)
+	{
 		try{
 			if(connection!=null){
 				connection.close();

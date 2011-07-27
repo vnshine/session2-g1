@@ -1,9 +1,10 @@
-package process;
+﻿package process;
 import java.util.Hashtable;
 public class TextConverter {
     private static TextConverter soleInstance = new TextConverter();
 
-    private char[][] vietNameseChars = {
+    private char[][] vietNameseChars = 
+    {
             {'Ã€', 'Ã�', 'áº¢', 'Ãƒ', 'áº ', 'Ä‚', 'áº°', 'áº®', 'áº²', 'áº´', 'áº¶', 'Ã‚', 'áº¦', 'áº¤', 'áº¨', 'áºª', 'áº¬'}
             , {'Ãˆ', 'Ã‰', 'áºº', 'áº¼', 'áº¸', 'ÃŠ', 'á»€', 'áº¾', 'á»‚', 'á»„', 'á»†'}
             , {'ÃŒ', 'Ã�', 'á»ˆ', 'Ä¨', 'á»Š'}
