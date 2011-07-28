@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -44,6 +45,8 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 	private JCheckBox[] chkCheck;
 	private JTextField[] txtText;
 	private JTextField txtSearch2;
+	private Integer row;
+	private String id;
 	public QuanLiKhachHang(){
 		//Frame
 		fFrame = new JFrame();
@@ -137,7 +140,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			
 			
 			
-			//Sửa
+			//j
 			JPanel tab3 =new JPanel();
 	        BorderLayout layout3 = new BorderLayout();
 	        tab3.setLayout(layout3);
@@ -206,6 +209,12 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		
 		
 	}
+	public void loadData(){
+		DefaultTableModel dtm = (DefaultTableModel) tblResult2.getModel();
+		dtm.getDataVector().removeAllElements();
+		dtm.fireTableChanged(null);
+	}
+	
 	public static void main(String[] args) {
 		new QuanLiKhachHang();
 
@@ -256,13 +265,9 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			}
 		}
 		
+		
 		if (e.getActionCommand().equals("Hiển thị danh sách")) {
-			DefaultTableModel dtm = (DefaultTableModel) tblResult.getModel();
-			
-			dtm.getDataVector().removeAllElements();
-			
-			dtm.fireTableChanged(null);
-			
+			loadData();
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			Vector<KhachHang> u = new Vector<KhachHang>();
 			u = hang_Process.getList();
@@ -278,9 +283,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		
 		
 		if (e.getActionCommand().equals("Hiển thị danh sách 2")) {
-			DefaultTableModel dtm = (DefaultTableModel) tblResult2.getModel();
-			dtm.getDataVector().removeAllElements();
-			dtm.fireTableChanged(null);
+			loadData();
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			Vector<KhachHang> u = new Vector<KhachHang>();
 			u = hang_Process.getList();
@@ -292,9 +295,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		}
 		
 		if (e.getActionCommand().equals("Tìm Kiếm 2")) {
-			DefaultTableModel dtm = (DefaultTableModel) tblResult2.getModel();
-			dtm.getDataVector().removeAllElements();
-			dtm.fireTableChanged(null);
+			loadData();
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			Vector<KhachHang> u = new Vector<KhachHang>();
 			u = hang_Process.getListSearch(txtSearch2.getText());
@@ -303,6 +304,36 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 				Object[] data2 = {user.getPK_KhachHang(),user.getsHoTen(),user.getdNgaySinh(),user.getsSoDienThoai(),user.getsDiaChi(),user.getiTrangThai(),user.getiDonVi()};
 				model2.insertRow(i, data2);
 			}
+		}
+		
+		
+		if (e.getActionCommand().equals("Lấy")) {
+			row = tblResult2.getSelectedRow();
+			id = (String) tblResult2.getValueAt(row, 0);
+			txtText[0].setText((String) tblResult2.getValueAt(row, 1));
+//			txtText[1].setText((String) tblResult2.getValueAt(row, 2));
+			txtText[2].setText((String) tblResult2.getValueAt(row, 3));
+			txtText[3].setText((String) tblResult2.getValueAt(row, 4));
+//			txtText[4].setText((String) tblResult2.getValueAt(row, 5));
+//			txtText[5].setText((String) tblResult2.getValueAt(row, 6));		
+		}
+		
+		if (e.getActionCommand().equals("Sửa")) {
+			KhachHang_Process hang_Process = new KhachHang_Process();
+			String id2 = id;
+			String ten = txtText[0].getText();
+			String sdt = txtText[2].getText();
+			String diachi = txtText[3].getText();
+			hang_Process.updatePerson(ten, sdt, diachi, id2);
+			loadData();
+			Vector<KhachHang> u = new Vector<KhachHang>();
+			u = hang_Process.getList();
+			for (int i = 0; i < u.size(); i++) {
+				KhachHang user = (KhachHang) u .get(i);
+				Object[] data2 = {user.getPK_KhachHang(),user.getsHoTen(),user.getdNgaySinh(),user.getsSoDienThoai(),user.getsDiaChi(),user.getiTrangThai(),user.getiDonVi()};
+				model2.insertRow(i, data2);
+			}
+			
 		}
 	}
 
