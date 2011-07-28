@@ -71,7 +71,7 @@ public class KhachHang_Process {
 		Vector<KhachHang> u = new Vector<KhachHang>();
 		Connection con = OpenConection.getConnection();
 		try {
-			CallableStatement cst = con.prepareCall("{call PRO_SEARCH_KHACHHANG ()}");
+			CallableStatement cst = con.prepareCall("{call PRO_SEARCH_KHACHHANG (?)}");
 			cst.setString(1, srt);
 			ResultSet rs = cst.executeQuery();
 //			PreparedStatement cst = con.prepareStatement("select * from dbo.tbl_KhachHang where sHoTen like '%"+srt+"%'");
@@ -95,5 +95,15 @@ public class KhachHang_Process {
 		
 		return u;
 
+	}
+	public void updatePerson(String ten,String sdt,String diachi, String id){
+		Connection con =OpenConection.getConnection();
+		try {
+			PreparedStatement cst = con.prepareStatement("update dbo.tbl_KhachHang set sHoTen = '"+ten+"', sSoDienThoai = '"+sdt+"', sDiaChi = '"+diachi+"' where PK_KhachHang = '"+id+"'");
+			cst.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }
