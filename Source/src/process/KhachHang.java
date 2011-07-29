@@ -1,4 +1,4 @@
-package quan_li_khach_hang;
+package process;
 
 import java.sql.Date;
 

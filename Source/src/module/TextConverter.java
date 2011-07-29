@@ -1,4 +1,4 @@
-﻿package process;
+﻿package module;
 import java.util.Hashtable;
 public class TextConverter {
     private static TextConverter soleInstance = new TextConverter();
