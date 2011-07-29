@@ -1,4 +1,4 @@
-package quan_li_khach_hang;
+package process;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -59,7 +59,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		pBaner = new JPanel();
 		pBaner.setPreferredSize(new Dimension(800,100));
 		Font f = new Font("Tahoma", 0, 20);
-		lBaner = new JLabel("Quản Lí Khách Hàng");
+		lBaner = new JLabel("Quáº£n LĂ­ KhĂ¡ch HĂ ng");
 		lBaner.setFont(f);
 		pBaner.add(lBaner);
 		fFrame.add(pBaner,layout.NORTH);
@@ -71,21 +71,21 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		tTab = new JTabbedPane();
 		
 		
-			//Thêm
+			//ThĂªm
 			JPanel tab1 = new JPanel();
 			FlowLayout flow = new FlowLayout();
 			tab1.setLayout(flow);
-			String[] str = {"ID","Họ và Tên","Ngày sinh","SĐT","Địa chỉ","Trạng Thái","Đơn vị"};
+			String[] str = {"ID","Há»� vĂ  TĂªn","NgĂ y sinh","SÄ�T","Ä�á»‹a chá»‰","Tráº¡ng ThĂ¡i","Ä�Æ¡n vá»‹"};
 			JLabel[] lLabels;
 			
 			JButton bAdd, bReset;
 			tText = new JTextField[7];
 			lLabels = new JLabel[7];
-			bAdd = new JButton("Thêm");
-			bAdd.setActionCommand("Thêm");
+			bAdd = new JButton("ThĂªm");
+			bAdd.setActionCommand("ThĂªm");
 			bAdd.addActionListener(this);
-			bReset = new JButton("Hủy");
-			bReset.setActionCommand("Hủy");
+			bReset = new JButton("Há»§y");
+			bReset.setActionCommand("Há»§y");
 			bReset.addActionListener(this);
 			for (int i = 0; i < lLabels.length; i++) {
 				lLabels[i] = new JLabel(str[i]);
@@ -95,18 +95,18 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			}
 			tab1.add(bAdd);
 			tab1.add(bReset);
-	        tTab.addTab("Thêm", tab1);
+	        tTab.addTab("ThĂªm", tab1);
 	        tTab.setSelectedIndex(0);
 	        
 	        
 	        
-	        //Xóa 
+	        //XĂ³a 
 	        JPanel tab2 =new JPanel();
 	        BorderLayout layout2 = new BorderLayout();
 	        tab2.setLayout(layout2);
 	        scpTable = new JScrollPane();
 			Object[][] data = {};
-			String[] column = {" ","Khách Hàng", "Họ và Tên", "Ngày Sinh","SĐT","Địa Chỉ","Trạng Thái","Đơn Vị"};
+			String[] column = {" ","KhĂ¡ch HĂ ng", "Há»� vĂ  TĂªn", "NgĂ y Sinh","SÄ�T","Ä�á»‹a Chá»‰","Tráº¡ng ThĂ¡i","Ä�Æ¡n Vá»‹"};
 			model = new DefaultTableModel(data, column);
 			tblResult = new JTable(model);
 			tblResult.setPreferredScrollableViewportSize(new Dimension(800,250));
@@ -115,17 +115,17 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			JButton btnList,btnSearch,btnDel;
 			JTextField txtSearch;
 			JLabel lSearch;
-			btnList = new JButton("Hiển thị danh sách");
+			btnList = new JButton("Hiá»ƒn thá»‹ danh sĂ¡ch");
 			btnList.addActionListener(this);
-			btnList.setActionCommand("Hiển thị danh sách");
-			btnSearch = new JButton("Tìm Kiếm");
+			btnList.setActionCommand("Hiá»ƒn thá»‹ danh sĂ¡ch");
+			btnSearch = new JButton("TĂ¬m Kiáº¿m");
 			btnSearch.addActionListener(this);
-			btnSearch.setActionCommand("Tìm Kiếm");
-			btnDel = new JButton("Xóa");
+			btnSearch.setActionCommand("TĂ¬m Kiáº¿m");
+			btnDel = new JButton("XĂ³a");
 			btnDel.addActionListener(this);
-			btnDel.setActionCommand("Xóa");
+			btnDel.setActionCommand("XĂ³a");
 			txtSearch = new JTextField(10);
-			lSearch = new JLabel("Tên Khách Hàng");
+			lSearch = new JLabel("TĂªn KhĂ¡ch HĂ ng");
 			
 			tab2.add(scpTable, layout2.NORTH);
 			tab2.add(btnList, layout2.CENTER);
@@ -135,7 +135,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			panel.add(btnSearch);
 			panel.add(btnDel);
 			tab2.add(panel, layout2.SOUTH);
-			tTab.addTab("xóa", tab2);
+			tTab.addTab("xĂ³a", tab2);
 			tTab.setSelectedIndex(1);
 			
 			
@@ -146,7 +146,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 	        tab3.setLayout(layout3);
 	        scpTable2 = new JScrollPane();
 			Object[][] data2 = {};
-			String[] column2 = {"Khách Hàng", "Họ và Tên", "Ngày Sinh","SĐT","Địa Chỉ","Trạng Thái","Đơn Vị"};
+			String[] column2 = {"KhĂ¡ch HĂ ng", "Há»� vĂ  TĂªn", "NgĂ y Sinh","SÄ�T","Ä�á»‹a Chá»‰","Tráº¡ng ThĂ¡i","Ä�Æ¡n Vá»‹"};
 			model2 = new DefaultTableModel(data2, column2);
 			tblResult2 = new JTable(model2);
 			tblResult2.setPreferredScrollableViewportSize(new Dimension(800,250));
@@ -155,25 +155,25 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			JButton btnList2,btnSearch2,btnGetInfo,btnUpdate;
 			
 			JLabel[] lLabel;
-			String[] label = {"Họ Tên","Ngày sinh","SĐT","Địa chì","Trạng thái","Đơn vị"};
+			String[] label = {"Há»� TĂªn","NgĂ y sinh","SÄ�T","Ä�á»‹a chĂ¬","Tráº¡ng thĂ¡i","Ä�Æ¡n vá»‹"};
 			lLabel = new JLabel[6];
 			txtText = new JTextField[6];
-			btnList2 = new JButton("Hiển thị danh sách");
+			btnList2 = new JButton("Hiá»ƒn thá»‹ danh sĂ¡ch");
 			btnList2.addActionListener(this);
-			btnList2.setActionCommand("Hiển thị danh sách 2");
+			btnList2.setActionCommand("Hiá»ƒn thá»‹ danh sĂ¡ch 2");
 //			btnList2.setPreferredSize(new Dimension(10,25));
 			JPanel listPanel = new JPanel();
 			listPanel.add(btnList2);
 			listPanel.setPreferredSize(new Dimension(25,25));
-			btnSearch2 = new JButton("Tìm Kiếm");
-			btnSearch2.setActionCommand("Tìm Kiếm 2");
+			btnSearch2 = new JButton("TĂ¬m Kiáº¿m");
+			btnSearch2.setActionCommand("TĂ¬m Kiáº¿m 2");
 			btnSearch2.addActionListener(this);
-			btnGetInfo = new JButton("Lấy");
+			btnGetInfo = new JButton("Láº¥y");
 			btnGetInfo.addActionListener(this);
-			btnGetInfo.setActionCommand("Lấy");
-			btnUpdate= new JButton("Sửa");
+			btnGetInfo.setActionCommand("Láº¥y");
+			btnUpdate= new JButton("Sá»­a");
 			btnUpdate.addActionListener(this);
-			btnUpdate.setActionCommand("Sửa");
+			btnUpdate.setActionCommand("Sá»­a");
 			txtSearch2 = new JTextField(5);
 			JPanel panel2 = new JPanel();
 			panel2.add(txtSearch2);
@@ -189,7 +189,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			tab3.add(scpTable2, layout3.NORTH);
 			tab3.add(listPanel, layout3.CENTER);
 			tab3.add(panel2, layout3.SOUTH);
-			tTab.addTab("Sửa", tab3);
+			tTab.addTab("Sá»­a", tab3);
 			tTab.setSelectedIndex(2);
 		
 		
@@ -221,7 +221,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("Thêm")) {
+		if (e.getActionCommand().equals("ThĂªm")) {
 			KhachHang_Process khachHang_Process = new KhachHang_Process();
 			KhachHang khachHang = new KhachHang();
 			khachHang.setPK_KhachHang(tText[0].getText());
@@ -259,14 +259,14 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			khachHang_Process.insertKhachHang(khachHang);
 			System.out.println(khachHang_Process.insertKhachHang(khachHang));
 		}
-		if (e.getActionCommand().equals("Hủy")) {
+		if (e.getActionCommand().equals("Há»§y")) {
 			for (int i = 0; i < 7; i++) {
 				tText[i].setText("");
 			}
 		}
 		
 		
-		if (e.getActionCommand().equals("Hiển thị danh sách")) {
+		if (e.getActionCommand().equals("Hiá»ƒn thá»‹ danh sĂ¡ch")) {
 			loadData();
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			Vector<KhachHang> u = new Vector<KhachHang>();
@@ -282,7 +282,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		}
 		
 		
-		if (e.getActionCommand().equals("Hiển thị danh sách 2")) {
+		if (e.getActionCommand().equals("Hiá»ƒn thá»‹ danh sĂ¡ch 2")) {
 			loadData();
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			Vector<KhachHang> u = new Vector<KhachHang>();
@@ -294,7 +294,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 			}
 		}
 		
-		if (e.getActionCommand().equals("Tìm Kiếm 2")) {
+		if (e.getActionCommand().equals("TĂ¬m Kiáº¿m 2")) {
 			loadData();
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			Vector<KhachHang> u = new Vector<KhachHang>();
@@ -307,7 +307,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 		}
 		
 		
-		if (e.getActionCommand().equals("Lấy")) {
+		if (e.getActionCommand().equals("Láº¥y")) {
 			row = tblResult2.getSelectedRow();
 			id = (String) tblResult2.getValueAt(row, 0);
 			txtText[0].setText((String) tblResult2.getValueAt(row, 1));
@@ -318,7 +318,7 @@ public class QuanLiKhachHang extends JFrame implements ActionListener {
 //			txtText[5].setText((String) tblResult2.getValueAt(row, 6));		
 		}
 		
-		if (e.getActionCommand().equals("Sửa")) {
+		if (e.getActionCommand().equals("Sá»­a")) {
 			KhachHang_Process hang_Process = new KhachHang_Process();
 			String id2 = id;
 			String ten = txtText[0].getText();

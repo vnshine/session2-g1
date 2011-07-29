@@ -1,10 +1,10 @@
-package conection;
+package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class OpenConection {
+public class ioconnection {
 
 	public static Connection getConnection(){
 		Connection con=null;
