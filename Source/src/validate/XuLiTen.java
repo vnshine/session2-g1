@@ -27,8 +27,8 @@ public class XuLiTen {
 		}
 		return name;
 	}
-//	public static void main(String[] args) {
-//		XuLiTen a = new XuLiTen();
-//		System.out.println(a.xuLiTen("   NguyEn   Van   ABC   "));
-//	}
+	public static void main(String[] args) {
+		XuLiTen a = new XuLiTen();
+		System.out.println(a.xuLiTen("   NguyEn   Van   ABC   "));
+	}
 }

@@ -123,10 +123,10 @@ public class LayTyGia {
 		}
 		return tyGiaNgoaiTe;
 	}
-//	public static void main(String[] args) {
-//		LayTyGia a = new LayTyGia();
-//		Vector<TyGia> b = new Vector<TyGia>();
-//		b = a.layTyGia();
-//		System.out.println(b.get(4).getLoaiNgoaiTe());
-//	}
+	public static void main(String[] args) {
+		LayTyGia a = new LayTyGia();
+		Vector<TyGia> b = new Vector<TyGia>();
+		b = a.layTyGia();
+		System.out.println(b.get(4).getLoaiNgoaiTe());
+	}
 }
