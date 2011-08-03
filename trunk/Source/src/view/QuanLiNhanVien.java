@@ -13,7 +13,6 @@ import java.awt.FlowLayout;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Vector;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -33,18 +32,14 @@ import process.*;
 public class QuanLiNhanVien extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField textField_PK;
-	private JTextField textField_Name;
-	private JTextField textField_Date;
-	private JTextField textField_Phone;
-	private JTextField textField_Find;
+	private JTextField textField_PK,textField_Name,textField_Date,textField_Phone,textField_Find;
+	private JButton btnDelete,btnAdd,btnUpdate,btnFind;
 	private JScrollPane danhSach;
 	private JTable nhanVien;
 	private JRadioButtonMenuItem lenUS,lviVN;
 	private Integer loaddata = 1; // neu bang 1 thi load database vao table
 	static Locale locale;
 	ResourceBundle bundle;
-	
 	DefaultTableModel model;
 	private JTextField textField_Status;
 	private JTextField textField_SoTrang;
@@ -59,59 +54,41 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
-		
 		JMenuItem mntmOpen = new JMenuItem("Open");
 		mnFile.add(mntmOpen);
-		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
-		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
-		
 		JMenu mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
-		
 		JRadioButtonMenuItem rdbtnmntmSortByAge = new JRadioButtonMenuItem("Sort by Age");
 		mnTools.add(rdbtnmntmSortByAge);
-		
 		JRadioButtonMenuItem rdbtnmntmSortByName = new JRadioButtonMenuItem("Sort by Name");
 		mnTools.add(rdbtnmntmSortByName);
-		
 		JSeparator separator_1 = new JSeparator();
 		mnTools.add(separator_1);
-		
 		JMenu mnLanguages = new JMenu("Languages");
 		mnTools.add(mnLanguages);
-		
 		ButtonGroup group2 = new ButtonGroup();
 		lenUS = new JRadioButtonMenuItem("English",true);
 		lenUS.addActionListener(this);
-			
 		lviVN = new JRadioButtonMenuItem("Tieng Viet",false);
 		lviVN.addActionListener(this);
 		group2.add(lenUS);
 		group2.add(lviVN);
 		mnLanguages.add(lenUS);
 		mnLanguages.add(lviVN);
-		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-		
-		
-		
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
 		JPanel banner = new JPanel();
 		banner.setBounds(100, 100, 800, 300);
 		contentPane.add(banner, BorderLayout.NORTH);
@@ -159,7 +136,6 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		textField_SoTrang.setColumns(2);
 
 		textField_SoTrang.disable();
-		
 		
 		JButton btnNext = new JButton("  Next >> ");
 		btnNext.addActionListener(this);
@@ -217,20 +193,28 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 		JPanel tools2 = new JPanel();
 		tools.add(tools2, BorderLayout.SOUTH);
 		
-		JButton btnAdd = new JButton("Add");
+		btnAdd = new JButton("Add");
+		btnAdd.setActionCommand("Add");
+		btnAdd.addActionListener(this);
 		tools2.add(btnAdd);
 		
-		JButton btnUpdate = new JButton("Update");
+		btnUpdate = new JButton("Update");
+		btnUpdate.setActionCommand("Update");
+		btnUpdate.addActionListener(this);
 		tools2.add(btnUpdate);
 		
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
+		btnDelete.setActionCommand("Delete");
+		btnDelete.addActionListener(this);
 		tools2.add(btnDelete);
 		
 		textField_Find = new JTextField();
 		tools2.add(textField_Find);
 		textField_Find.setColumns(10);
 		
-		JButton btnFind = new JButton("Find");
+		btnFind = new JButton("Find");
+		btnFind.setActionCommand("Find");
+		btnFind.addActionListener(this);
 		tools2.add(btnFind);
 		//nhanVien.getColumnModel().getColumn(0).setHeaderValue("Khoa Chinh");
 		
@@ -250,11 +234,9 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 				sex = "Nam";
 			}else sex = "Nu";
 			Object[] oPerson = {nhanVien2.get(i).getpK(),nhanVien2.get(i).getName(),sex,nhanVien2.get(i).getDate(),nhanVien2.get(i).getPhone(),nhanVien2.get(i).getTrangthai()};
-
 			model.insertRow(0, oPerson);
 		}
-		model.fireTableDataChanged();
-		
+		model.fireTableDataChanged();	
 	}
 	public void ChangeLanguage() {
 		//nhanVien.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("name"));
@@ -264,14 +246,20 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
+		String action = arg0.getActionCommand();
+	    if (action.equalsIgnoreCase("Add")) {
+	    	
+		}
+	    if (action.equalsIgnoreCase("Update")) {
+	    	
+		}
+	    if (action.equalsIgnoreCase("Delete")) {
+	    	
+		}
 		if (lviVN.isSelected()) {
-			
 			ChangeLanguage();
 		}
 	}
-
-	
-
 	/**
 	 * Launch the application.
 	 */
