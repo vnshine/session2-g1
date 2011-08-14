@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 import ch.rakudave.suggest.JSuggestField;
-import conection.OpenConection;
+import connect.ioconnection;
 
 public class AutoCompleteSearch extends JFrame {
 	private JFrame frame;
@@ -29,7 +29,7 @@ public class AutoCompleteSearch extends JFrame {
 		
 		public static Vector<String> Autocomplete(){
 			Vector<String> hangs = new Vector<String>();
-			Connection con = OpenConection.getConnection();
+			Connection con = ioconnection.getConnection();
 			try {
 				PreparedStatement cst = con.prepareStatement("SELECT sHoTen FROM dbo.tbl_KhachHang");
 				ResultSet rs = cst.executeQuery();
