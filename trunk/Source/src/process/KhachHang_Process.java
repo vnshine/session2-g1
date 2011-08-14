@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
-import connection.ioconnection;
+import connect.ioconnection;
 
 public class KhachHang_Process {
 	public boolean insertKhachHang(KhachHang khachHang) {
