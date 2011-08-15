@@ -186,11 +186,11 @@ public class NhatQuangApp extends javax.swing.JFrame {
     private void jtrMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtrMenuMouseClicked
         TreePath part[] = jtrMenu.getSelectionPaths();
         JOptionPane.showMessageDialog(this, part);
-        TreePath[] parLogin = new TreePath["Hệ thống", "Đăng nhập"];
-        if(part.equals(parLogin))
-        {
-            Login adminLogin = new Login();
-        }
+        //TreePath[] parLogin = new TreePath["Hệ thống", "Đăng nhập"];
+//        if(part.equals(parLogin))
+//        {
+//            Login adminLogin = new Login();
+//        }
     }//GEN-LAST:event_jtrMenuMouseClicked
 
     /**
