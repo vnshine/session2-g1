@@ -1,6 +1,6 @@
 package process;
 
-public class NhanVien {
+public class ChucNang {
 
 	private String pK;
 	private String name;

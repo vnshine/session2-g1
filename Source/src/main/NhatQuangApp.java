@@ -34,8 +34,7 @@ public class NhatQuangApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtrMenu = new javax.swing.JTree();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -59,32 +58,6 @@ public class NhatQuangApp extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(10, 10, 10, 10));
         setName("fraMainApp"); // NOI18N
         setResizable(false);
-
-        jtrMenu.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Hệ thống");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Đăng nhập");
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Đăng xuất");
-        treeNode1.add(treeNode2);
-        jtrMenu.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jtrMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jtrMenu.setName("jtrMenu"); // NOI18N
-        jtrMenu.setToggleClickCount(1);
-        jtrMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtrMenuMouseClicked(evt);
-            }
-        });
-        jtrMenu.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jtrMenuAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane1.setViewportView(jtrMenu);
 
         jMenu1.setText("Hệ thống");
 
@@ -163,13 +136,11 @@ public class NhatQuangApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(682, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 822, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
 
         pack();
@@ -178,20 +149,6 @@ public class NhatQuangApp extends javax.swing.JFrame {
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
-
-    private void jtrMenuAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jtrMenuAncestorAdded
-        
-    }//GEN-LAST:event_jtrMenuAncestorAdded
-
-    private void jtrMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtrMenuMouseClicked
-        TreePath part[] = jtrMenu.getSelectionPaths();
-        JOptionPane.showMessageDialog(this, part);
-        //TreePath[] parLogin = new TreePath["Hệ thống", "Đăng nhập"];
-//        if(part.equals(parLogin))
-//        {
-//            Login adminLogin = new Login();
-//        }
-    }//GEN-LAST:event_jtrMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -221,8 +178,7 @@ public class NhatQuangApp extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTree jtrMenu;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;

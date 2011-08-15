@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
-import conection.OpenConection;
+import connect.IOConnection;
 import myobject.TienTe;
 
 public class TienTe_Process {
 	public void insertTienTe (String name, Float mua, Float ban ){
-		Connection con =OpenConection.getConnection();
+		Connection con = IOConnection.getConnection();
 		Integer a = 0;
 		String id;
 		try {
@@ -37,13 +37,13 @@ public class TienTe_Process {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			OpenConection.closeConnection(con);
+			IOConnection.closeConnection(con);
 		}
 		
 	}
 	
 	public Vector<TienTe> showList(){
-		Connection con =OpenConection.getConnection();
+		Connection con = IOConnection.getConnection();
 		Vector<TienTe> u = new Vector<TienTe>();
 		try {
 			PreparedStatement ps = con.prepareStatement("select * from dbo.tbl_TienTe");
@@ -59,13 +59,13 @@ public class TienTe_Process {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			OpenConection.closeConnection(con);
+			IOConnection.closeConnection(con);
 		}
 		
 		return u;
 	}
 	public void updateTienTe(String id, String name, Float mua, Float ban){
-		Connection con =OpenConection.getConnection();
+		Connection con = IOConnection.getConnection();
 		try {
 			CallableStatement cst = con.prepareCall("{call UpdateTienTe(?,?,?,?)}");
 			
@@ -79,7 +79,7 @@ public class TienTe_Process {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			OpenConection.closeConnection(con);
+			IOConnection.closeConnection(con);
 		}
 		
 	}
