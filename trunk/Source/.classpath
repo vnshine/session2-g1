@@ -3,5 +3,15 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/sqljdbc4.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/suggest.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.borders_0.9.12.I20090422-1500.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.grouplayouts_0.9.11.I20090415-2230.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.layouts_0.9.11.I20090415-2230.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.lnfs_0.9.11.I20090415-2230.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.parser_0.9.11.I20090418-2330.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.types_0.9.11.I20090415-2230.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing.widgets_0.9.11.I20090417-1130.jar"/>
+	<classpathentry kind="lib" path="E:/Aiti-Aptech/PROJECT/SESSIONII/NhatQuang/Source/lib/org.dyno.visual.swing_0.9.12.I20090423-1800.jar"/>
+	<classpathentry kind="var" path="GWT_HOME/gwt-user.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
