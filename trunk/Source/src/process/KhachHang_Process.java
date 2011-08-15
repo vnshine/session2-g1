@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
-import connect.ioconnection;
+import connect.IOConnection;
 
 public class KhachHang_Process {
 	public boolean insertKhachHang(KhachHang khachHang) {
 		boolean dm = false;
-		Connection con =ioconnection.getConnection();
+		Connection con =IOConnection.getConnection();
 		try {
 //			CallableStatement cst = con.prepareCall("{call PRO_INSERT_KHACHHANG(?,?,?,?,?)}");
 			
@@ -34,7 +34,7 @@ public class KhachHang_Process {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{
-			ioconnection.closeConnection(con);
+			IOConnection.closeConnection(con);
 		}
 		
 		return dm;
@@ -42,7 +42,7 @@ public class KhachHang_Process {
 	
 	public Vector<KhachHang> getList(){
 		Vector<KhachHang> u = new Vector<KhachHang>();
-		Connection con = ioconnection.getConnection();
+		Connection con = IOConnection.getConnection();
 		try {
 			CallableStatement cst = con.prepareCall("{call PRO_SELECT_KHACHHANG ()}");
 			ResultSet rs = cst.executeQuery();
@@ -60,7 +60,7 @@ public class KhachHang_Process {
 		} catch (Exception e) {
 			
 		}finally{
-			ioconnection.closeConnection(con);
+			IOConnection.closeConnection(con);
 		}
 		
 		return u;
@@ -69,7 +69,7 @@ public class KhachHang_Process {
 	
 	public Vector<KhachHang> getListSearch(String srt){
 		Vector<KhachHang> u = new Vector<KhachHang>();
-		Connection con = ioconnection.getConnection();
+		Connection con = IOConnection.getConnection();
 		try {
 			CallableStatement cst = con.prepareCall("{call PRO_SEARCH_KHACHHANG (?)}");
 			cst.setString(1, srt);
@@ -90,14 +90,14 @@ public class KhachHang_Process {
 		} catch (Exception e) {
 			
 		}finally{
-			ioconnection.closeConnection(con);
+			IOConnection.closeConnection(con);
 		}
 		
 		return u;
 
 	}
 	public void updatePerson(String ten,String sdt,String diachi, String id){
-		Connection con =ioconnection.getConnection();
+		Connection con =IOConnection.getConnection();
 		try {
 			PreparedStatement cst = con.prepareStatement("update dbo.tbl_KhachHang set sHoTen = '"+ten+"', sSoDienThoai = '"+sdt+"', sDiaChi = '"+diachi+"' where PK_KhachHang = '"+id+"'");
 			cst.execute();
