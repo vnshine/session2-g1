@@ -5,7 +5,7 @@
 package process;
 
 import java.util.Vector;
-import connect.IOConnection;
+import connect.ioconnection;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ public class ChucNangProcess
     public Vector<ChucNang> LayDanhSachChucNang() throws SQLException
     {
             Vector<ChucNang> result = new Vector<ChucNang>();
-            Connection con = IOConnection.getConnection();
+            Connection con = ioconnection.getConnection();
             try
             {
                     CallableStatement cst = con.prepareCall("{call sp_tblChucNang_Select ()}");
@@ -47,7 +47,7 @@ public class ChucNangProcess
             finally
             {
                 
-                    IOConnection.closeConnection(con);	
+                    ioconnection.closeConnection(con);	
                     return result;
             }
     }
@@ -56,7 +56,7 @@ public class ChucNangProcess
     public Vector<ChucNang> TimChucNang(ChucNang chuc_nang) throws SQLException
     {
             Vector<ChucNang> result = new Vector<ChucNang>();
-            Connection con = IOConnection.getConnection();
+            Connection con = ioconnection.getConnection();
             try
             {
                     CallableStatement cst = con.prepareCall("{call sp_tblChucNang_Find (?,?,?)}");
@@ -86,7 +86,7 @@ public class ChucNangProcess
             finally
             {
                 
-                    IOConnection.closeConnection(con);	
+                    ioconnection.closeConnection(con);	
                     return result;
             }
     }
@@ -94,7 +94,7 @@ public class ChucNangProcess
     
     public Boolean TrungChucNang(String id, String ten)
     {
-            Connection con = IOConnection.getConnection();
+            Connection con = ioconnection.getConnection();
             Boolean result = false;
             try
             {
@@ -118,14 +118,14 @@ public class ChucNangProcess
             finally
             {
                 
-                    IOConnection.closeConnection(con);	
+                    ioconnection.closeConnection(con);	
                     return result;
             }
     }
     
     public boolean ThemChucNang(ChucNang chuc_nang) throws SQLException
     {
-            Connection cn = IOConnection.getConnection();
+            Connection cn = ioconnection.getConnection();
             Boolean success = true;
             try 
             {
@@ -148,7 +148,7 @@ public class ChucNangProcess
             }
             finally
             {
-                    IOConnection.closeConnection(cn);
+                    ioconnection.closeConnection(cn);
                     return success;
             }
     }
@@ -156,7 +156,7 @@ public class ChucNangProcess
     public boolean XoaChucNang(String id) throws SQLException
     {
             boolean result = true;
-            Connection con = (Connection) IOConnection.getConnection();
+            Connection con = (Connection) ioconnection.getConnection();
             try
             {
                     con.setAutoCommit(false);
@@ -175,7 +175,7 @@ public class ChucNangProcess
             }
             finally
             {
-                    IOConnection.closeConnection(con);
+                    ioconnection.closeConnection(con);
                     return result;
             }
             
@@ -184,7 +184,7 @@ public class ChucNangProcess
     
     public boolean SuaChucNang(ChucNang chuc_nang, String old_id) throws SQLException
     {
-            Connection cn = IOConnection.getConnection();
+            Connection cn = ioconnection.getConnection();
             Boolean success = true;
             try 
             {
@@ -208,7 +208,7 @@ public class ChucNangProcess
             }
             finally
             {
-                    IOConnection.closeConnection(cn);
+                    ioconnection.closeConnection(cn);
                     return success;
             }
     }
