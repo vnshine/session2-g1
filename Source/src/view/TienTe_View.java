@@ -35,7 +35,8 @@ import javax.swing.JButton;
 import myobject.TienTe;
 
 import process.TienTe_Process;
-//import quan_li_khach_hang.KhachHang;
+import quan_li_khach_hang.KhachHang;
+import quan_li_khach_hang.QuanLiKhachHang;
 
 public class TienTe_View extends JFrame implements ActionListener {
 
@@ -53,6 +54,7 @@ public class TienTe_View extends JFrame implements ActionListener {
 	private JTabbedPane tabbedPane;
 	private Integer row = null;
 	private String id = null;
+	private JButton[] btnSua;
 	/**
 	 * Launch the application.
 	 */
@@ -95,62 +97,75 @@ public class TienTe_View extends JFrame implements ActionListener {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		panel_1.add(tabbedPane);
+//		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setPreferredSize(new Dimension(650, 420));
-		tabbedPane.addTab("Them", null, panel_3, null);
+//		tabbedPane.addTab("Them", null, panel_3, null);
+		panel_1.add(panel_3);
 		panel_3.setLayout(null);
 		
-		JLabel lblMTinT = new JLabel("MĂ£ tiá»�n tá»‡");
-		lblMTinT.setBounds(169, 11, 86, 14);
+		Object[][] rowData = {};
+		String[] columnNames = {"ID","MÃ TIỀN TỆ","MUA VÀO","BÁN RA","SỬA","XÓA"};
+		model = new DefaultTableModel(rowData, columnNames); // assign data for table
+		
+		danhSach = new JScrollPane();
+		tbl = new JTable(model);
+		tbl.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tbl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		danhSach.setColumnHeaderView(tbl);
+		danhSach.setBounds(10,11,593,189);
+		panel_3.add(danhSach);
+		
+		JLabel lblMTinT = new JLabel("Mã tiền tệ");
+		lblMTinT.setBounds(209, 216, 86, 14);
 		panel_3.add(lblMTinT);
 		
 		textField = new JTextField();
-		textField.setBounds(297, 8, 86, 20);
+		textField.setBounds(391, 213, 86, 20);
 		panel_3.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblMuaVo = new JLabel("Mua vĂ o");
-		lblMuaVo.setBounds(169, 48, 46, 14);
+		JLabel lblMuaVo = new JLabel("Mua vào");
+		lblMuaVo.setBounds(209, 247, 46, 14);
 		panel_3.add(lblMuaVo);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(297, 45, 86, 20);
+		textField_1.setBounds(380, 244, 86, 20);
 		panel_3.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblBnRa = new JLabel("BĂ¡n ra");
-		lblBnRa.setBounds(169, 89, 46, 14);
+		JLabel lblBnRa = new JLabel("Bán ra");
+		lblBnRa.setBounds(209, 340, 46, 14);
 		panel_3.add(lblBnRa);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(297, 86, 86, 20);
+		textField_2.setBounds(324, 334, 86, 20);
 		panel_3.add(textField_2);
 		textField_2.setColumns(10);
 		
-		JButton btnThm = new JButton("ThĂªm");
+		JButton btnThm = new JButton("Thêm");
 		btnThm.addActionListener(this);
-		btnThm.setActionCommand("ThĂªm");
-		btnThm.setBounds(195, 151, 89, 23);
+		btnThm.setActionCommand("Thêm");
+		btnThm.setBounds(179, 386, 89, 23);
 		panel_3.add(btnThm);
 		
-		JButton btnHy = new JButton("Há»§y");
+		JButton btnHy = new JButton("Hủy");
 		btnHy.addActionListener(this);
-		btnHy.setActionCommand("Há»§y");
-		btnHy.setBounds(294, 151, 89, 23);
+		btnHy.setActionCommand("Hủy");
+		btnHy.setBounds(337, 386, 89, 23);
 		panel_3.add(btnHy);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setPreferredSize(new Dimension(650, 420));
-		tabbedPane.addTab("XĂ³a", null, panel_4, null);
+//		tabbedPane.addTab("Xóa", null, panel_4, null);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setPreferredSize(new Dimension(650, 420));
 		panel_5.setLayout(new BorderLayout());
-		tabbedPane.addTab("Sá»­a", null, panel_5, null);
-		tabbedPane.setSelectedIndex(0);
+//		tabbedPane.addTab("Sửa", null, panel_5, null);
+//		tabbedPane.setSelectedIndex(0);
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setPreferredSize(new Dimension(650, 220));
@@ -163,22 +178,13 @@ public class TienTe_View extends JFrame implements ActionListener {
 		panel_2.add(tree);
 		tree.setPreferredSize(new Dimension(100,500));
 		
-		danhSach = new JScrollPane();
-		Object[][] rowData = {};
-		String[] columnNames = {"ID","MĂƒ TIá»€N Tá»†","MUA VĂ€O","BĂ�N RA"};
-		model = new DefaultTableModel(rowData, columnNames); // assign data for table
-		tbl = new JTable(model);
-		tbl.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		tbl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		danhSach.setViewportView(tbl);
-		panel_6.add(danhSach, BorderLayout.NORTH);
 		
 		JPanel panel_7 = new JPanel();
 		panel_5.add(panel_7, BorderLayout.SOUTH);
 		panel_7.setLayout(null);
 		panel_7.setPreferredSize(new Dimension(650, 220));
 		
-		JLabel lblTimkiem = new JLabel("TĂ¬m kiáº¿m");
+		JLabel lblTimkiem = new JLabel("Tìm kiếm");
 		lblTimkiem.setBounds(145, 37, 46, 14);
 		panel_7.add(lblTimkiem);
 		
@@ -193,13 +199,13 @@ public class TienTe_View extends JFrame implements ActionListener {
 		btnTim.setBounds(405, 33, 89, 23);
 		panel_7.add(btnTim);
 		
-		JButton btnLaysolieu = new JButton("Láº¥y sá»‘ liá»‡u");
+		JButton btnLaysolieu = new JButton("Lấy số liệu");
 		btnLaysolieu.addActionListener(this);
-		btnLaysolieu.setActionCommand("Láº¥y sá»‘ liá»‡u");
+		btnLaysolieu.setActionCommand("Lấy số liệu");
 		btnLaysolieu.setBounds(306, 65, 89, 23);
 		panel_7.add(btnLaysolieu);
 		
-		JLabel lblMa = new JLabel("MĂ£");
+		JLabel lblMa = new JLabel("Mã");
 		lblMa.setBounds(145, 99, 46, 14);
 		panel_7.add(lblMa);
 		
@@ -208,7 +214,7 @@ public class TienTe_View extends JFrame implements ActionListener {
 		panel_7.add(textField_5);
 		textField_5.setColumns(10);
 		
-		JLabel lblMua = new JLabel("Mua vĂ o");
+		JLabel lblMua = new JLabel("Mua vào");
 		lblMua.setBounds(297, 99, 46, 14);
 		panel_7.add(lblMua);
 		
@@ -217,7 +223,7 @@ public class TienTe_View extends JFrame implements ActionListener {
 		panel_7.add(textField_6);
 		textField_6.setColumns(10);
 		
-		JLabel lblBan = new JLabel("BĂ¡n ra");
+		JLabel lblBan = new JLabel("Bán ra");
 		lblBan.setBounds(448, 99, 46, 14);
 		panel_7.add(lblBan);
 		
@@ -226,11 +232,11 @@ public class TienTe_View extends JFrame implements ActionListener {
 		panel_7.add(textField_7);
 		textField_7.setColumns(10);
 		
-		JButton btnSua = new JButton("Sá»­a");
-		btnSua.addActionListener(this);
-		btnSua.setActionCommand("Sá»­a");
-		btnSua.setBounds(306, 127, 89, 23);
-		panel_7.add(btnSua);
+//		JButton btnSua = new JButton("Sửa");
+//		btnSua.addActionListener(this);
+//		btnSua.setActionCommand("Sửa");
+//		btnSua.setBounds(306, 127, 89, 23);
+//		panel_7.add(btnSua);
 		
 	}
 	
@@ -241,8 +247,10 @@ public class TienTe_View extends JFrame implements ActionListener {
 			TienTe_Process process = new TienTe_Process();
 			Vector<TienTe> u = new Vector<TienTe>();
 			u = process.showList();
+			btnSua = new JButton[u.size()];
 			for (int i = 0; i < u.size(); i++) {
 				TienTe tienTe =(TienTe) u.get(i);
+				btnSua[i] = new JButton("Sửa");
 				Object[] rowData = {tienTe.getIdTienTe(),tienTe.getTenTienTe(),tienTe.getTyGiaMuaVao(),tienTe.getTyGiaBanRa()};
 				model.insertRow(i, rowData);
 			}
@@ -250,21 +258,21 @@ public class TienTe_View extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("Há»§y")) {
+		if (e.getActionCommand().equals("Hủy")) {
 			textField.setText("");
 			textField_1.setText("");
 			textField_2.setText("");
 		}
-		if (e.getActionCommand().equals("ThĂªm")) {
+		if (e.getActionCommand().equals("Thêm")) {
 			if (textField.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(this, "Cáº§n pháº£i nháº­p cĂ¢u mĂ£ tiá»�n tá»‡");
+				JOptionPane.showMessageDialog(this, "Cần phải nhập câu mã tiền tệ");
 				return;
 			}
 			TienTe_Process process = new TienTe_Process();
 			process.insertTienTe(textField.getText(),Float.parseFloat(textField_1.getText()),Float.parseFloat(textField_2.getText()));
 			loadData();
 		}
-		if (e.getActionCommand().equals("Láº¥y sá»‘ liá»‡u")) {
+		if (e.getActionCommand().equals("Lấy số liệu")) {
 			row = tbl.getSelectedRow();
 			id = (String) tbl.getValueAt(row, 0);
 			textField_5.setText((String)tbl.getValueAt(row, 1));
@@ -273,10 +281,12 @@ public class TienTe_View extends JFrame implements ActionListener {
 			textField_6.setText(mua);
 			textField_7.setText(ban);
 		}
-		if (e.getActionCommand().equals("Sá»­a")) {
+		if (e.getActionCommand().equals("Sửa")) {
 			TienTe_Process process = new TienTe_Process();
 			process.updateTienTe(id,textField_5.getText(),Float.parseFloat(textField_6.getText()),Float.parseFloat(textField_7.getText()));
 			loadData();
 		}
+		
+		
 	}
 }
