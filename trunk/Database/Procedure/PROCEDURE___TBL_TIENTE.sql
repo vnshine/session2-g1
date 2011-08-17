@@ -39,3 +39,14 @@ BEGIN
 	where
 		PK_sTienTeID = @PK_sTienTeID
 END
+---------------------------------------------------------------
+GO
+
+CREATE proc TrungTienTe
+	@PK_sTienTeID varchar(3),
+	@sTenTien nvarchar(20)
+as
+begin
+	select * FROM dbo.tbl_TienTe WHERE PK_sTienTeID = @PK_sTienTeID OR sTenTien = @sTenTien
+end
+
