@@ -15,6 +15,10 @@ begin
 end
 go
 
+--------------------------------
+--Bảng chức năng
+--------------------------------
+
 -----------Proc Select danh sách các chức năng
 if(OBJECT_ID('sp_tblChucNang_Select','p') is not null)
 begin
@@ -114,6 +118,118 @@ CREATE proc sp_tblChucNang_duplicate
 as
 begin
 	select * FROM tbl_ChucNang WHERE PK_sChucNangID = @id OR sTenChucNang = @ten
+end
+go
+
+
+--------------------------------
+--Bảng Quyền
+--------------------------------
+
+-----------Proc Select danh sách các quyền
+if(OBJECT_ID('sp_tblQuyen_Select','p') is not null)
+begin
+	drop proc  sp_tblQuyen_Select
+end
+GO
+
+CREATE proc sp_tblQuyen_Select
+as
+begin
+	select * FROM tbl_Quyen
+end
+go
+
+
+-----------Proc tìm kiếm quyền
+if(OBJECT_ID('sp_tblQuyen_Find','p') is not null)
+begin
+	drop proc  sp_tblQuyen_Find
+end
+GO
+
+CREATE proc sp_tblQuyen_Find
+	@ten nvarchar(50),
+	@ghichu nvarchar(100)
+as
+begin
+	IF (@ghichu = '')
+		begin
+			print 'ghi chu null'
+			select * FROM tbl_Quyen WHERE sTenQuyen LIKE '%' + @ten + '%'
+		end
+	ELSE
+		begin
+			print 'ghi chu not null'
+			select * FROM tbl_Quyen WHERE sTenQuyen LIKE '%' + @ten + '%' OR sGhiChu LIKE '%' + @ghichu + '%'
+		end
+end
+go
+
+
+
+-----------Proc thêm quyền
+if(OBJECT_ID('sp_tblQuyen_Insert','p') is not null)
+begin
+	drop proc  sp_tblQuyen_Insert
+end
+GO
+
+CREATE proc sp_tblQuyen_Insert
+	@ten nvarchar(50),
+	@ghichu nvarchar(100)
+as
+begin
+	insert INTO tbl_Quyen(sTenQuyen, sGhiChu) VALUES(@ten, @ghichu)
+end
+go
+
+-----------Proc sửa quyền
+if(OBJECT_ID('sp_tblQuyen_Update','p') is not null)
+begin
+	drop proc  sp_tblQuyen_Update
+end
+GO
+
+CREATE proc sp_tblQuyen_Update
+	@old_name nvarchar(50),
+	@ten nvarchar(50),
+	@ghichu nvarchar(100)
+as
+begin
+	update tbl_Quyen SET sTenQuyen = @ten, sGhiChu = @ghichu WHERE sTenQuyen = @old_name
+end
+go
+
+
+-----------Proc xóa quyền
+if(OBJECT_ID('sp_tblQuyen_Delete','p') is not null)
+begin
+	drop proc  sp_tblQuyen_Delete
+end
+GO
+
+CREATE proc sp_tblQuyen_Delete
+	@name nvarchar(50)
+as
+begin
+	Delete FROM tbl_Quyen WHERE PK_iQuyenID = @id
+end
+go
+
+
+-----------Proc kiểm tra có tồn tại ID
+if(OBJECT_ID('sp_tblQuyen_duplicate','p') is not null)
+begin
+	drop proc  sp_tblQuyen_duplicate
+end
+GO
+
+CREATE proc sp_tblQuyen_duplicate
+	@ten varchar(50)
+as
+begin
+	select * FROM tbl_Quyen WHERE sTenQuyen = @ten
 end
 go
 
