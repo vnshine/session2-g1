@@ -8,12 +8,13 @@ import java.util.Vector;
 
 import javax.swing.JFrame;
 import ch.rakudave.suggest.JSuggestField;
-import connect.IOConnection;
+import connect.ioconnection;
 
 public class AutoCompleteSearch extends JFrame {
 	private JFrame frame;
 	private JSuggestField s;
-	public AutoCompleteSearch() {
+	public AutoCompleteSearch() 
+        {
 		Vector<String> a = Autocomplete();
 		frame = new JFrame();
 		s = new JSuggestField(frame, a);
@@ -27,9 +28,10 @@ public class AutoCompleteSearch extends JFrame {
 		frame.setVisible(true);
 	}
 		
-		public static Vector<String> Autocomplete(){
+		public static Vector<String> Autocomplete()
+                {
 			Vector<String> hangs = new Vector<String>();
-			Connection con = IOConnection.getConnection();
+			Connection con = ioconnection.getConnection();
 			try {
 				PreparedStatement cst = con.prepareStatement("SELECT sHoTen from tbl_NhanVien");
 				ResultSet rs = cst.executeQuery();

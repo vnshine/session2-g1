@@ -226,7 +226,7 @@ public class QuanLiNhanVien extends JFrame implements ActionListener {
 	
 	public void loaddata() {
 		NhanVienProcess nhanVien = new NhanVienProcess();
-		Vector<ChucNang> nhanVien2 = nhanVien.getListNhanVien();
+		Vector<ObjQuyen> nhanVien2 = nhanVien.getListNhanVien();
 		String sex;
 		model.getDataVector().removeAllElements();
 		for (int i = 0; i < nhanVien2.size(); i++) {

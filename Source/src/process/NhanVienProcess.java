@@ -11,8 +11,8 @@ public class NhanVienProcess {
 	/**
 	 * @param args
 	 */
-	public  Vector<ChucNang> getListNhanVien(){
-		Vector<ChucNang> result = new Vector<ChucNang>();
+	public  Vector<ObjQuyen> getListNhanVien(){
+		Vector<ObjQuyen> result = new Vector<ObjQuyen>();
 		Connection con =UtilDelegate.getConnection();
 		try{
 			Statement stmt = con.createStatement();
@@ -25,7 +25,7 @@ public class NhanVienProcess {
 				String phone = cursor.getString("sSoDienThoai");
 				Integer status = cursor.getInt("iTrangThai");
 				
-				ChucNang person = new ChucNang();
+				ObjQuyen person = new ObjQuyen();
 				
 				person.setpK(pk);
 				person.setName(name);
