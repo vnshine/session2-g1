@@ -7,7 +7,7 @@ package admin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import connect.IOConnection;
+import connect.ioconnection;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import module.MD5;
@@ -25,7 +25,7 @@ public class LoginCode
         String md5Pass = MD5.MD5Password(passWord);
         System.out.println(md5Pass);
         
-        Connection con = IOConnection.getConnection();
+        Connection con = ioconnection.getConnection();
         try
         {
             PreparedStatement pr = con.prepareCall("{call sp_tblNhanVien_Login (?,?)}");
@@ -45,7 +45,7 @@ public class LoginCode
         }
         finally
         {
-            IOConnection.closeConnection(con);
+            ioconnection.closeConnection(con);
             return result;
         }
     }
