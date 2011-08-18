@@ -49,4 +49,13 @@ as
 begin
 	select * FROM dbo.tbl_TienTe WHERE PK_sTienTeID = @PK_sTienTeID OR sTenTien = @sTenTien
 end
-
+---------------------------------------------------------------
+GO
+CREATE PROCEDURE XoaTienTe
+		@PK_sTienTeID varchar(3)
+AS
+BEGIN
+	delete from dbo.tbl_TienTe 
+	where
+		PK_sTienTeID = @PK_sTienTeID
+	END
