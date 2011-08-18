@@ -117,23 +117,13 @@ public class TienTeView extends javax.swing.JFrame
             return false;
         }
         
-        if(txtMa.getText().length() != 3 )
+        if(txtMa.getText().length() < 3 || txtMa.getText().length() > 20)
         {
-            new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ gồm 3 chữ số!");
+            new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ lớn hơn 3 chữ cái!");
             lblMa.setForeground(Color.RED);
             return false;
         }
         
-        if(txtMuaVao.getText().equals(""))
-        {
-            new ThongBao(lblThongBao, Color.RED, "TÃªn chá»©c nÄƒng khÃ´ng Ä‘Æ°á»£c phÃ©p trá»‘ng");
-            lblMuaVao.setForeground(Color.RED);
-            return false;
-        }
-        
-        id = txtMa.getText();
-        ten = txtMuaVao.getText();
-        ghichu = txtBanRa.getText();
         
         return true;
     }
@@ -430,33 +420,29 @@ public class TienTeView extends javax.swing.JFrame
        
         OnOffEdit(true);
         action = "edit";
-        old_id = txtMa.getText();
+//        old_id = txtMa.getText();
+        row = tblChucNang.getSelectedRow();
+        old_id = (String)tblChucNang.getValueAt(row, 0);
+        txtMa.setText((String)tblChucNang.getValueAt(row, 1));
+        txtMuaVao.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+        txtBanRa.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
+        
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-
-//        if(!ValidInput())
-//        {
-//            new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
-//        }
-//        else
-//        {
-//            try
-//            {
-////                pro.XoaChucNang(id);
-//                OnOffEdit(false);
-//                new ThongBao(lblThongBao, Color.BLUE, "Đã xóa mã tiền tệ thành công");
-//                ResetInput();;
-//                FillToTable();
-//            }
-//            catch(SQLException ex)
-//            {
-//                new ThongBao(lblThongBao, Color.RED, "Có lỗi xảy ra! Xóa không thành công ");
-//                JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
-//                ResetError();
-//                ResetInput();
-//            }
-//        }
+            
+            	new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
+                OnOffEdit(true);
+                action = "delete";
+                row = tblChucNang.getSelectedRow();
+                old_id = (String)tblChucNang.getValueAt(row, 0);
+                txtMa.setText((String)tblChucNang.getValueAt(row, 1));
+                txtMuaVao.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+                txtBanRa.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
+                
+            
+            
+        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
@@ -492,15 +478,16 @@ public class TienTeView extends javax.swing.JFrame
                     ResetInput();
                 }
             }
-            else
+            else if (action.equals("edit"))
             {
                 
                 try
                 {
-                    ChucNang temp = new ChucNang(id, ten, ghichu);
-                    pro.updateTienTe("", "", Float.parseFloat("10"),Float.parseFloat("10"));
+//                    ChucNang temp = new ChucNang(id, ten, ghichu);
+                	row = tblChucNang.getSelectedRow();
+                    pro.updateTienTe(old_id, txtMa.getText(), Float.parseFloat(txtMuaVao.getText()),Float.parseFloat(txtBanRa.getText()));
                     OnOffEdit(false);
-                    new ThongBao(lblThongBao, Color.BLUE, "Sá»­a chá»©c nÄƒng thÃ nh cÃ´ng!");
+                    new ThongBao(lblThongBao, Color.BLUE, "Sửa thành công!");
                     FillToTable();
                     ResetInput();
                     ResetError();
@@ -508,6 +495,26 @@ public class TienTeView extends javax.swing.JFrame
                 catch(SQLException ex)
                 {
                     new ThongBao(lblThongBao, Color.RED, "Sá»­a chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
+                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
+                    ResetError();
+                    ResetInput();
+                }
+            }
+            
+            else if (action.equals("delete"))
+            {
+                
+                try
+                {
+                	pro.deleteTienTe(old_id);
+                    OnOffEdit(false);
+                    new ThongBao(lblThongBao, Color.BLUE, "Đã xóa mã tiền tệ thành công");
+                    ResetInput();;
+                    FillToTable();
+                }
+                catch(SQLException ex)
+                {
+                    new ThongBao(lblThongBao, Color.RED, "Có lỗi xảy ra! Xóa không thành công ");
                     JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
                     ResetError();
                     ResetInput();
@@ -606,5 +613,6 @@ public class TienTeView extends javax.swing.JFrame
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtMuaVao;
     private javax.swing.JTextField txtBanRa;
+    private int row;
     // End of variables declaration//GEN-END:variables
 }
