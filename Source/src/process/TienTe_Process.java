@@ -114,4 +114,21 @@ public class TienTe_Process  {
                     return result;
             }
     }
+	
+	public void deleteTienTe(String id)  throws SQLException{
+		Connection con =ioconnection.getConnection();
+		try {
+			CallableStatement cst = con.prepareCall("{call XoaTienTe(?)}");
+			
+			cst.setString(1, id);
+			
+			cst.executeQuery();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+	}
 }
