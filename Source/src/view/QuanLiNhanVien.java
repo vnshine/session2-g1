@@ -25,6 +25,9 @@ import javax.swing.JSeparator;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.border.BevelBorder;
 import javax.swing.DefaultComboBoxModel;
+
+import myobject.ObjQuyen;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import process.*;
