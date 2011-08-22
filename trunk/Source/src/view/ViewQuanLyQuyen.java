@@ -40,9 +40,12 @@ import javax.swing.JTable;
 import admin.LoginForm;
 
 import process.QuyenProcess;
+import sun.org.mozilla.javascript.internal.ast.WithStatement;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
 
 public class ViewQuanLyQuyen extends JFrame 
 {
@@ -143,7 +146,7 @@ public class ViewQuanLyQuyen extends JFrame
 		btnTim.setBounds(250, 11, 79, 23);
 		panAction.add(btnTim);
 		
-		JButton btnCapNhat = new JButton("Cập nhật");
+		JButton btnCapNhat = new JButton("Làm mới");
 		btnCapNhat.setBounds(339, 11, 79, 23);
 		panAction.add(btnCapNhat);
 		
@@ -158,7 +161,7 @@ public class ViewQuanLyQuyen extends JFrame
 		JPanel panTieuDeDanhSach = new JPanel();
 		panTieuDeDanhSach.setBorder(new TitledBorder(null, "Danh sách quyền", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panTieuDeDanhSach.setBackground(new Color(230, 230, 250));
-		panTieuDeDanhSach.setBounds(0, 167, 784, 257);
+		panTieuDeDanhSach.setBounds(0, 167, 784, 216);
 		panBody.add(panTieuDeDanhSach);
 		panTieuDeDanhSach.setLayout(null);
 		
@@ -167,7 +170,7 @@ public class ViewQuanLyQuyen extends JFrame
 		panTieuDeDanhSach.add(scrollPane);
 		
 		JScrollPane panDanhSach = new JScrollPane();
-		panDanhSach.setBounds(10, 21, 764, 231);
+		panDanhSach.setBounds(10, 21, 764, 184);
 		panDanhSach.setLayout(null);
 		panTieuDeDanhSach.add(panDanhSach);
 		
@@ -190,11 +193,15 @@ public class ViewQuanLyQuyen extends JFrame
 		btnThot.setBounds(685, 11, 89, 23);
 		panFoot.add(btnThot);
 		
+		JTextPane txtpnDfasdfafnaklsdjfasd = new JTextPane();
+		txtpnDfasdfafnaklsdjfasd.setBounds(12, 6, 663, 28);
+		panFoot.add(txtpnDfasdfafnaklsdjfasd);
+		
 		JLabel lblTrangThai = new JLabel("");
+		lblTrangThai.setBounds(16, 11, 659, 14);
+		panFoot.add(lblTrangThai);
 		lblTrangThai.setForeground(Color.BLACK);
 		lblTrangThai.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		lblTrangThai.setBounds(10, 15, 659, 14);
-		panFoot.add(lblTrangThai);
 		
 		/*
 		 * User INIT
@@ -218,7 +225,11 @@ public class ViewQuanLyQuyen extends JFrame
 //        tblDanhSach.getColumnModel().getColumn(0).setPreferredWidth(100);
         
         panDanhSach.setViewportView(tblDanhSach);
+
         
+        /*
+         * Design
+         */
         tblDanhSach = new JTable();
         panDanhSach.setColumnHeaderView(tblDanhSach);
         
@@ -252,10 +263,127 @@ public class ViewQuanLyQuyen extends JFrame
         lblThongBao.setForeground(Color.BLACK);
         lblThongBao.setBounds(99, 72, 675, 14);
         panel.add(lblThongBao);
+        
+        JButton btnFirst = new JButton("|<");
+        btnFirst.setBounds(273, 390, 45, 23);
+        panBody.add(btnFirst);
+        
+        JButton btnPrev = new JButton("<");
+        btnPrev.setBounds(328, 390, 45, 23);
+        panBody.add(btnPrev);
+        
+        JButton btnNext = new JButton(">");
+        btnNext.setBounds(411, 390, 45, 23);
+        panBody.add(btnNext);
+        
+        JButton btnLast = new JButton(">|");
+        btnLast.setBounds(466, 390, 45, 23);
+        panBody.add(btnLast);
+        
+        JLabel lblPageCount = new JLabel("1");
+        lblPageCount.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblPageCount.setBounds(384, 394, 18, 14);
+        panBody.add(lblPageCount);
 
         processAction = new QuyenProcess();
 
         //Hien du lieu ra bang
 //        FillToTable();
 	}
+	
+	/*
+	 * Các hàm bổ trợ
+	 */
+	
+	public void OnOffEdit(ViewQuanLyQuyen obj, Boolean flag)
+    {
+        obj.btnThem.setEnabled(!flag);
+        btnSua.setEnabled(!flag);
+        btnXoa.setEnabled(!flag);
+        btnLuu.setEnabled(flag);
+        btnHuy.setEnabled(flag);
+        btnTim.setEnabled(!flag);
+        
+        txtMaChucNang.setEditable(flag);
+        txtTenChucNang.setEditable(flag);
+        txtaGhiChu.setEditable(flag);
+    }
+    
+    public void ResetError()
+    {
+        lblID.setForeground(Color.BLACK);
+        lblTen.setForeground(Color.BLACK);
+        lblGhiChu.setForeground(Color.BLACK);
+        lblThongBao.setForeground(Color.BLACK);
+        lblThongBao.setText(" ");
+    }
+    
+    public void ResetInput()
+    {
+        txtMaChucNang.setText("");
+        txtTenChucNang.setText("");
+        txtaGhiChu.setText("");
+    }
+    
+    public Boolean ValidInput()
+    {
+        if(txtMaChucNang.getText().equals(""))
+        {
+            new ThongBao(lblThongBao, Color.RED, "ID không được phép trống");
+            lblID.setForeground(Color.RED);
+            return false;
+        }
+        
+        if(txtMaChucNang.getText().length() < 6 || txtMaChucNang.getText().length() > 15)
+        {
+            new ThongBao(lblThongBao, Color.RED, "ID nằm trong khoảng từ 6 đến 15!");
+            lblID.setForeground(Color.RED);
+            return false;
+        }
+        
+        if(txtTenChucNang.getText().equals(""))
+        {
+            new ThongBao(lblThongBao, Color.RED, "Tên chức năng không được phép trống");
+            lblTen.setForeground(Color.RED);
+            return false;
+        }
+        
+        id = txtMaChucNang.getText();
+        ten = txtTenChucNang.getText();
+        ghichu = txtaGhiChu.getText();
+        
+        return true;
+    }
+    
+    public void FillToTable()
+    {
+        ChucNangProcess prc = new ChucNangProcess();
+        Vector<ChucNang> getResult = new Vector<ChucNang>();
+        try 
+        {
+            getResult = prc.LayDanhSachChucNang();
+            if(getResult.isEmpty())
+            {
+                new ThongBao(lblTrangThai, Color.gray, "Hiện tại không có chức năng nào!");
+            }
+            else
+            {
+                new ThongBao(lblTrangThai, Color.BLUE, "Tổng số " + getResult.size() + " chức năng!");
+                model.setRowCount(0);
+                columnNames = new String[] {"ID", "Tên chức năng", "Ghi chú"};
+
+                for(int i=0;i<getResult.size();i++)
+                {
+                    Object[] temp = {getResult.get(i).getId(), getResult.get(i).getTenChucNang(), getResult.get(i).getGhiChu()};
+                    model.insertRow(tblChucNang.getRowCount(), temp);
+                }
+            }
+        }
+        catch(SQLException ex) 
+        {
+           new ThongBao(lblTrangThai, Color.RED, "Kết nối tới cơ sở dữ liệu gặp vấn đề!");
+           JOptionPane.showMessageDialog(this, "Lỗi: " + ex.getMessage(), "Lỗi SQL",JOptionPane.ERROR_MESSAGE);
+        }
+                
+    }
 }
