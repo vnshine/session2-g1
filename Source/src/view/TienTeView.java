@@ -329,7 +329,7 @@ public class TienTeView extends javax.swing.JFrame
             }
         });
 
-        btnLuu.setText("Lưu");
+        btnLuu.setText("  ");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -410,14 +410,14 @@ public class TienTeView extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+    	btnLuu.setText("Lưu");
         OnOffEdit(true);
         ResetInput();
         action = "add";
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       
+    	btnLuu.setText("Lưu");
         OnOffEdit(true);
         action = "edit";
 //        old_id = txtMa.getText();
@@ -432,6 +432,7 @@ public class TienTeView extends javax.swing.JFrame
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
             
             	new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
+            	btnLuu.setText("Xóa");
                 OnOffEdit(true);
                 action = "delete";
                 row = tblChucNang.getSelectedRow();
@@ -469,6 +470,7 @@ public class TienTeView extends javax.swing.JFrame
                     ResetInput();
                     FillToTable();
                     ResetError();
+                    btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
                 {
@@ -491,6 +493,7 @@ public class TienTeView extends javax.swing.JFrame
                     FillToTable();
                     ResetInput();
                     ResetError();
+                    btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
                 {
@@ -511,6 +514,7 @@ public class TienTeView extends javax.swing.JFrame
                     new ThongBao(lblThongBao, Color.BLUE, "Đã xóa mã tiền tệ thành công");
                     ResetInput();;
                     FillToTable();
+                    btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
                 {
