@@ -58,4 +58,4 @@ BEGIN
 	delete from dbo.tbl_TienTe 
 	where
 		PK_sTienTeID = @PK_sTienTeID
-	END
+END

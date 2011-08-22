@@ -39,7 +39,7 @@ public class ThongTinCongTy_Process {
 		return u;
 	}
 	
-	public void insertTienTe (String name, Float mua, Float ban )  throws SQLException{
+	public void insertCongTy (String name, Float mua, Float ban )  throws SQLException{
 		Connection con =ioconnection.getConnection();
 		Integer a = 0;
 		String id;
@@ -55,6 +55,43 @@ public class ThongTinCongTy_Process {
 				id = "T" + (a+1);
 			}
 			CallableStatement cst = con.prepareCall("{call InsertTienTe(?,?,?,?)}");
+			
+			cst.setString(1, id);
+			cst.setString(2, name.toUpperCase());
+			cst.setFloat(3, mua);
+			cst.setFloat(4, ban);
+			
+			cst.executeQuery();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+	}
+	
+	public void deleteCongTy(String id)  throws SQLException{
+		Connection con =ioconnection.getConnection();
+		try {
+			CallableStatement cst = con.prepareCall("{call DeleteCongTy(?)}");
+			
+			cst.setString(1, id);
+			
+			cst.executeQuery();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+	}
+	
+	public void updateCongTy(String id, String name, Float mua, Float ban)  throws SQLException{
+		Connection con =ioconnection.getConnection();
+		try {
+			CallableStatement cst = con.prepareCall("{call UpdateTienTe(?,?,?,?)}");
 			
 			cst.setString(1, id);
 			cst.setString(2, name.toUpperCase());
