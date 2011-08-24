@@ -39,27 +39,19 @@ public class ThongTinCongTy_Process {
 		return u;
 	}
 	
-	public void insertCongTy (String name, Float mua, Float ban )  throws SQLException{
+	public void insertCongTy (String id, String name, String diaChi, String sdt, String email, String web, String tienTe, Integer soLuong)  throws SQLException{
 		Connection con =ioconnection.getConnection();
-		Integer a = 0;
-		String id;
 		try {
-			PreparedStatement ps = con.prepareStatement("select count(*) from dbo.tbl_TienTe");
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				a = rs.getInt(1);
-			}
-			if (a<10) {
-				id = "T0" + (a+1);
-			}else {
-				id = "T" + (a+1);
-			}
-			CallableStatement cst = con.prepareCall("{call InsertTienTe(?,?,?,?)}");
+			CallableStatement cst = con.prepareCall("{call InsertCongTy(?,?,?,?,?,?,?,?)}");
 			
 			cst.setString(1, id);
 			cst.setString(2, name.toUpperCase());
-			cst.setFloat(3, mua);
-			cst.setFloat(4, ban);
+			cst.setString(3, diaChi);
+			cst.setString(4, sdt);
+			cst.setString(5, email);
+			cst.setString(6, web);
+			cst.setString(7, tienTe);
+			cst.setInt(8, soLuong);
 			
 			cst.executeQuery();
 			
@@ -88,15 +80,19 @@ public class ThongTinCongTy_Process {
 		
 	}
 	
-	public void updateCongTy(String id, String name, Float mua, Float ban)  throws SQLException{
+	public void updateCongTy(String id, String name, String diaChi, String sdt, String email, String web, String tienTe, Integer soLuong)  throws SQLException{
 		Connection con =ioconnection.getConnection();
 		try {
-			CallableStatement cst = con.prepareCall("{call UpdateTienTe(?,?,?,?)}");
+			CallableStatement cst = con.prepareCall("{call UpdateCongTy(?,?,?,?,?,?,?,?)}");
 			
 			cst.setString(1, id);
 			cst.setString(2, name.toUpperCase());
-			cst.setFloat(3, mua);
-			cst.setFloat(4, ban);
+			cst.setString(3, diaChi);
+			cst.setString(4, sdt);
+			cst.setString(5, email);
+			cst.setString(6, web);
+			cst.setString(7, tienTe);
+			cst.setInt(8, soLuong);
 			
 			cst.executeQuery();
 			
