@@ -213,7 +213,7 @@ CREATE proc sp_tblQuyen_Delete
 	@id int
 as
 begin
-	Delete FROM tbl_Quyen WHERE PK_iQuyenID = @id
+	Delete FROM tbl_Quyen WHERE sTenQuyen = @name
 end
 go
 
