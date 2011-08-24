@@ -210,7 +210,7 @@ end
 GO
 
 CREATE proc sp_tblQuyen_Delete
-	@name nvarchar(50)
+	@id int
 as
 begin
 	Delete FROM tbl_Quyen WHERE PK_iQuyenID = @id
