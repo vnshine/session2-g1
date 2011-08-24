@@ -12,3 +12,54 @@ BEGIN
 	where
 		PK_sCongTyID = @PK_sCongTyID
 END
+---------------------------------------------------------------
+GO
+CREATE PROCEDURE InsertCongTy
+	@PK_sCongTyID varchar(6),
+	@sTenCongTy nvarchar(100),
+	@sDiaChi nvarchar(100),
+	@sSoDienThoai varchar(12),
+	@sEmail varchar(45),
+	@sWebsite varchar(45),
+	@FK_sTienTeID varchar(3),
+	@iTienMat int
+AS
+BEGIN
+	insert into dbo.tbl_ThongTinCongTy
+	values
+	(
+		@PK_sCongTyID,
+		@sTenCongTy,
+		@sDiaChi,
+		@sSoDienThoai,
+		@sEmail,
+		@sWebsite,
+		@FK_sTienTeID,
+		@iTienMat
+	)
+END
+---------------------------------------------------------------
+GO
+CREATE PROCEDURE UpdateCongTy
+	@PK_sCongTyID varchar(6),
+	@sTenCongTy nvarchar(100),
+	@sDiaChi nvarchar(100),
+	@sSoDienThoai varchar(12),
+	@sEmail varchar(45),
+	@sWebsite varchar(45),
+	@FK_sTienTeID varchar(3),
+	@iTienMat int
+AS
+BEGIN
+	update dbo.tbl_ThongTinCongTy
+	set
+		sTenCongTy = @sTenCongTy,
+		sDiaChi = @sDiaChi,
+		sSoDienThoai = @sSoDienThoai,
+		sEmail = @sEmail,
+		sWebsite = @sWebsite,
+		FK_sTienTeID = @FK_sTienTeID,
+		iTienMat = @iTienMat
+	where
+		PK_sCongTyID = @PK_sCongTyID
+END
