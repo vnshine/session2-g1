@@ -7,6 +7,7 @@ GO
 CREATE PROCEDURE InsertTienTe
 		@PK_sTienTeID varchar(3),
 		@sTenTien nvarchar(20),
+		@sTenTienEng nvarchar(20),
 		@fMuaVao float,
 		@fBanRa float
 AS
@@ -16,6 +17,7 @@ BEGIN
 	(
 		@PK_sTienTeID,
 		@sTenTien,
+		@sTenTienEng,
 		@fMuaVao,
 		@fBanRa
 	)
@@ -25,6 +27,7 @@ GO
 CREATE PROCEDURE UpdateTienTe
 	@PK_sTienTeID varchar(3),
 	@sTenTien nvarchar(20),
+	@sTenTienEng nvarchar(20),
 	@fMuaVao float,
 	@fBanRa float
 AS
@@ -33,6 +36,7 @@ BEGIN
 	set
 	
 		sTenTien = @sTenTien,
+		sTenTienEng	= @sTenTienEng,
 		fMuaVao = @fMuaVao,
 		fBanRa = @fBanRa
 

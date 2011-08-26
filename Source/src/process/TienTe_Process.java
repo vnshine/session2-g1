@@ -25,12 +25,15 @@ public class TienTe_Process  {
 			}else {
 				id = "T" + (a+1);
 			}
-			CallableStatement cst = con.prepareCall("{call InsertTienTe(?,?,?,?)}");
+			CallableStatement cst = con.prepareCall("{call InsertTienTe(?,?,?,?,?)}");
+			
+			
 			
 			cst.setString(1, id);
 			cst.setString(2, name.toUpperCase());
-			cst.setFloat(3, mua);
-			cst.setFloat(4, ban);
+			cst.setString(3, name.toUpperCase().trim());
+			cst.setFloat(4, mua);
+			cst.setFloat(5, ban);
 			
 			cst.executeQuery();
 			
@@ -67,12 +70,13 @@ public class TienTe_Process  {
 	public void updateTienTe(String id, String name, Float mua, Float ban)  throws SQLException{
 		Connection con =ioconnection.getConnection();
 		try {
-			CallableStatement cst = con.prepareCall("{call UpdateTienTe(?,?,?,?)}");
+			CallableStatement cst = con.prepareCall("{call UpdateTienTe(?,?,?,?,?)}");
 			
 			cst.setString(1, id);
 			cst.setString(2, name.toUpperCase());
-			cst.setFloat(3, mua);
-			cst.setFloat(4, ban);
+			cst.setString(3, name.toUpperCase().trim());
+			cst.setFloat(4, mua);
+			cst.setFloat(5, ban);
 			
 			cst.executeQuery();
 			

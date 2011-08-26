@@ -43,7 +43,9 @@ GO
 CREATE PROCEDURE UpdateCongTy
 	@PK_sCongTyID varchar(6),
 	@sTenCongTy nvarchar(100),
+	@sTenCongTyEng nvarchar(100),
 	@sDiaChi nvarchar(100),
+	@sDiaChiEng nvarchar(100),
 	@sSoDienThoai varchar(12),
 	@sEmail varchar(45),
 	@sWebsite varchar(45),
@@ -54,7 +56,9 @@ BEGIN
 	update dbo.tbl_ThongTinCongTy
 	set
 		sTenCongTy = @sTenCongTy,
+		sTenCongTyEng = @sTenCongTyEng,
 		sDiaChi = @sDiaChi,
+		sDiaChiEng = @sDiaChiEng,
 		sSoDienThoai = @sSoDienThoai,
 		sEmail = @sEmail,
 		sWebsite = @sWebsite,
