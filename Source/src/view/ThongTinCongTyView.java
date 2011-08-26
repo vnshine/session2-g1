@@ -74,7 +74,12 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         
         
         //Hien du lieu ra bang
-        soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+        if (searchOnOff == false) {
+        	soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+		}else {
+			soTrang =(int) Math.floor(pro.soPhanTuSearch()/8 + 1);
+		}
+        
         label_1.setText(String.valueOf(soTrang));
         FillToTable(1);
         thisTrang = 1;
@@ -142,6 +147,42 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         textField_6.setText(String.valueOf(trang));
         Vector<ThongTinCongTy> getResult = new Vector<ThongTinCongTy>();
         try 
+        {	if (searchOnOff == false) {
+        		getResult = pro.showList(trang);
+			}else {
+				getResult = pro.searchList(trang);
+			}
+            
+            if(getResult.isEmpty())
+            {
+                new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
+            }
+            else
+            {
+                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " +String.valueOf(pro.soPhanTu()) + " công ty!");
+                model.setRowCount(0);
+                columnNames = new String[] {"ID", "Tên công ty", "Địa chỉ", "Số điện thoại", "Email", "Website" , "Loại tiền sử dụng" , "Số lượng"};
+
+                for(int i=0;i<getResult.size();i++)
+                {
+                    Object[] temp = {getResult.get(i).getIdCongTy(),getResult.get(i).getTenCongTy(),getResult.get(i).getDiaChiCongTy(),getResult.get(i).getSdtCongTy(),getResult.get(i).getEmailCongTy(),getResult.get(i).getWebCongTy(),getResult.get(i).getIdTienTe(),getResult.get(i).getSlTienMat()};
+                    model.insertRow(tblChucNang.getRowCount(), temp);
+                }
+            }
+        }
+        catch(SQLException ex) 
+        {
+           new ThongBao(lblTrangThai, Color.RED, "Káº¿t ná»‘i tá»›i cÆ¡ sá»Ÿ dá»¯ liá»‡u gáº·p váº¥n Ä‘á»�!");
+           JOptionPane.showMessageDialog(this, "Lá»—i: " + ex.getMessage(), "Lá»—i SQL",JOptionPane.ERROR_MESSAGE);
+        }
+                
+    }
+    
+    public void SearchToTable(Integer trang)
+    {
+        textField_6.setText(String.valueOf(trang));
+        Vector<ThongTinCongTy> getResult = new Vector<ThongTinCongTy>();
+        try 
         {
             getResult = pro.showList(trang);
             if(getResult.isEmpty())
@@ -168,8 +209,6 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         }
                 
     }
-    
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -416,7 +455,12 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         });
 
         btnTim.setText("Tìm kiếm");
-
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
+        
         javax.swing.GroupLayout gl_jPanel3 = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(gl_jPanel3);
         gl_jPanel3.setHorizontalGroup(
@@ -555,6 +599,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
         textField_5.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
         
+        
     }//GEN-LAST:event_btnSuaActionPerformed
     
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -573,6 +618,14 @@ public class ThongTinCongTyView extends javax.swing.JFrame
             
         
     }//GEN-LAST:event_btnXoaActionPerformed
+    
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	btnLuu.setText("Tìm");
+        OnOffEdit(true);
+        searchOnOff = true;
+        action = "search";
+}
+    
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         FillToTable(soTrang);
         thisTrang = soTrang;
@@ -604,59 +657,10 @@ public class ThongTinCongTyView extends javax.swing.JFrame
        
         if(ValidInput())
         {
-            if(action.equals("add"))
-            {
-//                if(pro.TrungMa(id, ten)) // Náº¿u trÃ¹ng chá»©c nÄƒng
-//                {
-//                    lblMa.setForeground(Color.RED);
-//                    lblMuaVao.setForeground(Color.RED);
-//                    new ThongBao(lblThongBao, Color.RED, "Má»™t chá»©c nÄƒng tÆ°Æ¡ng tá»± Ä‘Ã£ tá»“n táº¡i!");
-//                    return;
-//                }
-                
-                try
-                {
-                
-                    
-                    pro.insertCongTy(txtID.getText(), Float.parseFloat(txtTen.getText()), Float.parseFloat(textField_5.getText()));
-                    OnOffEdit(false);
-                    new ThongBao(lblThongBao, Color.BLUE, "Thêm thành công!");
-                    ResetInput();
-                    FillToTable(1);
-                    ResetError();
-                }
-                catch(SQLException ex)
-                {
-                    new ThongBao(lblThongBao, Color.RED, "ThÃªm chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
-                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
-                    ResetError();
-                    ResetInput();
-                }
-            }
-            else if (action.equals("edit"))
-            {
-                
-                try
-                {
-                   
-                	row = tblChucNang.getSelectedRow();
-                    pro.updateCongTy(old_id, txtID.getText(), Float.parseFloat(txtTen.getText()),Float.parseFloat(textField_5.getText()));
-                    OnOffEdit(false);
-                    new ThongBao(lblThongBao, Color.BLUE, "Sửa thành công!");
-                    FillToTable(1);
-                    ResetInput();
-                    ResetError();
-                }
-                catch(SQLException ex)
-                {
-                    new ThongBao(lblThongBao, Color.RED, "Sá»­a chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
-                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
-                    ResetError();
-                    ResetInput();
-                }
-            }
             
-            else if (action.equals("delete"))
+           
+            
+            if (action.equals("delete"))
             {
                 
                 try
@@ -676,6 +680,29 @@ public class ThongTinCongTyView extends javax.swing.JFrame
                     ResetInput();
                 }
             }
+            else if (action.equals("search"))
+            {
+                
+                try
+                {
+                   
+                	
+                    pro.searchCongTy(txtID.getText(),txtTen.getText(),textField_5.getText(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),Integer.valueOf(textField_4.getText()));
+                    System.out.println(txtID.getText());
+                    OnOffEdit(false);
+                    ResetInput();
+                    ResetError();
+                    
+                }
+                catch(SQLException ex)
+                {
+                    new ThongBao(lblThongBao, Color.RED, "Sá»­a chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
+                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
+                    ResetError();
+                    ResetInput();
+                }
+            }
+            
         }
         
     }//GEN-LAST:event_btnLuuActionPerformed
@@ -780,5 +807,6 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     private JButton btnNt;
     private Integer soTrang = null;
     private Integer thisTrang = null;
+    private Boolean searchOnOff = false;
 }
 
