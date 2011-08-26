@@ -233,6 +233,26 @@ begin
 end
 go
 
+--------------------------------
+--Phân quyền
+--------------------------------
+
+--Phân trang thông tin rút gọn nhân viên
+
+CREATE proc sp_tblNhanVien_RutgonPhanTrang
+	@iSoTrang int,
+	@iSoBanGhi int,
+	@sNhanVienID varchar(6),
+	@sHoTenEng varchar(50),
+	@sSoDienThoai varchar(13),
+	@bGioiTinh bit
+as
+	begin
+		SELECT TOP (@iSoBanGhi) * FROM (SELECT TOP ((@iSoBanGhi) * @iSoTrang) PK_sNhanVienID, sHoTen, sSoDienThoai, bGioiTinh FROM tbl_NhanVien WHERE PK_sNhanVienID LIKE '%' + @sNhanVienID + '%' and sSoDienThoai LIKE '%' + @sSoDienThoai + '%' AND bGioiTinh = 1 AND sHoTenEng LIKE '%' + @sHoTenEng + '%' ORDER BY PK_sNhanVienID DESC) c ORDER BY PK_sNhanVienID DESC
+	END
+
+SELECT * FROM tbl_NhanVien
+EXEC sp_tblNhanVien_RutgonPhanTrang 2,2,'','','',1
 
 --+++++++++++++++++++++++++++++++
 --------------------------------+
@@ -249,9 +269,19 @@ INSERT INTO tbl_Quyen(sTenQuyen,sGhiChu) VALUES(N'Quản trị', N'Quản trị 
 --------------------------------
 --Bảng nhân viên
 --------------------------------
+INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values('Quản trị','QUANTRI','Quản trị hệ thống')
+INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values('Bán hàng','BANHANG','')
+INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values('Thủ kho','THUKHO','')
 
-INSERT INTO tbl_NhanVien values('NV0001','nv001',N'Quang Liem', '0989320758','05/02/1990','1','',1)
+
+INSERT INTO tbl_NhanVien values('NV0001','nv001',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0002','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0003','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0004','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
 
 UPDATE tbl_NhanVien SET sMatKhau = '73acd9a5972130b75066c82595a1fae3' WHERE PK_sNhanVienID = 'NV0001'
 
 exec sp_tblNhanVien_Login 'NV0001', 'admin'
+
+
+-- 
