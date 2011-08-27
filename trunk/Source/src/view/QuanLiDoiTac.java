@@ -8,11 +8,15 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Vector;
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -24,15 +28,9 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import module.ThongBao;
 import myobject.DoiTac;
 import process.QLDoiTacProcess;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.HierarchyListener;
-import java.awt.event.HierarchyEvent;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class QuanLiDoiTac extends JInternalFrame {
@@ -45,9 +43,13 @@ public class QuanLiDoiTac extends JInternalFrame {
 	private JTextField textField_SoDT;
 	private JTextField textField_DiaChiDT;
 	private JTextField textField_GhiChuDT;
-	private JComboBox box_SoTrang;
+	JLabel lblThongBao;
+	private JComboBox<Integer> box_SoTrang;
 	private Integer soTrang = 1;
 	private Integer sTT = 1;
+	private Integer insertb = 0;
+	private Integer deleteb = 0;
+	private Integer updateb = 0;
 	private String[] columname = new String[] { "STT",
 															"M\u00E3 \u0111\u1ED1i t\u00E1c",
 															"T\u00EAn \u0111\u1ED1i t\u00E1c",
@@ -137,21 +139,78 @@ public class QuanLiDoiTac extends JInternalFrame {
 		verticalBox.add(panel_TacVu);
 		
 		JButton btnThm = new JButton("Th\u00EAm");
+		btnThm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+					if (insertb == 1) {
+						insertb = 0;
+						closeText();
+					} else {
+						insertb = 1;
+						updateb = 0;
+						deleteb = 0;
+						openText();
+					}
+			}
+		});
+		
 		panel_TacVu.add(btnThm);
 		
 		JButton btnSa = new JButton("S\u1EEDa");
+		btnSa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (updateb == 1) {
+					updateb = 0;
+					closeText();
+				} else {
+					updateb = 1;
+					insertb = 0;
+					deleteb = 0;
+					openText();
+					new ThongBao(lblThongBao, Color.RED, "Click vao doi tuong muon sua trong bang !!!");
+				}
+			}
+		});
 		panel_TacVu.add(btnSa);
 		
 		JButton btnXa = new JButton("X\u00F3a");
+		btnXa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (deleteb == 1) {
+					deleteb = 0;
+					closeText();
+				} else {
+					deleteb = 1;
+					insertb = 0;
+					updateb = 0;
+					openText();
+					new ThongBao(lblThongBao, Color.RED, "Click vao doi tuong muon xoa trong bang !!!");
+				}
+			}
+		});
 		panel_TacVu.add(btnXa);
 		
 		JButton btnTmKim = new JButton("T\u00ECm ki\u1EBFm");
 		panel_TacVu.add(btnTmKim);
 		
 		JButton btnLu = new JButton("L\u01B0u");
+		btnLu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				insert();
+				delete();
+				update();
+				find();
+			}
+		});
 		panel_TacVu.add(btnLu);
 		
 		JButton btnHy = new JButton("H\u1EE7y");
+		btnHy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				huy();
+			}
+		});
 		panel_TacVu.add(btnHy);
 		
 		JPanel panel_DanhSach = new JPanel();
@@ -163,49 +222,59 @@ public class QuanLiDoiTac extends JInternalFrame {
 		panel_DanhSach.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				loadLuoiTable();
+			}
+		});
 		model = (new DefaultTableModel(
 				new Object[][] {
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
-						{null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
+						{null, null, null, null, null, null, null},
 					},
-					columname
+					new String[] {
+						"STT", "M\u00E3 \u0111\u1ED1i t\u00E1c", "T\u00EAn \u0111\u1ED1i t\u00E1c", "Ng\u01B0\u1EDDi li\u00EAn h\u1EC7", "\u0110\u1ECBa ch\u1EC9", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i", "Ghi ch\u00FA"
+					}
 				) {
 					boolean[] columnEditables = new boolean[] {
-						true, false, false, false, false, false
+						true, false, false, false, false, false, false
 					};
 					public boolean isCellEditable(int row, int column) {
 						return columnEditables[column];
 					}
 				});
 		table.setModel(model);
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);
-		table.getColumnModel().getColumn(2).setPreferredWidth(350);
-		table.getColumnModel().getColumn(3).setPreferredWidth(350);
-		table.getColumnModel().getColumn(4).setPreferredWidth(400);
-		table.getColumnModel().getColumn(5).setPreferredWidth(300);
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(2).setPreferredWidth(120);
+		table.getColumnModel().getColumn(3).setPreferredWidth(120);
+		table.getColumnModel().getColumn(4).setPreferredWidth(120);
+		table.getColumnModel().getColumn(6).setPreferredWidth(120);
+		
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_XemTrang = new JPanel();
@@ -224,13 +293,10 @@ public class QuanLiDoiTac extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(box_SoTrang.getSelectedItem());
 				soTrang = (Integer) box_SoTrang.getSelectedItem();
-				try {
-					loaddata();
-					box_SoTrang.setSelectedItem(soTrang);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			
+				loaddata();
+				box_SoTrang.setSelectedItem(soTrang);
+				
 			}
 		});
 		
@@ -261,12 +327,67 @@ public class QuanLiDoiTac extends JInternalFrame {
 		gbc_lblCreateBy.gridy = 0;
 		panel_2.add(lblCreateBy, gbc_lblCreateBy);
 		
+		textField_DiaChiDT.setEditable(false);
+		textField_GhiChuDT.setEditable(false);
+		textField_MaDT.setEditable(false);
+		textField_NLH.setEditable(false);
+		textField_SoDT.setEditable(false);
+		textField_TenDT.setEditable(false);
 		
-		
-		
+		JPanel panel_Error = new JPanel();
+		verticalBox_1.add(panel_Error);
+		lblThongBao = new JLabel();
+		new ThongBao(lblThongBao, Color.RED, " ");
+		panel_Error.add(lblThongBao);
 		loaddata();
+	}
+	
+	
+	
+	
+	
+	public void huy(){
+//		textField_DiaChiDT.setEditable(false);
+//		textField_GhiChuDT.setEditable(false);
+//		textField_MaDT.setEditable(false);
+//		textField_NLH.setEditable(false);
+//		textField_SoDT.setEditable(false);
+//		textField_TenDT.setEditable(false);
+		
+		textField_DiaChiDT.setText("");
+		textField_GhiChuDT.setText("");
+		textField_MaDT.setText("");
+		textField_NLH.setText("");
+		textField_SoDT.setText("");
+		textField_TenDT.setText("");
+		
+//		insertb = 0;
+//		deleteb = 0;
+//		updateb = 0;
+	}
+	
+	
+	
+	
+	public void openText() {
+			textField_DiaChiDT.setEditable(true);
+			textField_GhiChuDT.setEditable(true);
+			textField_MaDT.setEditable(true);
+			textField_NLH.setEditable(true);
+			textField_SoDT.setEditable(true);
+			textField_TenDT.setEditable(true);
+		
 
 	}
+	public void closeText() {
+			textField_DiaChiDT.setEditable(false);
+			textField_GhiChuDT.setEditable(false);
+			textField_MaDT.setEditable(false);
+			textField_NLH.setEditable(false);
+			textField_SoDT.setEditable(false);
+			textField_TenDT.setEditable(false);
+		}
+	
 	
 	private static void installLnF() {
 		try {
@@ -279,12 +400,20 @@ public class QuanLiDoiTac extends JInternalFrame {
 					+ " on this platform:" + e.getMessage());
 		}
 	}
-	public void loaddata() throws SQLException {
+	
+	
+	
+	
+	
+	public void loaddata() {
+		try {
+			
+		
 		QLDoiTacProcess dtac = new QLDoiTacProcess();
 		Integer soDT = dtac.getsoDoiTac();
 				
-		System.out.println((soDT / 25));
-		if (((soDT / 25) % 2) == 0 ) {
+		//System.out.println("thong ke so trang: "+(soDT / 25));
+		if ((soDT % 25) == 0 ) {
 			Combo((soDT / 25));
 		}else Combo((soDT / 25)+1);
 		
@@ -302,13 +431,42 @@ public class QuanLiDoiTac extends JInternalFrame {
 								dsDoiTac.get(i).getsTenDoiTac(),
 								dsDoiTac.get(i).getsNguoiLienHe(),
 								dsDoiTac.get(i).getsDiaChi(),
-								dsDoiTac.get(i).getsSoDienThoai()
+								dsDoiTac.get(i).getsSoDienThoai(),
+								dsDoiTac.get(i).getsGhiChu()
 								};
 			sTT++;
 			model.insertRow(i, oPerson);
 		}
 		model.fireTableDataChanged();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	public void loadLuoiTable(){
+		 
+		//int col = table.getSelectedColumn();  
+		int row = table.getSelectedRow();  
+		textField_MaDT.setText(((String)table.getModel().getValueAt(row, 1)));
+		textField_TenDT.setText(((String)table.getModel().getValueAt(row, 2)));
+		textField_NLH.setText(((String)table.getModel().getValueAt(row, 3)));
+		textField_DiaChiDT.setText(((String)table.getModel().getValueAt(row, 4)));
+		textField_SoDT.setText(((String)table.getModel().getValueAt(row, 5))); 
+		textField_GhiChuDT.setText(((String)table.getModel().getValueAt(row, 6))); 
+	}
+	
+	
+	
+	
+	
+	
 	
 	public void Combo(int numItems)
 	{
@@ -320,20 +478,119 @@ public class QuanLiDoiTac extends JInternalFrame {
 		box_SoTrang.setModel(model);
 	}
 	
+	
+	
+	
+	
+	
+	
 	public void insert()
 	{
-		DoiTac doiTac = new DoiTac();
-		doiTac.setiTrangThai(1);
-		doiTac.setPK_sDoiTacID(textField_MaDT.getText());
-		doiTac.setsDiaChi(textField_DiaChiDT.getText());
-		doiTac.setsGhiChu(textField_GhiChuDT.getText());
-		doiTac.setsNguoiLienHe(textField_NLH.getText());
-		doiTac.setsSoDienThoai(textField_SoDT.getText());
-		doiTac.setsTenDoiTac(textField_TenDT.getText());
-		doiTac.setsTenDoiTacEng()
-		QLDoiTacProcess dtac = new QLDoiTacProcess();
+		if (insertb == 1) {
+			try {
+				
+				DoiTac doiTac = new DoiTac();
+				doiTac.setiTrangThai(1);
+				doiTac.setPK_sDoiTacID(textField_MaDT.getText());
+				doiTac.setsDiaChi(textField_DiaChiDT.getText());
+				doiTac.setsGhiChu(textField_GhiChuDT.getText());
+				doiTac.setsNguoiLienHe(textField_NLH.getText());
+				doiTac.setsSoDienThoai(textField_SoDT.getText());
+				doiTac.setsTenDoiTac(textField_TenDT.getText());
+				doiTac.setsTenDoiTacEng("text convert roi");//TextConverter.toEnglish(textField_TenDT.getText()));
+				QLDoiTacProcess dtac = new QLDoiTacProcess();
+				Integer soDT = dtac.getsoDoiTac();
+				boolean kiemTra = dtac.ThemDoiTac(doiTac);
+				System.out.println(kiemTra);
+				if (kiemTra==true) {
+					
+					
+					System.out.println((soDT / 25));
+					new ThongBao(lblThongBao, Color.RED, "Insert ngon !!!");
+					if ((soDT % 25) == 0 ) {
+						Combo((soDT / 25));
+						soTrang = (soDT / 25);
+						
+						loaddata();
+						box_SoTrang.setSelectedItem(soTrang);
+						
+					}else 
+					{	
+						Combo((soDT / 25)+1);
+						soTrang = (soDT / 25)+1;
+						loaddata();
+						box_SoTrang.setSelectedItem(soTrang);
+					}
+				}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} else {
+// thong bao loi ra man hinh
+		}
+	}
+	
+	public void delete(){
+		if (deleteb == 1) {
+			try {
+				
+				DoiTac doiTac = new DoiTac();
+				doiTac.setPK_sDoiTacID(textField_MaDT.getText());
+				doiTac.setsDiaChi(textField_DiaChiDT.getText());
+				doiTac.setsGhiChu(textField_GhiChuDT.getText());
+				doiTac.setsNguoiLienHe(textField_NLH.getText());
+				doiTac.setsSoDienThoai(textField_SoDT.getText());
+				doiTac.setsTenDoiTac(textField_TenDT.getText());
+				doiTac.setsTenDoiTacEng("text convert roi");//TextConverter.toEnglish(textField_TenDT.getText()));
+				QLDoiTacProcess dtac = new QLDoiTacProcess();
+				Integer soDT = dtac.getsoDoiTac();
+				boolean kiemTra = dtac.XoaDoiTac(doiTac.getPK_sDoiTacID());
+				System.out.println(kiemTra);
+				if (kiemTra==true) {
+					
+					
+					System.out.println((soDT / 25));
+					new ThongBao(lblThongBao, Color.RED, "Xoa ngon !!!");
+					if ((soDT % 25) == 0 ) {
+						Combo((soDT / 25));
+						soTrang = (soDT / 25);
+						
+						loaddata();
+						box_SoTrang.setSelectedItem(soTrang);
+						
+					}else 
+					{	
+						Combo((soDT / 25)+1);
+						soTrang = (soDT / 25)+1;
+						loaddata();
+						box_SoTrang.setSelectedItem(soTrang);
+					}
+					
+					
+				}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} else {
+// thong bao loi ra man hinh
+		}
+	}
+	
+	public void update(){
+		if (updateb == 1) {
+			
+		} else {
+// thong bao loi ra man hinh
+		}
+	}
+	
+	public void find(){
 		
 	}
+	
+	
 	
 	/**
 	 * Launch the application.
