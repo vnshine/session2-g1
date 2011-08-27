@@ -81,33 +81,33 @@ public class QLDoiTacProcess
             }
     }
     
-    public boolean ThemQuyen(DoiTac doiTac) throws SQLException
+    public boolean ThemDoiTac(DoiTac doiTac) throws SQLException
     {
             Connection cn = ioconnection.getConnection();
             Boolean success = true;
             try 
             {
-                    cn.setAutoCommit(false);
+                   // cn.setAutoCommit(false);
                     CallableStatement cst = cn.prepareCall("{call sp_tblDoiTac_Insert (?,?,?,?,?,?,?,?)}");
                     
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
-                    cst.setNString(1, doiTac.getPK_sDoiTacID());
+                    cst.setString(1, doiTac.getPK_sDoiTacID());
+                    cst.setString(2, doiTac.getsTenDoiTac());
+                    cst.setString(3, doiTac.getsTenDoiTacEng());
+                    cst.setString(4, doiTac.getsSoDienThoai());
+                    cst.setString(5, doiTac.getsDiaChi());
+                    cst.setInt(6, doiTac.getiTrangThai());
+                    cst.setString(7, doiTac.getsNguoiLienHe());
+                    cst.setString(8, doiTac.getsGhiChu());
                     
                     
-                    success = cst.execute();
-                    cst.clearBatch();
-                    cn.commit();
+                    cst.execute();
+                    //cst.clearBatch();
+                    //cn.commit();
             } 
             catch (SQLException e)
             {
                     e.printStackTrace();
-                    cn.rollback();
+                    //cn.rollback();
                     success = false;
             }
             finally
@@ -117,6 +117,33 @@ public class QLDoiTacProcess
             }
     }
     
+    public boolean XoaDoiTac(String maDoiTac) throws SQLException
+    {
+            boolean result = true;
+            Connection con = (Connection) ioconnection.getConnection();
+            try
+            {
+                    con.setAutoCommit(false);
+                    CallableStatement cst = con.prepareCall("{call sp_tblDoiTac_Delete (?)}");
+                    
+                    cst.setNString(1,maDoiTac);
+                    
+                    result = cst.execute();
+                    cst.clearBatch();
+                    con.commit();
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = false;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);
+                    return result;
+            }
+            
+    }
     /*
     public Vector<ObjQuyen> TimQuyen(ObjQuyen varQuyen) throws SQLException
     {
@@ -186,33 +213,7 @@ public class QLDoiTacProcess
     
     */
     
-    /*public boolean XoaQuyen(String _tenQuyen) throws SQLException
-    {
-            boolean result = true;
-            Connection con = (Connection) ioconnection.getConnection();
-            try
-            {
-                    con.setAutoCommit(false);
-                    CallableStatement cst = con.prepareCall("{call sp_tblQuyen_Delete (?)}");
-                    
-                    cst.setNString(1,_tenQuyen);
-                    
-                    result = cst.execute();
-                    cst.clearBatch();
-                    con.commit();
-            }
-            catch (Exception e)
-            {
-                    e.printStackTrace();
-                    result = false;
-            }
-            finally
-            {
-                    ioconnection.closeConnection(con);
-                    return result;
-            }
-            
-    }*/
+    /**/
     
 /*    
     public boolean SuaQuyen(ObjQuyen varQuyen, String old_name) throws SQLException
