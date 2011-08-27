@@ -29,8 +29,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import module.ThongBao;
+import module.TiengVietToEg;
 import myobject.DoiTac;
 import process.QLDoiTacProcess;
+import validate.XuLiTen;
+
 import java.awt.event.MouseEvent;
 
 public class QuanLiDoiTac extends JInternalFrame {
@@ -44,7 +47,7 @@ public class QuanLiDoiTac extends JInternalFrame {
 	private JTextField textField_DiaChiDT;
 	private JTextField textField_GhiChuDT;
 	JLabel lblThongBao;
-	private JComboBox<Integer> box_SoTrang;
+	private JComboBox box_SoTrang;
 	private Integer soTrang = 1;
 	private Integer sTT = 1;
 	private Integer insertb = 0;
@@ -340,6 +343,8 @@ public class QuanLiDoiTac extends JInternalFrame {
 		new ThongBao(lblThongBao, Color.RED, " ");
 		panel_Error.add(lblThongBao);
 		loaddata();
+		
+		
 	}
 	
 	
@@ -488,16 +493,17 @@ public class QuanLiDoiTac extends JInternalFrame {
 	{
 		if (insertb == 1) {
 			try {
-				
+				XuLiTen a = new XuLiTen();
 				DoiTac doiTac = new DoiTac();
+				//textField_MaDT.setText("Chuyen thanh: "+a.xuLiTen(textField_TenDT.getText()));
 				doiTac.setiTrangThai(1);
 				doiTac.setPK_sDoiTacID(textField_MaDT.getText());
 				doiTac.setsDiaChi(textField_DiaChiDT.getText());
 				doiTac.setsGhiChu(textField_GhiChuDT.getText());
-				doiTac.setsNguoiLienHe(textField_NLH.getText());
+				doiTac.setsNguoiLienHe(a.xuLiTen(textField_NLH.getText()));
 				doiTac.setsSoDienThoai(textField_SoDT.getText());
-				doiTac.setsTenDoiTac(textField_TenDT.getText());
-				doiTac.setsTenDoiTacEng("text convert roi");//TextConverter.toEnglish(textField_TenDT.getText()));
+				doiTac.setsTenDoiTac(a.xuLiTen(textField_TenDT.getText()));
+				doiTac.setsTenDoiTacEng(TiengVietToEg.convert(textField_TenDT.getText()));
 				QLDoiTacProcess dtac = new QLDoiTacProcess();
 				Integer soDT = dtac.getsoDoiTac();
 				boolean kiemTra = dtac.ThemDoiTac(doiTac);
