@@ -2,6 +2,103 @@
 --------------------------------
 --Bảng đối tác
 --------------------------------
+
+-----------Proc thêm đối tác             
+if(OBJECT_ID('sp_tblDoiTac_Insert','p') is not null)
+begin
+	drop proc  sp_tblDoiTac_Insert
+end
+GO
+
+CREATE proc sp_tblDoiTac_Insert
+	@PK_sDoiTacID varchar(6),
+	@sTenDoiTac nvarchar(45),
+	@sTenDoiTacEng varchar(45),
+	@sSoDienThoai varchar(12),
+	@sDiaChi nvarchar(100),
+	@iTrangThai int,
+	@sNguoiLienHe nvarchar(45),
+	@sGhiChu nvarchar(100)
+as
+begin
+	insert INTO tbl_DoiTac VALUES(@PK_sDoiTacID,
+								  @sTenDoiTac,
+								  @sTenDoiTacEng,
+								  @sSoDienThoai,
+								  @sDiaChi,
+								  @iTrangThai,
+								  @sNguoiLienHe,
+								  @sGhiChu	
+									)
+end
+go
+
+-----------Proc sửa đối tác
+if(OBJECT_ID('sp_tblDoiTac_Update','p') is not null)
+begin
+	drop proc  sp_tblDoiTac_Update
+end
+GO
+
+CREATE proc sp_tblDoiTac_Update
+	@PK_sDoiTacIDCu varchar(6),
+	@PK_sDoiTacID varchar(6),
+	@sTenDoiTac nvarchar(45),
+	@sTenDoiTacEng varchar(45),
+	@sSoDienThoai varchar(12),
+	@sDiaChi nvarchar(100),
+	@iTrangThai int,
+	@sNguoiLienHe nvarchar(45),
+	@sGhiChu nvarchar(100)
+as
+begin
+	update tbl_DoiTac SET 
+	  PK_sDoiTacID = @PK_sDoiTacID,
+	  sTenDoiTac = @sTenDoiTac,
+	  sTenDoiTacEng = @sTenDoiTacEng,
+	  sSoDienThoai =@sSoDienThoai,
+	  sDiaChi = @sDiaChi,
+	  iTrangThai = @iTrangThai,
+	  sNguoiLienHe = @sNguoiLienHe,
+	  sGhiChu = @sGhiChu
+	where PK_sDoiTacID = @PK_sDoiTacIDCu
+end
+go
+
+
+-----------Proc xóa đối tác
+if(OBJECT_ID('sp_tblDoiTac_Delete','p') is not null)
+begin
+	drop proc  sp_tblDoiTac_Delete
+end
+GO
+
+CREATE proc sp_tblDoiTac_Delete
+	@PK_sDoiTacIDCu varchar(6)
+as
+begin
+	Delete FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE PK_sDoiTacID = @PK_sDoiTacIDCu
+end
+go
+
+
+-----------Proc kiểm tra có tồn tại ID
+if(OBJECT_ID('sp_tblDoiTac_duplicate','p') is not null)
+begin
+	drop proc  sp_tblDoiTac_duplicate
+end
+GO
+
+CREATE proc sp_tblDoiTac_duplicate
+	@PK_sDoiTacIDCu varchar(6)
+as
+begin
+	select * FROM tbl_DoiTac WHERE PK_sDoiTacID = @PK_sDoiTacIDCu
+end
+go
+
+-----------Proc lay danh sach
+
 GO
 
 CREATE PROCEDURE DanhSach_DoiTac 
@@ -40,78 +137,17 @@ GO
 
 
 
------------Proc thêm đối tác             
-if(OBJECT_ID('sp_tblDoiTac_Insert','p') is not null)
-begin
-	drop proc  sp_tblDoiTac_Insert
-end
-GO
-
-CREATE proc sp_tblDoiTac_Insert
-	@PK_sDoiTacID varchar(6),
-	@sTenDoiTac nvarchar(45),
-	@sTenDoiTacEng varchar(45),
-	@sSoDienThoai varchar(12),
-	@sDiaChi nvarchar(100),
-	@iTrangThai int,
-	@sNguoiLienHe nvarchar(45),
-	@sGhiChu nvarchar(100)
-as
-begin
-	insert INTO tbl_DoiTac VALUES(@id, @ten, @ghichu)
-end
-go
-
------------Proc sửa chức năng
-if(OBJECT_ID('sp_tblDoiTac_Update','p') is not null)
-begin
-	drop proc  sp_tblDoiTac_Update
-end
-GO
-
-CREATE proc sp_tblDoiTac_Update
-	@old_id varchar(15),
-	@new_id varchar(15),
-	@ten varchar(50),
-	@ghichu varchar(100)
-as
-begin
-	update tbl_DoiTac SET PK_sDoiTacID = @new_id, sTenDoiTac = @ten, sGhiChu = @ghichu WHERE PK_sDoiTacID = @old_id
-end
-go
 
 
------------Proc xóa chức năng
-if(OBJECT_ID('sp_tblDoiTac_Delete','p') is not null)
-begin
-	drop proc  sp_tblDoiTac_Delete
-end
-GO
-
-CREATE proc sp_tblDoiTac_Delete
-	@id varchar(15)
-as
-begin
-	Delete FROM tbl_DoiTac WHERE PK_sDoiTacID = @id
-end
-go
 
 
------------Proc kiểm tra có tồn tại ID
-if(OBJECT_ID('sp_tblDoiTac_duplicate','p') is not null)
-begin
-	drop proc  sp_tblDoiTac_duplicate
-end
-GO
 
-CREATE proc sp_tblDoiTac_duplicate
-	@id varchar(15),
-	@ten varchar(50)
-as
-begin
-	select * FROM tbl_DoiTac WHERE PK_sDoiTacID = @id OR sTenDoiTac = @ten
-end
-go
+
+
+
+
+
+
 
 
 --------------------------------
