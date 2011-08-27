@@ -9,6 +9,15 @@ public class DoiTac {
 	private Integer iTrangThai;
 	private String sNguoiLienHe;
 	private String sGhiChu;
+	private String sTenDoiTacEng;
+	
+	
+	public String getsTenDoiTacEng() {
+		return sTenDoiTacEng;
+	}
+	public void setsTenDoiTacEng(String sTenDoiTacEng) {
+		this.sTenDoiTacEng = sTenDoiTacEng;
+	}
 	public String getPK_sDoiTacID() {
 		return PK_sDoiTacID;
 	}
