@@ -259,6 +259,7 @@ as
 SELECT * FROM tbl_NhanVien ORDER BY PK_sNhanVienID DESC
 EXEC sp_tblNhanVien_FindRutGon 3,'','','',1
 
+
 --+++++++++++++++++++++++++++++++
 --------------------------------+
 --Thêm cơ sở dữ liệu            +
