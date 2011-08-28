@@ -10,9 +10,17 @@
  */
 package view;
 
+import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
+import module.SetCenter;
+import myobject.NhanVienRutGon;
+import process.PhanQuyenProcess;
 
 /**
  *
@@ -21,6 +29,10 @@ import javax.swing.UIManager;
 public class ViewPhanQuyen extends javax.swing.JFrame {
 
     /** Creates new form ViewPhanQuyen */
+    DefaultTableModel model = null;
+    Object[][] rowData = {};
+    String[] columnNames = {};
+        
     public ViewPhanQuyen() 
     {
         initComponents();
@@ -33,10 +45,67 @@ public class ViewPhanQuyen extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this,"Không thể áp dụng giao diện: \"System Look and Feel\"", "Lỗi giao diện",JOptionPane.ERROR_MESSAGE);
         }
-		
+        
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*
+         * 
+         */
+        new SetCenter(this);
+        columnNames = new String[] {"Mã nhân viên", "Họ tên","Số điện thoại","Giới tình"};
+        model = new DefaultTableModel(rowData, columnNames);
+        tblDanhSach = new JTable(model)
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex) 
+            {
+                    return false; //Disallow the editing of any cell
+            }
+        };
+        tblDanhSach.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblDanhSach.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        tblDanhSach.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        //panDanhSach.setViewportView(tblDanhSach);
+
+        //Hien du lieu ra bang
+        FillToTable();
     }
 
+    /*
+     * Các hàm tự viết
+     */    
+    
+    
+    public void FillToTable()
+    {
+        PhanQuyenProcess prc = new PhanQuyenProcess();
+        Vector<NhanVienRutGon> getResult = new Vector<NhanVienRutGon>();
+        try 
+        {
+            getResult = prc.TimNhanVienGutGon(null, WIDTH)
+            if(getResult.isEmpty())
+            {
+                new ThongBao(lblTrangThai, Color.gray, "Danh sách quyền rỗng!");
+            }
+            else
+            {
+                new ThongBao(lblTrangThai, Color.BLUE, "Tổng số " + getResult.size() + " bản ghi.");
+                model.setRowCount(0);
+                for(int i=0;i<getResult.size();i++)
+                {
+                    Object[] temp = {getResult.get(i).getTen(), getResult.get(i).getGhiChu()};
+                    
+                    model.insertRow(tblDanhSach.getRowCount(), temp);
+                }
+            }
+        }
+        catch(SQLException ex) 
+        {
+           new ThongBao(lblTrangThai, Color.RED, "Kết nối tới cơ sở dữ liệu gặp vấn đề!");
+           JOptionPane.showMessageDialog(this, "Lỗi: " + ex.getMessage(), "Lỗi SQL",JOptionPane.ERROR_MESSAGE);
+        }
+                
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
