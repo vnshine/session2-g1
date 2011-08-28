@@ -4,7 +4,6 @@
  */
 package validate;
 import java.util.Vector;
-import java.util.regex.*;
 public class XuLiTen {
 	
 	public String xuLiTen(String name){
