@@ -19,18 +19,19 @@ import myobject.NhanVienRutGon;
  */
 public class PhanQuyenProcess 
 {
-    public Vector<NhanVienRutGon> TimNhanVienGutGon(NhanVienRutGon temp) throws SQLException
+    public Vector<NhanVienRutGon> TimNhanVienGutGon(NhanVienRutGon temp, Integer soTrang) throws SQLException
     {
             Vector<NhanVienRutGon> result = new Vector<NhanVienRutGon>();
             Connection con = ioconnection.getConnection();
             try
             {
-                    CallableStatement cst = con.prepareCall("{call sp_tblNhanVien_FindRutGon (?,?,?,?)}");
+                    CallableStatement cst = con.prepareCall("{call sp_tblNhanVien_FindRutGon (?,?,?,?,?)}");
                     
-                    cst.setString(1, temp.getsNhanVienID());
-                    cst.setString(2, temp.getsHoTen());
-                    cst.setString(3, temp.getsSoDienThoai());
-                    cst.setBoolean(4, temp.getbGioiTinh());
+                    cst.setInt(1, soTrang);
+                    cst.setString(2, temp.getsNhanVienID());
+                    cst.setString(3, temp.getsHoTen());
+                    cst.setString(4, temp.getsSoDienThoai());
+                    cst.setBoolean(5, temp.getbGioiTinh());
                     
                     ResultSet rs =  cst.executeQuery();
 
