@@ -93,7 +93,7 @@ CREATE proc sp_tblDoiTac_duplicate
 	@PK_sDoiTacIDCu varchar(6)
 as
 begin
-	select * FROM tbl_DoiTac WHERE PK_sDoiTacID = @PK_sDoiTacIDCu
+	Select count(*) from (select * FROM tbl_DoiTac WHERE PK_sDoiTacID = @PK_sDoiTacIDCu)dup
 end
 go
 

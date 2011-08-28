@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import myobject.DoiTac;
 import connect.ioconnection;
 
@@ -81,6 +80,34 @@ public class QLDoiTacProcess
             }
     }
     
+    public boolean checkPK( String PK) throws SQLException
+    {
+    		Integer result = 0;
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("{call sp_tblDoiTac_duplicate(?)}");
+                    cst.setString(1, PK);
+                    ResultSet rs =  cst.executeQuery();
+                    rs.next();
+					System.out.println(rs.getInt(1));
+					result = rs.getInt(1);
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = 0;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    if (result == 1) {
+                    	return false;
+					}
+                    return true;
+            }
+    }
+    
     public boolean ThemDoiTac(DoiTac doiTac) throws SQLException
     {
             Connection cn = ioconnection.getConnection();
@@ -117,30 +144,63 @@ public class QLDoiTacProcess
             }
     }
     
-    public boolean XoaDoiTac(String maDoiTac) throws SQLException
+    public boolean SuaDoiTac(DoiTac doiTac,String PK) throws SQLException
     {
-            boolean result = true;
-            Connection con = (Connection) ioconnection.getConnection();
-            try
+            Connection cn = ioconnection.getConnection();
+            Boolean success = true;
+            try 
             {
-                    con.setAutoCommit(false);
-                    CallableStatement cst = con.prepareCall("{call sp_tblDoiTac_Delete (?)}");
+                   // cn.setAutoCommit(false);
+                    CallableStatement cst = cn.prepareCall("{call sp_tblDoiTac_Update (?,?,?,?,?,?,?,?,?)}");
+                    cst.setString(1, PK);
+                    cst.setString(2, doiTac.getPK_sDoiTacID());
+                    cst.setString(3, doiTac.getsTenDoiTac());
+                    cst.setString(4, doiTac.getsTenDoiTacEng());
+                    cst.setString(5, doiTac.getsSoDienThoai());
+                    cst.setString(6, doiTac.getsDiaChi());
+                    cst.setInt(7, doiTac.getiTrangThai());
+                    cst.setString(8, doiTac.getsNguoiLienHe());
+                    cst.setString(9, doiTac.getsGhiChu());
                     
-                    cst.setNString(1,maDoiTac);
                     
-                    result = cst.execute();
-                    cst.clearBatch();
-                    con.commit();
-            }
-            catch (Exception e)
+                    cst.execute();
+                    //cst.clearBatch();
+                    //cn.commit();
+            } 
+            catch (SQLException e)
             {
                     e.printStackTrace();
-                    result = false;
+                    //cn.rollback();
+                    success = false;
             }
             finally
             {
-                    ioconnection.closeConnection(con);
-                    return result;
+                    ioconnection.closeConnection(cn);
+                    return success;
+            }
+    }
+    public boolean XoaDoiTac(String maDoiTac) throws SQLException
+    {
+            Connection con = (Connection) ioconnection.getConnection();
+            try
+            {
+                    //con.setAutoCommit(false);
+                    CallableStatement cst = con.prepareCall("{call sp_tblDoiTac_Delete (?)}");         
+                    cst.setNString(1,maDoiTac);
+                    cst.execute();
+
+            }
+            catch (Exception e)
+            {
+            		
+                    e.printStackTrace();
+                    return false;
+            }
+            finally
+            {
+            	
+                ioconnection.closeConnection(con);
+                return true;
             }
             
     }
@@ -248,6 +308,6 @@ public class QLDoiTacProcess
 */
     public static void main(String[] args) throws SQLException {
     	QLDoiTacProcess a = new QLDoiTacProcess();
-    	System.out.println(a.getListDoiTac(2).size());
+    	System.out.println(a.checkPK("appp"));
     }
 }
