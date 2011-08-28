@@ -63,10 +63,11 @@ GO
 CREATE proc sp_tblChucNang_Insert
 	@id varchar(15),
 	@ten varchar(50),
+	@tenEng varchar(50),
 	@ghichu varchar(100)
 as
 begin
-	insert INTO tbl_ChucNang VALUES(@id, @ten, @ghichu)
+	insert INTO tbl_ChucNang VALUES(@id, @ten, @tenEng, @ghichu)
 end
 go
 
@@ -210,7 +211,7 @@ end
 GO
 
 CREATE proc sp_tblQuyen_Delete
-	@id int
+	@name nvarchar(50)
 as
 begin
 	Delete FROM tbl_Quyen WHERE sTenQuyen = @name
@@ -238,21 +239,25 @@ go
 --------------------------------
 
 --Phân trang thông tin rút gọn nhân viên
-
-CREATE proc sp_tblNhanVien_RutgonPhanTrang
+if(OBJECT_ID('sp_tblNhanVien_FindRutGon','p') is not null)
+begin
+	drop proc  sp_tblNhanVien_FindRutGon
+end
+GO
+CREATE proc sp_tblNhanVien_FindRutGon
 	@iSoTrang int,
-	@iSoBanGhi int,
 	@sNhanVienID varchar(6),
 	@sHoTenEng varchar(50),
 	@sSoDienThoai varchar(13),
 	@bGioiTinh bit
 as
 	begin
+		DECLARE @iSoBanGhi int = 5
 		SELECT TOP (@iSoBanGhi) * FROM (SELECT TOP ((@iSoBanGhi) * @iSoTrang) PK_sNhanVienID, sHoTen, sSoDienThoai, bGioiTinh FROM tbl_NhanVien WHERE PK_sNhanVienID LIKE '%' + @sNhanVienID + '%' and sSoDienThoai LIKE '%' + @sSoDienThoai + '%' AND bGioiTinh = 1 AND sHoTenEng LIKE '%' + @sHoTenEng + '%' ORDER BY PK_sNhanVienID DESC) c ORDER BY PK_sNhanVienID DESC
 	END
 
-SELECT * FROM tbl_NhanVien
-EXEC sp_tblNhanVien_RutgonPhanTrang 2,2,'','','',1
+SELECT * FROM tbl_NhanVien ORDER BY PK_sNhanVienID DESC
+EXEC sp_tblNhanVien_FindRutGon 3,'','','',1
 
 --+++++++++++++++++++++++++++++++
 --------------------------------+
@@ -278,10 +283,18 @@ INSERT INTO tbl_NhanVien values('NV0001','nv001',N'Quang Liem','QUANGLIEM', '098
 INSERT INTO tbl_NhanVien values('NV0002','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
 INSERT INTO tbl_NhanVien values('NV0003','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
 INSERT INTO tbl_NhanVien values('NV0004','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0005','nv001',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0006','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0007','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0008','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0009','nv001',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0010','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0011','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
+INSERT INTO tbl_NhanVien values('NV0012','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
 
-UPDATE tbl_NhanVien SET sMatKhau = '73acd9a5972130b75066c82595a1fae3' WHERE PK_sNhanVienID = 'NV0001'
+--UPDATE tbl_NhanVien SET sMatKhau = '73acd9a5972130b75066c82595a1fae3' WHERE PK_sNhanVienID = 'NV0001'
 
-exec sp_tblNhanVien_Login 'NV0001', 'admin'
+--exec sp_tblNhanVien_Login 'NV0001', 'admin'
 
 
 -- 
