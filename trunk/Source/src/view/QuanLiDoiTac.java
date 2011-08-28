@@ -11,8 +11,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -26,6 +28,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableModel;
 
 import module.ThongBao;
@@ -33,8 +37,6 @@ import module.TiengVietToEg;
 import myobject.DoiTac;
 import process.QLDoiTacProcess;
 import validate.XuLiTen;
-
-import java.awt.event.MouseEvent;
 
 public class QuanLiDoiTac extends JInternalFrame {
 
@@ -53,6 +55,7 @@ public class QuanLiDoiTac extends JInternalFrame {
 	private Integer insertb = 0;
 	private Integer deleteb = 0;
 	private Integer updateb = 0;
+	private Integer loi=0;
 	private String[] columname = new String[] { "STT",
 															"M\u00E3 \u0111\u1ED1i t\u00E1c",
 															"T\u00EAn \u0111\u1ED1i t\u00E1c",
@@ -68,6 +71,8 @@ public class QuanLiDoiTac extends JInternalFrame {
 	 * @throws SQLException 
 	 */
 	public QuanLiDoiTac() throws SQLException {
+		lblThongBao = new JLabel();
+		lblThongBao.setText("ghghjjjjjfgjgfjgj");
 		Toolkit tk = Toolkit.getDefaultToolkit();  
 		int xSize = ((int) tk.getScreenSize().getWidth());  
 		int ySize = ((int) tk.getScreenSize().getHeight());  
@@ -96,6 +101,12 @@ public class QuanLiDoiTac extends JInternalFrame {
 		panel_DL1.add(lblMiTc);
 		
 		textField_MaDT = new JTextField();
+		textField_MaDT.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent arg0) {
+				checkMaDT();
+			}
+		});
+
 		panel_DL1.add(textField_MaDT);
 		textField_MaDT.setColumns(10);
 		
@@ -339,7 +350,7 @@ public class QuanLiDoiTac extends JInternalFrame {
 		
 		JPanel panel_Error = new JPanel();
 		verticalBox_1.add(panel_Error);
-		lblThongBao = new JLabel();
+		
 		new ThongBao(lblThongBao, Color.RED, " ");
 		panel_Error.add(lblThongBao);
 		loaddata();
@@ -491,10 +502,12 @@ public class QuanLiDoiTac extends JInternalFrame {
 	
 	public void insert()
 	{
-		if (insertb == 1) {
+		if (insertb == 1 && loi == 0) {
 			try {
 				XuLiTen a = new XuLiTen();
+//				CheckTen checkTen = new CheckTen();
 				DoiTac doiTac = new DoiTac();
+
 				//textField_MaDT.setText("Chuyen thanh: "+a.xuLiTen(textField_TenDT.getText()));
 				doiTac.setiTrangThai(1);
 				doiTac.setPK_sDoiTacID(textField_MaDT.getText());
@@ -593,6 +606,12 @@ public class QuanLiDoiTac extends JInternalFrame {
 	}
 	
 	public void find(){
+		
+	}
+	
+	public void checkMaDT(){
+		new ThongBao(lblThongBao, Color.RED, "Click vao doi tuong muon sua trong bang !!!");
+		
 		
 	}
 	
