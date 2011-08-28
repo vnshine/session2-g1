@@ -1,15 +1,77 @@
-package module;
+package validate;
 
 public class CheckTen {
 
-	private boolean Check(String name) {
-		String str; 
+	public boolean Check(String name,Integer max,Integer min) {
+		String str,str2;
+		str2 = name;
 		Integer loi = 0;
+		
+		str2 = str2.trim();//xoa khoang trang dau duoi
+		while (str2.contains("  ")) {//chuyen khoang trang dai thanh dau cach
+			str2 = str2.substring(0,str2.indexOf("  ")+1) + str2.substring(str2.indexOf("  ")+2);
+		}
+		
+		
+		if (name.length() < min) loi = 1;//kiem tra do dai ten toi thieu
+		if (name.length() > max) loi = 1;//kiem tra do dai ten toi da
 		char arrChar[] = name.toCharArray();
-		for (int i = 1; i < (name.length()); i++) {//kiem tra ky tu nhap vao
+		for (int i = 0; i < (arrChar.length); i++) {//kiem tra ky tu nhap vao
 			str = name.substring(i,i+1);
-			if (str.matches("[A-z]")) {}else loi = 1;
+			//if (str.matches("[A-z]")) {}else loi = 1;
 			switch(arrChar[i]){
+				case 'Q':
+				case 'W':
+				case 'E':
+				case 'R':
+				case 'T':
+				case 'Y':
+				case 'U':
+				case 'I':
+				case 'O':
+				case 'P':
+				case 'A':
+				case 'S':
+				case 'D':
+				case 'F':
+				case 'G':
+				case 'H':
+				case 'J':
+				case 'K':
+				case 'L':
+				case 'Z':
+				case 'X':
+				case 'C':
+				case 'V':
+				case 'B':
+				case 'N':
+				case 'M':
+				case 'q':
+				case 'w':
+				case 'e':
+				case 'r':
+				case 't':
+				case 'y':
+				case 'u':
+				case 'i':
+				case 'o':
+				case 'p':
+				case 'a':
+				case 's':
+				case 'd':
+				case 'f':
+				case 'g':
+				case 'h':
+				case 'j':
+				case 'k':
+				case 'l':
+				case 'z':
+				case 'x':
+				case 'c':
+				case 'v':
+				case 'b':
+				case 'n':
+				case 'm':
 				case '\u00E1':
 				case '\u00E0':
 				case '\u1EA3':
@@ -29,10 +91,7 @@ public class CheckTen {
 				case '\u1EAD':
 				case '\u0203':
 				case '\u01CE':
-			{
-//			result[i] = 'a';
-			break;
-			}
+
 				case '\u00E9':
 				case '\u00E8':
 				case '\u1EBB':
@@ -45,19 +104,13 @@ public class CheckTen {
 				case '\u1EC5':
 				case '\u1EC7':
 				case '\u0207':
-			{
-//			result[i] = 'e';
-			break;
-			}
+
 				case '\u00ED':
 				case '\u00EC':
 				case '\u1EC9':
 				case '\u0129':
 				case '\u1ECB':
-			{
-//			result[i] = 'i';
-			break;
-			}
+
 				case '\u00F3':
 				case '\u00F2':
 				case '\u1ECF':
@@ -76,10 +129,7 @@ public class CheckTen {
 				case '\u1EE1':
 				case '\u1EE3':
 				case '\u020F':
-			{
-//			result[i] = 'o';
-			break;
-			}
+
 				case '\u00FA':
 				case '\u00F9':
 				case '\u1EE7':
@@ -91,24 +141,15 @@ public class CheckTen {
 				case '\u1EED':
 				case '\u1EEF':
 				case '\u1EF1':
-			{
-//			result[i] = 'u';
-			break;
-			}
+
 				case '\u00FD':
 				case '\u1EF3':
 				case '\u1EF7':
 				case '\u1EF9':
 				case '\u1EF5':
-			{
-//			result[i] = 'y';
-			break;
-			}
+
 				case '\u0111':
-			{
-//			result[i] = 'd';
-			break;
-			}
+
 				case '\u00C1':
 				case '\u00C0':
 				case '\u1EA2':
@@ -128,10 +169,7 @@ public class CheckTen {
 				case '\u1EAC':
 				case '\u0202':
 				case '\u01CD':
-			{
-//			result[i] = 'A';
-			break;
-			}
+
 				case '\u00C9':
 				case '\u00C8':
 				case '\u1EBA':
@@ -144,19 +182,13 @@ public class CheckTen {
 				case '\u1EC4':
 				case '\u1EC6':
 				case '\u0206':
-			{
-//			result[i] = 'E';
-			break;
-			}
+
 				case '\u00CD':
 				case '\u00CC':
 				case '\u1EC8':
 				case '\u0128':
 				case '\u1ECA':
-			{
-//			result[i] = 'I';
-			break;
-			}
+
 				case '\u00D3':
 				case '\u00D2':
 				case '\u1ECE':
@@ -175,10 +207,7 @@ public class CheckTen {
 				case '\u1EE0':
 				case '\u1EE2':
 				case '\u020E':
-			{
-//			result[i] = 'O';
-			break;
-			}
+
 				case '\u00DA':
 				case '\u00D9':
 				case '\u1EE6':
@@ -190,29 +219,23 @@ public class CheckTen {
 				case '\u1EEC':
 				case '\u1EEE':
 				case '\u1EF0':
-			{
-//			result[i] = 'U';
-			break;
-			}
 			
 				case '\u00DD':
 				case '\u1EF2':
 				case '\u1EF6':
 				case '\u1EF8':
 				case '\u1EF4':
-			{
-//			result[i] = 'Y';
-			break;
-			}
+
 				case '\u0110':
 				case '\u00D0':
 				case '\u0089':
 			{
-//			result[i] = 'D';
+				System.out.println("nhay vao ko lam j ");
 			break;
 			}
 			default:
 //			result[i] = arrChar[i];
+				System.out.println("nhay vao default ");
 				loi = 1;
 			}
 			
@@ -223,5 +246,10 @@ public class CheckTen {
 		} else {
 			return true;
 		}
+	}
+	
+	public static void main(String[] args) {
+		CheckTen a = new CheckTen();
+		System.out.println(a.Check("àhfh5ghv", 100, 6));
 	}
 }
