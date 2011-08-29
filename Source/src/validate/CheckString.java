@@ -10,13 +10,6 @@ import module.ThongBao;
 
 public class CheckString {
 
-	public boolean isPhoneFormat(String strValue) {
-        String regex = "^[+]?[01]?[- .]?(\\([2-9]\\d{2}\\)|[2-9]\\d{2})[- .]?\\d{3}[- .]?\\d{4}$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(strValue);
-        return m.matches();
-        //return strValue.matches();
-    }
 	public boolean OnlytextAndNumber(String str,Integer max,Integer min,JLabel lblThongBao,String nhan) {
 		Integer loi = 0;
 		str = str.trim();//xoa khoang trang dau duoi
@@ -269,12 +262,12 @@ public class CheckString {
 				case '\u00D0':
 				case '\u0089':
 			{
-				System.out.println("nhay vao ko lam j ");
+//				System.out.println("nhay vao ko lam j ");
 			break;
 			}
 			default:
 //			result[i] = arrChar[i];
-				System.out.println("nhay vao default ");
+//				System.out.println("nhay vao default ");
 				loi = 1;
 			}
 			
@@ -529,12 +522,12 @@ public class CheckString {
 				case '\u00D0':
 				case '\u0089':
 			{
-				System.out.println("nhay vao ko lam j ");
+//				System.out.println("nhay vao ko lam j ");
 			break;
 			}
 			default:
 //			result[i] = arrChar[i];
-				System.out.println("nhay vao default ");
+//				System.out.println("nhay vao default ");
 				loi = 1;
 			}
 			
@@ -550,7 +543,7 @@ public class CheckString {
 
 	    public static boolean PhoneNumber(String str) {
 	    	String regex ="^[+]?[0-9]?[0-9]?[- .]?([0-9]{3})[- .]?[0-9]{3}[- .]?[0-9]{4}$";
-	    	String regex2 ="^[+]?[0-9]?[0-9]?[- .]?([0-9]{3})[- .]?[0-9]{3}[- .]?[0-9]{4}$";
+	    	String regex2 ="^[+]?[0-9]?[0-9]?[- .]?([0-9]{3})[- .]?[0-9]{3}[- .]?[0-9]{3}$";
 	        if ((Pattern.matches(regex, str) == true )||(Pattern.matches(regex2, str) == true )) {
 	        	return true;
 			}

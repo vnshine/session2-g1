@@ -15,7 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -23,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -349,8 +349,10 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		new ThongBao(lblThongBao, Color.RED, " ");
 		panel_Error.add(lblThongBao);
 		loaddata();
-		
-		
+//		JFrame ad = new JFrame();
+//		ad.add(panel_XemTrang);
+//		ad.setVisible(true);
+//		JOptionPane.showConfirmDialog(panel_DL1, "ko co j");
 	}
 	
 	
@@ -539,16 +541,18 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 				
 		} else {
 
-			String error;
-			error = "C\u00F3 l\u1ED7i x\u1EA3 ra : ";
-			if (loiDiaChi == 1) {error = error+ "DC ,";}
-			if (loiGhiChu == 1) {error = error+ "GC ,";}
-			if (loiMaDT == 1) {error = error+ "MDT ,";}
-			if (loiNLH == 1) {error = error+ "NLH ,";}
-			if (loiSDT == 1) {error = error+ "SDT ,";}
-			if (loiTenDT == 1) {error = error+ "TDT ,";}
-			error = error+"kh\u00F4ng h\u1EE3p l\u1EC7";
-			new ThongBao(lblThongBao, Color.RED, error);
+			if (insertb == 1) {
+				String error;
+				error = "C\u00F3 l\u1ED7i x\u1EA3 ra : ";
+				if (loiDiaChi == 1) {error = error+ "DC ,";}
+				if (loiGhiChu == 1) {error = error+ "GC ,";}
+				if (loiMaDT == 1) {error = error+ "MDT ,";}
+				if (loiNLH == 1) {error = error+ "NLH ,";}
+				if (loiSDT == 1) {error = error+ "SDT ,";}
+				if (loiTenDT == 1) {error = error+ "TDT ,";}
+				error = error+"kh\u00F4ng h\u1EE3p l\u1EC7";
+				new ThongBao(lblThongBao, Color.RED, error);
+			}
 		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -562,27 +566,38 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	public void delete(){
 		QLDoiTacProcess dtac = new QLDoiTacProcess();
 		if (deleteb == 1) {
+			
+			
 			try {
 				if (dtac.checkPK(textField_MaDT.getText())) {
 					// khoa chinh ko trung
 					new ThongBao(lblThongBao, Color.RED,"Kh\u00F4ng t\u1ED3n t\u1EA1i \u0111\u1ED1i t\u00E1c mu\u1ED1n x\u00F3a !");
 				} else {
-					dtac.XoaDoiTac((textField_MaDT.getText()));
-					new ThongBao(lblThongBao, Color.BLUE,"Delete ngon !");
-					Integer soDT = dtac.getsoDoiTac();
-					if ((soDT % 25) == 0 ) {
-						Combo((soDT / 25));
-						soTrang = (soDT / 25);
-						
-						loaddata();
-						box_SoTrang.setSelectedItem(soTrang);
-						
-					}else 
-					{	
-						Combo((soDT / 25)+1);
-						soTrang = (soDT / 25)+1;
-						loaddata();
-						box_SoTrang.setSelectedItem(soTrang);
+					
+					if (JOptionPane.showConfirmDialog(new JFrame(),
+					        "Do you want to delete "+textField_MaDT.getText()+" ?", "Delete",
+					        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+					      
+					 {
+						dtac.XoaDoiTac((textField_MaDT.getText()));
+						new ThongBao(lblThongBao, Color.BLUE,"Delete ngon !");
+						Integer soDT = dtac.getsoDoiTac();
+						if ((soDT % 25) == 0 ) {
+							Combo((soDT / 25));
+							soTrang = (soDT / 25);
+							
+							loaddata();
+							box_SoTrang.setSelectedItem(soTrang);
+							
+						}else 
+						{	
+							Combo((soDT / 25)+1);
+							soTrang = (soDT / 25)+1;
+							loaddata();
+							box_SoTrang.setSelectedItem(soTrang);
+						}
+					} else {
+
 					}
 				}
 				
@@ -597,9 +612,16 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	
 	public void update(){
 		try {
-			if (updateb == 1) {//quan trong
-				checkMaDT();
+			onClickTable = 0;
+			for (int i = 0; i < 25; i++) {
+				 if (table.isRowSelected(i)) {
+					onClickTable = 1;
+				}
 			}
+			
+			if ((updateb == 1) && (onClickTable ==1)) {//quan trong
+				checkMaDT();
+			
 			QLDoiTacProcess dtac = new QLDoiTacProcess();
 			if (updateb == 1 && loi == 0 && loiDiaChi == 0 && loiGhiChu == 0 && loiMaDT ==0 && loiNLH==0 && loiSDT==0 && loiTenDT ==0) {
 				
@@ -643,12 +665,22 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 					}
 					
 			} else {
-	// thong bao loi ra man hinh
+	
+			}
+			}else {
+				
+				if (updateb ==1) {
+					if (JOptionPane.showConfirmDialog(new JFrame(),
+					        "You must Click to table to Edit ?", "Edit",
+					        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+					
+				}      
 			}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		
 	}
 	
 	public void find(){
@@ -657,68 +689,78 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	
 	public void checkTen(){
 		
-		loiTenDT = 0; 
-		if ((CheckString.Onlytext(textField_TenDT.getText(), 45, 6))==false) {
-			loiTenDT = 1;
-			new ThongBao(lblThongBao, Color.RED,"K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng " +
-					"h\u1EE3p l\u1EC7 ho\u1EB7c \u0111\u1ED9 d\u00E0i kh\u00F4ng ph\u00F9 h\u1EE3p !");
-		} else {
-			loiTenDT = 0;
-			new ThongBao(lblThongBao, Color.BLUE, "T\u00EAn \u0111\u1ED1i t\u00E1c: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+		if (deleteb == 0) {
+			loiTenDT = 0; 
+			if ((CheckString.Onlytext(textField_TenDT.getText(), 45, 6))==false) {
+				loiTenDT = 1;
+				new ThongBao(lblThongBao, Color.RED,"K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng " +
+						"h\u1EE3p l\u1EC7 ho\u1EB7c \u0111\u1ED9 d\u00E0i kh\u00F4ng ph\u00F9 h\u1EE3p !");
+			} else {
+				loiTenDT = 0;
+				new ThongBao(lblThongBao, Color.BLUE, "T\u00EAn \u0111\u1ED1i t\u00E1c: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+			}
 		}
 		
 	}
 	
 	public void checkNLH(){
 		
-		loiNLH = 0; 
-		if ((CheckString.Onlytext(textField_NLH.getText(), 45, 6))==false) {
-			loiNLH = 1;
-			new ThongBao(lblThongBao, Color.RED,"K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng " +
-					"h\u1EE3p l\u1EC7 ho\u1EB7c \u0111\u1ED9 d\u00E0i kh\u00F4ng ph\u00F9 h\u1EE3p !");
-		} else {
-			loiNLH = 0;
-			new ThongBao(lblThongBao, Color.BLUE, "Ng\u01B0\u1EDDi li\u00EAn h\u1EC7: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+		if (deleteb == 0) {
+			loiNLH = 0; 
+			if ((CheckString.Onlytext(textField_NLH.getText(), 45, 6))==false) {
+				loiNLH = 1;
+				new ThongBao(lblThongBao, Color.RED,"K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng " +
+						"h\u1EE3p l\u1EC7 ho\u1EB7c \u0111\u1ED9 d\u00E0i kh\u00F4ng ph\u00F9 h\u1EE3p !");
+			} else {
+				loiNLH = 0;
+				new ThongBao(lblThongBao, Color.BLUE, "Ng\u01B0\u1EDDi li\u00EAn h\u1EC7: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+			}
 		}
 		
 	}
 
 	public void checkSoDT(){
 		
-		loiSDT = 0; 
-		if ((CheckString.PhoneNumber(textField_SoDT.getText()))==false) {
-			loiSDT = 1;
-			new ThongBao(lblThongBao, Color.RED, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i:  kh\u00F4ng h\u1EE3p l\u1EC7 ! ");
-		} else {
-			loiSDT = 0;
-			new ThongBao(lblThongBao, Color.BLUE, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i: h\u1EE3p l\u1EC7 ! ");
+		if (deleteb == 0) {
+			loiSDT = 0; 
+			if ((CheckString.PhoneNumber(textField_SoDT.getText()))==false) {
+				loiSDT = 1;
+				new ThongBao(lblThongBao, Color.RED, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i:  kh\u00F4ng h\u1EE3p l\u1EC7 ! ");
+			} else {
+				loiSDT = 0;
+				new ThongBao(lblThongBao, Color.BLUE, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i: h\u1EE3p l\u1EC7 ! ");
+			}
 		}
 		
 	}
 
 	public void checkDiaChi(){
 		
-		loiDiaChi = 0; 
-		if ((CheckString.Address(textField_DiaChiDT.getText(), 100, 6))==false) {
-			loiDiaChi = 1;
-			new ThongBao(lblThongBao, Color.RED, "\u0110\u1ECBa ch\u1EC9: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng h\u1EE3p l\u1EC7 !");
-			
-		} else {
-			loiDiaChi = 0;
-			new ThongBao(lblThongBao, Color.BLUE, "\u0110\u1ECBa ch\u1EC9: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+		if (deleteb == 0) {
+			loiDiaChi = 0; 
+			if ((CheckString.Address(textField_DiaChiDT.getText(), 100, 6))==false) {
+				loiDiaChi = 1;
+				new ThongBao(lblThongBao, Color.RED, "\u0110\u1ECBa ch\u1EC9: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng h\u1EE3p l\u1EC7 !");
+				
+			} else {
+				loiDiaChi = 0;
+				new ThongBao(lblThongBao, Color.BLUE, "\u0110\u1ECBa ch\u1EC9: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+			}
 		}
 		
 	}
 
 	public void checkGhiChu(){
 		
-		loiGhiChu = 0; 
-		if ((CheckString.Address(textField_GhiChuDT.getText(), 100, 0))==false) {
-			loiGhiChu = 1;
-			new ThongBao(lblThongBao, Color.RED, "Ghi ch\u00FA: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng h\u1EE3p l\u1EC7 !");
-		} else {
-			loiGhiChu = 0;
-			new ThongBao(lblThongBao, Color.BLUE, "Ghi ch\u00FA: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+		if (deleteb == 0) {
+			loiGhiChu = 0; 
+			if ((CheckString.Address(textField_GhiChuDT.getText(), 100, 0))==false) {
+				loiGhiChu = 1;
+				new ThongBao(lblThongBao, Color.RED, "Ghi ch\u00FA: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o kh\u00F4ng h\u1EE3p l\u1EC7 !");
+			} else {
+				loiGhiChu = 0;
+				new ThongBao(lblThongBao, Color.BLUE, "Ghi ch\u00FA: K\u00FD t\u1EF1 nh\u1EADp v\u00E0o h\u1EE3p l\u1EC7 !");
+			}
 		}
 		
 	}
