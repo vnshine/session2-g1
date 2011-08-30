@@ -42,8 +42,10 @@ public class CheckString {
 		for (int i = 0; i < min; i++) {
 			str3 = str3 + " ";
 		}
-		if (str3.contains(str2)) {
+		if (min != 0) {
+			if (str3.contains(str2)) {
 			loi = 1;
+		}
 		}
 		while (str2.contains("  ")) {//chuyen khoang trang dai thanh dau cach
 			str2 = str2.substring(0,str2.indexOf("  ")+1) + str2.substring(str2.indexOf("  ")+2);
@@ -294,8 +296,10 @@ public class CheckString {
 		for (int i = 0; i < min; i++) {
 			str3 = str3 + " ";
 		}
-		if (str3.contains(str2)) {
+		if (min !=0) {
+			if (str3.contains(str2)) {
 			loi = 1;
+		}
 		}
 		str2 = str2.trim();//xoa khoang trang dau duoi
 		while (str2.contains("  ")) {//chuyen khoang trang dai thanh dau cach
