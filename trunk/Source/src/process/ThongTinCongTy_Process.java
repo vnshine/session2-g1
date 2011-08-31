@@ -82,12 +82,13 @@ public class ThongTinCongTy_Process {
 		return u;
 	}
 	
-	public Vector<ThongTinCongTy> searchList(Integer trang){
+	public Vector<ThongTinCongTy> searchList(Integer trang ,String id,String ten ,String diaChi ,String sdt ,String email ,String web ,String tt ,Integer sl) throws SQLException{
 		Connection con =ioconnection.getConnection();
 		Vector<ThongTinCongTy> u = new Vector<ThongTinCongTy>();
 		
 		try {
-			CallableStatement cst = con.prepareCall("{call PhanTrang_CongTy(?)}");
+			
+			CallableStatement cst = con.prepareCall("{call SearchPhanTrang_CongTy(?)}");
 			cst.setInt(1, trang);
 			
 			ResultSet rs = cst.executeQuery();
@@ -117,29 +118,25 @@ public class ThongTinCongTy_Process {
 		Vector<ThongTinCongTy> u = new Vector<ThongTinCongTy>();
 		
 		try {
-			CallableStatement cst = con.prepareCall("{call Search_CongTy(?,?,?,?,?,?,?,?)}");
-			cst.setString(2, id);
-			cst.setString(3, name);
-			cst.setString(4, diaChi);
-			cst.setString(5, sdt);
-			cst.setString(6, email);
-			cst.setString(7, web);
-			cst.setString(8, tt);
-			cst.setInt(9, sl);
+			String str = "IF EXIT ";
+			str = str + "(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'search' AND TABLE_TYPE = 'VIEW' AND TABLE_SCHEMA = 'dbo') ";
+			str = str + "DROP VIEW dbo.search ";
+			str = str + "EXEC(' CREATE view dbo.search AS select * from dbo.tbl_ThongTinCongTy where ";
+			str = str + "PK_sCongTyID like ''%"+id+"%'' and ";
+			str = str + "sTenCongTyEng like ''%"+name.toUpperCase().trim()+"%'' and ";
+			str = str + "sDiaChiEng like ''%"+diaChi.toUpperCase().trim()+"%'' and ";
+			str = str + "sSoDienThoai like ''%"+sdt+"%'' and ";
+			str = str + "sEmail like ''%"+email+"%'' and ";
+			str = str + "sWebsite like ''%"+web+"%'' and ";
+			str = str + "FK_sTienTeID like ''%"+tt+"%'' and ";
+			str = str + "iTienMat = "+sl+" ";
+			str = str + "')";
+			PreparedStatement pr = con.prepareStatement(str);
+			ResultSet rs = pr.executeQuery();
+			System.out.println(str);
 			
-			ResultSet rs = cst.executeQuery();
 			while (rs.next()) {
-				ThongTinCongTy congTy = new ThongTinCongTy();
 				count++;
-				congTy.setIdCongTy(rs.getString(1));
-				congTy.setTenCongTy(rs.getString(2));
-				congTy.setDiaChiCongTy(rs.getString(4));
-				congTy.setSdtCongTy(rs.getString(6));
-				congTy.setEmailCongTy(rs.getString(7));
-				congTy.setWebCongTy(rs.getString(8));
-				congTy.setIdTienTe(rs.getString(9));
-				congTy.setSlTienMat(rs.getInt(10));
-				u.add(congTy);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -41,16 +41,16 @@ BEGIN
 		CREATE view dbo.search
 		WITH SCHEMABINDING
 		AS
-		select ^ from dbo.tbl_ThongTinCongTy
+		select * from dbo.tbl_ThongTinCongTy
 				where  
-					PK_sCongTyID like @id and
-					sTenCongTyEng like @name and
-					sDiaChiEng like @diachi and
-					sSoDienThoai like @sdt and
-					sEmail like @email and
-					sWebsite like @web and
-					FK_sTienTeID like @tt and
-					iTienMat like @sl
+					PK_sCongTyID like ''%@id%'' and
+					sTenCongTyEng like ''%@name%'' and
+					sDiaChiEng like ''%@diachi%'' and
+					sSoDienThoai like ''%@sdt%'' and
+					sEmail like ''%@email%'' and
+					sWebsite like ''%@web%'' and
+					FK_sTienTeID like ''%@tt%'' and
+					iTienMat like ''%@sl%''
 	')	
 END
 ---------------------------------------------------------------
@@ -63,5 +63,15 @@ BEGIN
 	from 
 		(select top (@trang*8) * from dbo.search order by PK_sCongTyID ASC) c  
 	order by PK_sCongTyID DESC
+END
+---------------------------------------------------------------
+GO
+CREATE PROCEDURE test
+		@id varchar(6)
+AS
+BEGIN
+	select * 
+	from 
+		
 END
 ---------------------------------------------------------------

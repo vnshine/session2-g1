@@ -124,19 +124,8 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     
     public Boolean ValidInput()
     {
-        if(txtID.getText().equals(""))
-        {
-            new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ không dược phép để trống");
-            lblID.setForeground(Color.RED);
-            return false;
-        }
         
-        if(txtID.getText().length() < 3 || txtID.getText().length() > 20)
-        {
-            new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ lớn hơn 3 chữ cái!");
-            lblID.setForeground(Color.RED);
-            return false;
-        }
+        
         
         
         return true;
@@ -150,7 +139,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         {	if (searchOnOff == false) {
         		getResult = pro.showList(trang);
 			}else {
-				getResult = pro.searchList(trang);
+				getResult = pro.searchList(trang,txtID.getText(),txtTen.getText(),textField_5.getText(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),Integer.valueOf(textField_4.getText()));
 			}
             
             if(getResult.isEmpty())
@@ -283,8 +272,6 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         lblThongBao.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblThongBao.setText("* Là bắt buộc");
         
-        JLabel lblS = new JLabel("SĐT: ");
-        
         textField = new JTextField();
         textField.setColumns(10);
         
@@ -310,12 +297,16 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         
         textField_5 = new JTextField();
         textField_5.setColumns(10);
+        
+        txtSt = new JTextField();
+        txtSt.setText("SĐT:");
+        txtSt.setColumns(10);
 
         javax.swing.GroupLayout gl_jPanel2 = new javax.swing.GroupLayout(jPanel2);
         gl_jPanel2.setHorizontalGroup(
         	gl_jPanel2.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_jPanel2.createSequentialGroup()
-        			.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        			.addGroup(gl_jPanel2.createParallelGroup(Alignment.TRAILING)
         				.addGroup(gl_jPanel2.createSequentialGroup()
         					.addContainerGap()
         					.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
@@ -326,32 +317,35 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         								.addComponent(lblTen, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         							.addGap(18)
         							.addGroup(gl_jPanel2.createParallelGroup(Alignment.TRAILING)
-        								.addComponent(txtID, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-        								.addComponent(txtTen, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-        								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-        								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+        								.addComponent(txtID, GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+        								.addComponent(txtTen, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+        								.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+        								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
+        							.addPreferredGap(ComponentPlacement.RELATED)
         							.addGroup(gl_jPanel2.createParallelGroup(Alignment.TRAILING)
         								.addGroup(gl_jPanel2.createSequentialGroup()
-        									.addGap(18)
-        									.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
-        										.addComponent(lblWebsite_1, Alignment.TRAILING)
-        										.addComponent(lblSLng, Alignment.TRAILING)))
-        								.addGroup(gl_jPanel2.createSequentialGroup()
-        									.addGap(17)
-        									.addComponent(lblS, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-        								.addGroup(gl_jPanel2.createSequentialGroup()
-        									.addGap(17)
-        									.addComponent(lblDiaChi)))
-        							.addPreferredGap(ComponentPlacement.RELATED)
+        									.addGap(175)
+        									.addComponent(lblSLng)
+        									.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE))
+        								.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING, false)
+        									.addGroup(Alignment.TRAILING, gl_jPanel2.createSequentialGroup()
+        										.addComponent(txtSt, 0, 0, Short.MAX_VALUE)
+        										.addPreferredGap(ComponentPlacement.RELATED))
+        									.addGroup(Alignment.TRAILING, gl_jPanel2.createSequentialGroup()
+        										.addComponent(lblDiaChi)
+        										.addGap(26))
+        									.addGroup(gl_jPanel2.createSequentialGroup()
+        										.addComponent(lblWebsite_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        										.addPreferredGap(ComponentPlacement.RELATED))))
         							.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
-        								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-        								.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-        								.addComponent(textField_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-        								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
+        								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+        								.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+        								.addComponent(textField_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+        								.addComponent(textField_5, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)))
         						.addComponent(lblTinT)))
-        				.addGroup(Alignment.TRAILING, gl_jPanel2.createSequentialGroup()
+        				.addGroup(gl_jPanel2.createSequentialGroup()
         					.addGap(96)
-        					.addComponent(lblThongBao, GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)))
+        					.addComponent(lblThongBao, GroupLayout.DEFAULT_SIZE, 1392, Short.MAX_VALUE)))
         			.addContainerGap())
         );
         gl_jPanel2.setVerticalGroup(
@@ -360,29 +354,30 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         			.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblID)
         				.addComponent(txtID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(lblDiaChi)
-        				.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblDiaChi))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
         				.addComponent(txtTen, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(lblTen)
-        				.addComponent(lblS)
-        				.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(txtSt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addGap(18)
         			.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
         					.addComponent(lblEmail_1)
         					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(lblWebsite_1)
-        					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(lblWebsite_1)))
         			.addGap(18)
         			.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
         					.addComponent(lblTinT)
         					.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(lblSLng)
-        				.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(lblSLng)))
         			.addGap(18)
         			.addComponent(lblThongBao)
         			.addGap(39))
@@ -686,10 +681,13 @@ public class ThongTinCongTyView extends javax.swing.JFrame
                 try
                 {
                    
-                	
+                	if (textField_4.getText() == null) {
+                		textField_4.setText(" ");
+					}
                     pro.searchCongTy(txtID.getText(),txtTen.getText(),textField_5.getText(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText(),Integer.valueOf(textField_4.getText()));
                     System.out.println(txtID.getText());
                     OnOffEdit(false);
+                    FillToTable(1);
                     ResetInput();
                     ResetError();
                     
@@ -808,5 +806,6 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     private Integer soTrang = null;
     private Integer thisTrang = null;
     private Boolean searchOnOff = false;
+    private JTextField txtSt;
 }
 
