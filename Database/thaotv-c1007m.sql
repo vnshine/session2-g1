@@ -48,6 +48,37 @@ END
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 
+-----------Proc Select số lượng Ket qua tim kiem
+if(OBJECT_ID('SoLuong_KQ','p') is not null)
+begin
+	drop proc  SoLuong_KQ
+end
+GO
+CREATE PROCEDURE SoLuong_KQ 
+@key nvarchar
+AS
+BEGIN
+	SET @key = '%' + @key + '%'
+	Select count(*) FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
+												PK_sDoiTacID like @key or
+												sTenDoiTac like @key or
+												sTenDoiTacEng like @key or
+												sSoDienThoai like @key or
+												sDiaChi like @key or
+												sNguoiLienHe like @key or
+												sGhiChu like @key)kqt
+END
+
+GO
+
+Select count(*) FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
+												PK_sDoiTacID like '%ttn112sd%' or
+												sTenDoiTac like '%ttn112dd%' or
+												sTenDoiTacEng like '%ttn112sd%' or
+												sSoDienThoai like '%ttn112sd%' or
+												sDiaChi like '%ttn112sd%' or
+												sNguoiLienHe like '%ttn112sd%' or
+												sGhiChu like '%ttn112sd%')kqt
 
 -----------Proc thêm đối tác             
 if(OBJECT_ID('sp_tblDoiTac_Insert','p') is not null)
