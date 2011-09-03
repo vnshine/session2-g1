@@ -34,6 +34,8 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableModel;
 
+import ch.rakudave.suggest.JSuggestField;
+
 import module.ThongBao;
 import module.TiengVietToEg;
 import myobject.DoiTac;
@@ -59,6 +61,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	private Integer insertb = 0;
 	private Integer deleteb = 0;
 	private Integer updateb = 0;
+	private Integer findb = 0;
 	private Integer loi=0;
 	private Integer loiMaDT=0;
 	private Integer loiTenDT=0;
@@ -67,6 +70,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	private Integer loiDiaChi=0;
 	private Integer loiGhiChu=0;
 	private Integer onClickTable = 0;
+	private JSuggestField textfJSuggestField;
 	private String[] columname = new String[] { "STT",
 															"M\u00E3 \u0111\u1ED1i t\u00E1c",
 															"T\u00EAn \u0111\u1ED1i t\u00E1c",
@@ -76,6 +80,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 															};
 	DefaultTableModel model;
 	private CheckString CheckString = new CheckString();
+	private JTextField textField;
 
 	/**
 	 * Create the frame.
@@ -114,7 +119,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_MaDT = new JTextField();
 		textField_MaDT.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				if(deleteb ==1 || updateb ==1 || insertb == 1) checkMaDT();
+				if((deleteb ==1) || (updateb ==1) || (insertb == 1)) checkMaDT();
 			}
 		});
 
@@ -207,10 +212,22 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		btnDelete.addActionListener(this);
 		panel_TacVu.add(btnDelete);
 		
+		JPanel panel_TimKiem = new JPanel();
+		panel_TimKiem.setBorder(new TitledBorder(null, "T\u00ECm ki\u1EBFm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_TacVu.add(panel_TimKiem);
+		
+		JFrame frame = new JFrame();
+		Vector<String> VectorKetQua = new Vector<String>();
+		VectorKetQua.add("abcchsjbcjsbjcbjsjcvscvjsvkcs");
+		textfJSuggestField = new JSuggestField(frame, VectorKetQua);
+		
+		panel_TimKiem.add(textfJSuggestField);
+		textfJSuggestField.setColumns(10);
+		
 		btnFind = new JButton("T\u00ECm ki\u1EBFm");
+		panel_TimKiem.add(btnFind);
 		btnFind.setActionCommand("Find");
 		btnFind.addActionListener(this);
-		panel_TacVu.add(btnFind);
 		
 		btnSave = new JButton("L\u01B0u");
 		btnSave.setActionCommand("Save");
@@ -416,11 +433,14 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	public void loaddata() {
 		try {
 			
-		
+			Integer soDT;
 		QLDoiTacProcess dtac = new QLDoiTacProcess();
-		Integer soDT = dtac.getsoDoiTac();
-				
-		//System.out.println("thong ke so trang: "+(soDT / 25));
+		if (findb == 1) {
+			soDT = dtac.getSoLuongKQ(textfJSuggestField.getText());
+		} else {
+			soDT = dtac.getsoDoiTac();
+		}
+			System.out.println("dguvbdikbgkdbgkdkbgkdbkgdobgodogndolngkdngdogodngdgndkngkkdgnd "+soDT);
 		if ((soDT % 25) == 0 ) {
 			Combo((soDT / 25));
 		}else Combo((soDT / 25)+1);
@@ -428,7 +448,12 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		model.getDataVector().removeAllElements();
 		model.fireTableDataChanged();
 		
-		Vector<DoiTac> dsDoiTac = dtac.getListDoiTac(soTrang);
+		Vector<DoiTac> dsDoiTac;
+		if (findb == 1) {
+			dsDoiTac = dtac.getListSearched(soTrang,textfJSuggestField.getText());
+		} else {
+			dsDoiTac = dtac.getListDoiTac(soTrang);
+		}
 		sTT = (soTrang-1)*25+1;
 		System.out.println("So thu tu: "+sTT);
 		System.out.println("So trang: "+soTrang);
@@ -925,7 +950,31 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 			}
 		}
 		if (e.getActionCommand().equals("Find")) {
+			QLDoiTacProcess a = new QLDoiTacProcess();
+			Integer soDT;
+			try {
+				soDT = a.getSoLuongKQ(textfJSuggestField.getText());
 			
+			if ((soDT % 25) == 0 ) {
+				Combo((soDT / 25));
+				soTrang = (soDT / 25);
+				
+				loaddata();
+				box_SoTrang.setSelectedItem(soTrang);
+				
+			}else 
+			{	
+				Combo((soDT / 25)+1);
+				soTrang = (soDT / 25)+1;
+				loaddata();
+				box_SoTrang.setSelectedItem(soTrang);
+			}
+			findb =1;
+			loaddata();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (e.getActionCommand().equals("Save")) {
 			insert();

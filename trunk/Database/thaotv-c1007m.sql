@@ -3,6 +3,52 @@
 --Bảng đối tác
 --------------------------------
 
+
+-----------Proc timmf đối tác
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE SEARCH_DOITAC  
+	@soTrang int,
+	@key nvarchar
+AS
+BEGIN
+	SET @key  = '%' + @key + '%'
+	--
+	
+	select * from (
+	select top ((
+				Select count(*) from (SELECT top (25*@soTrang) *
+				FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
+												PK_sDoiTacID like @key or
+												sTenDoiTac like @key or
+												sTenDoiTacEng like @key or
+												sSoDienThoai like @key or
+												sDiaChi like @key or
+												sNguoiLienHe like @key or
+												sGhiChu like @key)thao)d
+				)-(25*(@soTrang-1)))
+	*from (		
+	select top (25*@soTrang) *
+	from (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
+												PK_sDoiTacID like @key or
+												sTenDoiTac like @key or
+												sTenDoiTacEng like @key or
+												sSoDienThoai like @key or
+												sDiaChi like @key or
+												sNguoiLienHe like @key or
+												sGhiChu like @key)causelec order by PK_sDoiTacID ASC
+	) a	order by PK_sDoiTacID DESC
+	) b	order by PK_sDoiTacID ASC
+	--
+	
+
+END
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+
+
 -----------Proc thêm đối tác             
 if(OBJECT_ID('sp_tblDoiTac_Insert','p') is not null)
 begin
