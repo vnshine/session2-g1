@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -113,7 +114,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_MaDT = new JTextField();
 		textField_MaDT.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				checkMaDT();
+				if(deleteb ==1 || updateb ==1 || insertb == 1) checkMaDT();
 			}
 		});
 
@@ -126,7 +127,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_TenDT = new JTextField();
 		textField_TenDT.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				checkTen();
+				if(deleteb ==1 || updateb ==1 || insertb == 1) checkTen();
 			}
 		});
 		
@@ -139,7 +140,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_NLH = new JTextField();
 		textField_NLH.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				checkNLH();
+				if(deleteb ==1 || updateb ==1 || insertb == 1) checkNLH();
 			}
 		});
 		panel_DL1.add(textField_NLH);
@@ -151,7 +152,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_SoDT = new JTextField();
 		textField_SoDT.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				checkSoDT();
+				if(deleteb ==1 || updateb ==1 || insertb == 1) checkSoDT();
 			}
 		});
 		panel_DL1.add(textField_SoDT);
@@ -168,7 +169,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_DiaChiDT = new JTextField();
 		textField_DiaChiDT.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				checkDiaChi();
+				if(deleteb ==1 || updateb ==1 || insertb == 1) checkDiaChi();
 			}
 		});
 		panel_DL2.add(textField_DiaChiDT);
@@ -180,7 +181,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textField_GhiChuDT = new JTextField();
 		textField_GhiChuDT.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				checkGhiChu();
+				if(deleteb ==1 || updateb ==1 || insertb == 1) checkGhiChu();
 			}
 		});
 		panel_DL2.add(textField_GhiChuDT);
