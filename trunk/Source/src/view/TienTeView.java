@@ -26,9 +26,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import module.SetCenter;
-import myobject.ChucNang;
 import myobject.TienTe;
-import process.ChucNangProcess;
 import process.TienTe_Process;
 import module.ThongBao;
 
