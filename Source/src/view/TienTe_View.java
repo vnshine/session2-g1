@@ -12,7 +12,6 @@ package view;
 
 import admin.LoginForm;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -27,20 +26,21 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import module.SetCenter;
-import myobject.ChucNang;
-import myobject.ThongTinCongTy;
 import myobject.TienTe;
-import process.ChucNangProcess;
-import process.ThongTinCongTy_Process;
 import process.TienTe_Process;
 import module.ThongBao;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
 /**
  *
  * @author vietanh
  */
-public class ThongTinCongTy_View extends javax.swing.JFrame 
+public class TienTe_View extends javax.swing.JFrame 
 {
 
     DefaultTableModel model = null;
@@ -49,15 +49,16 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
     
     String action; //Biáº¿n ghi nháº­n ngÆ°á»�i dÃ¹ng nháº¥n vÃ o nÃºt nÃ o
 
-    ThongTinCongTy_Process pro;
+    TienTe_Process pro;
+    String id, ten, ghichu;
     String old_id;
     
     /** Creates new form fraChucNang */
-    public ThongTinCongTy_View() 
+    public TienTe_View() 
     {
         initComponents();
         
-        columnNames = new String[] {"ID", "Tên công ty", "Địa chỉ", "Số điện thoại", "Email", "Website" , "Loại tiền sử dụng" , "Số lượng"};
+        columnNames = new String[] {"ID", "Mã tiền tệ", "Mua vào", "Bán ra"};
         model = new DefaultTableModel(rowData, columnNames);
         tblChucNang = new JTable(model)
         {
@@ -72,7 +73,7 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
         
         panChucNang.setViewportView(tblChucNang);
 
-        pro = new ThongTinCongTy_Process();
+        pro = new TienTe_Process();
         
         
         //Hien du lieu ra bang
@@ -89,40 +90,42 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
         btnHuy.setEnabled(flag);
         btnTim.setEnabled(!flag);
         
-        txtID.setEditable(flag);
-        txtTen.setEditable(flag);
-        txtDiaChi.setEditable(flag);
+        txtMa.setEditable(flag);
+        txtMuaVao.setEditable(flag);
+        txtBanRa.setEditable(flag);
+        textField.setEditable(flag);
     }
     
     public void ResetError()
     {
-        lblID.setForeground(Color.BLACK);
-        lblTen.setForeground(Color.BLACK);
-        lblDiaChi.setForeground(Color.BLACK);
+        lblMa.setForeground(Color.BLACK);
+        lblMuaVao.setForeground(Color.BLACK);
+        lblBanRa.setForeground(Color.BLACK);
         lblThongBao.setForeground(Color.BLACK);
         lblThongBao.setText(" ");
     }
     
     public void ResetInput()
     {
-        txtID.setText("");
-        txtTen.setText("");
-        txtDiaChi.setText("");
+        txtMa.setText("");
+        txtMuaVao.setText("");
+        txtBanRa.setText("");
+        textField.setText("");
     }
     
     public Boolean ValidInput()
     {
-        if(txtID.getText().equals(""))
+        if(txtMa.getText().equals(""))
         {
             new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ không dược phép để trống");
-            lblID.setForeground(Color.RED);
+            lblMa.setForeground(Color.RED);
             return false;
         }
         
-        if(txtID.getText().length() < 3 || txtID.getText().length() > 20)
+        if(txtMa.getText().length() < 3 || txtMa.getText().length() > 20)
         {
             new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ lớn hơn 3 chữ cái!");
-            lblID.setForeground(Color.RED);
+            lblMa.setForeground(Color.RED);
             return false;
         }
         
@@ -132,8 +135,8 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
     
     public void FillToTable()
     {
-        ThongTinCongTy_Process pro = new ThongTinCongTy_Process();
-        Vector<ThongTinCongTy> getResult = new Vector<ThongTinCongTy>();
+        TienTe_Process pro = new TienTe_Process();
+        Vector<TienTe> getResult = new Vector<TienTe>();
         try 
         {
             getResult = pro.showList();
@@ -143,13 +146,13 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
             }
             else
             {
-                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " + getResult.size() + " công ty!");
+                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " + getResult.size() + " loại mã tiền tệ!");
                 model.setRowCount(0);
-                columnNames = new String[] {"ID", "Tên công ty", "Địa chỉ", "Số điện thoại", "Email", "Website" , "Loại tiền sử dụng" , "Số lượng"};
+                columnNames = new String[] {"ID", "Mã tiền tệ", "Mua vào", "Bán ra"};
 
                 for(int i=0;i<getResult.size();i++)
                 {
-                    Object[] temp = {getResult.get(i).getIdCongTy(),getResult.get(i).getTenCongTy(),getResult.get(i).getDiaChiCongTy(),getResult.get(i).getSdtCongTy(),getResult.get(i).getEmailCongTy(),getResult.get(i).getWebCongTy(),getResult.get(i).getIdTienTe(),getResult.get(i).getSlTienMat()};
+                    Object[] temp = {getResult.get(i).getIdTienTe(), getResult.get(i).getTenTienTe(), getResult.get(i).getTyGiaMuaVao(), getResult.get(i).getTyGiaBanRa()};
                     model.insertRow(tblChucNang.getRowCount(), temp);
                 }
             }
@@ -176,23 +179,13 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        txtID = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtDiaChi = new javax.swing.JTextField();
-        lblID = new javax.swing.JLabel();
-        lblDiaChi = new javax.swing.JLabel();
-        lblTen = new javax.swing.JLabel();
-        lblSdt = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
-        lblWebsite = new javax.swing.JLabel();
-        lblTienTe = new javax.swing.JLabel();
-        lblSoluong = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
-        txtSdt = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtWebsite = new javax.swing.JTextField();
-        txtTienTe = new javax.swing.JTextField();
-        txtSoLuong = new javax.swing.JTextField();
+        txtMa = new javax.swing.JTextField();
+//        jScrollPane2 = new javax.swing.JScrollPane();
+        txtBanRa = new javax.swing.JTextField();
+        lblMa = new javax.swing.JLabel();
+        lblBanRa = new javax.swing.JLabel();
+        lblMuaVao = new javax.swing.JLabel();
+        txtMuaVao = new javax.swing.JTextField();
         lblThongBao = new javax.swing.JLabel();
         panChucNang = new javax.swing.JScrollPane();
         tblChucNang = new javax.swing.JTable();
@@ -237,62 +230,66 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dữ liệu"));
 
-        
-        
-        jScrollPane2.setViewportView(txtDiaChi);
+        lblMa.setText("Mã tiền tệ: *");
 
-        lblID.setText("ID: *");
+        lblMuaVao.setText("Mua vào: ");
 
-        lblTen.setText("Tên Công Ty: ");
-
-        lblDiaChi.setText("Địa Chỉ: ");
-        
-        lblSdt.setText("SĐT: ");
+        lblBanRa.setText("Bán ra: ");
 
         lblThongBao.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblThongBao.setText("* Là bắt buộc");
+        
+        JLabel lblId = new JLabel("ID: *");
+        
+        textField = new JTextField();
+        textField.setColumns(10);
 
         javax.swing.GroupLayout gl_jPanel2 = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(gl_jPanel2);
         gl_jPanel2.setHorizontalGroup(
-            gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gl_jPanel2.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblID)
-                    .addComponent(lblTen))
-                    
-                .addGap(18, 18, 18)
-                .addGroup(gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblThongBao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
-                    .addGroup(gl_jPanel2.createSequentialGroup()
-                        .addGroup(gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addComponent(lblDiaChi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))))
+        	gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel2.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblMa)
+        				.addComponent(lblId))
+        			.addGap(18)
+        			.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblThongBao, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+        				.addGroup(gl_jPanel2.createSequentialGroup()
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(textField)
+        						.addComponent(txtMa, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        						.addComponent(lblBanRa)
+        						.addComponent(lblMuaVao))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(txtBanRa)
+        						.addComponent(txtMuaVao, GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
+        					.addContainerGap())))
         );
         gl_jPanel2.setVerticalGroup(
-            gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(gl_jPanel2.createSequentialGroup()
-                .addGroup(gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(gl_jPanel2.createSequentialGroup()
-                        .addGroup(gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblID)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDiaChi))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(gl_jPanel2.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTen)))
-                            
-                    .addComponent(jScrollPane2, 0, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblThongBao)
-                .addContainerGap())
+        	gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel2.createSequentialGroup()
+        			.addGroup(gl_jPanel2.createParallelGroup(Alignment.LEADING)
+        				.addComponent(txtBanRa, 0, 0, Short.MAX_VALUE)
+        				.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(lblBanRa)
+        					.addComponent(lblId)
+        					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(gl_jPanel2.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(txtMuaVao, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblMuaVao)
+        				.addComponent(txtMa)
+        				.addComponent(lblMa))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(lblThongBao)
+        			.addContainerGap())
         );
+        jPanel2.setLayout(gl_jPanel2);
 
         panChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách"));
 
@@ -345,7 +342,7 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
             }
         });
 
-        btnLuu.setText(" ");
+        btnLuu.setText("  ");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -421,6 +418,7 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
                 .addComponent(lblTrangThai)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -438,12 +436,12 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
 //        old_id = txtMa.getText();
         row = tblChucNang.getSelectedRow();
         old_id = (String)tblChucNang.getValueAt(row, 0);
-        txtID.setText((String)tblChucNang.getValueAt(row, 1));
-        txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
-        txtDiaChi.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
+        txtMa.setText((String)tblChucNang.getValueAt(row, 1));
+        txtMuaVao.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+        txtBanRa.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
         
     }//GEN-LAST:event_btnSuaActionPerformed
-    
+
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
             
             	new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
@@ -452,15 +450,15 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
                 action = "delete";
                 row = tblChucNang.getSelectedRow();
                 old_id = (String)tblChucNang.getValueAt(row, 0);
-                txtID.setText((String)tblChucNang.getValueAt(row, 0));
-                txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 1)));
-                txtDiaChi.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+                txtMa.setText((String)tblChucNang.getValueAt(row, 1));
+                txtMuaVao.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+                txtBanRa.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
                 
             
             
         
     }//GEN-LAST:event_btnXoaActionPerformed
-    
+
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
        
         if(ValidInput())
@@ -479,12 +477,13 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
                 {
                 
                     
-                    pro.insertCongTy(txtID.getText(), Float.parseFloat(txtTen.getText()), Float.parseFloat(txtDiaChi.getText()));
+                    pro.insertTienTe(textField.getText(), txtMa.getText(), Float.parseFloat(txtMuaVao.getText()), Float.parseFloat(txtBanRa.getText()));
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Thêm thành công!");
                     ResetInput();
                     FillToTable();
                     ResetError();
+                    btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
                 {
@@ -499,14 +498,15 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
                 
                 try
                 {
-                   
+//                    ChucNang temp = new ChucNang(id, ten, ghichu);
                 	row = tblChucNang.getSelectedRow();
-                    pro.updateCongTy(old_id, txtID.getText(), Float.parseFloat(txtTen.getText()),Float.parseFloat(txtDiaChi.getText()));
+                    pro.updateTienTe(old_id, txtMa.getText(), Float.parseFloat(txtMuaVao.getText()),Float.parseFloat(txtBanRa.getText()));
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Sửa thành công!");
                     FillToTable();
                     ResetInput();
                     ResetError();
+                    btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
                 {
@@ -522,12 +522,12 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
                 
                 try
                 {
-                	pro.deleteCongTy(old_id);
+                	pro.deleteTienTe(old_id);
                     OnOffEdit(false);
-                    new ThongBao(lblThongBao, Color.BLUE, "Đã xóa thông tin công ty thành công");
+                    new ThongBao(lblThongBao, Color.BLUE, "Đã xóa mã tiền tệ thành công");
                     ResetInput();;
                     FillToTable();
-                    btnLuu.setText(" ");
+                    btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
                 {
@@ -597,10 +597,10 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
 
             public void run() 
             {
-            	ThongTinCongTy_View congTy_View = new ThongTinCongTy_View();
-                SetCenter setCenter = new SetCenter(congTy_View);
-                congTy_View.setVisible(true);
-                congTy_View.OnOffEdit(false);
+                TienTe_View tienView = new TienTe_View();
+                SetCenter setCenter = new SetCenter(tienView);
+                tienView.setVisible(true);
+                tienView.OnOffEdit(false);
             }
         });
     }
@@ -614,30 +614,19 @@ public class ThongTinCongTy_View extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
+//    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblDiaChi;
-    private javax.swing.JLabel lblID;
-    private javax.swing.JLabel lblTen;
-    private javax.swing.JLabel lblSdt;
-    private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblWebsite;
-    private javax.swing.JLabel lblTienTe;
-    private javax.swing.JLabel lblSoluong;
+    private javax.swing.JLabel lblBanRa;
+    private javax.swing.JLabel lblMa;
+    private javax.swing.JLabel lblMuaVao;
     private javax.swing.JLabel lblThongBao;
     private javax.swing.JLabel lblTrangThai;
     private javax.swing.JScrollPane panChucNang;
     private javax.swing.JTable tblChucNang;
-    private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtDiaChi;
-    private javax.swing.JTextField txtSdt;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtWebsite;
-    private javax.swing.JTextField txtTienTe;
-    private javax.swing.JTextField txtSoLuong;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtMuaVao;
+    private javax.swing.JTextField txtBanRa;
     private int row;
-    // End of variables declaration//GEN-END:variables
+    private JTextField textField;
 }
-
