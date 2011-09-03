@@ -6,20 +6,87 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
+
 import myobject.DoiTac;
 import connect.ioconnection;
 
 
 public class QLDoiTacProcess 
 {
-    public Vector<DoiTac> getListDoiTac(Integer soTrang) throws SQLException
+	public Vector<DoiTac> getListSearched(Integer soTrang,String key) throws SQLException
+    {
+            Vector<DoiTac> result = new Vector<DoiTac>();
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("{call SEARCH_DOITAC(?,?)}");
+//					System.out.println(getsoDoiTac());
+
+					cst.setInt(1, soTrang);
+					cst.setString(2, key);
+                    ResultSet rs =  cst.executeQuery();
+
+                    while(rs.next())
+                    {
+                    	DoiTac varDoiTac = new DoiTac();
+                    	varDoiTac.setPK_sDoiTacID(rs.getString("PK_sDoiTacID"));
+                    	varDoiTac.setsTenDoiTac(rs.getString("sTenDoiTac"));
+                    	varDoiTac.setsSoDienThoai(rs.getString("sSoDienThoai"));
+                    	varDoiTac.setsNguoiLienHe(rs.getString("sNguoiLienHe"));
+                    	varDoiTac.setsGhiChu(rs.getString("sGhiChu"));
+                    	varDoiTac.setsDiaChi(rs.getString("sDiaChi"));
+                    	varDoiTac.setiTrangThai(rs.getInt("iTrangThai"));
+                    	varDoiTac.setsTenDoiTacEng(rs.getString("sTenDoiTacEng"));
+                        
+                        result.add(varDoiTac);
+                    }
+
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
+	public Integer getSoLuongKQ(String key) throws SQLException
+    {
+    		Integer result = null;
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    
+	            	CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_KQ(?)}");
+	            	soLuongRecod.setString(1, key);
+
+                    ResultSet rs1 =  soLuongRecod.executeQuery();
+					rs1.next();
+					System.out.println(rs1.getInt(1));
+					result = rs1.getInt(1);
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
+	public Vector<DoiTac> getListDoiTac(Integer soTrang) throws SQLException
     {
             Vector<DoiTac> result = new Vector<DoiTac>();
             Connection con = ioconnection.getConnection();
             try
             {
                     CallableStatement cst = con.prepareCall("{call DanhSach_DoiTac(?)}");
-					System.out.println(getsoDoiTac());
+//					System.out.println(getsoDoiTac());
                     /*
 					if (getsoDoiTac() < soTrang*25||soTrang*25<=0) {
                     	cst.setInt(1, 0);
@@ -65,7 +132,7 @@ public class QLDoiTacProcess
                     CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_DoiTac()}");
                     ResultSet rs1 =  soLuongRecod.executeQuery();
 					rs1.next();
-					System.out.println(rs1.getInt(1));
+//					System.out.println(rs1.getInt(1));
 					result = rs1.getInt(1);
             }
             catch (Exception e)
@@ -90,7 +157,7 @@ public class QLDoiTacProcess
                     cst.setString(1, PK);
                     ResultSet rs =  cst.executeQuery();
                     rs.next();
-					System.out.println(rs.getInt(1));
+//					System.out.println(rs.getInt(1));
 					result = rs.getInt(1);
             }
             catch (Exception e)
@@ -308,6 +375,8 @@ public class QLDoiTacProcess
 */
     public static void main(String[] args) throws SQLException {
     	QLDoiTacProcess a = new QLDoiTacProcess();
-    	System.out.println(a.checkPK("appp"));
+    	//System.out.println(a.checkPK("appp"));
+    	System.out.println(a.getListSearched(1, "ttn112").get(0).getsTenDoiTac());
+    	System.out.println(a.getSoLuongKQ("ttn11hhhhh2"));
     }
 }
