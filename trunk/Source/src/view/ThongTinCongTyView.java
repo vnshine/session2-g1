@@ -74,13 +74,12 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         
         
         //Hien du lieu ra bang
-        if (searchOnOff == false) {
-        	soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
-		}else {
-			soTrang =(int) Math.floor(pro.soPhanTuSearch()/8 + 1);
-		}
         
+        soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
         label_1.setText(String.valueOf(soTrang));
+		
+        
+        
         FillToTable(1);
         thisTrang = 1;
     }
@@ -88,12 +87,13 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     
     public void OnOffEdit(Boolean flag)
     {
-        btnThem.setEnabled(!flag);
-        btnSua.setEnabled(!flag);
-        btnXoa.setEnabled(!flag);
+//        btnThem.setEnabled(!flag);
+//        btnSua.setEnabled(!flag);
+//        btnXoa.setEnabled(!flag);
         btnLuu.setEnabled(flag);
         btnHuy.setEnabled(flag);
         btnTim.setEnabled(!flag);
+        btnShow.setEnabled(!flag);
         
         txtID.setEditable(flag);
         txtTen.setEditable(flag);
@@ -219,10 +219,11 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         panChucNang = new javax.swing.JScrollPane();
         tblChucNang = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
+//        btnThem = new javax.swing.JButton();
+//        btnSua = new javax.swing.JButton();
+//        btnXoa = new javax.swing.JButton();
         btnLuu = new javax.swing.JButton();
+        btnShow = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
         btnTim = new javax.swing.JButton();
         lblTrangThai = new javax.swing.JLabel();
@@ -410,28 +411,35 @@ public class ThongTinCongTyView extends javax.swing.JFrame
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tác vụ"));
 
-        btnThem.setText("Thêm");
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+//        btnThem.setText("Thêm");
+//        btnThem.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnThemActionPerformed(evt);
+//            }
+//        });
+
+//        btnSua.setText("Sửa");
+//        btnSua.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnSuaActionPerformed(evt);
+//            }
+//        });
+
+//        btnXoa.setText("Xóa");
+//        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                btnXoaActionPerformed(evt);
+//            }
+//        });
+
+        btnShow.setText("Danh sách");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btnShowActionPerformed(evt);
             }
         });
-
-        btnSua.setText("Sửa");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
-            }
-        });
-
-        btnLuu.setText(" ");
+        
+        btnLuu.setText("Tìm");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
@@ -458,11 +466,11 @@ public class ThongTinCongTyView extends javax.swing.JFrame
             gl_jPanel3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gl_jPanel3.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnThem)
+                .addComponent(btnShow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSua)
+//                .addComponent(btnSua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXoa)
+//                .addComponent(btnXoa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTim)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -474,9 +482,9 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         gl_jPanel3.setVerticalGroup(
             gl_jPanel3.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(gl_jPanel3.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnThem)
-                .addComponent(btnSua)
-                .addComponent(btnXoa)
+                .addComponent(btnShow)
+//                .addComponent(btnSua)
+//                .addComponent(btnXoa)
                 .addComponent(btnTim)
                 .addComponent(btnLuu)
                 .addComponent(btnHuy))
@@ -572,43 +580,43 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-    	btnLuu.setText("Lưu");
-        OnOffEdit(true);
-        ResetInput();
-        action = "add";
-    }//GEN-LAST:event_btnThemActionPerformed
+//    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+//    	btnLuu.setText("Lưu");
+//        OnOffEdit(true);
+//        ResetInput();
+//        action = "add";
+//    }//GEN-LAST:event_btnThemActionPerformed
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-    	btnLuu.setText("Lưu");
-        OnOffEdit(true);
-        action = "edit";
-//        old_id = txtMa.getText();
-        row = tblChucNang.getSelectedRow();
-        old_id = (String)tblChucNang.getValueAt(row, 0);
-        txtID.setText((String)tblChucNang.getValueAt(row, 1));
-        txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
-        textField_5.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
-        
-        
-    }//GEN-LAST:event_btnSuaActionPerformed
+//    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+//    	btnLuu.setText("Lưu");
+//        OnOffEdit(true);
+//        action = "edit";
+////        old_id = txtMa.getText();
+//        row = tblChucNang.getSelectedRow();
+//        old_id = (String)tblChucNang.getValueAt(row, 0);
+//        txtID.setText((String)tblChucNang.getValueAt(row, 1));
+//        txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+//        textField_5.setText(String.valueOf(tblChucNang.getValueAt(row, 3)));
+//        
+//        
+//    }//GEN-LAST:event_btnSuaActionPerformed
     
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-            
-            	new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
-            	btnLuu.setText("Xóa");
-                OnOffEdit(true);
-                action = "delete";
-                row = tblChucNang.getSelectedRow();
-                old_id = (String)tblChucNang.getValueAt(row, 0);
-                txtID.setText((String)tblChucNang.getValueAt(row, 0));
-                txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 1)));
-                textField_5.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
-                
-            
-            
-        
-    }//GEN-LAST:event_btnXoaActionPerformed
+//    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+//            
+//            	new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
+//            	btnLuu.setText("Xóa");
+//                OnOffEdit(true);
+//                action = "delete";
+//                row = tblChucNang.getSelectedRow();
+//                old_id = (String)tblChucNang.getValueAt(row, 0);
+//                txtID.setText((String)tblChucNang.getValueAt(row, 0));
+//                txtTen.setText(String.valueOf(tblChucNang.getValueAt(row, 1)));
+//                textField_5.setText(String.valueOf(tblChucNang.getValueAt(row, 2)));
+//                
+//            
+//            
+//        
+//    }//GEN-LAST:event_btnXoaActionPerformed
     
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
     	btnLuu.setText("Tìm");
@@ -618,32 +626,76 @@ public class ThongTinCongTyView extends javax.swing.JFrame
 }
     
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        FillToTable(soTrang);
-        thisTrang = soTrang;
+    	if (searchOnOff == false) {
+    		
+    		FillToTable(soTrang);
+            thisTrang = soTrang;
+		}else if (searchOnOff == true) {
+			
+    		SearchToTable(soTrang);
+            thisTrang = soTrang;
+		}
+        
     }
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        FillToTable(1);
-        thisTrang = 1;
+        
+    	if (searchOnOff == false) {
+			FillToTable(1);
+			thisTrang = 1;
+		}else if (searchOnOff == true) {
+			SearchToTable(1);
+			thisTrang = 1;
+		}
+    	
     }
     private void btnNtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-    	if (thisTrang < soTrang) {
-			thisTrang ++ ;
-			FillToTable(thisTrang);
-		}else {
-			
+    	if (searchOnOff == false) {
+    		if (thisTrang < soTrang) {
+    			thisTrang ++ ;
+    			FillToTable(thisTrang);
+    		}else {
+				
+			}
+		}else if (searchOnOff == true) {
+			if (thisTrang < soTrang) {
+    			thisTrang ++ ;
+    			SearchToTable(thisTrang);
+    		}else {
+				
+			}
 		}
+    	
         
         
     }
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-    	if (thisTrang > 1) {
-			thisTrang -- ;
-			FillToTable(thisTrang);
-		}else {
-			
+    	if (searchOnOff == false) {
+    		if (thisTrang > 1) {
+    			thisTrang -- ;
+    			FillToTable(thisTrang);
+    		}else {
+    			
+    		}
+		}else if (searchOnOff == true) {
+			if (thisTrang > 1) {
+				thisTrang -- ;
+				SearchToTable(thisTrang);
+			}else {
+				
+			}
 		}
         
     }
+    
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	searchOnOff = false;
+    	soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+    	label_1.setText(String.valueOf(soTrang));
+    	thisTrang = 1;
+    	FillToTable(1);
+        
+    }
+    
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
        
         if(ValidInput())
@@ -681,6 +733,9 @@ public class ThongTinCongTyView extends javax.swing.JFrame
                     pro.searchCongTy(txtID.getText(),txtTen.getText(),textField_5.getText(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
                     System.out.println(txtID.getText());
                     OnOffEdit(false);
+                    soTrang =(int) Math.floor(pro.soPhanTuSearch()/8 + 1);
+                    label_1.setText(String.valueOf(soTrang));
+                    thisTrang = 1;
                     SearchToTable(1);
                     ResetInput();
                     ResetError();
@@ -765,10 +820,11 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLuu;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
+//    private javax.swing.JButton btnSua;
+//    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnShow;
     private javax.swing.JButton btnTim;
-    private javax.swing.JButton btnXoa;
+//    private javax.swing.JButton btnXoa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

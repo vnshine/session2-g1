@@ -193,8 +193,7 @@ public class ThongTinCongTy_Process {
 	public void updateCongTy(String id, String name, String diaChi, String sdt, String email, String web, String tienTe, Integer soLuong)  throws SQLException{
 		Connection con =ioconnection.getConnection();
 		try {
-			CallableStatement cst = con.prepareCall("{call UpdateCongTy(?,?,?,?,?,?,?,?,?,?)}");
-			
+			CallableStatement cst = con.prepareCall("{call UpdateCongTy(?,?,?,?,?,?,?,?,?,?)}");		
 			cst.setString(1, id);
 			cst.setString(2, name.toUpperCase());
 			cst.setString(3, name.toUpperCase().trim());
