@@ -15,6 +15,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.Vector;
+
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -74,10 +76,12 @@ public class TienTe_View extends javax.swing.JFrame
         panChucNang.setViewportView(tblChucNang);
 
         pro = new TienTe_Process();
-        
+        soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+        label_1.setText(String.valueOf(soTrang));
         
         //Hien du lieu ra bang
-        FillToTable();
+        FillToTable(1);
+        thisTrang = 1;
     }
 
     
@@ -133,13 +137,45 @@ public class TienTe_View extends javax.swing.JFrame
         return true;
     }
     
-    public void FillToTable()
+    public void FillToTable(Integer trang)
     {
-        TienTe_Process pro = new TienTe_Process();
+    	textField_6.setText(String.valueOf(trang));
         Vector<TienTe> getResult = new Vector<TienTe>();
         try 
         {
-            getResult = pro.showList();
+            getResult = pro.showList(trang);
+            if(getResult.isEmpty())
+            {
+                new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
+            }
+            else
+            {
+                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " + String.valueOf(pro.soPhanTu()) + " loại mã tiền tệ!");
+                model.setRowCount(0);
+                columnNames = new String[] {"ID", "Mã tiền tệ", "Mua vào", "Bán ra"};
+
+                for(int i=0;i<getResult.size();i++)
+                {
+                    Object[] temp = {getResult.get(i).getIdTienTe(), getResult.get(i).getTenTienTe(), getResult.get(i).getTyGiaMuaVao(), getResult.get(i).getTyGiaBanRa()};
+                    model.insertRow(tblChucNang.getRowCount(), temp);
+                }
+            }
+        }
+        catch(SQLException ex) 
+        {
+           new ThongBao(lblTrangThai, Color.RED, "Káº¿t ná»‘i tá»›i cÆ¡ sá»Ÿ dá»¯ liá»‡u gáº·p váº¥n Ä‘á»�!");
+           JOptionPane.showMessageDialog(this, "Lá»—i: " + ex.getMessage(), "Lá»—i SQL",JOptionPane.ERROR_MESSAGE);
+        }
+                
+    }
+    
+    public void SearchToTable(Integer trang)
+    {
+    	textField_6.setText(String.valueOf(trang));
+        Vector<TienTe> getResult = new Vector<TienTe>();
+        try 
+        {
+            getResult = pro.searchList(trang, id, ten, muaVao, banRa);
             if(getResult.isEmpty())
             {
                 new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
@@ -391,6 +427,36 @@ public class TienTe_View extends javax.swing.JFrame
         lblTrangThai.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblTrangThai.setText(" ");
 
+        btnFirst = new JButton("First");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
+        btnPrev = new JButton("Prev");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
+        btnNt = new JButton("Next");
+        btnNt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNtActionPerformed(evt);
+            }
+        });
+        btnLast = new JButton("Last");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+        JLabel label = new JLabel("/");
+        
+        label_1 = new JLabel();
+        textField_6 = new JTextField();
+        textField_6.setColumns(10);
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -400,7 +466,21 @@ public class TienTe_View extends javax.swing.JFrame
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panChucNang, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            		.addGap(163)
+        			.addComponent(btnFirst)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnPrev)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(label, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(btnNt)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnLast)
+        			.addGap(74)
                 .addComponent(lblTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -415,13 +495,86 @@ public class TienTe_View extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTrangThai)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(lblTrangThai)
+        				.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(btnFirst)
+        					.addComponent(btnPrev)
+        					.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(label)
+        					.addComponent(label_1)
+        					.addComponent(btnNt)
+        					.addComponent(btnLast)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	if (searchOnOff == false) {
+    		
+    		FillToTable(soTrang);
+            thisTrang = soTrang;
+		}else if (searchOnOff == true) {
+			
+    		SearchToTable(soTrang);
+            thisTrang = soTrang;
+		}
+        
+    }
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        
+    	if (searchOnOff == false) {
+			FillToTable(1);
+			thisTrang = 1;
+		}else if (searchOnOff == true) {
+			SearchToTable(1);
+			thisTrang = 1;
+		}
+    	
+    }
+    private void btnNtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	if (searchOnOff == false) {
+    		if (thisTrang < soTrang) {
+    			thisTrang ++ ;
+    			FillToTable(thisTrang);
+    		}else {
+				
+			}
+		}else if (searchOnOff == true) {
+			if (thisTrang < soTrang) {
+    			thisTrang ++ ;
+    			SearchToTable(thisTrang);
+    		}else {
+				
+			}
+		}
+    	
+        
+        
+    }
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	if (searchOnOff == false) {
+    		if (thisTrang > 1) {
+    			thisTrang -- ;
+    			FillToTable(thisTrang);
+    		}else {
+    			
+    		}
+		}else if (searchOnOff == true) {
+			if (thisTrang > 1) {
+				thisTrang -- ;
+				SearchToTable(thisTrang);
+			}else {
+				
+			}
+		}
+        
+    }
+    
+    
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
     	btnLuu.setText("Lưu");
         OnOffEdit(true);
@@ -481,7 +634,8 @@ public class TienTe_View extends javax.swing.JFrame
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Thêm thành công!");
                     ResetInput();
-                    FillToTable();
+                    FillToTable(1);
+                    thisTrang = 1;
                     ResetError();
                     btnLuu.setText("  ");
                 }
@@ -503,7 +657,8 @@ public class TienTe_View extends javax.swing.JFrame
                     pro.updateTienTe(old_id, txtMa.getText(), Float.parseFloat(txtMuaVao.getText()),Float.parseFloat(txtBanRa.getText()));
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Sửa thành công!");
-                    FillToTable();
+                    FillToTable(1);
+                    thisTrang = 1;
                     ResetInput();
                     ResetError();
                     btnLuu.setText("  ");
@@ -525,8 +680,10 @@ public class TienTe_View extends javax.swing.JFrame
                 	pro.deleteTienTe(old_id);
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Đã xóa mã tiền tệ thành công");
-                    ResetInput();;
-                    FillToTable();
+                    FillToTable(1);
+                    thisTrang = 1;
+                    ResetInput();
+                    ResetError();
                     btnLuu.setText("  ");
                 }
                 catch(SQLException ex)
@@ -629,4 +786,14 @@ public class TienTe_View extends javax.swing.JFrame
     private javax.swing.JTextField txtBanRa;
     private int row;
     private JTextField textField;
+    private JButton btnLast;
+    private JButton btnFirst;
+    private JButton btnPrev;
+    private JButton btnNt;
+    private Integer soTrang = null;
+    private Integer thisTrang = null;
+    private Boolean searchOnOff = false;
+    private JTextField textField_6;
+    private javax.swing.JLabel label_1;
+    private javax.swing.JButton btnShow;
 }

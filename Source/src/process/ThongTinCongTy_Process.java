@@ -13,7 +13,6 @@ import myobject.TienTe;
 import connect.ioconnection;
 
 public class ThongTinCongTy_Process {
-	public Integer count = 0;
 	public Integer soPhanTu(){
 		Connection con =ioconnection.getConnection();
 		Integer count = null;
@@ -135,11 +134,6 @@ public class ThongTinCongTy_Process {
 			str = str + "')";
 			PreparedStatement pr = con.prepareStatement(str);
 			ResultSet rs = pr.executeQuery();
-			
-			
-			while (rs.next()) {
-				count++;
-			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}finally{

@@ -66,12 +66,24 @@ BEGIN
 END
 ---------------------------------------------------------------
 GO
-CREATE PROCEDURE test
-		@id varchar(6)
+CREATE PROCEDURE PhanTrang_TienTe
+		@trang int
 AS
 BEGIN
-	select * 
+	select top 8 * 
 	from 
-		
+		(select top (@trang*8) * from dbo.tbl_TienTe order by PK_sTienTeID ASC) c  
+	order by PK_sTienTeID DESC
+END
+---------------------------------------------------------------
+GO
+CREATE PROCEDURE SearchPhanTrang_TienTe
+		@trang int
+AS
+BEGIN
+	select top 8 * 
+	from 
+		(select top (@trang*8) * from dbo.search2 order by PK_sTienTeID ASC) c  
+	order by PK_sTienTeID DESC
 END
 ---------------------------------------------------------------
