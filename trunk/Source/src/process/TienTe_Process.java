@@ -66,6 +66,7 @@ public class TienTe_Process  {
 				tienTe.setTenTienTe(rs.getString(2));
 				tienTe.setTyGiaMuaVao(rs.getFloat(4));
 				tienTe.setTyGiaBanRa(rs.getFloat(5));
+				System.out.println(tienTe.getIdTienTe());
 				u.add(tienTe);
 			}
 		} catch (Exception e) {
