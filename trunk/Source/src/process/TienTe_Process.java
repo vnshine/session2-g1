@@ -77,7 +77,7 @@ public class TienTe_Process  {
 		return u;
 	}
 	
-	public Vector<TienTe> searchList(Integer trang ,String id,String ten ,Float muaVao , Float banRa) throws SQLException{
+	public Vector<TienTe> searchList(Integer trang) throws SQLException{
 		Connection con =ioconnection.getConnection();
 		Vector<TienTe> u = new Vector<TienTe>();
 		try {
@@ -103,7 +103,7 @@ public class TienTe_Process  {
 		return u;
 	}
 	
-	public Vector<TienTe> searchTienTe(String id, String name, Float muaVao, Float banRa ) throws SQLException{
+	public Vector<TienTe> searchTienTe(String id, String name) throws SQLException{
 		Connection con =ioconnection.getConnection();
 		Vector<TienTe> u = new Vector<TienTe>();
 		
@@ -111,12 +111,12 @@ public class TienTe_Process  {
 			String str = "IF EXISTS ";
 			str = str + "(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'search2' AND TABLE_TYPE = 'VIEW' AND TABLE_SCHEMA = 'dbo') ";
 			str = str + "DROP VIEW dbo.search2 ";
-			str = str + "EXEC(' CREATE view dbo.search AS select * from dbo.tbl_ThongTinCongTy where ";
+			str = str + "EXEC(' CREATE view dbo.search2 AS select * from dbo.tbl_TienTe where ";
 			str = str + "PK_sTienTeID like ''%"+id+"%'' and ";
 			name = name.replace(" ", "");
-			str = str + "sTenTienEng like ''%"+name.toUpperCase()+"%'' and ";
-			str = str + "fMuaVao like ''%"+muaVao+"%'' and ";
-			str = str + "fBanRa like ''%"+banRa+"%'' ";
+			str = str + "sTenTienEng like ''%"+name.toUpperCase()+"%'' ";
+//			str = str + "fMuaVao like ''%"+muaVao+"%'' and ";
+//			str = str + "fBanRa like ''%"+banRa+"%'' ";
 			str = str + "')";
 			PreparedStatement pr = con.prepareStatement(str);
 			ResultSet rs = pr.executeQuery();

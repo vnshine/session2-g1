@@ -171,7 +171,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         Vector<ThongTinCongTy> getResult = new Vector<ThongTinCongTy>();
         try 
         {
-        	getResult = pro.searchList(trang,txtID.getText(),txtTen.getText(),textField_5.getText(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+        	getResult = pro.searchList(trang);
             if(getResult.isEmpty())
             {
                 new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
@@ -623,7 +623,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         OnOffEdit(true);
         searchOnOff = true;
         action = "search";
-}
+    }
     
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
     	if (searchOnOff == false) {
@@ -703,27 +703,27 @@ public class ThongTinCongTyView extends javax.swing.JFrame
             
            
             
-            if (action.equals("delete"))
-            {
-                
-                try
-                {
-                	pro.deleteCongTy(old_id);
-                    OnOffEdit(false);
-                    new ThongBao(lblThongBao, Color.BLUE, "Đã xóa thông tin công ty thành công");
-                    ResetInput();;
-                    FillToTable(1);
-                    btnLuu.setText(" ");
-                }
-                catch(SQLException ex)
-                {
-                    new ThongBao(lblThongBao, Color.RED, "Có lỗi xảy ra! Xóa không thành công ");
-                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
-                    ResetError();
-                    ResetInput();
-                }
-            }
-            else if (action.equals("search"))
+//            if (action.equals("delete"))
+//            {
+//                
+//                try
+//                {
+//                	pro.deleteCongTy(old_id);
+//                    OnOffEdit(false);
+//                    new ThongBao(lblThongBao, Color.BLUE, "Đã xóa thông tin công ty thành công");
+//                    ResetInput();;
+//                    FillToTable(1);
+//                    btnLuu.setText(" ");
+//                }
+//                catch(SQLException ex)
+//                {
+//                    new ThongBao(lblThongBao, Color.RED, "Có lỗi xảy ra! Xóa không thành công ");
+//                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
+//                    ResetError();
+//                    ResetInput();
+//                }
+//            }
+            if (action.equals("search"))
             {
                 
                 try
@@ -731,7 +731,6 @@ public class ThongTinCongTyView extends javax.swing.JFrame
                    
                 	
                     pro.searchCongTy(txtID.getText(),txtTen.getText(),textField_5.getText(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
-                    System.out.println(txtID.getText());
                     OnOffEdit(false);
                     soTrang =(int) Math.floor(pro.soPhanTuSearch()/8 + 1);
                     label_1.setText(String.valueOf(soTrang));

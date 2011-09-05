@@ -93,6 +93,7 @@ public class TienTe_View extends javax.swing.JFrame
         btnLuu.setEnabled(flag);
         btnHuy.setEnabled(flag);
         btnTim.setEnabled(!flag);
+        btnShow.setEnabled(!flag);
         
         txtMa.setEditable(flag);
         txtMuaVao.setEditable(flag);
@@ -102,6 +103,7 @@ public class TienTe_View extends javax.swing.JFrame
     
     public void ResetError()
     {
+    	lblId.setForeground(Color.BLACK);
         lblMa.setForeground(Color.BLACK);
         lblMuaVao.setForeground(Color.BLACK);
         lblBanRa.setForeground(Color.BLACK);
@@ -126,7 +128,14 @@ public class TienTe_View extends javax.swing.JFrame
             return false;
         }
         
-        if(txtMa.getText().length() < 3 || txtMa.getText().length() > 20)
+        if(textField.getText().equals("") && searchOnOff == false)
+        {
+            new ThongBao(lblThongBao, Color.RED, "ID tiền tệ không dược phép để trống");
+            lblId.setForeground(Color.RED);
+            return false;
+        }
+        
+        if((txtMa.getText().length() < 3 || txtMa.getText().length() > 20) && searchOnOff == false)
         {
             new ThongBao(lblThongBao, Color.RED, "Mã tiền tệ lớn hơn 3 chữ cái!");
             lblMa.setForeground(Color.RED);
@@ -175,14 +184,14 @@ public class TienTe_View extends javax.swing.JFrame
         Vector<TienTe> getResult = new Vector<TienTe>();
         try 
         {
-            getResult = pro.searchList(trang, id, ten, muaVao, banRa);
+            getResult = pro.searchList(trang);
             if(getResult.isEmpty())
             {
                 new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
             }
             else
             {
-                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " + getResult.size() + " loại mã tiền tệ!");
+                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " + String.valueOf(pro.soPhanTuSearch()) + " loại mã tiền tệ!");
                 model.setRowCount(0);
                 columnNames = new String[] {"ID", "Mã tiền tệ", "Mua vào", "Bán ra"};
 
@@ -232,6 +241,7 @@ public class TienTe_View extends javax.swing.JFrame
         btnLuu = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
         btnTim = new javax.swing.JButton();
+        btnShow = new javax.swing.JButton();
         lblTrangThai = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -275,7 +285,7 @@ public class TienTe_View extends javax.swing.JFrame
         lblThongBao.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblThongBao.setText("* Là bắt buộc");
         
-        JLabel lblId = new JLabel("ID: *");
+        lblId = new JLabel("ID: *");
         
         textField = new JTextField();
         textField.setColumns(10);
@@ -357,6 +367,13 @@ public class TienTe_View extends javax.swing.JFrame
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tác vụ"));
 
+        btnShow.setText("Danh Sách");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
+        
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,7 +410,12 @@ public class TienTe_View extends javax.swing.JFrame
         });
 
         btnTim.setText("Tìm kiếm");
-
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
+        
         javax.swing.GroupLayout gl_jPanel3 = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(gl_jPanel3);
         gl_jPanel3.setHorizontalGroup(
@@ -405,6 +427,8 @@ public class TienTe_View extends javax.swing.JFrame
                 .addComponent(btnSua)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnXoa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnShow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnTim)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -419,6 +443,7 @@ public class TienTe_View extends javax.swing.JFrame
                 .addComponent(btnThem)
                 .addComponent(btnSua)
                 .addComponent(btnXoa)
+                .addComponent(btnShow)
                 .addComponent(btnTim)
                 .addComponent(btnLuu)
                 .addComponent(btnHuy))
@@ -511,6 +536,21 @@ public class TienTe_View extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	searchOnOff = false;
+    	soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+    	label_1.setText(String.valueOf(soTrang));
+    	thisTrang = 1;
+    	FillToTable(1);
+        
+    }
+    
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    	btnLuu.setText("Tìm");
+        OnOffEdit(true);
+        searchOnOff = true;
+        action = "search";
+    }
     
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
     	if (searchOnOff == false) {
@@ -635,6 +675,8 @@ public class TienTe_View extends javax.swing.JFrame
                     new ThongBao(lblThongBao, Color.BLUE, "Thêm thành công!");
                     ResetInput();
                     FillToTable(1);
+                    soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+                    label_1.setText(String.valueOf(soTrang));
                     thisTrang = 1;
                     ResetError();
                     btnLuu.setText("  ");
@@ -642,6 +684,31 @@ public class TienTe_View extends javax.swing.JFrame
                 catch(SQLException ex)
                 {
                     new ThongBao(lblThongBao, Color.RED, "ThÃªm chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
+                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
+                    ResetError();
+                    ResetInput();
+                }
+            }
+            else if (action.equals("search"))
+            {
+                
+                try
+                {
+                   
+                	
+                    pro.searchTienTe(textField.getText(), txtMa.getText());
+                    OnOffEdit(false);
+                    soTrang =(int) Math.floor(pro.soPhanTuSearch()/8 + 1);
+                    label_1.setText(String.valueOf(soTrang));
+                    thisTrang = 1;
+                    SearchToTable(1);
+                    ResetInput();
+                    ResetError();
+                    
+                }
+                catch(SQLException ex)
+                {
+                    new ThongBao(lblThongBao, Color.RED, "Sá»­a chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
                     JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
                     ResetError();
                     ResetInput();
@@ -658,6 +725,8 @@ public class TienTe_View extends javax.swing.JFrame
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Sửa thành công!");
                     FillToTable(1);
+                    soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+                    label_1.setText(String.valueOf(soTrang));
                     thisTrang = 1;
                     ResetInput();
                     ResetError();
@@ -681,6 +750,8 @@ public class TienTe_View extends javax.swing.JFrame
                     OnOffEdit(false);
                     new ThongBao(lblThongBao, Color.BLUE, "Đã xóa mã tiền tệ thành công");
                     FillToTable(1);
+                    soTrang =(int) Math.floor(pro.soPhanTu()/8 + 1);
+                    label_1.setText(String.valueOf(soTrang));
                     thisTrang = 1;
                     ResetInput();
                     ResetError();
@@ -796,4 +867,5 @@ public class TienTe_View extends javax.swing.JFrame
     private JTextField textField_6;
     private javax.swing.JLabel label_1;
     private javax.swing.JButton btnShow;
+    private javax.swing.JLabel lblId;
 }
