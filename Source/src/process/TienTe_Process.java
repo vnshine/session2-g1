@@ -58,9 +58,10 @@ public class TienTe_Process  {
 		try {
 			CallableStatement cst = con.prepareCall("{call PhanTrang_TienTe(?)}");
 			cst.setInt(1, trang);
-			
+			System.out.println("vao day ne");
 			ResultSet rs = cst.executeQuery();
 			while (rs.next()) {
+				System.out.println("vao day luon nua ne");
 				TienTe tienTe = new TienTe();
 				tienTe.setIdTienTe(rs.getString(1));
 				tienTe.setTenTienTe(rs.getString(2));
