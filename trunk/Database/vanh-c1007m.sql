@@ -4,6 +4,25 @@
 insert into dbo.tbl_TienTe values('T01','USD','USD',21500,22000)
 insert into dbo.tbl_TienTe values('T02','EUR','EUR',25500,26500)
 insert into dbo.tbl_TienTe values('T03','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T04','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T05','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T06','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T07','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T08','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T09','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T10','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T11','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T12','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T13','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T14','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T15','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T16','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T17','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T18','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T19','YEN','YEN',19500,20000)
+insert into dbo.tbl_TienTe values('T20','YEN','YEN',19500,20000)
+
+select * from dbo.tbl_TienTe
 
 GO
 

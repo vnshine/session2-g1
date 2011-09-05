@@ -7,9 +7,129 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import connect.ioconnection;
+import myobject.ThongTinCongTy;
 import myobject.TienTe;
 
 public class TienTe_Process  {
+	
+	public Integer soPhanTu(){
+		Connection con =ioconnection.getConnection();
+		Integer count = null;
+		try {
+			PreparedStatement ps = con.prepareStatement("select count(*) from dbo.tbl_TienTe");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+		return count;
+	}
+	
+	public Integer soPhanTuSearch(){
+		Connection con =ioconnection.getConnection();
+		Integer count = null;
+		try {
+			PreparedStatement ps = con.prepareStatement("select count(*) from dbo.search2");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				count = rs.getInt(1);
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+		return count;
+	}
+	
+	public Vector<TienTe> showList(Integer trang) throws SQLException{
+		Connection con =ioconnection.getConnection();
+		Vector<TienTe> u = new Vector<TienTe>();
+		try {
+			CallableStatement cst = con.prepareCall("{call PhanTrang_TienTe(?)}");
+			cst.setInt(1, trang);
+			
+			ResultSet rs = cst.executeQuery();
+			while (rs.next()) {
+				TienTe tienTe = new TienTe();
+				tienTe.setIdTienTe(rs.getString(1));
+				tienTe.setTenTienTe(rs.getString(2));
+				tienTe.setTyGiaMuaVao(rs.getFloat(4));
+				tienTe.setTyGiaBanRa(rs.getFloat(5));
+				u.add(tienTe);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+		return u;
+	}
+	
+	public Vector<TienTe> searchList(Integer trang ,String id,String ten ,Float muaVao , Float banRa) throws SQLException{
+		Connection con =ioconnection.getConnection();
+		Vector<TienTe> u = new Vector<TienTe>();
+		try {
+			
+			CallableStatement cst = con.prepareCall("{call SearchPhanTrang_TienTe(?)}");
+			cst.setInt(1, trang);
+			
+			ResultSet rs = cst.executeQuery();
+			while (rs.next()) {
+				TienTe tienTe = new TienTe();
+				tienTe.setIdTienTe(rs.getString(1));
+				tienTe.setTenTienTe(rs.getString(2));
+				tienTe.setTyGiaMuaVao(rs.getFloat(4));
+				tienTe.setTyGiaBanRa(rs.getFloat(5));
+				u.add(tienTe);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		return u;
+	}
+	
+	public Vector<TienTe> searchTienTe(String id, String name, Float muaVao, Float banRa ) throws SQLException{
+		Connection con =ioconnection.getConnection();
+		Vector<TienTe> u = new Vector<TienTe>();
+		
+		try {
+			String str = "IF EXISTS ";
+			str = str + "(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'search2' AND TABLE_TYPE = 'VIEW' AND TABLE_SCHEMA = 'dbo') ";
+			str = str + "DROP VIEW dbo.search2 ";
+			str = str + "EXEC(' CREATE view dbo.search AS select * from dbo.tbl_ThongTinCongTy where ";
+			str = str + "PK_sTienTeID like ''%"+id+"%'' and ";
+			name = name.replace(" ", "");
+			str = str + "sTenTienEng like ''%"+name.toUpperCase()+"%'' and ";
+			str = str + "fMuaVao like ''%"+muaVao+"%'' and ";
+			str = str + "fBanRa like ''%"+banRa+"%'' ";
+			str = str + "')";
+			PreparedStatement pr = con.prepareStatement(str);
+			ResultSet rs = pr.executeQuery();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally{
+			ioconnection.closeConnection(con);
+		}
+		
+		return u;
+	}
+	
 	public void insertTienTe (String id , String name, Float mua, Float ban )  throws SQLException{
 		Connection con =ioconnection.getConnection();
 		try {
@@ -34,28 +154,7 @@ public class TienTe_Process  {
 		
 	}
 	
-	public Vector<TienTe> showList() throws SQLException{
-		Connection con =ioconnection.getConnection();
-		Vector<TienTe> u = new Vector<TienTe>();
-		try {
-			PreparedStatement ps = con.prepareStatement("select * from dbo.tbl_TienTe");
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				TienTe tienTe = new TienTe();
-				tienTe.setIdTienTe(rs.getString(1));
-				tienTe.setTenTienTe(rs.getString(2));
-				tienTe.setTyGiaMuaVao(rs.getFloat(4));
-				tienTe.setTyGiaBanRa(rs.getFloat(5));
-				u.add(tienTe);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}finally{
-			ioconnection.closeConnection(con);
-		}
-		
-		return u;
-	}
+	
 	public void updateTienTe(String id, String name, Float mua, Float ban)  throws SQLException{
 		Connection con =ioconnection.getConnection();
 		try {

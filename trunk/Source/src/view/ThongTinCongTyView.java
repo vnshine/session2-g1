@@ -137,7 +137,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         Vector<ThongTinCongTy> getResult = new Vector<ThongTinCongTy>();
         try 
         {	
-        		getResult = pro.showList(trang);
+        	getResult = pro.showList(trang);
 			
             
             if(getResult.isEmpty())
@@ -388,7 +388,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
 
             },
             new String [] {
-                "TÃªn chá»©c nÄƒng", "Ghi chÃº"
+                "Tên Chức năng", "Ghi chú"
             }
         ) {
             Class[] types = new Class [] {
@@ -841,7 +841,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     private javax.swing.JTable tblChucNang;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtTen;
-    private int row;
+//    private int row;
     private JTextField textField;
     private JTextField textField_1;
     private JTextField textField_2;
