@@ -82,7 +82,7 @@ public class ThongTinCongTy_Process {
 		return u;
 	}
 	
-	public Vector<ThongTinCongTy> searchList(Integer trang ,String id,String ten ,String diaChi ,String sdt ,String email ,String web ,String tt) throws SQLException{
+	public Vector<ThongTinCongTy> searchList(Integer trang) throws SQLException{
 		Connection con =ioconnection.getConnection();
 		Vector<ThongTinCongTy> u = new Vector<ThongTinCongTy>();
 		try {
