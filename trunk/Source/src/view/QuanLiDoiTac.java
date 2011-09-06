@@ -315,7 +315,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		});
 		panel_XemTrang.add(btnBack);
 		
-		box_SoTrang = new JComboBox<Integer>();
+		box_SoTrang = new JComboBox();
 		box_SoTrang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(box_SoTrang.getSelectedItem());
