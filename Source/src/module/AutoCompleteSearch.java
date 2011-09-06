@@ -33,7 +33,7 @@ public class AutoCompleteSearch extends JFrame {
 			Vector<String> hangs = new Vector<String>();
 			Connection con = ioconnection.getConnection();
 			try {
-				PreparedStatement cst = con.prepareStatement("SELECT sHoTen from tbl_NhanVien");
+				PreparedStatement cst = con.prepareStatement("SELECT * from tbl_doitac");
 				ResultSet rs = cst.executeQuery();
 				while(rs.next()){
 //					popup.add(rs.getString(1));
