@@ -219,10 +219,24 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		panel_TimKiem.setBorder(new TitledBorder(null, "T\u00ECm ki\u1EBFm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_TacVu.add(panel_TimKiem);
 		
-		JFrame frame = new JFrame();
-		Vector<String> VectorKetQua = new Vector<String>();
-		VectorKetQua.add("abcchsjbcjsbjcbjsjcvscvjsvkcs");
-		textfJSuggestField = new JSuggestField(frame, VectorKetQua);
+		final JFrame frame = new JFrame();
+		//Vector<String> VectorKetQua = new Vector<String>();
+		//VectorKetQua.add("abcchsjbcjsbjcbjsjcvscvjsvkcs");
+		textfJSuggestField = new JSuggestField(frame);
+		
+		
+		textfJSuggestField.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent arg0) {
+				QLDoiTacProcess qlDoiTacPro = new QLDoiTacProcess();
+				try {
+					textfJSuggestField.setSuggestData(qlDoiTacPro.getSuggestData(textfJSuggestField.getText()));
+					textfJSuggestField = new JSuggestField(frame,qlDoiTacPro.getSuggestData(textfJSuggestField.getText()));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		panel_TimKiem.add(textfJSuggestField);
 		textfJSuggestField.setColumns(10);
@@ -414,7 +428,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		}
 	}	
 	
-	
+
 	
 	public void openText() {
 			textField_DiaChiDT.setEditable(true);
@@ -457,12 +471,14 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 			
 			Integer soDT;
 		QLDoiTacProcess dtac = new QLDoiTacProcess();
-		if (findb == 1) {
-			soDT = dtac.getSoLuongKQ(textfJSuggestField.getText());
-		} else {
+		if (findb == 0) {
 			soDT = dtac.getsoDoiTac();
+			
+		} else {
+			findb = 0;
+			soDT = dtac.getSoLuongKQ(textfJSuggestField.getText());
 		}
-			System.out.println("dguvbdikbgkdbgkdkbgkdbkgdobgodogndolngkdngdogodngdgndkngkkdgnd "+soDT);
+			//System.out.println("dguvbdikbgkdbgkdkbgkdbkgdobgodogndolngkdngdogodngdgndkngkkdgnd "+soDT);
 		if ((soDT % 10) == 0 ) {
 			Combo((soDT / 10));
 		}else Combo((soDT / 10)+1);

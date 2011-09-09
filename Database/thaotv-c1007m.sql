@@ -54,7 +54,7 @@ set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 
 -----------Proc Select số lượng Ket qua tim kiem
-if(OBJECT_ID('SoLuong_KQ','p') is not null)
+if(OBJECT_ID('SoLuong_KQ','t') is not null)
 begin
 	drop proc  SoLuong_KQ
 end
@@ -74,16 +74,7 @@ BEGIN
 												sGhiChu like @key)kqt
 END
 
-GO
 
-Select count(*) FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
-												PK_sDoiTacID like '%ttn112sd%' or
-												sTenDoiTac like '%ttn112dd%' or
-												sTenDoiTacEng like '%ttn112sd%' or
-												sSoDienThoai like '%ttn112sd%' or
-												sDiaChi like '%ttn112sd%' or
-												sNguoiLienHe like '%ttn112sd%' or
-												sGhiChu like '%ttn112sd%')kqt
 
 -----------Proc thêm đối tác             
 if(OBJECT_ID('sp_tblDoiTac_Insert','p') is not null)
@@ -221,7 +212,31 @@ END
 
 GO
 
-SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE MATCH(sTenDoiTacEng) AGAINST('tho')
+-----------Proc Select tu khoa goi y Ket qua tim kiem
+if(OBJECT_ID('SuggestData','p') is not null)
+begin
+	drop proc  SuggestData
+end
+GO
+CREATE PROCEDURE SuggestData 
+@key nvarchar
+AS
+BEGIN
+	SET @key = @key + '%'
+	Select top 5 * FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
+												PK_sDoiTacID like @key or
+												sTenDoiTac like @key or
+												sTenDoiTacEng like @key or
+												sSoDienThoai like @key or
+												sDiaChi like @key or
+												sNguoiLienHe like @key or
+												sGhiChu like @key)kqt
+END
+
+GO
+
+
+--SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE MATCH(sTenDoiTacEng) AGAINST('tho')
 
 
 

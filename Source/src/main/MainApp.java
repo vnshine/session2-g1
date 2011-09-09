@@ -1,16 +1,13 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
 
 public class MainApp extends JFrame {
 
@@ -21,7 +18,6 @@ public class MainApp extends JFrame {
 	//public JTabbedPane paneCenter;
 	private JPanel panelMenu;
 
-	
 	
 	/**
 	 * Launch the application.
