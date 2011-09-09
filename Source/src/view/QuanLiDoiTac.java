@@ -244,8 +244,8 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		verticalBox.add(panel_DanhSach);
 		panel_DanhSach.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
-		panel_DanhSach.add(scrollPane);
+		//JScrollPane scrollPane = new JScrollPane();
+		//panel_DanhSach.add(scrollPane, BorderLayout.NORTH);
 		
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
@@ -267,21 +267,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 						{null, null, null, null, null, null, null},
 						{null, null, null, null, null, null, null},
 						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
-						{null, null, null, null, null, null, null},
+						
 					},
 					new String[] {
 						"STT", "M\u00E3 \u0111\u1ED1i t\u00E1c", "T\u00EAn \u0111\u1ED1i t\u00E1c", "Ng\u01B0\u1EDDi li\u00EAn h\u1EC7", "\u0110\u1ECBa ch\u1EC9", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i", "Ghi ch\u00FA"
@@ -302,8 +288,8 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		table.getColumnModel().getColumn(4).setPreferredWidth(120);
 		table.getColumnModel().getColumn(6).setPreferredWidth(120);
 		
-		scrollPane.setViewportView(table);
-		
+		//scrollPane.setViewportView(table);
+		panel_DanhSach.add(table, BorderLayout.NORTH);
 		JPanel panel_XemTrang = new JPanel();
 		verticalBox.add(panel_XemTrang);
 		
@@ -441,9 +427,9 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 			soDT = dtac.getsoDoiTac();
 		}
 			System.out.println("dguvbdikbgkdbgkdkbgkdbkgdobgodogndolngkdngdogodngdgndkngkkdgnd "+soDT);
-		if ((soDT % 25) == 0 ) {
-			Combo((soDT / 25));
-		}else Combo((soDT / 25)+1);
+		if ((soDT % 10) == 0 ) {
+			Combo((soDT / 10));
+		}else Combo((soDT / 10)+1);
 		
 		model.getDataVector().removeAllElements();
 		model.fireTableDataChanged();
@@ -454,7 +440,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		} else {
 			dsDoiTac = dtac.getListDoiTac(soTrang);
 		}
-		sTT = (soTrang-1)*25+1;
+		sTT = (soTrang-1)*10+1;
 		System.out.println("So thu tu: "+sTT);
 		System.out.println("So trang: "+soTrang);
 		System.out.println("So doi tac trong trang: "+dsDoiTac.size());
@@ -546,19 +532,19 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 				if (kiemTra==true) {
 					
 					
-					System.out.println((soDT / 25));
+					System.out.println((soDT / 10));
 					
-					if ((soDT % 25) == 0 ) {
-						Combo((soDT / 25));
-						soTrang = (soDT / 25);
+					if ((soDT % 10) == 0 ) {
+						Combo((soDT / 10));
+						soTrang = (soDT / 10);
 						
 						loaddata();
 						box_SoTrang.setSelectedItem(soTrang);
 						
 					}else 
 					{	
-						Combo((soDT / 25)+1);
-						soTrang = (soDT / 25)+1;
+						Combo((soDT / 10)+1);
+						soTrang = (soDT / 10)+1;
 						loaddata();
 						box_SoTrang.setSelectedItem(soTrang);
 					}
@@ -608,17 +594,17 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 						dtac.XoaDoiTac((textField_MaDT.getText()));
 						new ThongBao(lblThongBao, Color.BLUE,"Delete ngon !");
 						Integer soDT = dtac.getsoDoiTac();
-						if ((soDT % 25) == 0 ) {
-							Combo((soDT / 25));
-							soTrang = (soDT / 25);
+						if ((soDT % 10) == 0 ) {
+							Combo((soDT / 10));
+							soTrang = (soDT / 10);
 							
 							loaddata();
 							box_SoTrang.setSelectedItem(soTrang);
 							
 						}else 
 						{	
-							Combo((soDT / 25)+1);
-							soTrang = (soDT / 25)+1;
+							Combo((soDT / 10)+1);
+							soTrang = (soDT / 10)+1;
 							loaddata();
 							box_SoTrang.setSelectedItem(soTrang);
 						}
@@ -639,7 +625,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	public void update(){
 		try {
 			onClickTable = 0;
-			for (int i = 0; i < 25; i++) {
+			for (int i = 0; i < 10; i++) {
 				 if (table.isRowSelected(i)) {
 					onClickTable = 1;
 				}
@@ -672,19 +658,19 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 					if (kiemTra==true) {
 						
 						
-//						System.out.println((soDT / 25));
+//						System.out.println((soDT / 10));
 						new ThongBao(lblThongBao, Color.BLUE, "Update ngon !!!");
-						if ((soDT % 25) == 0 ) {
-							Combo((soDT / 25));
-							soTrang = (soDT / 25);
+						if ((soDT % 10) == 0 ) {
+							Combo((soDT / 10));
+							soTrang = (soDT / 10);
 							
 							loaddata();
 							box_SoTrang.setSelectedItem(soTrang);
 							
 						}else 
 						{	
-							Combo((soDT / 25)+1);
-							soTrang = (soDT / 25)+1;
+							Combo((soDT / 10)+1);
+							soTrang = (soDT / 10)+1;
 							loaddata();
 							box_SoTrang.setSelectedItem(soTrang);
 						}
@@ -955,17 +941,17 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 			try {
 				soDT = a.getSoLuongKQ(textfJSuggestField.getText());
 			
-			if ((soDT % 25) == 0 ) {
-				Combo((soDT / 25));
-				soTrang = (soDT / 25);
+			if ((soDT % 10) == 0 ) {
+				Combo((soDT / 10));
+				soTrang = (soDT / 10);
 				
 				loaddata();
 				box_SoTrang.setSelectedItem(soTrang);
 				
 			}else 
 			{	
-				Combo((soDT / 25)+1);
-				soTrang = (soDT / 25)+1;
+				Combo((soDT / 10)+1);
+				soTrang = (soDT / 10)+1;
 				loaddata();
 				box_SoTrang.setSelectedItem(soTrang);
 			}
