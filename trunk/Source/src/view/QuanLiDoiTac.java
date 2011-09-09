@@ -34,6 +34,8 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.table.DefaultTableModel;
 
+import UsingExcelTemplates.WriteExcel;
+
 import ch.rakudave.suggest.JSuggestField;
 
 import module.ThongBao;
@@ -53,7 +55,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	private JTextField textField_SoDT;
 	private JTextField textField_DiaChiDT;
 	private JTextField textField_GhiChuDT;
-	private JButton btnAdd,btnEdit,btnDelete,btnSave,btnFind,btnCancel,btnBack,btnNext;
+	private JButton btnAdd,btnEdit,btnDelete,btnSave,btnFind,btnCancel,btnBack,btnNext,btnExport;
 	private JLabel lblThongBao;
 	private JComboBox box_SoTrang;
 	private Integer soTrang = 1;
@@ -239,6 +241,11 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		btnCancel.addActionListener(this);
 		panel_TacVu.add(btnCancel);
 		
+		btnExport = new JButton("Xu\u1EA5t danh s\u00E1ch");
+		btnExport.setActionCommand("Export");
+		btnExport.addActionListener(this);
+		panel_TacVu.add(btnExport);
+		
 		JPanel panel_DanhSach = new JPanel();
 		panel_DanhSach.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Danh s\u00E1ch \u0111\u1ED1i t\u00E1c", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
 		verticalBox.add(panel_DanhSach);
@@ -376,7 +383,34 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 //		deleteb = 0;
 //		updateb = 0;
 	}
+
 	
+	public void export(){
+		
+		WriteExcel test = new WriteExcel();
+		QLDoiTacProcess ql = new QLDoiTacProcess();
+		Vector<Vector<String>> duLieu = new Vector<Vector<String>>();
+		Vector<DoiTac> doiTac;
+		try {
+			doiTac = ql.getListDoiTac(1);
+			for (int k = 0; k < doiTac.size(); k++) {
+				Vector<String> phanTu = new Vector<String>();
+				phanTu.add(doiTac.get(k).getsTenDoiTac());
+				System.out.println(doiTac.get(k).getPK_sDoiTacID().toString());
+				phanTu.add(doiTac.get(k).getPK_sDoiTacID().toString());
+				phanTu.add(doiTac.get(k).getsSoDienThoai());
+				phanTu.add(doiTac.get(k).getsDiaChi());
+				phanTu.add(doiTac.get(k).getsNguoiLienHe());
+				phanTu.add(doiTac.get(k).getsGhiChu());
+				duLieu.add(phanTu);
+			}
+			test.write(8, 1, duLieu, "Temp.xls");
+			System.out.println(doiTac.get(0).getClass().getCanonicalName());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
 	
 	
 	
@@ -968,10 +1002,14 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 			update();
 			find();
 		}
+		
 		if (e.getActionCommand().equals("Cancel")) {
 			huy();
 		}
 
+		if (e.getActionCommand().equals("Export")) {
+			export();
+		}
 		
 	}
 
