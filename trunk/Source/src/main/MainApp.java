@@ -60,15 +60,14 @@ public class MainApp extends JFrame {
 		panelMenu = new JPanel();
 		panelMenu.setLayout(new BorderLayout());
 		tabbedPane = new JTabbedPane();
+		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		//tabbedPane.add("dsgds", "media/images/48px-Crystal_Clear_action_bookmark.png",  new JButton());
 		tabbedPane.addTab("Chức năng vớ vẩn", new ChucNang(this));
-		tabbedPane.addTab("Tro giup", new Help(this));
-		
-//
-////        this.tbnPane.addTab("Chuc nang", new ChucNang(this));
-//
+		tabbedPane.addTab("Trợ giúp", new Help(this));
+
 		panelMenu.add(tabbedPane);
 		paneCenter = new ClosableTabbedPane();
+		paneCenter.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		getContentPane().add(this.panelMenu,BorderLayout.NORTH);
 		getContentPane().add(this.paneCenter,BorderLayout.CENTER);
 		

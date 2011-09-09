@@ -8,6 +8,11 @@
 set ANSI_NULLS ON
 set QUOTED_IDENTIFIER ON
 GO
+if(OBJECT_ID('SEARCH_DOITAC','p') is not null)
+begin
+	drop proc  SEARCH_DOITAC
+end
+GO
 CREATE PROCEDURE SEARCH_DOITAC  
 	@soTrang int,
 	@key nvarchar
@@ -18,7 +23,7 @@ BEGIN
 	
 	select * from (
 	select top ((
-				Select count(*) from (SELECT top (25*@soTrang) *
+				Select count(*) from (SELECT top (10*@soTrang) *
 				FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
 												PK_sDoiTacID like @key or
 												sTenDoiTac like @key or
@@ -27,9 +32,9 @@ BEGIN
 												sDiaChi like @key or
 												sNguoiLienHe like @key or
 												sGhiChu like @key)thao)d
-				)-(25*(@soTrang-1)))
+				)-(10*(@soTrang-1)))
 	*from (		
-	select top (25*@soTrang) *
+	select top (10*@soTrang) *
 	from (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
 												PK_sDoiTacID like @key or
 												sTenDoiTac like @key or
@@ -91,7 +96,7 @@ CREATE proc sp_tblDoiTac_Insert
 	@PK_sDoiTacID varchar(6),
 	@sTenDoiTac nvarchar(45),
 	@sTenDoiTacEng varchar(45),
-	@sSoDienThoai varchar(12),
+	@sSoDienThoai varchar(16),
 	@sDiaChi nvarchar(100),
 	@iTrangThai int,
 	@sNguoiLienHe nvarchar(45),
@@ -122,7 +127,7 @@ CREATE proc sp_tblDoiTac_Update
 	@PK_sDoiTacID varchar(6),
 	@sTenDoiTac nvarchar(45),
 	@sTenDoiTacEng varchar(45),
-	@sSoDienThoai varchar(12),
+	@sSoDienThoai varchar(16),
 	@sDiaChi nvarchar(100),
 	@iTrangThai int,
 	@sNguoiLienHe nvarchar(45),
@@ -177,18 +182,22 @@ go
 -----------Proc lay danh sach
 
 GO
-
+if(OBJECT_ID('DanhSach_DoiTac','p') is not null)
+begin
+	drop proc  DanhSach_DoiTac
+end
+GO
 CREATE PROCEDURE DanhSach_DoiTac 
 	@soTrang int
 AS
 BEGIN
 	select * from (
 	select top ((
-				Select count(*) from (SELECT top (25*@soTrang) *
+				Select count(*) from (SELECT top (10*@soTrang) *
 				FROM [NhatQuang].[dbo].[tbl_DoiTac])d
-				)-(25*(@soTrang-1)))
+				)-(10*(@soTrang-1)))
 	*from (		
-	select top (25*@soTrang) *
+	select top (10*@soTrang) *
 	from [NhatQuang].[dbo].[tbl_DoiTac] order by PK_sDoiTacID ASC
 	) a	order by PK_sDoiTacID DESC
 	) b	order by PK_sDoiTacID ASC
