@@ -2,6 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -251,8 +252,8 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		verticalBox.add(panel_DanhSach);
 		panel_DanhSach.setLayout(new BorderLayout(0, 0));
 		
-		//JScrollPane scrollPane = new JScrollPane();
-		//panel_DanhSach.add(scrollPane, BorderLayout.NORTH);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(200,200));
 		
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
@@ -295,8 +296,9 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		table.getColumnModel().getColumn(4).setPreferredWidth(120);
 		table.getColumnModel().getColumn(6).setPreferredWidth(120);
 		
-		//scrollPane.setViewportView(table);
-		panel_DanhSach.add(table, BorderLayout.NORTH);
+		scrollPane.setViewportView(table);
+		panel_DanhSach.add(scrollPane, BorderLayout.NORTH);
+		//panel_DanhSach.add(table, BorderLayout.NORTH);
 		JPanel panel_XemTrang = new JPanel();
 		verticalBox.add(panel_XemTrang);
 		
