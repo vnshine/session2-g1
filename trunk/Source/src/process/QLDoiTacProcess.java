@@ -271,6 +271,48 @@ public class QLDoiTacProcess
             }
             
     }
+    public Vector<String> getSuggestData(String key) throws SQLException
+    {
+            //Vector<DoiTac> result = new Vector<DoiTac>();
+            Vector<String> result = new Vector<String>();
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("{call SuggestData(?)}");
+					cst.setString(1, key);
+                    ResultSet rs =  cst.executeQuery();
+
+                    while(rs.next())
+                    {
+                    	
+                    	if ((rs.getString("sTenDoiTac")).contains(key)) {result.add(rs.getString("sTenDoiTac"));}
+                    	
+                    	if ((rs.getString("sSoDienThoai")).contains(key)) {result.add(rs.getString("sSoDienThoai"));}
+                    	
+                    	if ((rs.getString("sNguoiLienHe")).contains(key)) {result.add(rs.getString("sNguoiLienHe"));}
+                    	
+                    	if ((rs.getString("sGhiChu")).contains(key)) {result.add(rs.getString("sGhiChu"));}
+                    	
+                    	if ((rs.getString("sDiaChi")).contains(key)) {result.add(rs.getString("sDiaChi"));}
+                    	
+                    	if ((rs.getString("sTenDoiTacEng")).contains(key)) {result.add(rs.getString("sTenDoiTacEng"));}
+                    	
+                        if ((rs.getString("PK_sDoiTacID")).contains(key)) {result.add(rs.getString("PK_sDoiTacID"));}
+                        
+                    }
+
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
     /*
     public Vector<ObjQuyen> TimQuyen(ObjQuyen varQuyen) throws SQLException
     {
