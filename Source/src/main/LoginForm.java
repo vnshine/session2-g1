@@ -3,6 +3,7 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,7 +19,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
+import process.LoginProcess;
+import sun.font.FontManager.FamilyDescription;
+import view.ThongTinCongTyView;
+
 import java.awt.Font;
+import java.io.IOException;
 
 public class LoginForm extends JFrame {
 
@@ -26,7 +32,9 @@ public class LoginForm extends JFrame {
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	private JTextField textField;
-
+	private LoginProcess pro;
+	private String name, pass;
+	private JLabel lblName, lblPassword, label;
 	/**
 	 * Launch the application.
 	 */
@@ -35,11 +43,12 @@ public class LoginForm extends JFrame {
 			public void run() {
 				try {
 					String lnfClassname = PREFERRED_LOOK_AND_FEEL;
-					if (lnfClassname == null)
+					if (lnfClassname == null){
 						lnfClassname = UIManager.getCrossPlatformLookAndFeelClassName();
+					}
 					UIManager.setLookAndFeel(lnfClassname);
-					LoginForm frame = new LoginForm();
-					frame.setVisible(true);
+					LoginForm frame1 = new LoginForm();
+					frame1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,7 +62,7 @@ public class LoginForm extends JFrame {
 	public LoginForm() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 249);
+		setBounds(100, 100, 450, 270);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -74,11 +83,11 @@ public class LoginForm extends JFrame {
 		lblEnter.setBounds(23, 11, 251, 14);
 		panel_1.add(lblEnter);
 		
-		JLabel lblName = new JLabel("Name");
+		lblName = new JLabel("Name");
 		lblName.setBounds(49, 36, 46, 14);
 		panel_1.add(lblName);
 		
-		JLabel lblPassword = new JLabel("Password");
+		lblPassword = new JLabel("Password");
 		lblPassword.setBounds(49, 61, 46, 14);
 		panel_1.add(lblPassword);
 		
@@ -102,5 +111,69 @@ public class LoginForm extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(230, 115, 89, 23);
 		panel_1.add(btnCancel);
+		
+		label = new JLabel("");
+		label.setBounds(117, 155, 303, 14);
+		label.setForeground(Color.RED);
+		panel_1.add(label);
+		
+		pro = new LoginProcess();
+		
+		btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+		});
+		
+		btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+		});
+		
+	}
+	
+	private Boolean valid(String name, String pass){
+		Boolean result = true;
+		if(name.equals("")){
+			lblName.setForeground(Color.red);
+			label.setText("Tên đăng nhập không được để trống");
+			return false;
+		}
+		if(pass.equals("")){
+			lblPassword.setForeground(Color.red);
+			label.setText("Mã đăng nhập không được để trống");
+			return false;
+		}
+		return result;
+	}
+	
+	private void btnOkActionPerformed(java.awt.event.ActionEvent evt){
+		name = textField.getText();
+		pass = passwordField.getText();
+		name = name.replace(" ", "").toUpperCase();
+		pass = pass.replace(" ", "").toUpperCase();
+		
+		if (valid(name, pass) == false) {
+			return;
+		}
+		if (pro.Login(name, pass)) {
+			label.setText("ngon");
+			this.setVisible(false);
+			ThongTinCongTyView frame = new ThongTinCongTyView();
+			frame.setVisible(true);
+			frame.pack();
+			frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+			
+			
+		}else {
+			label.setText("Sai mã đăng nhập hoặc mật khẩu");
+		}
+		
+	}
+
+	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt){
+		System.exit(0);		
 	}
 }
