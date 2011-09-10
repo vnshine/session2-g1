@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
@@ -10,6 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridBagLayout;
 import javax.swing.border.LineBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -19,11 +23,16 @@ import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
+import module.SetCenter;
+
 import process.LoginProcess;
 import sun.font.FontManager.FamilyDescription;
+import view.LostPassword;
 import view.ThongTinCongTyView;
 
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class LoginForm extends JFrame {
@@ -34,7 +43,7 @@ public class LoginForm extends JFrame {
 	private JTextField textField;
 	private LoginProcess pro;
 	private String name, pass;
-	private JLabel lblName, lblPassword, label;
+	private JLabel lblName, lblPassword, lblLostPassword, label;
 	/**
 	 * Launch the application.
 	 */
@@ -49,6 +58,7 @@ public class LoginForm extends JFrame {
 					UIManager.setLookAndFeel(lnfClassname);
 					LoginForm frame1 = new LoginForm();
 					frame1.setVisible(true);
+					SetCenter setCenter = new SetCenter(frame1);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,6 +70,7 @@ public class LoginForm extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginForm() {
+		setTitle("Login");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 270);
@@ -115,7 +126,15 @@ public class LoginForm extends JFrame {
 		label = new JLabel("");
 		label.setBounds(117, 155, 303, 14);
 		label.setForeground(Color.RED);
+//		label.setVerticalTextPosition(JLabel.BOTTOM);
+//		label.setHorizontalTextPosition(JLabel.CENTER);
 		panel_1.add(label);
+		
+		lblLostPassword = new JLabel("Lost password?");
+		lblLostPassword.setForeground(Color.BLUE);
+		lblLostPassword.setCursor(new Cursor(HAND_CURSOR));
+		lblLostPassword.setBounds(338, 89, 82, 14);
+		panel_1.add(lblLostPassword);
 		
 		pro = new LoginProcess();
 		
@@ -130,6 +149,13 @@ public class LoginForm extends JFrame {
                 btnCancelActionPerformed(evt);
             }
 		});
+		
+		lblLostPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            	lblLostPasswordMouseClicked(evt);
+            }
+        });
 		
 	}
 	
@@ -158,15 +184,12 @@ public class LoginForm extends JFrame {
 			return;
 		}
 		if (pro.Login(name, pass)) {
-			label.setText("ngon");
 			this.setVisible(false);
 			ThongTinCongTyView frame = new ThongTinCongTyView();
 			frame.setVisible(true);
 			frame.pack();
 			frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-			
-			
 		}else {
 			label.setText("Sai mã đăng nhập hoặc mật khẩu");
 		}
@@ -175,5 +198,14 @@ public class LoginForm extends JFrame {
 
 	private void btnCancelActionPerformed(java.awt.event.ActionEvent evt){
 		System.exit(0);		
+	}
+	
+	private void lblLostPasswordMouseClicked(MouseEvent evt){
+		this.setVisible(false);
+		LostPassword frame = new LostPassword();
+		frame.setVisible(true);
+		frame.pack();
+		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		SetCenter setCenter = new SetCenter(frame);
 	}
 }
