@@ -44,6 +44,9 @@ public class LoginForm extends JFrame {
 	private LoginProcess pro;
 	private String name, pass;
 	private JLabel lblName, lblPassword, lblLostPassword, label;
+//	private static Thread th1;
+//	private static Thread th2;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -65,6 +68,16 @@ public class LoginForm extends JFrame {
 			}
 		});
 	}
+
+//	public static void Login(){
+//		
+//		
+//	}
+//	
+//	public static void App(){
+//		
+//		
+//	}
 
 	/**
 	 * Create the frame.
@@ -89,16 +102,16 @@ public class LoginForm extends JFrame {
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
 		
-		JLabel lblEnter = new JLabel("Enter your usermane and password");
+		JLabel lblEnter = new JLabel("Nhập tài khoản và mật khẩu");
 		lblEnter.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEnter.setBounds(23, 11, 251, 14);
 		panel_1.add(lblEnter);
 		
-		lblName = new JLabel("Name");
+		lblName = new JLabel("Tài khoản: ");
 		lblName.setBounds(49, 36, 46, 14);
 		panel_1.add(lblName);
 		
-		lblPassword = new JLabel("Password");
+		lblPassword = new JLabel("Mật khẩu: ");
 		lblPassword.setBounds(49, 61, 46, 14);
 		panel_1.add(lblPassword);
 		
@@ -111,15 +124,15 @@ public class LoginForm extends JFrame {
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
-		JCheckBox chckbxRememberPassword = new JCheckBox("Remember Password");
+		JCheckBox chckbxRememberPassword = new JCheckBox("Ghi nhớ");
 		chckbxRememberPassword.setBounds(49, 85, 182, 23);
 		panel_1.add(chckbxRememberPassword);
 		
-		JButton btnOk = new JButton("Ok");
+		JButton btnOk = new JButton("Đăng nhập");
 		btnOk.setBounds(131, 115, 89, 23);
 		panel_1.add(btnOk);
 		
-		JButton btnCancel = new JButton("Cancel");
+		JButton btnCancel = new JButton("Hủy");
 		btnCancel.setBounds(230, 115, 89, 23);
 		panel_1.add(btnCancel);
 		
@@ -130,7 +143,7 @@ public class LoginForm extends JFrame {
 //		label.setHorizontalTextPosition(JLabel.CENTER);
 		panel_1.add(label);
 		
-		lblLostPassword = new JLabel("Lost password?");
+		lblLostPassword = new JLabel("Quên mật khẩu?");
 		lblLostPassword.setForeground(Color.BLUE);
 		lblLostPassword.setCursor(new Cursor(HAND_CURSOR));
 		lblLostPassword.setBounds(338, 89, 82, 14);
