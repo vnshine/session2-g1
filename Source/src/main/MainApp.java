@@ -59,8 +59,7 @@ public class MainApp extends JFrame {
 	public MainApp() throws IOException {
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("New label");
+	
 
 
 		getContentPane().setLayout(new BorderLayout());
@@ -70,9 +69,31 @@ public class MainApp extends JFrame {
 		tabbedPane = new JTabbedPane();
 		tabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		//tabbedPane.add("dsgds", "media/images/48px-Crystal_Clear_action_bookmark.png",  new JButton());
-		tabbedPane.addTab("Chức năng vớ vẩn", new ChucNang(this));
-		tabbedPane.addTab("Trợ giúp", new Help(this));
+
+		//JPanel  pnlProducts = new JPanel();
+		tabbedPane.add(null, new javax.swing.ImageIcon("media/images/Windows.png"));
+		tabbedPane.addTab("Hệ Thống", new javax.swing.ImageIcon("media/images/Home.png"), new ChucNang(this)); // NOI18N
+
+//        javax.swing.GroupLayout pnlProductsLayout = new javax.swing.GroupLayout(pnlProducts);
+//        pnlProducts.setLayout(pnlProductsLayout);
+//        pnlProductsLayout.setHorizontalGroup(
+//            pnlProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGap(0, 630, Short.MAX_VALUE)
+//        );
+//        pnlProductsLayout.setVerticalGroup(
+//            pnlProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGap(0, 418, Short.MAX_VALUE)
+//        );
+		tabbedPane.addTab("Nhập/Xuất", new javax.swing.ImageIcon("media/images/import_export-icon.png"), new ChucNang(this));
+		tabbedPane.addTab("Thu/Chi", new javax.swing.ImageIcon("media/images/money-icon.png"), new ChucNang(this));
+		tabbedPane.addTab("Công nợ", new javax.swing.ImageIcon("media/images/ConNO-icon.png"), new ChucNang(this));
+		tabbedPane.addTab("Hàng hóa", new javax.swing.ImageIcon("media/images/hanghoa-icon.png"), new ChucNang(this));
+		tabbedPane.addTab("Đối tác", new javax.swing.ImageIcon("media/images/icon-DoiTac.png"), new DoiTac(this));
+		tabbedPane.addTab("Nhân viên", new javax.swing.ImageIcon("media/images/icon-NhanVien.png"), new ChucNang(this));
+		tabbedPane.addTab("Báo cáo", new javax.swing.ImageIcon("media/images/ReportsIcon.png"), new ChucNang(this));
+		tabbedPane.addTab("Quản lí", new javax.swing.ImageIcon("media/images/Manager-Icon.png"), new ChucNang(this));
+		tabbedPane.addTab("Trợ giúp", new javax.swing.ImageIcon("media/images/help-icon.png"), new ChucNang(this));
+		
 
 		panelMenu.add(tabbedPane);
 		paneCenter = new ClosableTabbedPane();
