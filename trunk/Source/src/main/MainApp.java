@@ -3,6 +3,13 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +24,8 @@ public class MainApp extends JFrame {
 	public static ClosableTabbedPane paneCenter;
 	//public JTabbedPane paneCenter;
 	private JPanel panelMenu;
-
+	private JPanel panel_Banner;
+	private BufferedImage image;
 	
 	/**
 	 * Launch the application.
@@ -44,8 +52,11 @@ public class MainApp extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
 	 */
-	public MainApp() {
+
+
+	public MainApp() throws IOException {
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -54,8 +65,10 @@ public class MainApp extends JFrame {
 
 		getContentPane().setLayout(new BorderLayout());
 		panelMenu = new JPanel();
+		//panelMenu.set
 		panelMenu.setLayout(new BorderLayout());
 		tabbedPane = new JTabbedPane();
+		tabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 		tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		//tabbedPane.add("dsgds", "media/images/48px-Crystal_Clear_action_bookmark.png",  new JButton());
 		tabbedPane.addTab("Chức năng vớ vẩn", new ChucNang(this));
@@ -64,7 +77,15 @@ public class MainApp extends JFrame {
 		panelMenu.add(tabbedPane);
 		paneCenter = new ClosableTabbedPane();
 		paneCenter.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-		getContentPane().add(this.panelMenu,BorderLayout.NORTH);
+		
+		panel_Banner = new JPanel();
+		image = ImageIO.read(new File("media/images/NhatQuangBanner.png")); 
+		BufferedImage myPicture = image; 
+		JLabel picLabel = new JLabel(new ImageIcon( myPicture )) ;
+		panel_Banner.add(picLabel);
+
+		getContentPane().add(panel_Banner, BorderLayout.NORTH);
+		getContentPane().add(this.panelMenu,BorderLayout.WEST);
 		getContentPane().add(this.paneCenter,BorderLayout.CENTER);
 		
 	}
