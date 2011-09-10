@@ -47,38 +47,38 @@ public class Login extends javax.swing.JFrame {
         lblThongBao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Đăng nhập");
+        setTitle("Ä�Äƒng nháº­p");
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(200, 200, 0, 0));
         setModalExclusionType(java.awt.Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
         setName("fraLogin"); // NOI18N
         setResizable(false);
-        setType(java.awt.Window.Type.UTILITY);
+//        setType(java.awt.Window.Type.UTILITY);
 
-        panDangNhap.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin tài khoản", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
+        panDangNhap.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ThÃ´ng tin tÃ i khoáº£n", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
 
-        lblMaNhanVien.setText("Mã nhân viên: ");
+        lblMaNhanVien.setText("MÃ£ nhÃ¢n viÃªn: ");
 
         txtMaNhanVien.setText("admin");
 
-        lblMatKhau.setText("Mật khẩu: ");
+        lblMatKhau.setText("Máº­t kháº©u: ");
 
         txtMatKhau.setText("admin");
 
-        chkNhoTaiKhoan.setText("Nhớ tài khoản");
+        chkNhoTaiKhoan.setText("Nhá»› tÃ i khoáº£n");
 
         lblQuyenMatKhau.setForeground(new java.awt.Color(0, 51, 255));
-        lblQuyenMatKhau.setText("Quyên mật khẩu?");
+        lblQuyenMatKhau.setText("QuyÃªn máº­t kháº©u?");
         lblQuyenMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        btnDangNhap.setText("Đăng nhập");
+        btnDangNhap.setText("Ä�Äƒng nháº­p");
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
             }
         });
 
-        btnThoat.setText("Thoát");
+        btnThoat.setText("ThoÃ¡t");
 
         lblThongBao.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblThongBao.setForeground(new java.awt.Color(255, 0, 0));
@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame {
 
     /*
      * ***********************************************
-     * Các hàm phục vụ các chức năng
+     * CÃ¡c hÃ m phá»¥c vá»¥ cÃ¡c chá»©c nÄƒng
      */
     private Boolean isValidInput(String sMaNhanVien, String sMatKhau)
     {
@@ -165,27 +165,27 @@ public class Login extends javax.swing.JFrame {
         if(sMaNhanVien.equals(""))
         {
             lblMaNhanVien.setForeground(Color.red);
-            lblThongBao.setText("Mã nhân viên là bắt buộc!");
+            lblThongBao.setText("MÃ£ nhÃ¢n viÃªn lÃ  báº¯t buá»™c!");
             return false;
         }
         if(sMaNhanVien.length() != 6)
         {
             lblMaNhanVien.setForeground(Color.red);
-            lblThongBao.setText("Mã nhân viên gồm 6 ký tự!");
+            lblThongBao.setText("MÃ£ nhÃ¢n viÃªn gá»“m 6 kÃ½ tá»±!");
             return false;
         }
         
         if(sMatKhau.equals(""))
         {
             lblMatKhau.setForeground(Color.red);
-            lblThongBao.setText("Mật khẩu là bắt buộc!");
+            lblThongBao.setText("Máº­t kháº©u lÃ  báº¯t buá»™c!");
             return false;
         }
         
         if(sMatKhau.length() < 4)
         {
             lblMatKhau.setForeground(Color.red);
-            lblThongBao.setText("Mật khẩu phải lớn hơn 4 ký tự!");
+            lblThongBao.setText("Máº­t kháº©u pháº£i lá»›n hÆ¡n 4 kÃ½ tá»±!");
             return false;
         }
         return result;
@@ -203,13 +203,13 @@ public class Login extends javax.swing.JFrame {
         LoginCode vaLogin = new LoginCode();
         if(vaLogin.ValidLogin(sMaNhanVien, sMatKhau))
         {
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công!","Đăng nhập",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ä�Äƒng nháº­p thÃ nh cÃ´ng!","Ä�Äƒng nháº­p",JOptionPane.INFORMATION_MESSAGE);
         }
         else
         {
             panDangNhap.setForeground(Color.yellow);
-            lblThongBao.setText("Sai mã nhân viên hoặc mật khẩu!");
-            //JOptionPane.showMessageDialog(this, "Đăng nhập không thành công!\nSai mã nhân viên hoặc mật khẩu.","Đăng nhập",JOptionPane.WARNING_MESSAGE);
+            lblThongBao.setText("Sai mÃ£ nhÃ¢n viÃªn hoáº·c máº­t kháº©u!");
+            //JOptionPane.showMessageDialog(this, "Ä�Äƒng nháº­p khÃ´ng thÃ nh cÃ´ng!\nSai mÃ£ nhÃ¢n viÃªn hoáº·c máº­t kháº©u.","Ä�Äƒng nháº­p",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed
 

@@ -271,27 +271,27 @@ EXEC sp_tblNhanVien_FindRutGon 3,'','','',1
 --Bảng quyền
 --------------------------------
 
-INSERT INTO tbl_Quyen(sTenQuyen,sGhiChu) VALUES(N'Quản trị', N'Quản trị hệ thống')
+INSERT INTO tbl_Quyen(sTenQuyen,sTenQuyenEng,sGhiChu) VALUES(N'Quản trị', 'QUANTRI', N'Quản trị hệ thống')
 --------------------------------
 --Bảng nhân viên
 --------------------------------
-INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values('Quản trị','QUANTRI','Quản trị hệ thống')
-INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values('Bán hàng','BANHANG','')
-INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values('Thủ kho','THUKHO','')
+INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values(N'Quản trị','QUANTRI',N'Quản trị hệ thống')
+INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values(N'Bán hàng','BANHANG',N'')
+INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values(N'Thủ kho','THUKHO',N'')
 
 
-INSERT INTO tbl_NhanVien values('NV0001','nv001',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0002','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0003','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0004','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0005','nv001',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0006','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0007','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0008','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0009','nv001',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0010','nv002',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0011','nv003',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',1)
-INSERT INTO tbl_NhanVien values('NV0012','nv004',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0001','a1d926ae46e4c9c5ce38eced5500eef7',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0002','e4f214d42c8ff889dd24be9094e601ed',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0003','2456a735acd36d2f80cc5cac1e0d8ef2',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0004','3764d7af739d1e42d739a3bd7c3726e5',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
+INSERT INTO tbl_NhanVien values('NV0005','a1d926ae46e4c9c5ce38eced5500eef7',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0006','e4f214d42c8ff889dd24be9094e601ed',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0007','2456a735acd36d2f80cc5cac1e0d8ef2',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0008','3764d7af739d1e42d739a3bd7c3726e5',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
+INSERT INTO tbl_NhanVien values('NV0009','a1d926ae46e4c9c5ce38eced5500eef7',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0010','e4f214d42c8ff889dd24be9094e601ed',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0011','2456a735acd36d2f80cc5cac1e0d8ef2',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0012','3764d7af739d1e42d739a3bd7c3726e5',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
 
 --UPDATE tbl_NhanVien SET sMatKhau = '73acd9a5972130b75066c82595a1fae3' WHERE PK_sNhanVienID = 'NV0001'
 
