@@ -31,7 +31,7 @@ import module.SetCenter;
 import module.ThongBao;
 import myobject.ThongTinCongTy;
 import process.ThongTinCongTy_Process;
-import admin.LoginForm;
+import main.LoginForm;
 
 
 /**
@@ -45,7 +45,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     Object[][] rowData = {};
     String[] columnNames = {};
     
-    String action; //Biáº¿n ghi nháº­n ngÆ°á»�i dÃ¹ng nháº¥n vÃ o nÃºt nÃ o
+    String action; //BiÃ¡ÂºÂ¿n ghi nhÃ¡ÂºÂ­n ngÃ†Â°Ã¡Â»ï¿½i dÃƒÂ¹ng nhÃ¡ÂºÂ¥n vÃƒÂ o nÃƒÂºt nÃƒÂ o
 
     ThongTinCongTy_Process pro;
     String old_id;
@@ -55,7 +55,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     {
         initComponents();
         
-        columnNames = new String[] {"ID", "Tên công ty", "Địa chỉ", "Số điện thoại", "Email", "Website" , "Loại tiền sử dụng" , "Số lượng"};
+        columnNames = new String[] {"ID", "TÃªn cÃ´ng ty", "Ä�á»‹a chá»‰", "Sá»‘ Ä‘iá»‡n thoáº¡i", "Email", "Website" , "Loáº¡i tiá»�n sá»­ dá»¥ng" , "Sá»‘ lÆ°á»£ng"};
         model = new DefaultTableModel(rowData, columnNames);
         tblChucNang = new JTable(model)
         {
@@ -142,13 +142,13 @@ public class ThongTinCongTyView extends javax.swing.JFrame
             
             if(getResult.isEmpty())
             {
-                new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
+                new ThongBao(lblTrangThai, Color.gray, "Danh sÃ¡ch trá»‘ng!");
             }
             else
             {
-                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " +String.valueOf(pro.soPhanTu()) + " công ty!");
+                new ThongBao(lblTrangThai, Color.BLUE, "Danh sÃ¡ch gá»“m " +String.valueOf(pro.soPhanTu()) + " cÃ´ng ty!");
                 model.setRowCount(0);
-                columnNames = new String[] {"ID", "Tên công ty", "Địa chỉ", "Số điện thoại", "Email", "Website" , "Loại tiền sử dụng" , "Số lượng"};
+                columnNames = new String[] {"ID", "TÃªn cÃ´ng ty", "Ä�á»‹a chá»‰", "Sá»‘ Ä‘iá»‡n thoáº¡i", "Email", "Website" , "Loáº¡i tiá»�n sá»­ dá»¥ng" , "Sá»‘ lÆ°á»£ng"};
 
                 for(int i=0;i<getResult.size();i++)
                 {
@@ -159,8 +159,8 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         }
         catch(SQLException ex) 
         {
-           new ThongBao(lblTrangThai, Color.RED, "Káº¿t ná»‘i tá»›i cÆ¡ sá»Ÿ dá»¯ liá»‡u gáº·p váº¥n Ä‘á»�!");
-           JOptionPane.showMessageDialog(this, "Lá»—i: " + ex.getMessage(), "Lá»—i SQL",JOptionPane.ERROR_MESSAGE);
+           new ThongBao(lblTrangThai, Color.RED, "KÃ¡ÂºÂ¿t nÃ¡Â»â€˜i tÃ¡Â»â€ºi cÃ†Â¡ sÃ¡Â»Å¸ dÃ¡Â»Â¯ liÃ¡Â»â€¡u gÃ¡ÂºÂ·p vÃ¡ÂºÂ¥n Ã„â€˜Ã¡Â»ï¿½!");
+           JOptionPane.showMessageDialog(this, "LÃ¡Â»â€”i: " + ex.getMessage(), "LÃ¡Â»â€”i SQL",JOptionPane.ERROR_MESSAGE);
         }
                 
     }
@@ -174,13 +174,13 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         	getResult = pro.searchList(trang);
             if(getResult.isEmpty())
             {
-                new ThongBao(lblTrangThai, Color.gray, "Danh sách trống!");
+                new ThongBao(lblTrangThai, Color.gray, "Danh sÃ¡ch trá»‘ng!");
             }
             else
             {
-                new ThongBao(lblTrangThai, Color.BLUE, "Danh sách gồm " +String.valueOf(pro.soPhanTuSearch()) + " công ty!");
+                new ThongBao(lblTrangThai, Color.BLUE, "Danh sÃ¡ch gá»“m " +String.valueOf(pro.soPhanTuSearch()) + " cÃ´ng ty!");
                 model.setRowCount(0);
-                columnNames = new String[] {"ID", "Tên công ty", "Địa chỉ", "Số điện thoại", "Email", "Website" , "Loại tiền sử dụng" , "Số lượng"};
+                columnNames = new String[] {"ID", "TÃªn cÃ´ng ty", "Ä�á»‹a chá»‰", "Sá»‘ Ä‘iá»‡n thoáº¡i", "Email", "Website" , "Loáº¡i tiá»�n sá»­ dá»¥ng" , "Sá»‘ lÆ°á»£ng"};
 
                 for(int i=0;i<getResult.size();i++)
                 {
@@ -191,8 +191,8 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         }
         catch(SQLException ex) 
         {
-           new ThongBao(lblTrangThai, Color.RED, "Káº¿t ná»‘i tá»›i cÆ¡ sá»Ÿ dá»¯ liá»‡u gáº·p váº¥n Ä‘á»�!");
-           JOptionPane.showMessageDialog(this, "Lá»—i: " + ex.getMessage(), "Lá»—i SQL",JOptionPane.ERROR_MESSAGE);
+           new ThongBao(lblTrangThai, Color.RED, "KÃ¡ÂºÂ¿t nÃ¡Â»â€˜i tÃ¡Â»â€ºi cÃ†Â¡ sÃ¡Â»Å¸ dÃ¡Â»Â¯ liÃ¡Â»â€¡u gÃ¡ÂºÂ·p vÃ¡ÂºÂ¥n Ã„â€˜Ã¡Â»ï¿½!");
+           JOptionPane.showMessageDialog(this, "LÃ¡Â»â€”i: " + ex.getMessage(), "LÃ¡Â»â€”i SQL",JOptionPane.ERROR_MESSAGE);
         }
                 
     }
@@ -258,18 +258,18 @@ public class ThongTinCongTyView extends javax.swing.JFrame
             .addGap(0, 98, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dữ liệu"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dá»¯ liá»‡u"));
 
         lblID.setText("ID: *");
 
-        lblTen.setText("Tên Công Ty: ");
+        lblTen.setText("TÃªn CÃ´ng Ty: ");
 
-        lblDiaChi.setText("Địa Chỉ: *");
+        lblDiaChi.setText("Ä�á»‹a Chá»‰: *");
         
-        lblSdt.setText("SĐT: ");
+        lblSdt.setText("SÄ�T: ");
 
         lblThongBao.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        lblThongBao.setText("* Là bắt buộc");
+        lblThongBao.setText("* LÃ  báº¯t buá»™c");
         
         textField = new JTextField();
         textField.setColumns(10);
@@ -278,9 +278,9 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         
         JLabel lblWebsite_1 = new JLabel("Website: ");
         
-        JLabel lblTinT = new JLabel("Tiền tệ : *");
+        JLabel lblTinT = new JLabel("Tiá»�n tá»‡ : *");
         
-        JLabel lblSLng = new JLabel("Số lượng:");
+        JLabel lblSLng = new JLabel("Sá»‘ lÆ°á»£ng:");
         
         textField_1 = new JTextField();
         textField_1.setColumns(10);
@@ -297,7 +297,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         textField_5 = new JTextField();
         textField_5.setColumns(10);
         
-        JLabel lblS = new JLabel("SĐT:");
+        JLabel lblS = new JLabel("SÄ�T:");
 
         javax.swing.GroupLayout gl_jPanel2 = new javax.swing.GroupLayout(jPanel2);
         gl_jPanel2.setHorizontalGroup(
@@ -381,14 +381,14 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         );
         jPanel2.setLayout(gl_jPanel2);
 
-        panChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách"));
+        panChucNang.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sÃ¡ch"));
 
         tblChucNang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tên Chức năng", "Ghi chú"
+                "TÃªn Chá»©c nÄƒng", "Ghi chÃº"
             }
         ) {
             Class[] types = new Class [] {
@@ -409,51 +409,51 @@ public class ThongTinCongTyView extends javax.swing.JFrame
         panChucNang.setViewportView(tblChucNang);
         tblChucNang.getColumnModel().getColumn(0).setResizable(false);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tác vụ"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("TÃ¡c vá»¥"));
 
-//        btnThem.setText("Thêm");
+//        btnThem.setText("ThÃªm");
 //        btnThem.addActionListener(new java.awt.event.ActionListener() {
 //            public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                btnThemActionPerformed(evt);
 //            }
 //        });
 
-//        btnSua.setText("Sửa");
+//        btnSua.setText("Sá»­a");
 //        btnSua.addActionListener(new java.awt.event.ActionListener() {
 //            public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                btnSuaActionPerformed(evt);
 //            }
 //        });
 
-//        btnXoa.setText("Xóa");
+//        btnXoa.setText("XÃ³a");
 //        btnXoa.addActionListener(new java.awt.event.ActionListener() {
 //            public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                btnXoaActionPerformed(evt);
 //            }
 //        });
 
-        btnShow.setText("Danh sách");
+        btnShow.setText("Danh sÃ¡ch");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowActionPerformed(evt);
             }
         });
         
-        btnLuu.setText("Tìm");
+        btnLuu.setText("TÃ¬m");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
             }
         });
 
-        btnHuy.setText("Hủy");
+        btnHuy.setText("Há»§y");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyActionPerformed(evt);
             }
         });
 
-        btnTim.setText("Tìm kiếm");
+        btnTim.setText("TÃ¬m kiáº¿m");
         btnTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTimActionPerformed(evt);
@@ -581,14 +581,14 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
 //    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//    	btnLuu.setText("Lưu");
+//    	btnLuu.setText("LÆ°u");
 //        OnOffEdit(true);
 //        ResetInput();
 //        action = "add";
 //    }//GEN-LAST:event_btnThemActionPerformed
 
 //    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-//    	btnLuu.setText("Lưu");
+//    	btnLuu.setText("LÆ°u");
 //        OnOffEdit(true);
 //        action = "edit";
 ////        old_id = txtMa.getText();
@@ -603,8 +603,8 @@ public class ThongTinCongTyView extends javax.swing.JFrame
     
 //    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
 //            
-//            	new ThongBao(lblThongBao, Color.RED, "Bạn phải chắc chắn là muốn xóa");
-//            	btnLuu.setText("Xóa");
+//            	new ThongBao(lblThongBao, Color.RED, "Báº¡n pháº£i cháº¯c cháº¯n lÃ  muá»‘n xÃ³a");
+//            	btnLuu.setText("XÃ³a");
 //                OnOffEdit(true);
 //                action = "delete";
 //                row = tblChucNang.getSelectedRow();
@@ -619,7 +619,7 @@ public class ThongTinCongTyView extends javax.swing.JFrame
 //    }//GEN-LAST:event_btnXoaActionPerformed
     
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-    	btnLuu.setText("Tìm");
+    	btnLuu.setText("TÃ¬m");
         OnOffEdit(true);
         searchOnOff = true;
         action = "search";
@@ -710,15 +710,15 @@ public class ThongTinCongTyView extends javax.swing.JFrame
 //                {
 //                	pro.deleteCongTy(old_id);
 //                    OnOffEdit(false);
-//                    new ThongBao(lblThongBao, Color.BLUE, "Đã xóa thông tin công ty thành công");
+//                    new ThongBao(lblThongBao, Color.BLUE, "Ä�Ã£ xÃ³a thÃ´ng tin cÃ´ng ty thÃ nh cÃ´ng");
 //                    ResetInput();;
 //                    FillToTable(1);
 //                    btnLuu.setText(" ");
 //                }
 //                catch(SQLException ex)
 //                {
-//                    new ThongBao(lblThongBao, Color.RED, "Có lỗi xảy ra! Xóa không thành công ");
-//                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
+//                    new ThongBao(lblThongBao, Color.RED, "CÃ³ lá»—i xáº£y ra! XÃ³a khÃ´ng thÃ nh cÃ´ng ");
+//                    JOptionPane.showMessageDialog(this, "LÃ¡Â»â€”i SQL: " + ex.getMessage(), "LÃ¡Â»â€”i SQL", JOptionPane.ERROR_MESSAGE);
 //                    ResetError();
 //                    ResetInput();
 //                }
@@ -742,8 +742,8 @@ public class ThongTinCongTyView extends javax.swing.JFrame
                 }
                 catch(SQLException ex)
                 {
-                    new ThongBao(lblThongBao, Color.RED, "Sá»­a chá»©c nÄƒng khÃ´ng thÃ nh cÃ´ng!");
-                    JOptionPane.showMessageDialog(this, "Lá»—i SQL: " + ex.getMessage(), "Lá»—i SQL", JOptionPane.ERROR_MESSAGE);
+                    new ThongBao(lblThongBao, Color.RED, "SÃ¡Â»Â­a chÃ¡Â»Â©c nÃ„Æ’ng khÃƒÂ´ng thÃƒÂ nh cÃƒÂ´ng!");
+                    JOptionPane.showMessageDialog(this, "LÃ¡Â»â€”i SQL: " + ex.getMessage(), "LÃ¡Â»â€”i SQL", JOptionPane.ERROR_MESSAGE);
                     ResetError();
                     ResetInput();
                 }
