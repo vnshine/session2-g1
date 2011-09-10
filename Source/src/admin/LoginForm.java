@@ -167,12 +167,12 @@ public class LoginForm extends javax.swing.JFrame {
             lblThongBao.setText("MĂ£ nhĂ¢n viĂªn lĂ  báº¯t buá»™c!");
             return false;
         }
-        if(sMaNhanVien.length() != 6)
-        {
-            lblMaNhanVien.setForeground(Color.red);
-            lblThongBao.setText("MĂ£ nhĂ¢n viĂªn gá»“m 6 kĂ½ tá»±!");
-            return false;
-        }
+//        if(sMaNhanVien.length() != 6)
+//        {
+//            lblMaNhanVien.setForeground(Color.red);
+//            lblThongBao.setText("MĂ£ nhĂ¢n viĂªn gá»“m 6 kĂ½ tá»±!");
+//            return false;
+//        }
         
         if(sMatKhau.equals(""))
         {
