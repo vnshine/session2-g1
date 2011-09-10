@@ -14,11 +14,11 @@ import javax.swing.JToolBar;
 import view.QuanLiDoiTac;
 
 
-public class ChucNang extends JPanel implements ActionListener {
+public class DoiTac extends JPanel implements ActionListener {
     private JToolBar tbr;
     private JButton btnDoiTac,btnNhanVien;
     private MainApp trangchu;
-    public ChucNang(MainApp trangchu){
+    public DoiTac(MainApp trangchu){
     	this.setLayout(new FlowLayout(FlowLayout.LEFT));
         this.trangchu = trangchu;
         this.tbr = new JToolBar();
@@ -29,19 +29,10 @@ public class ChucNang extends JPanel implements ActionListener {
         btnDoiTac.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnDoiTac);
         btnDoiTac.addActionListener(this);
-        
-        btnNhanVien = new JButton("Quản lí nhân viên",new ImageIcon("media/images/icon-NhanVien.png"));
-        btnNhanVien.setVerticalTextPosition(JButton.BOTTOM);
-        btnNhanVien.setHorizontalTextPosition(JButton.CENTER);
-        tbr.add(this.btnNhanVien);
-        btnNhanVien.addActionListener(this);
-
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-    	
-    	
         if(e.getSource()== this.btnDoiTac){
         	if(this.trangchu.paneCenter.positionTab("Đối tác") > -1){
         		return;
@@ -52,27 +43,12 @@ public class ChucNang extends JPanel implements ActionListener {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-        			//this.trangchu.paneCenter.addTab(new MuaHang(trangchu), "Mua Hàng");
-            		
-        		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
-        		}
-//                this.trangchu.paneCenter.add("Mua Hàng",new JButton("jfbsgbksnkgs"));		
-//                this.trangchu.paneCenter.add("Mua Hàng",new MuaHang(trangchu));
-        }
-        
-        if(e.getSource()== this.btnNhanVien){
-        	if(this.trangchu.paneCenter.positionTab("Nhân Viên") > -1){
-        		return;
-        		}else if(this.trangchu.paneCenter.positionTab("Nhân Viên") == -1){
-        			this.trangchu.paneCenter.addTab(new JButton("jfbsgbksnkgs"), "Nhân Viên");
         		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
         		}
         }
-        
         int count = this.trangchu.paneCenter.getTabCount();
         for(int i=0;i<count;i++){
                 this.trangchu.paneCenter.setTabComponentAt(i, new ButtonTabComponent(this.trangchu.paneCenter));
-
         }
     }
 }
