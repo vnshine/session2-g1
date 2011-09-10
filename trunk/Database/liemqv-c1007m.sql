@@ -280,18 +280,18 @@ INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values(N'Bán hàng','B
 INSERT INTO tbl_Quyen (sTenQuyen,sTenQuyenEng,sGhiChu) values(N'Thủ kho','THUKHO',N'')
 
 
-INSERT INTO tbl_NhanVien values('NV0001','a1d926ae46e4c9c5ce38eced5500eef7',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0002','e4f214d42c8ff889dd24be9094e601ed',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0003','2456a735acd36d2f80cc5cac1e0d8ef2',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0004','3764d7af739d1e42d739a3bd7c3726e5',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
-INSERT INTO tbl_NhanVien values('NV0005','a1d926ae46e4c9c5ce38eced5500eef7',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0006','e4f214d42c8ff889dd24be9094e601ed',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0007','2456a735acd36d2f80cc5cac1e0d8ef2',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0008','3764d7af739d1e42d739a3bd7c3726e5',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
-INSERT INTO tbl_NhanVien values('NV0009','a1d926ae46e4c9c5ce38eced5500eef7',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0010','e4f214d42c8ff889dd24be9094e601ed',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0011','2456a735acd36d2f80cc5cac1e0d8ef2',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
-INSERT INTO tbl_NhanVien values('NV0012','3764d7af739d1e42d739a3bd7c3726e5',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
+INSERT INTO tbl_NhanVien values('NV0001','8359a83a944fbaf05f5e94ca606ba264',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0002','735e679351d2d7331c32b26d7f90bfbf',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0003','7fdf435d494afa9f83342ee571c326ee',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0004','96b1c8f7cb0b3177f2fa570e10dd3110',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
+INSERT INTO tbl_NhanVien values('NV0005','8359a83a944fbaf05f5e94ca606ba264',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0006','735e679351d2d7331c32b26d7f90bfbf',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0007','7fdf435d494afa9f83342ee571c326ee',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0008','96b1c8f7cb0b3177f2fa570e10dd3110',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
+INSERT INTO tbl_NhanVien values('NV0009','8359a83a944fbaf05f5e94ca606ba264',N'Quang Liem','QUANGLIEM', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0010','735e679351d2d7331c32b26d7f90bfbf',N'Bui Minh', 'BUIMINH','0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0011','7fdf435d494afa9f83342ee571c326ee',N'Trong Ninh', 'TRONGNINH', '0989320758','05/02/1990','1','',2)
+INSERT INTO tbl_NhanVien values('NV0012','96b1c8f7cb0b3177f2fa570e10dd3110',N'Hoang Anh', 'HOANGANH', '0989320758','05/02/1990','1','',3)
 
 --UPDATE tbl_NhanVien SET sMatKhau = '73acd9a5972130b75066c82595a1fae3' WHERE PK_sNhanVienID = 'NV0001'
 

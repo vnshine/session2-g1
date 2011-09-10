@@ -16,7 +16,6 @@ public class LoginProcess {
         Boolean result = false;
         MD5 md5 = new MD5();
         String md5Pass = MD5.MD5Password(passWord);
-//        System.out.println(md5Pass);
         
         Connection con = ioconnection.getConnection();
         try
