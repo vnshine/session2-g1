@@ -3,7 +3,6 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +25,7 @@ public class MainApp extends JFrame {
 	private JPanel panelMenu;
 	private JPanel panel_Banner;
 	private BufferedImage image;
+	private JPanel panelImg;
 	
 	/**
 	 * Launch the application.
@@ -72,7 +72,7 @@ public class MainApp extends JFrame {
 
 		//JPanel  pnlProducts = new JPanel();
 		tabbedPane.add(null, new javax.swing.ImageIcon("media/images/Windows.png"));
-		tabbedPane.addTab("Hệ Thống", new javax.swing.ImageIcon("media/images/Home.png"), new ChucNang(this)); // NOI18N
+		tabbedPane.addTab("Hệ Thống", new javax.swing.ImageIcon("media/images/Home.png"), new HeThong(this)); // NOI18N
 
 //        javax.swing.GroupLayout pnlProductsLayout = new javax.swing.GroupLayout(pnlProducts);
 //        pnlProducts.setLayout(pnlProductsLayout);
@@ -86,31 +86,31 @@ public class MainApp extends JFrame {
 //        );
 		tabbedPane.addTab("Nhập/Xuất", 
 				new javax.swing.ImageIcon("media/images/import_export-icon.png"), 
-				new ChucNang(this));
+				new NhapXuat(this));
 		tabbedPane.addTab("Thu/Chi"  , 
 				new javax.swing.ImageIcon("media/images/money-icon.png"),         
-				new ChucNang(this));
+				new ThuChi(this));
 		tabbedPane.addTab("Công nợ"  , 
 				new javax.swing.ImageIcon("media/images/ConNO-icon.png"),         
-				new ChucNang(this));
+				new CongNo(this));
 		tabbedPane.addTab("Hàng hóa" , 
 				new javax.swing.ImageIcon("media/images/hanghoa-icon.png"),       
-				new ChucNang(this));
+				new HangHoa(this));
 		tabbedPane.addTab("Đối tác"  , 
 				new javax.swing.ImageIcon("media/images/icon-DoiTac.png"),        
 				new DoiTac(this));
 		tabbedPane.addTab("Nhân viên", 
 				new javax.swing.ImageIcon("media/images/icon-NhanVien.png"),      
-				new ChucNang(this));
+				new NhanVien(this));
 		tabbedPane.addTab("Báo cáo"  , 
 				new javax.swing.ImageIcon("media/images/ReportsIcon.png"),        
-				new ChucNang(this));
+				new BaoCao(this));
 		tabbedPane.addTab("Quản lí"  , 
 				new javax.swing.ImageIcon("media/images/Manager-Icon.png"),       
-				new ChucNang(this));
+				new QuanLi(this));
 		tabbedPane.addTab("Trợ giúp" , 
 				new javax.swing.ImageIcon("media/images/help-icon.png"),          
-				new ChucNang(this));
+				new TroGiup(this));
 		
 
 		panelMenu.add(tabbedPane);
@@ -120,10 +120,15 @@ public class MainApp extends JFrame {
 		panel_Banner = new JPanel();
 		image = ImageIO.read(new File("media/images/NhatQuangBanner.png")); 
 		BufferedImage myPicture = image; 
-		JLabel picLabel = new JLabel(new ImageIcon( myPicture )) ;
-		panel_Banner.add(picLabel);
 
 		getContentPane().add(panel_Banner, BorderLayout.NORTH);
+		panel_Banner.setLayout(new BorderLayout(0, 0));
+		
+		panelImg = new JPanel();
+		panel_Banner.add(panelImg);
+		panelImg.setLayout(new BorderLayout(0, 0));
+		JLabel picLabel = new JLabel(new ImageIcon( myPicture )) ;
+		panelImg.add(picLabel);
 		getContentPane().add(this.panelMenu,BorderLayout.WEST);
 		getContentPane().add(this.paneCenter,BorderLayout.CENTER);
 		
