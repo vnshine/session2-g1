@@ -5,53 +5,128 @@
 
 
 -----------Proc timmf đối tác
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
 GO
 if(OBJECT_ID('SEARCH_DOITAC','p') is not null)
 begin
 	drop proc  SEARCH_DOITAC
 end
 GO
-CREATE PROCEDURE SEARCH_DOITAC  
-	@soTrang int,
-	@key nvarchar
+CREATE PROCEDURE SEARCH_DOITAC
+	@soTrang int ,
+	@key varchar
 AS
 BEGIN
-	SET @key  = '%' + @key + '%'
-	--
-	
-	select * from (
-	select top ((
-				Select count(*) from (SELECT top (10*@soTrang) *
-				FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
-												PK_sDoiTacID like @key or
-												sTenDoiTac like @key or
-												sTenDoiTacEng like @key or
-												sSoDienThoai like @key or
-												sDiaChi like @key or
-												sNguoiLienHe like @key or
-												sGhiChu like @key)thao)d
-				)-(10*(@soTrang-1)))
-	*from (		
-	select top (10*@soTrang) *
-	from (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
-												PK_sDoiTacID like @key or
-												sTenDoiTac like @key or
-												sTenDoiTacEng like @key or
-												sSoDienThoai like @key or
-												sDiaChi like @key or
-												sNguoiLienHe like @key or
-												sGhiChu like @key)causelec order by PK_sDoiTacID ASC
-	) a	order by PK_sDoiTacID DESC
+	SET @key = '%' + @key + '%'
+	Select top
+	((Select count(*) From
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like @key or
+		sTenDoiTac like @key or
+		sTenDoiTacEng like @key or
+		sSoDienThoai like @key or
+		sDiaChi like @key or
+		sNguoiLienHe like @key or
+		sGhiChu like @key
+		)ui
+	) -(10*(@soTrang-1)))
+	* From
+	(select top (10*@soTrang) *
+	from
+	(SELECT top(Select count(*) From 
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like @key or
+		sTenDoiTac like @key or
+		sTenDoiTacEng like @key or
+		sSoDienThoai like @key or
+		sDiaChi like @key or
+		sNguoiLienHe like @key or
+		sGhiChu like @key
+		)uiq
+	) * FROM 
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like @key or
+		sTenDoiTac like @key or
+		sTenDoiTacEng like @key or
+		sSoDienThoai like @key or
+		sDiaChi like @key or
+		sNguoiLienHe like @key or
+		sGhiChu like @key
+		)uio
+	 order by PK_sDoiTacID ASC
+	)a order by PK_sDoiTacID DESC
 	) b	order by PK_sDoiTacID ASC
-	--
-	
-
 END
+GO
+	/*
+	Select top
+	((Select count(*) From
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like '%lovan%' or
+		sTenDoiTac like '%lovan%' or
+		sTenDoiTacEng like '%lovan%' or
+		sSoDienThoai like '%lovan%' or
+		sDiaChi like '%lovan%' or
+		sNguoiLienHe like '%lovan%' or
+		sGhiChu like '%lovan%'
+		)ui
+	) -(10*(1-1)))
+	* From
+	(select top (10*1) *
+	from
+	(SELECT top(Select count(*) From 
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like '%lovan%' or
+		sTenDoiTac like '%lovan%' or
+		sTenDoiTacEng like '%lovan%' or
+		sSoDienThoai like '%lovan%' or
+		sDiaChi like '%lovan%' or
+		sNguoiLienHe like '%lovan%' or
+		sGhiChu like '%lovan%'
+		)uiq
+	) * FROM 
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like '%lovan%' or
+		sTenDoiTac like '%lovan%' or
+		sTenDoiTacEng like '%lovan%' or
+		sSoDienThoai like '%lovan%' or
+		sDiaChi like '%lovan%' or
+		sNguoiLienHe like '%lovan%' or
+		sGhiChu like '%lovan%'
+		)uio
+	 order by PK_sDoiTacID ASC
+	)a order by PK_sDoiTacID DESC
+	) b	order by PK_sDoiTacID ASC
+	*/
 
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
+
 
 -----------Proc Select số lượng Ket qua tim kiem
 if(OBJECT_ID('SoLuong_KQ','t') is not null)
@@ -64,14 +139,36 @@ CREATE PROCEDURE SoLuong_KQ
 AS
 BEGIN
 	SET @key = '%' + @key + '%'
-	Select count(*) FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
-												PK_sDoiTacID like @key or
-												sTenDoiTac like @key or
-												sTenDoiTacEng like @key or
-												sSoDienThoai like @key or
-												sDiaChi like @key or
-												sNguoiLienHe like @key or
-												sGhiChu like @key)kqt
+	Select count(*) From
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like @key or
+		sTenDoiTac like @key or
+		sTenDoiTacEng like @key or
+		sSoDienThoai like @key or
+		sDiaChi like @key or
+		sNguoiLienHe like @key or
+		sGhiChu like @key
+		)soluongkq
+		/*
+		Select count(*) From
+		(
+		SELECT
+		*
+		FROM  dbo.tbl_DoiTac
+		where  
+		PK_sDoiTacID like '%16%' or
+		sTenDoiTac like '%16%' or
+		sTenDoiTacEng like '%16%' or
+		sSoDienThoai like '%16%' or
+		sDiaChi like '%16%' or
+		sNguoiLienHe like '%16%' or
+		sGhiChu like '%16%'
+		)soluongkq
+		*/
 END
 
 
@@ -225,22 +322,14 @@ BEGIN
 	SET @key = @key + '%'
 	Select top 5 * FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
 												PK_sDoiTacID like @key or
-												sTenDoiTac like @key or
-												sTenDoiTacEng like @key or
-												sSoDienThoai like @key or
-												sDiaChi like @key or
-												sNguoiLienHe like @key or
-												sGhiChu like @key)kqt
+												sTenDoiTac like @key
+												)kqt
 END
 
 GO
-
+--SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE sDiaChi like N'40 cao%'
 
 --SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE MATCH(sTenDoiTacEng) AGAINST('tho')
-
-
-
-
 
 
 
@@ -702,94 +791,65 @@ insert into dbo.tbl_NhanVien values('A0060',N' Huỳnh Tô Xinh',2,Convert(datet
 
 
 
-
-
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0000',N' Bùi Van An',							'hfsbjfusgufs','87818699279','dgdughudjgb',3,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0001',N' Nguy?n Phùng Nh?t Anh',	'hfsbjfusgufs','81812020480','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0002',N' Lê Ðình Chinh',					'hfsbjfusgufs','81031286729','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0003',N' Võ Th? Thùy Dung',				'hfsbjfusgufs','81864247945','dgdughudjgb',1,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0004',N' Ðu?ng Trung H?u',				'hfsbjfusgufs','81032247423','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0005',N' Nguy?n Th? Hòa',					'hfsbjfusgufs','81920374323','dgdughudjgb',2,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0006',N' Phùng Th? Hòa',					'hfsbjfusgufs','81613110425','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0007',N' Phan Van Hon',						'hfsbjfusgufs','81049998270','dgdughudjgb',3,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0008',N' H? Anh Khoa',						'hfsbjfusgufs','81038798319','dgdughudjgb',1,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0009',N' Nguy?n Th? Li?u',				'hfsbjfusgufs','81018944765','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0010',N' Phan Van Lôi',						'hfsbjfusgufs','81576081899','dgdughudjgb',3,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0011',N' Lê H?u L?c',							'hfsbjfusgufs','81250258140','dgdughudjgb',1,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0012',N' Tr?n Th? Kim L?i',				'hfsbjfusgufs','81383422966','dgdughudjgb',2,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0013',N' Duong Tr?ng Lu?ng',			'hfsbjfusgufs','81239973871','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0014',N' Nguy?n Th? Kim Ngân',		'hfsbjfusgufs','81101633623','dgdughudjgb',1,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0015',N' Thái Th? H?ng Nhung',		'hfsbjfusgufs','81193029880','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0016',N' Lý Minh Nh?t',						'hfsbjfusgufs','81300375025','dgdughudjgb',3,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0017',N' Tr?n C?u Nuong',					'hfsbjfusgufs','81104603016','dgdughudjgb',2,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0018',N' Tr?n Thanh Phong',				'hfsbjfusgufs','81775415591','dgdughudjgb',3,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0019',N' Ðàm Minh Phú',						'hfsbjfusgufs','81388851004','dgdughudjgb',1,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0020',N' Nguy?n Thanh Phuong',		'hfsbjfusgufs','81899775498','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0021',N' Lâm Thành Phu?c',				'hfsbjfusgufs','81642491106','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0022',N' Nguy?n Ðình Quí',				'hfsbjfusgufs','81306477313','dgdughudjgb',3,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0023',N' Hu?nh Van Qu?c',					'hfsbjfusgufs','81516402175','dgdughudjgb',2,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0024',N' Ngô B?o Qu?c',						'hfsbjfusgufs','81983751629','dgdughudjgb',3,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0025',N' Duong Nh?t Quy?n',				'hfsbjfusgufs','81410100411','dgdughudjgb',1,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0026',N' Hu?nh H?u Tâm',					'hfsbjfusgufs','81271508414','dgdughudjgb',1,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0027',N' Ph?m Th? Minh Tâm',			'hfsbjfusgufs','81871795189','dgdughudjgb',1,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0028',N' Nguy?n Van Thanh',				'hfsbjfusgufs','81065468886','dgdughudjgb',1,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0029',N' Nguy?n H?u Thái',				'hfsbjfusgufs','81020473009','dgdughudjgb',1,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0030',N' Võ Th? Kim Thoa',				'hfsbjfusgufs','81759724205','dgdughudjgb',1,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0031',N' Nguy?n Th? Ng?c Thúy',		'hfsbjfusgufs','81653218768','dgdughudjgb',2,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0032',N' Tr?n Th? Di?u Tín',			'hfsbjfusgufs','81483041285','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0033',N' Lâm Thái Toàn',					'hfsbjfusgufs','81508431119','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0034',N' Võ Th? Ki?u Trinh',			'hfsbjfusgufs','81985861539','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0035',N' Mai Van Tr?ng',					'hfsbjfusgufs','81650988777','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0036',N' Tr?n Thanh Tùng',				'hfsbjfusgufs','81728052940','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0037',N' Nguy?n Phu?c Vinh',			'hfsbjfusgufs','81968702610','dgdughudjgb',2,'nguoi lien he','ghi chu')     
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0038',N' Hu?nh Ng?c Thúy Vy',			'hfsbjfusgufs','81549414890','dgdughudjgb',1,'nguoi lien he','ghi chu')   
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A0039',N' Hu?nh Tô Xinh',					'hfsbjfusgufs','81994711599','dgdughudjgb',3,'nguoi lien he','ghi chu')     
-
-
-                                                                                                                                                                       
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1100',N' Bùi Van An',							'hfsbjfusgufs','87818699279','dgdughudjgb',3,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1101',N' Nguy?n Phùng Nh?t Anh',	'hfsbjfusgufs','81812020480','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1102',N' Lê Ðình Chinh',					'hfsbjfusgufs','81031286729','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1103',N' Võ Th? Thùy Dung',				'hfsbjfusgufs','81864247945','dgdughudjgb',1,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1104',N' Ðu?ng Trung H?u',				'hfsbjfusgufs','81032247423','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1105',N' Nguy?n Th? Hòa',					'hfsbjfusgufs','81920374323','dgdughudjgb',2,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1106',N' Phùng Th? Hòa',					'hfsbjfusgufs','81613110425','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1107',N' Phan Van Hon',						'hfsbjfusgufs','81049998270','dgdughudjgb',3,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1108',N' H? Anh Khoa',						'hfsbjfusgufs','81038798319','dgdughudjgb',1,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1109',N' Nguy?n Th? Li?u',				'hfsbjfusgufs','81018944765','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1110',N' Phan Van Lôi',						'hfsbjfusgufs','81576081899','dgdughudjgb',3,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1111',N' Lê H?u L?c',							'hfsbjfusgufs','81250258140','dgdughudjgb',1,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1112',N' Tr?n Th? Kim L?i',				'hfsbjfusgufs','81383422966','dgdughudjgb',2,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1113',N' Duong Tr?ng Lu?ng',			'hfsbjfusgufs','81239973871','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1114',N' Nguy?n Th? Kim Ngân',		'hfsbjfusgufs','81101633623','dgdughudjgb',1,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1115',N' Thái Th? H?ng Nhung',		'hfsbjfusgufs','81193029880','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1116',N' Lý Minh Nh?t',						'hfsbjfusgufs','81300375025','dgdughudjgb',3,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1117',N' Tr?n C?u Nuong',					'hfsbjfusgufs','81104603016','dgdughudjgb',2,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1118',N' Tr?n Thanh Phong',				'hfsbjfusgufs','81775415591','dgdughudjgb',3,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1119',N' Ðàm Minh Phú',						'hfsbjfusgufs','81388851004','dgdughudjgb',1,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1120',N' Nguy?n Thanh Phuong',		'hfsbjfusgufs','81899775498','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1121',N' Lâm Thành Phu?c',				'hfsbjfusgufs','81642491106','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1122',N' Nguy?n Ðình Quí',				'hfsbjfusgufs','81306477313','dgdughudjgb',3,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1123',N' Hu?nh Van Qu?c',					'hfsbjfusgufs','81516402175','dgdughudjgb',2,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1124',N' Ngô B?o Qu?c',						'hfsbjfusgufs','81983751629','dgdughudjgb',3,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1125',N' Duong Nh?t Quy?n',				'hfsbjfusgufs','81410100411','dgdughudjgb',1,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1126',N' Hu?nh H?u Tâm',					'hfsbjfusgufs','81271508414','dgdughudjgb',1,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1127',N' Ph?m Th? Minh Tâm',			'hfsbjfusgufs','81871795189','dgdughudjgb',1,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1128',N' Nguy?n Van Thanh',				'hfsbjfusgufs','81065468886','dgdughudjgb',1,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1129',N' Nguy?n H?u Thái',				'hfsbjfusgufs','81020473009','dgdughudjgb',1,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1130',N' Võ Th? Kim Thoa',				'hfsbjfusgufs','81759724205','dgdughudjgb',1,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1131',N' Nguy?n Th? Ng?c Thúy',		'hfsbjfusgufs','81653218768','dgdughudjgb',2,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1132',N' Tr?n Th? Di?u Tín',			'hfsbjfusgufs','81483041285','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1133',N' Lâm Thái Toàn',					'hfsbjfusgufs','81508431119','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1134',N' Võ Th? Ki?u Trinh',			'hfsbjfusgufs','81985861539','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1135',N' Mai Van Tr?ng',					'hfsbjfusgufs','81650988777','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1136',N' Tr?n Thanh Tùng',				'hfsbjfusgufs','81728052940','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1137',N' Nguy?n Phu?c Vinh',			'hfsbjfusgufs','81968702610','dgdughudjgb',2,'nguoi lien he','ghi chu')          
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1138',N' Hu?nh Ng?c Thúy Vy',			'hfsbjfusgufs','81549414890','dgdughudjgb',1,'nguoi lien he','ghi chu')        
-INSERT INTO [NhatQuang].[dbo].[tbl_DoiTac] VALUES ('A1139',N' Hu?nh Tô Xinh',					'hfsbjfusgufs','81994711599','dgdughudjgb',3,'nguoi lien he','ghi chu')          
-
-
-
-
-
-
+                                                                                                                                                                                                     
+insert INTO tbl_DoiTac VALUES('A0000',N'Bùi Van		An					','name','84662923783',N'27-28, ngõ 294 V?n Phúc, Kim Mã   											 ',3,N'Bùi Van	An                ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0001',N'Nguy?n Phùng Nh?t	Anh ','name','81437314916',N'40 Cao Bá Quát                                            ',3,N'Nguy?n Phùng Nh?t	Anh     ',N' Ghi chu  ')   
+insert INTO tbl_DoiTac VALUES('A0002',N'Lê Ðình		Chinh       ','name','81675878898',N'555 Kim Mã                                               ',3,N'Lê Ðình	Chinh             ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0003',N'Võ Th? Thùy		Dung    ','name','81444486590',N'121K1 Gi?ng Võ                                           ',3,N'Võ Th? Thùy	Dung          ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0004',N'Ðu?ng Trung		H?u     ','name','81352995173',N'360 Kim Mã                                               ',2,N'Ðu?ng Trung	H?u           ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0005',N'Nguy?n Th?		Hòa       ','name','81569289237',N'32 Phó Ð?c Chính                                         ',2,N'Nguy?n Th?	Hòa           ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0006',N'Phùng Th?		Hòa       ','name','81814239859',N'30 Núi Trúc                                              ',1,N'Phùng Th?	Hòa             ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0007',N'Phan Van		Hon         ','name','81330975274',N'102A Ng?c Khánh                                          ',3,N'Phan Van	Hon             ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0008',N'H? Anh		Khoa          ','name','81416549992',N'269A Kim Mã                                              ',1,N'H? Anh	Khoa              ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0009',N'Nguy?n Th?		Li?u      ','name','81306201444',N'76 Ph?m Huy Thông, Ng?c Khánh                            ',3,N'Nguy?n Th?	Li?u          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0010',N'Phan Van		Lôi         ','name','81129533074',N'S? 68, Ph?m Huy Thông, Ng?c Khánh                        ',1,N'Phan Van	Lôi             ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0011',N'Lê H?u		L?c           ','name','81332649056',N'S? 3B, Phan Ðình PhùngÐ? an Châu Á, Âu                   ',1,N'Lê H?u	L?c               ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0012',N'Tr?n Th? Kim		L?i     ','name','81331459371',N'S? 58 Ph?m Huy Thông, Ng?c Khánh                         ',1,N'Tr?n Th? Kim	L?i         ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0013',N'Duong Tr?ng		Lu?ng   ','name','81250338977',N'63 C?a B?c                                               ',2,N'Duong Tr?ng	Lu?ng         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0014',N'Nguy?n Th? Kim		Ngân  ','name','81220718190',N'31 Láng H?, Ba Ðình                                      ',3,N'Nguy?n Th? Kim	Ngân      ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0015',N'Thái Th? H?ng		Nhung ','name','81923247979',N'281 d?i c?n                                              ',3,N'Thái Th? H?ng	Nhung       ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0016',N'Lý Minh		Nh?t        ','name','81106240588',N'37 B Phan Ðình Phùng                                     ',2,N'Lý Minh	Nh?t              ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0017',N'Tr?n C?u		Nuong       ','name','81388399857',N'102-C8B Gi?ng Võ                                         ',2,N'Tr?n C?u	Nuong           ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0018',N'Tr?n Thanh		Phong     ','name','81794685188',N'637 Kim Ma St., Ba Dinh Dist                             ',2,N'Tr?n Thanh	Phong         ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0019',N'Ðàm Minh		Phú         ','name','81149721746',N'Sofitel Plaza Hanoi, 1 Thanh Nien St., Ba Dinh Dist., HN ',1,N'Ðàm Minh	Phú             ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0020',N'Nguy?n Thanh		Phuong  ','name','81981406937',N'11.b Dien Bien Phu St., Ba Dinh Dist., HN                ',3,N'Nguy?n Thanh	Phuong      ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0021',N'Lâm Thành		Phu?c     ','name','81409067535',N'F101-5-A5-Kim Ma St., Ba Dinh Dis., HN                   ',1,N'Lâm Thành	Phu?c           ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0022',N'Nguy?n Ðình		Quí     ','name','81394653157',N'6/42 Lieu Giai Str., Ba Dinh Dist., HN                   ',3,N'Nguy?n Ðình	Quí           ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0023',N'Hu?nh Van		Qu?c      ','name','81704510964',N'5 Ly Van Phuc St., Ba Dinh Dist., HN                     ',1,N'Hu?nh Van	Qu?c            ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0024',N'Ngô B?o		Qu?c        ','name','81766822298',N'8B/1 Lang Ha st., Ba Dinh Dis., HN                       ',2,N'Ngô B?o	Qu?c              ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0025',N'Duong Nh?t		Quy?n     ','name','81706917849',N'462 Ð?i C?n, Q. Ba Ðình, Hà N?i.                         ',2,N'Duong Nh?t	Quy?n         ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0026',N'Hu?nh H?u		Tâm       ','name','81770348463',N'18 Phan Ðình Phùng, Q. Ba Ðình, Hà N?i                   ',3,N'Hu?nh H?u	Tâm             ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0027',N'Ph?m Th? Minh		Tâm   ','name','81598499235',N'Qu?n Ba Ðình Ð?a ch?: 105 / K1 Gi?ng Võ                  ',2,N'Ph?m Th? Minh	Tâm         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0028',N'Nguy?n Van		Thanh     ','name','81010726877',N'F120 A5 Giang Vo, Ba Dinh Dist., HN                      ',3,N'Nguy?n Van	Thanh         ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0029',N'Nguy?n H?u		Thái      ','name','81556567392',N'288 Ba Trieu Str., HAi Ba Trung Dist., HN                ',1,N'Nguy?n H?u	Thái          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0030',N'Võ Th? Kim		Thoa      ','name','81132774259',N'5 Truc Bach St., Ba Dinh Dist.,HN                        ',3,N'Võ Th? Kim	Thoa          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0031',N'Nguy?n Th? Ng?c		Thúy','name','81504682722',N'37 B Phan Ðình Phùng                                     ',1,N'Nguy?n Th? Ng?c	Thúy      ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0032',N'Tr?n Th? Di?u		Tín   ','name','81346966086',N'102-C8B Gi?ng Võ                                         ',3,N'Tr?n Th? Di?u	Tín         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0033',N'Lâm Thái		Toàn        ','name','81003650707',N'637 Kim Ma St., Ba Dinh Dist                             ',2,N'Lâm Thái	Toàn            ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0034',N'Võ Th? Ki?u		Trinh   ','name','81363867493',N'Sofitel Plaza Hanoi, 1 Thanh Nien St., Ba Dinh Dist., HN ',1,N'Võ Th? Ki?u	Trinh         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0035',N'Mai Van		Tr?ng       ','name','81938968817',N'11.b Dien Bien Phu St., Ba Dinh Dist., HN                ',1,N'Mai Van	Tr?ng             ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0036',N'Tr?n Thanh		Tùng      ','name','81733691885',N'F101-5-A5-Kim Ma St., Ba Dinh Dis., HN                   ',1,N'Tr?n Thanh	Tùng          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0037',N'Nguy?n Phu?c		Vinh    ','name','81815267937',N'6/42 Lieu Giai Str., Ba Dinh Dist., HN                   ',1,N'Nguy?n Phu?c	Vinh        ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0038',N'Hu?nh Ng?c Thúy		Vy  ','name','81811687936',N'5 Ly Van Phuc St., Ba Dinh Dist., HN                     ',3,N'Hu?nh Ng?c Thúy	Vy        ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0039',N'Hu?nh Tô		Xinh        ','name','81984821772',N'27-28, ngõ 294 V?n Phúc, Kim Mã                          ',1,N'Hu?nh Tô	Xinh            ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0040',N'Ðàm Minh		Phú         ','name','81462343383',N'40 Cao Bá Quát                                           ',2,N'Ðàm Minh	Phú             ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0041',N'Nguy?n Thanh		Phuong  ','name','81506988410',N'555 Kim Mã                                               ',1,N'Nguy?n Thanh	Phuong      ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0042',N'Lâm Thành		Phu?c     ','name','81334064463',N'121K1 Gi?ng Võ                                           ',2,N'Lâm Thành	Phu?c           ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0043',N'Nguy?n Ðình		Quí     ','name','81011604031',N'360 Kim Mã                                               ',2,N'Nguy?n Ðình	Quí           ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0044',N'Hu?nh Van		Qu?c      ','name','81618361930',N'32 Phó Ð?c Chính                                         ',3,N'Hu?nh Van	Qu?c            ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0045',N'Ngô B?o		Qu?c        ','name','81363406820',N'30 Núi Trúc                                              ',3,N'Ngô B?o	Qu?c              ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0046',N'Duong Nh?t		Quy?n     ','name','81862372057',N'102A Ng?c Khánh                                          ',3,N'Duong Nh?t	Quy?n         ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0047',N'Hu?nh H?u		Tâm       ','name','81155341829',N'269A Kim Mã                                              ',1,N'Hu?nh H?u	Tâm             ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0048',N'Ph?m Th? Minh		Tâm   ','name','81736350945',N'76 Ph?m Huy Thông, Ng?c Khánh                            ',1,N'Ph?m Th? Minh	Tâm         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0049',N'Nguy?n Van		Thanh     ','name','81745187068',N'S? 68, Ph?m Huy Thông, Ng?c Khánh                        ',3,N'Nguy?n Van	Thanh         ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0050',N'Nguy?n H?u		Thái      ','name','81210464115',N'S? 3B, Phan Ðình PhùngÐ? an Châu Á, Âu                   ',3,N'Nguy?n H?u	Thái          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0051',N'Võ Th? Kim		Thoa      ','name','81614806672',N'S? 58 Ph?m Huy Thông, Ng?c Khánh                         ',3,N'Võ Th? Kim	Thoa          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0052',N'Nguy?n Th? Ng?c		Thúy','name','81111148416',N'63 C?a B?c                                               ',1,N'Nguy?n Th? Ng?c	Thúy      ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0053',N'Tr?n Th? Di?u		Tín   ','name','81699256323',N'31 Láng H?, Ba Ðình                                      ',1,N'Tr?n Th? Di?u	Tín         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0054',N'Lâm Thái		Toàn        ','name','81099322064',N'281 d?i c?n                                              ',3,N'Lâm Thái	Toàn            ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0055',N'Võ Th? Ki?u		Trinh   ','name','81615641411',N'37 B Phan Ðình Phùng                                     ',3,N'Võ Th? Ki?u	Trinh         ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0056',N'Mai Van		Tr?ng       ','name','81537181221',N'102-C8B Gi?ng Võ                                         ',1,N'Mai Van	Tr?ng             ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0057',N'Tr?n Thanh		Tùng      ','name','81215895491',N'637 Kim Ma St., Ba Dinh Dist                             ',3,N'Tr?n Thanh	Tùng          ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0058',N'Nguy?n Phu?c		Vinh    ','name','81114753930',N'Sofitel Plaza Hanoi, 1 Thanh Nien St., Ba Dinh Dist., HN ',3,N'Nguy?n Phu?c	Vinh        ',N'   Ghi chu')   
+insert INTO tbl_DoiTac VALUES('A0059',N'Hu?nh Ng?c Thúy		Vy  ','name','81751821878',N'11.b Dien Bien Phu St., Ba Dinh Dist., HN                ',2,N'Hu?nh Ng?c Thúy	Vy        ',N' Ghi chu  ')     
+insert INTO tbl_DoiTac VALUES('A0060',N'Hu?nh Tô		Xinh        ','name','81780200701',N'F101-5-A5-Kim Ma St., Ba Dinh Dis., HN                   ',2,N'Hu?nh Tô	Xinh            ',N'   Ghi chu')   

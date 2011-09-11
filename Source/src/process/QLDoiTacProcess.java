@@ -291,9 +291,9 @@ public class QLDoiTacProcess
                     	
                     	if ((rs.getString("sNguoiLienHe")).contains(key)) {result.add(rs.getString("sNguoiLienHe"));}
                     	
-                    	if ((rs.getString("sGhiChu")).contains(key)) {result.add(rs.getString("sGhiChu"));}
+                    	//if ((rs.getString("sGhiChu")).contains(key)) {result.add(rs.getString("sGhiChu"));}
                     	
-                    	if ((rs.getString("sDiaChi")).contains(key)) {result.add(rs.getString("sDiaChi"));}
+                    	//if ((rs.getString("sDiaChi")).contains(key)) {result.add(rs.getString("sDiaChi"));}
                     	
                     	if ((rs.getString("sTenDoiTacEng")).contains(key)) {result.add(rs.getString("sTenDoiTacEng"));}
                     	
