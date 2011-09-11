@@ -84,15 +84,33 @@ public class MainApp extends JFrame {
 //            pnlProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 //            .addGap(0, 418, Short.MAX_VALUE)
 //        );
-		tabbedPane.addTab("Nhập/Xuất", new javax.swing.ImageIcon("media/images/import_export-icon.png"), new ChucNang(this));
-		tabbedPane.addTab("Thu/Chi", new javax.swing.ImageIcon("media/images/money-icon.png"), new ChucNang(this));
-		tabbedPane.addTab("Công nợ", new javax.swing.ImageIcon("media/images/ConNO-icon.png"), new ChucNang(this));
-		tabbedPane.addTab("Hàng hóa", new javax.swing.ImageIcon("media/images/hanghoa-icon.png"), new ChucNang(this));
-		tabbedPane.addTab("Đối tác", new javax.swing.ImageIcon("media/images/icon-DoiTac.png"), new DoiTac(this));
-		tabbedPane.addTab("Nhân viên", new javax.swing.ImageIcon("media/images/icon-NhanVien.png"), new ChucNang(this));
-		tabbedPane.addTab("Báo cáo", new javax.swing.ImageIcon("media/images/ReportsIcon.png"), new ChucNang(this));
-		tabbedPane.addTab("Quản lí", new javax.swing.ImageIcon("media/images/Manager-Icon.png"), new ChucNang(this));
-		tabbedPane.addTab("Trợ giúp", new javax.swing.ImageIcon("media/images/help-icon.png"), new ChucNang(this));
+		tabbedPane.addTab("Nhập/Xuất", 
+				new javax.swing.ImageIcon("media/images/import_export-icon.png"), 
+				new ChucNang(this));
+		tabbedPane.addTab("Thu/Chi"  , 
+				new javax.swing.ImageIcon("media/images/money-icon.png"),         
+				new ChucNang(this));
+		tabbedPane.addTab("Công nợ"  , 
+				new javax.swing.ImageIcon("media/images/ConNO-icon.png"),         
+				new ChucNang(this));
+		tabbedPane.addTab("Hàng hóa" , 
+				new javax.swing.ImageIcon("media/images/hanghoa-icon.png"),       
+				new ChucNang(this));
+		tabbedPane.addTab("Đối tác"  , 
+				new javax.swing.ImageIcon("media/images/icon-DoiTac.png"),        
+				new DoiTac(this));
+		tabbedPane.addTab("Nhân viên", 
+				new javax.swing.ImageIcon("media/images/icon-NhanVien.png"),      
+				new ChucNang(this));
+		tabbedPane.addTab("Báo cáo"  , 
+				new javax.swing.ImageIcon("media/images/ReportsIcon.png"),        
+				new ChucNang(this));
+		tabbedPane.addTab("Quản lí"  , 
+				new javax.swing.ImageIcon("media/images/Manager-Icon.png"),       
+				new ChucNang(this));
+		tabbedPane.addTab("Trợ giúp" , 
+				new javax.swing.ImageIcon("media/images/help-icon.png"),          
+				new ChucNang(this));
 		
 
 		panelMenu.add(tabbedPane);

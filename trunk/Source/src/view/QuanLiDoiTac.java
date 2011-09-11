@@ -355,7 +355,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		gbl_panel_2.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
-		JLabel lblCreateBy = new JLabel("Create by ...");
+		JLabel lblCreateBy = new JLabel("....................................");
 		GridBagConstraints gbc_lblCreateBy = new GridBagConstraints();
 		gbc_lblCreateBy.insets = new Insets(0, 0, 0, 5);
 		gbc_lblCreateBy.anchor = GridBagConstraints.NORTHWEST;
