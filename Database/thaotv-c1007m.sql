@@ -17,10 +17,10 @@ end
 GO
 CREATE PROCEDURE SEARCH_DOITAC
 	@soTrang int ,
-	@key varchar
+	@key nvarchar(200)
 AS
 BEGIN
-	SET @key = '%' + @key + '%'
+	SET @key = '%' + @key + '%';
 	Select top
 	((Select count(*) From
 		(
@@ -135,10 +135,10 @@ begin
 end
 GO
 CREATE PROCEDURE SoLuong_KQ 
-@key nvarchar
+@key nvarchar(200)
 AS
 BEGIN
-	SET @key = '%' + @key + '%'
+	SET @key = '%' + @key + '%';
 	Select count(*) From
 		(
 		SELECT
@@ -153,22 +153,6 @@ BEGIN
 		sNguoiLienHe like @key or
 		sGhiChu like @key
 		)soluongkq
-		/*
-		Select count(*) From
-		(
-		SELECT
-		*
-		FROM  dbo.tbl_DoiTac
-		where  
-		PK_sDoiTacID like '%16%' or
-		sTenDoiTac like '%16%' or
-		sTenDoiTacEng like '%16%' or
-		sSoDienThoai like '%16%' or
-		sDiaChi like '%16%' or
-		sNguoiLienHe like '%16%' or
-		sGhiChu like '%16%'
-		)soluongkq
-		*/
 END
 
 
@@ -316,13 +300,14 @@ begin
 end
 GO
 CREATE PROCEDURE SuggestData 
-@key nvarchar
+@key nvarchar(200)
 AS
 BEGIN
-	SET @key = @key + '%'
+	SET @key = @key + '%';
 	Select top 5 * FROM (SELECT * FROM [NhatQuang].[dbo].[tbl_DoiTac] WHERE 
 												PK_sDoiTacID like @key or
-												sTenDoiTac like @key
+												sTenDoiTac like @key or
+												sTenDoiTacEng like @key
 												)kqt
 END
 
