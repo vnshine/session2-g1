@@ -278,27 +278,20 @@ public class QLDoiTacProcess
             Connection con = ioconnection.getConnection();
             try
             {
+            		key = key.toLowerCase();
                     CallableStatement cst = con.prepareCall("{call SuggestData(?)}");
 					cst.setString(1, key);
                     ResultSet rs =  cst.executeQuery();
 
                     while(rs.next())
                     {
-                    	
-                    	if ((rs.getString("sTenDoiTac")).contains(key)) {result.add(rs.getString("sTenDoiTac"));}
-                    	
-                    	if ((rs.getString("sSoDienThoai")).contains(key)) {result.add(rs.getString("sSoDienThoai"));}
-                    	
-                    	if ((rs.getString("sNguoiLienHe")).contains(key)) {result.add(rs.getString("sNguoiLienHe"));}
-                    	
-                    	//if ((rs.getString("sGhiChu")).contains(key)) {result.add(rs.getString("sGhiChu"));}
-                    	
-                    	//if ((rs.getString("sDiaChi")).contains(key)) {result.add(rs.getString("sDiaChi"));}
-                    	
-                    	if ((rs.getString("sTenDoiTacEng")).contains(key)) {result.add(rs.getString("sTenDoiTacEng"));}
-                    	
-                        if ((rs.getString("PK_sDoiTacID")).contains(key)) {result.add(rs.getString("PK_sDoiTacID"));}
-                        
+                    	if (rs.getString("sTenDoiTac").startsWith(key)) {
+                    	result.add(rs.getString("sTenDoiTac"));
+                    	}
+                    	if (((rs.getString("sNguoiLienHe")).toLowerCase()).startsWith(key)) {result.add(rs.getString("sNguoiLienHe"));}
+                    	if (((rs.getString("sTenDoiTacEng")).toLowerCase()).startsWith(key)) {result.add(rs.getString("sTenDoiTacEng"));}
+                    	if (((rs.getString("PK_sDoiTacID")).toLowerCase()).startsWith(key)) {result.add(rs.getString("PK_sDoiTacID"));}
+                    	if (((rs.getString("sSoDienThoai")).toLowerCase()).startsWith(key)) {result.add(rs.getString("sSoDienThoai"));}
                     }
 
             }
@@ -418,7 +411,7 @@ public class QLDoiTacProcess
     public static void main(String[] args) throws SQLException {
     	QLDoiTacProcess a = new QLDoiTacProcess();
     	//System.out.println(a.checkPK("appp"));
-    	System.out.println(a.getListSearched(1, "ttn112").get(0).getsTenDoiTac());
-    	System.out.println(a.getSoLuongKQ("ttn11hhhhh2"));
+    	//System.out.println(a.getListSearched(1, "lo427272727272").get(0).getsTenDoiTac());
+    	System.out.println(a.getSoLuongKQ("l7272727272o"));
     }
 }

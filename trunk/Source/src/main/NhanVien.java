@@ -26,6 +26,7 @@ public class NhanVien extends JPanel implements ActionListener {
         this.tbr = new JToolBar();
         this.add(tbr);
         tbr.setOrientation(JToolBar.VERTICAL);
+        tbr.setEnabled(false);
         
         btnNhanVien = new JButton("Quản lí nhân viên",new ImageIcon("media/images/NhanVien-icon.png"));
         btnNhanVien.setVerticalTextPosition(JButton.BOTTOM);

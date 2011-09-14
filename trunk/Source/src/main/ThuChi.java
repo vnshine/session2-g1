@@ -25,6 +25,7 @@ public class ThuChi extends JPanel implements ActionListener {
         this.tbr = new JToolBar();
         this.add(tbr);
         tbr.setOrientation(JToolBar.VERTICAL);
+        tbr.setEnabled(false);
         /*
         btnDoiTac = new JButton("Quản lí đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
         btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);

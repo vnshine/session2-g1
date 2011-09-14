@@ -219,24 +219,20 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		panel_TimKiem.setBorder(new TitledBorder(null, "T\u00ECm ki\u1EBFm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_TacVu.add(panel_TimKiem);
 		
-		final JFrame frame = new JFrame();
-		//Vector<String> VectorKetQua = new Vector<String>();
-		//VectorKetQua.add("abcchsjbcjsbjcbjsjcvscvjsvkcs");
-		textfJSuggestField = new JSuggestField(frame);
-		
+		textfJSuggestField = new JSuggestField(new Frame());
 		
 		textfJSuggestField.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
-				QLDoiTacProcess qlDoiTacPro = new QLDoiTacProcess();
 				try {
-					textfJSuggestField.setSuggestData(qlDoiTacPro.getSuggestData(textfJSuggestField.getText()));
-					textfJSuggestField = new JSuggestField(frame,qlDoiTacPro.getSuggestData(textfJSuggestField.getText()));
+					suggestf();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 			}
 		});
+		
 		
 		panel_TimKiem.add(textfJSuggestField);
 		textfJSuggestField.setColumns(10);
@@ -400,6 +396,22 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 //		updateb = 0;
 	}
 
+	public void suggestf() throws SQLException
+	{
+		QLDoiTacProcess qlDoiTacPro = new QLDoiTacProcess();
+		Vector<String> data = new Vector<String>();
+		data = qlDoiTacPro.getSuggestData(textfJSuggestField.getText());
+		System.out.println("---------------------------------------");
+		Vector<String> data2 = new Vector<String>();
+		for (int i = 0; i < data.size(); i++) {
+			System.out.println(data.get(i));
+			data2.add(data.get(i));
+			if( i == 5) break;
+		}
+		
+		textfJSuggestField.setSuggestData(data2);
+		//textfJSuggestField = new JSuggestField(data2);
+	}
 	
 	public void export(){
 		
