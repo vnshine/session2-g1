@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
+import javax.swing.Box;
+
+import module.MarqueeTyGia;
 
 public class MainApp extends JFrame {
 
@@ -26,6 +29,8 @@ public class MainApp extends JFrame {
 	private JPanel panel_Banner;
 	private BufferedImage image;
 	private JPanel panelImg;
+	private JPanel panel_tyGia;
+	private Box verticalBox;
 	
 	/**
 	 * Launch the application.
@@ -124,11 +129,19 @@ public class MainApp extends JFrame {
 		getContentPane().add(panel_Banner, BorderLayout.NORTH);
 		panel_Banner.setLayout(new BorderLayout(0, 0));
 		
+		verticalBox = Box.createVerticalBox();
+		panel_Banner.add(verticalBox, BorderLayout.SOUTH);
+		
 		panelImg = new JPanel();
-		panel_Banner.add(panelImg);
+		verticalBox.add(panelImg);
 		panelImg.setLayout(new BorderLayout(0, 0));
 		JLabel picLabel = new JLabel(new ImageIcon( myPicture )) ;
 		panelImg.add(picLabel);
+		
+		panel_tyGia = new JPanel();
+		MarqueeTyGia marqueeTyGia = new MarqueeTyGia();
+		panel_tyGia.add(marqueeTyGia);
+		verticalBox.add(panel_tyGia);
 		getContentPane().add(this.panelMenu,BorderLayout.WEST);
 		getContentPane().add(this.paneCenter,BorderLayout.CENTER);
 		
