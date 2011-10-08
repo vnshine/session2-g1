@@ -19,7 +19,6 @@ import javax.swing.Box;
 import module.MarqueeTyGia;
 
 public class MainApp extends JFrame {
-
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
@@ -31,7 +30,6 @@ public class MainApp extends JFrame {
 	private JPanel panelImg;
 	private JPanel panel_tyGia;
 	private Box verticalBox;
-	
 	/**
 	 * Launch the application.
 	 */
@@ -44,8 +42,6 @@ public class MainApp extends JFrame {
 					frame.setVisible(true);
 					frame.pack();
 					//frame.getContentPane().add(frame);
-
-					
 					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 					frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
