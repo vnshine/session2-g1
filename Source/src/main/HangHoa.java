@@ -9,15 +9,14 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
-import view.QuanLiDoiTac;
+import view.QuanLiNhomHang;
 
 
 public class HangHoa extends JPanel implements ActionListener {
     private JToolBar tbr;
-    private JButton btnDoiTac,btnNhanVien;
+    private JButton btnNhomHang,btnHangHoa;
     private MainApp trangchu;
     public HangHoa(MainApp trangchu){
     	this.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -26,24 +25,28 @@ public class HangHoa extends JPanel implements ActionListener {
         this.add(tbr);
         tbr.setEnabled(false);
         tbr.setOrientation(JToolBar.VERTICAL);
-        /*
-        btnDoiTac = new JButton("Quản lí đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
-        btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);
-        btnDoiTac.setHorizontalTextPosition(JButton.CENTER);
-        tbr.add(this.btnDoiTac);
-        btnDoiTac.addActionListener(this);
-        */
 
+        btnNhomHang = new JButton("Quản lí nhóm hàng",new ImageIcon("media/images/nhomhang-icon.png"));
+        btnNhomHang.setVerticalTextPosition(JButton.BOTTOM);
+        btnNhomHang.setHorizontalTextPosition(JButton.CENTER);
+        tbr.add(this.btnNhomHang);
+        btnNhomHang.addActionListener(this);
+
+        btnHangHoa = new JButton("Quản lí hàng hóa",new ImageIcon("media/images/hanghoa -icon.png"));
+        btnHangHoa.setVerticalTextPosition(JButton.BOTTOM);
+        btnHangHoa.setHorizontalTextPosition(JButton.CENTER);
+        tbr.add(this.btnHangHoa);
+        btnHangHoa.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-    	/*
-        if(e.getSource()== this.btnDoiTac){
-        	if(this.trangchu.paneCenter.positionTab("Đối tác") > -1){
+    	
+        if(e.getSource()== this.btnNhomHang){
+        	if(this.trangchu.paneCenter.positionTab("Nhóm hàng") > -1){
         		return;
-        		}else if(this.trangchu.paneCenter.positionTab("Đối tác") == -1){
+        		}else if(this.trangchu.paneCenter.positionTab("Nhóm hàng") == -1){
         			try {
-						this.trangchu.paneCenter.addTab(new QuanLiDoiTac(), "Đối tác");
+						this.trangchu.paneCenter.addTab(new QuanLiNhomHang(), "Nhóm hàng");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -51,7 +54,20 @@ public class HangHoa extends JPanel implements ActionListener {
         		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
         		}
         }
-        */
+        
+        if(e.getSource()== this.btnHangHoa){
+        	if(this.trangchu.paneCenter.positionTab("Hàng hóa") > -1){
+        		return;
+        		}else if(this.trangchu.paneCenter.positionTab("Hàng hóa") == -1){
+        			try {
+						this.trangchu.paneCenter.addTab(new QuanLiNhomHang(), "Hàng hóa");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+        		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
+        		}
+        }
         int count = this.trangchu.paneCenter.getTabCount();
         for(int i=0;i<count;i++){
                 this.trangchu.paneCenter.setTabComponentAt(i, new ButtonTabComponent(this.trangchu.paneCenter));
