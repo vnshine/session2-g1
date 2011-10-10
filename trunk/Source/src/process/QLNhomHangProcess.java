@@ -13,45 +13,12 @@ import connect.ioconnection;
 
 public class QLNhomHangProcess 
 {
-	public Vector<NhomHang> getListSearched(Integer soTrang,String key) throws SQLException
-    {
-            Vector<NhomHang> result = new Vector<NhomHang>();
-            Connection con = ioconnection.getConnection();
-            try
-            {
-                    CallableStatement cst = con.prepareCall("{call SEARCH_NhomHang(?,?)}");
-					cst.setInt(1, soTrang);
-					cst.setString(2, key);
-                    ResultSet rs =  cst.executeQuery();
-                    while(rs.next())
-                    {
-                    	NhomHang varNhomHang = new NhomHang();
-                    	varNhomHang.setID(rs.getInt("PK_iNhomHangID"));
-                    	varNhomHang.setsTenNhomHang(rs.getString("sTenNhomHang"));
-                    	varNhomHang.setsTenNhomHangEng(rs.getString("sTenNhomHangEng"));
-                    	varNhomHang.setsGhiChu(rs.getString("sGhiChu"));
-                        result.add(varNhomHang);
-                    }
-
-            }
-            catch (Exception e)
-            {
-                    e.printStackTrace();
-                    result = null;
-            }
-            finally
-            {
-                    ioconnection.closeConnection(con);	
-                    return result;
-            }
-    }
 	public Integer getSoLuongKQ(String key) throws SQLException
     {
     		Integer result = null;
             Connection con = ioconnection.getConnection();
             try
-            {
-                    
+            {                    
 	            	CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_KQ_nhomHang(?)}");
 	            	soLuongRecod.setString(1, key);
                     ResultSet rs1 =  soLuongRecod.executeQuery();
