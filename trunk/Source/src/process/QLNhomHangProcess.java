@@ -221,11 +221,11 @@ public class QLNhomHangProcess
     
     
     public static void main(String[] args) throws SQLException {
-    	QLNhomHangProcess a = new QLNhomHangProcess();
-    	System.out.println(a.getListNhomHang(1));
-    	System.out.println(a.getListSearched(1, "dgdsb"));
-    	System.out.println(a.getSoLuongKQ("hsdhjd"));
-    	System.out.println(a.getsoNhomHang());
-    	System.out.println(a.getSuggestData("shsh"));
+//    	QLNhomHangProcess a = new QLNhomHangProcess();
+//    	System.out.println(a.getListNhomHang(1));
+//    	System.out.println(a.getListSearched(1, "dgdsb"));
+//    	System.out.println(a.getSoLuongKQ("hsdhjd"));
+//    	System.out.println(a.getsoNhomHang());
+//    	System.out.println(a.getSuggestData("shsh"));
     }
 }

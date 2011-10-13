@@ -4,7 +4,6 @@ package main;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -45,12 +44,7 @@ public class HangHoa extends JPanel implements ActionListener {
         	if(this.trangchu.paneCenter.positionTab("Nhóm hàng") > -1){
         		return;
         		}else if(this.trangchu.paneCenter.positionTab("Nhóm hàng") == -1){
-        			try {
-						this.trangchu.paneCenter.addTab(new QuanLiNhomHang(), "Nhóm hàng");
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+        			this.trangchu.paneCenter.addTab(new QuanLiNhomHang(), "Nhóm hàng");
         		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
         		}
         }
@@ -59,12 +53,7 @@ public class HangHoa extends JPanel implements ActionListener {
         	if(this.trangchu.paneCenter.positionTab("Hàng hóa") > -1){
         		return;
         		}else if(this.trangchu.paneCenter.positionTab("Hàng hóa") == -1){
-        			try {
-						this.trangchu.paneCenter.addTab(new QuanLiNhomHang(), "Hàng hóa");
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+        			this.trangchu.paneCenter.addTab(new QuanLiNhomHang(), "Hàng hóa");
         		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
         		}
         }
