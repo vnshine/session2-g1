@@ -68,6 +68,36 @@ public class QLNhomHangProcess
                     return result;
             }
     }
+	public Vector<NhomHang> getListNhomHangcombo() throws SQLException
+    {
+            Vector<NhomHang> result = new Vector<NhomHang>();
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("{call DanhSachall_NhomHang()}");
+                    ResultSet rs =  cst.executeQuery();
+
+                    while(rs.next())
+                    {
+                    	NhomHang varNhomHang = new NhomHang();
+                    	varNhomHang.setID(rs.getInt("PK_iNhomHangID"));
+                    	varNhomHang.setsTenNhomHang(rs.getString("sTenNhomHang"));
+                    	varNhomHang.setsTenNhomHangEng(rs.getString("sTenNhomHangEng"));
+                    	varNhomHang.setsGhiChu(rs.getString("sGhiChu"));              
+                        result.add(varNhomHang);
+                    }
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
     public Integer getsoNhomHang() throws SQLException
     {
     		Integer result = 0;
@@ -102,6 +132,7 @@ public class QLNhomHangProcess
                     ResultSet rs =  cst.executeQuery();
                     rs.next();
 					result = rs.getInt(1);
+					//System.out.println(result);
             }
             catch (Exception e)
             {
@@ -111,13 +142,40 @@ public class QLNhomHangProcess
             finally
             {
                     ioconnection.closeConnection(con);	
-                    if (result == 1) {
+                    if (result > 0) {
                     	return false;
 					}
                     return true;
             }
     }
-    
+    public boolean checkTenNhomHangEdit( String tenTruoc, String tenSau) throws SQLException
+    {
+    		Integer result = 0;
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("{call sp_tblNhomHang_duplicate2(?,?)}");
+                    cst.setString(1, tenTruoc);
+                    cst.setString(2, tenSau);
+                    ResultSet rs =  cst.executeQuery();
+                    rs.next();
+					result = rs.getInt(1);
+					//System.out.println(result);
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = 0;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    if (result > 0) {
+                    	return false;
+					}
+                    return true;
+            }
+    }
     public boolean ThemNhomHang(NhomHang NhomHang) throws SQLException
     {
             Connection cn = ioconnection.getConnection();
@@ -143,14 +201,14 @@ public class QLNhomHangProcess
             }
     }
     
-    public boolean SuaNhomHang(NhomHang NhomHang,String ID) throws SQLException
+    public boolean SuaNhomHang(NhomHang NhomHang,Integer id) throws SQLException
     {
             Connection cn = ioconnection.getConnection();
             Boolean success = true;
             try 
             {
                 CallableStatement cst = cn.prepareCall("{call sp_tblNhomHang_Update (?,?,?,?)}");
-                cst.setString(1, ID);
+                cst.setInt(1, id);
                 cst.setString(2, NhomHang.getsTenNhomHang());
                 cst.setString(3, NhomHang.getsTenNhomHangEng());
                 cst.setString(4, NhomHang.getsGhiChu());
@@ -221,7 +279,8 @@ public class QLNhomHangProcess
     
     
     public static void main(String[] args) throws SQLException {
-//    	QLNhomHangProcess a = new QLNhomHangProcess();
+    	QLNhomHangProcess a = new QLNhomHangProcess();
+    	System.out.println(a.checkTenNhomHang("bdff"));
 //    	System.out.println(a.getListNhomHang(1));
 //    	System.out.println(a.getListSearched(1, "dgdsb"));
 //    	System.out.println(a.getSoLuongKQ("hsdhjd"));

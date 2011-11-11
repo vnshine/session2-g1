@@ -18,10 +18,10 @@ import view.QuanLiDoiTac;
 public class QuanLi extends JPanel implements ActionListener {
     private JToolBar tbr;
     private JButton btnDoiTac,btnNhanVien;
-    private MainApp trangchu;
-    public QuanLi(MainApp trangchu){
+    private Home trangchu;
+    public QuanLi(Home home){
     	this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.trangchu = trangchu;
+        this.trangchu = home;
         this.tbr = new JToolBar();
         this.add(tbr);
         tbr.setOrientation(JToolBar.VERTICAL);

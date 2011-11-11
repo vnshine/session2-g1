@@ -40,7 +40,7 @@ import java.awt.Dimension;
 
 public class DoiGiaoDien extends JPanel implements ItemListener {
 	private JComboBox combox;
-	public DoiGiaoDien(MainApp trangchu) {
+	public DoiGiaoDien(Home home) {
 		String course[] = {"Chọn","Windows","Moderate","Autumn","BusinessBlackSteel","BusinessBlueSteel","Business","ChallengerDeep","CremeCoffee","Creme",
 				"DustCoffee","Dust","Gemini","EmeraldDusk","Magellan","MistAqua","GraphiteAqua","MistSilver","GraphiteGlass","Moderate",
 				"NebulaBrickWall","Graphite","Nebula","OfficeBlue2007","OfficeSilver2007","Raven","Sahara"};

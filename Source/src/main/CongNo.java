@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.border.BevelBorder;
 
 import view.QuanLiDoiTac;
 
@@ -18,11 +19,12 @@ import view.QuanLiDoiTac;
 public class CongNo extends JPanel implements ActionListener {
     private JToolBar tbr;
     private JButton btnDoiTac,btnNhanVien;
-    private MainApp trangchu;
-    public CongNo(MainApp trangchu){
+    private Home trangchu;
+    public CongNo(Home home){
     	this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.trangchu = trangchu;
+        this.trangchu = home;
         this.tbr = new JToolBar();
+        tbr.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
         this.add(tbr);
         tbr.setEnabled(false);
         tbr.setOrientation(JToolBar.VERTICAL);

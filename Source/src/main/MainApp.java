@@ -2,25 +2,31 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.Timer;
 import javax.swing.UIManager;
-import javax.swing.Box;
 
 import module.MarqueeTyGia;
 
 public class MainApp extends JFrame {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-	private JPanel contentPane;
+//	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	public static ClosableTabbedPane paneCenter;
 	//public JTabbedPane paneCenter;
@@ -30,6 +36,9 @@ public class MainApp extends JFrame {
 	private JPanel panelImg;
 	private JPanel panel_tyGia;
 	private Box verticalBox;
+	private JScrollPane scrollPane;
+	private Timer timer;
+	private MarqueeTyGia marqueeTyGia;
 	/**
 	 * Launch the application.
 	 */
@@ -57,7 +66,10 @@ public class MainApp extends JFrame {
 	 */
 
 
-	public MainApp() throws IOException {
+	public MainApp() throws Exception {
+		VerticalMenuBar verticalMenuBar = new VerticalMenuBar();
+		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_action_bookmark.png"));
+		setTitle("Phần mềm quản lí bán hàng Hợp tác xã công nghiệp Nhật Quang");
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 	
@@ -85,6 +97,7 @@ public class MainApp extends JFrame {
 //            pnlProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 //            .addGap(0, 418, Short.MAX_VALUE)
 //        );
+		tabbedPane.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
 		tabbedPane.addTab("Nhập/Xuất", 
 				new javax.swing.ImageIcon("media/images/import_export-icon.png"), 
 				new NhapXuat(this));
@@ -135,10 +148,23 @@ public class MainApp extends JFrame {
 		panelImg.add(picLabel);
 		
 		panel_tyGia = new JPanel();
-		MarqueeTyGia marqueeTyGia = new MarqueeTyGia();
+		
+		marqueeTyGia = new MarqueeTyGia();
 		panel_tyGia.add(marqueeTyGia);
+		timer = new Timer(400000, new ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		    	  marqueeTyGia = new MarqueeTyGia();
+		    	  panel_tyGia.removeAll();
+		    	  panel_tyGia.add(marqueeTyGia);
+		        repaint();
+		      }
+		    });
+		    timer.start();
+		
 		verticalBox.add(panel_tyGia);
+		
 		getContentPane().add(this.panelMenu,BorderLayout.WEST);
+		//getContentPane().add(verticalMenuBar);
 		getContentPane().add(this.paneCenter,BorderLayout.CENTER);
 		
 	}
