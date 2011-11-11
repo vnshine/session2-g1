@@ -10,7 +10,23 @@ import module.ThongBao;
 
 public class CheckString {
 
-	public boolean OnlytextAndNumber(String str,Integer max,Integer min,JLabel lblThongBao,String nhan) {
+	public static boolean IntegerNumber(String value) {
+		try {
+			Integer tempVal = Integer.parseInt(value);
+			return true;
+        }catch(NumberFormatException e) {
+        	return false;
+        }
+	}
+	public static boolean Floatnumber(String value) {
+		try {
+			float tempVal = Float.parseFloat(value);
+			return true;
+        }catch(NumberFormatException e) {
+        	return false;
+        }
+	}
+	public static boolean OnlytextAndNumber(String str,Integer max,Integer min,JLabel lblThongBao,String nhan) {
 		Integer loi = 0;
 		str = str.trim();//xoa khoang trang dau duoi
 		if (str.length() < min) {//kiem tra do dai ten toi thieu
@@ -33,7 +49,7 @@ public class CheckString {
 	}
 	
 	
-	public boolean Onlytext(String name,Integer max,Integer min) {
+	public static boolean Onlytext(String name,Integer max,Integer min) {
 		String str,str2,str3;
 		str2 = name;
 		str3 = null;
@@ -288,7 +304,7 @@ public class CheckString {
 		}
 	}
 	
-	public boolean Address(String name,Integer max,Integer min) {
+	public static boolean Address(String name,Integer max,Integer min) {
 		String str,str2,str3;
 		str2 = name;
 		str3 = null;

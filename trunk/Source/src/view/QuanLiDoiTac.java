@@ -45,6 +45,8 @@ import myobject.DoiTac;
 import process.QLDoiTacProcess;
 import validate.CheckString;
 import validate.XuLiTen;
+import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 
@@ -90,6 +92,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	 * @throws SQLException 
 	 */
 	public QuanLiDoiTac() throws SQLException {
+		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\icon-DoiTac.png"));
 		lblThongBao = new JLabel();
 		lblThongBao.setText("Kh\u00F4ng t\u1ED3n t\u1EA1i \u0111\u1ED1i t\u00E1c mu\u1ED1n x\u00F3a !");
 		Toolkit tk = Toolkit.getDefaultToolkit();  
@@ -200,20 +203,44 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		verticalBox.add(panel_TacVu);
 		
 		btnAdd = new JButton("Th\u00EAm");
+		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnAdd.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
 		btnAdd.setActionCommand("Add");
 		btnAdd.addActionListener(this);
 		
 		panel_TacVu.add(btnAdd);
 		
 		btnEdit = new JButton("S\u1EEDa");
+		btnEdit.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnEdit.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Edit.png"));
 		btnEdit.setActionCommand("Edit");
 		btnEdit.addActionListener(this);
 		panel_TacVu.add(btnEdit);
 		
 		btnDelete = new JButton("X\u00F3a");
+		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnDelete.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\delete.png"));
 		btnDelete.setActionCommand("Delete");
 		btnDelete.addActionListener(this);
 		panel_TacVu.add(btnDelete);
+		
+		btnSave = new JButton("L\u01B0u");
+		btnSave.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Save.png"));
+		btnSave.setActionCommand("Save");
+		btnSave.addActionListener(this);
+		panel_TacVu.add(btnSave);
+		
+		btnCancel = new JButton("H\u1EE7y");
+		btnCancel.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\cancel.png"));
+		btnCancel.setActionCommand("Cancel");
+		btnCancel.addActionListener(this);
+		panel_TacVu.add(btnCancel);
+		
+		btnExport = new JButton("Xu\u1EA5t danh s\u00E1ch");
+		btnExport.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\excel.png"));
+		btnExport.setActionCommand("Export");
+		btnExport.addActionListener(this);
+		panel_TacVu.add(btnExport);
 		
 		JPanel panel_TimKiem = new JPanel();
 		panel_TimKiem.setBorder(new TitledBorder(null, "T\u00ECm ki\u1EBFm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -238,24 +265,10 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textfJSuggestField.setColumns(10);
 		
 		btnFind = new JButton("T\u00ECm ki\u1EBFm");
+		btnFind.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\search-icon.png"));
 		panel_TimKiem.add(btnFind);
 		btnFind.setActionCommand("Find");
 		btnFind.addActionListener(this);
-		
-		btnSave = new JButton("L\u01B0u");
-		btnSave.setActionCommand("Save");
-		btnSave.addActionListener(this);
-		panel_TacVu.add(btnSave);
-		
-		btnCancel = new JButton("H\u1EE7y");
-		btnCancel.setActionCommand("Cancel");
-		btnCancel.addActionListener(this);
-		panel_TacVu.add(btnCancel);
-		
-		btnExport = new JButton("Xu\u1EA5t danh s\u00E1ch");
-		btnExport.setActionCommand("Export");
-		btnExport.addActionListener(this);
-		panel_TacVu.add(btnExport);
 		
 		JPanel panel_DanhSach = new JPanel();
 		panel_DanhSach.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Danh s\u00E1ch \u0111\u1ED1i t\u00E1c", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
@@ -312,7 +325,8 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		JPanel panel_XemTrang = new JPanel();
 		verticalBox.add(panel_XemTrang);
 		
-		btnBack = new JButton("Back");
+		btnBack = new JButton("");
+		btnBack.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\prev.png"));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				box_SoTrang.setSelectedItem(soTrang-1);
@@ -321,6 +335,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		panel_XemTrang.add(btnBack);
 		
 		box_SoTrang = new JComboBox();
+		box_SoTrang.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		box_SoTrang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println(box_SoTrang.getSelectedItem());
@@ -334,7 +349,8 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		
 		panel_XemTrang.add(box_SoTrang);
 		
-		btnNext = new JButton("Next");
+		btnNext = new JButton("");
+		btnNext.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				box_SoTrang.setSelectedItem(soTrang+1);
@@ -433,7 +449,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 				duLieu.add(phanTu);
 			}
 			test.write(8, 1, duLieu, "Temp.xls");
-			System.out.println(doiTac.get(0).getClass().getCanonicalName());
+			//System.out.println(doiTac.get(0).getClass().getCanonicalName());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

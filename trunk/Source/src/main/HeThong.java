@@ -1,32 +1,41 @@
 package main;
 
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
-import view.QuanLiDoiTac;
-import javax.swing.SwingConstants;
-import java.awt.Component;
+import com.zfqjava.swing.JSideBar;
+import java.awt.BorderLayout;
+import java.sql.SQLException;
+
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.JLabel;
+import javax.swing.border.BevelBorder;
+
+import view.QuanLiNhaSanXuat;
+import view.ThongTaiKhoan;
 
 
 public class HeThong extends JPanel implements ActionListener {
     private JToolBar tbr;
     private JButton btnlogout,btnMyAcc,btnTheme;
-    private MainApp trangchu;
-    public HeThong(MainApp trangchu){
+    private Home trangchu;
+    private JLabel lblNewLabel;
+    public HeThong(Home home){
+    	
     	this.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.trangchu = trangchu;
+        this.trangchu = home;
         this.tbr = new JToolBar();
-        tbr.setEnabled(false);
-        this.add(tbr);
+        tbr.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+        add(tbr);
         tbr.setOrientation(JToolBar.VERTICAL);
         btnlogout = new JButton("Đăng xuất",new ImageIcon("media/images/logout.png"));
         btnlogout.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -47,10 +56,17 @@ public class HeThong extends JPanel implements ActionListener {
         btnTheme.setVerticalTextPosition(JButton.BOTTOM);
         btnTheme.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnTheme);
-        DoiGiaoDien theme = new DoiGiaoDien(trangchu);
+        DoiGiaoDien theme = new DoiGiaoDien(home);
         tbr.add(theme);
+        
+        lblNewLabel = new JLabel("                                       ");
+        lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tbr.add(lblNewLabel);
 
     }
+    public void closeMenu() {
+		this.setVisible(false);
+	}
     @Override
     public void actionPerformed(ActionEvent e) {
     	
@@ -59,9 +75,21 @@ public class HeThong extends JPanel implements ActionListener {
         }
         
         if(e.getSource()== this.btnMyAcc){
-        	
-        }
-        
+            	if(this.trangchu.paneCenter.positionTab("Tài khoản") > -1){
+            		return;
+            		}else if(this.trangchu.paneCenter.positionTab("Tài khoản") == -1){
+            			try {
+    						this.trangchu.paneCenter.addTab(new ThongTaiKhoan(), "Tài khoản");
+    					} catch (SQLException e1) {
+    						// TODO Auto-generated catch block
+    						e1.printStackTrace();
+    					} catch (Exception e2) {
+    						// TODO Auto-generated catch block
+    						e2.printStackTrace();
+    					}
+            		this.trangchu.paneCenter.setSelectedIndex( this.trangchu.paneCenter.getTabCount()-1);
+            		}
+            }
         int count = this.trangchu.paneCenter.getTabCount();
         for(int i=0;i<count;i++){
                 this.trangchu.paneCenter.setTabComponentAt(i, new ButtonTabComponent(this.trangchu.paneCenter));
