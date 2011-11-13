@@ -1,41 +1,21 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Graphics;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 
-import com.toedter.calendar.JDateChooser;
-import java.awt.Color;
-import java.awt.Component;
-
-public class TrangChu extends JInternalFrame implements ActionListener {
+public class TrangChu extends JInternalFrame{
 
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+	private static final long serialVersionUID = 1L;
+	ImageIcon icon;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -69,17 +49,17 @@ public class TrangChu extends JInternalFrame implements ActionListener {
 		});
 	}
 	public TrangChu() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_app_ksame.png"));
-		getContentPane().setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_BaoCao = new JPanel();
-		panel_BaoCao.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		getContentPane().add(panel_BaoCao, BorderLayout.CENTER);
-		panel_BaoCao.setLayout(new BorderLayout(0, 0));
+		icon = new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\TrangChu.png");
+		JPanel panel = new JPanel(){
+		public void paintComponent(Graphics g)	{	
+			Dimension d = getSize();
+			g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+			setOpaque( false );
+			super.paintComponent(g);
+		}
+		};
+		//scrollPane = new JScrollPane( panel );	
+		setContentPane( panel );
 	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }
