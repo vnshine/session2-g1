@@ -1,21 +1,19 @@
 package main;
 
-
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,28 +24,24 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 import javax.swing.UIManager;
-
 import module.MarqueeTyGia;
 import view.QuanLiBaoCao;
 import view.TrangChu;
 
-import java.awt.FlowLayout;
-import java.awt.Color;
-import javax.swing.JTextField;
-
+import com.zfqjava.swing.JStatusBar;
+import java.awt.SystemColor;
 
 public class Home extends JFrame implements ActionListener {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 //	private JPanel contentPane;
+	private static final long serialVersionUID = 1L;
+	ImageIcon icon;
 	private JTabbedPane tabbedPane;
 	public static ClosableTabbedPane paneCenter;
 	//public JTabbedPane paneCenter;
 	private JPanel panelMenu;
 	private JPanel panel_Banner;
-	private BufferedImage image;
 	private JPanel panelImg;
-	private JPanel panel_tyGia;
-	private Box verticalBox;
 	private JScrollPane scrollPane;
 	private Timer timer;
 	private MarqueeTyGia marqueeTyGia;
@@ -82,7 +76,23 @@ public class Home extends JFrame implements ActionListener {
 	private JButton button_3;
 	private JButton button_4;
 	private JButton button_5;
-	private JPanel panel;
+	private JStatusBar JStatusBar;
+	private JPanel panel_2;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel label_3;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
+	private JLabel label_7;
+	private JLabel lblDgdgdgd;
+	private JLabel label_8;
+	private JLabel label_9;
+	private JLabel label_10;
+	private JLabel label_11;
+	private JLabel label_12;
+	private JLabel label_13;
+	private JPanel panel_TyGia;
 	
 	/**
 	 * Launch the application.
@@ -122,16 +132,14 @@ public class Home extends JFrame implements ActionListener {
 //		final BaoCao		 BaoCao		  = new  BaoCao		(this); 
 		final QuanLi		 QuanLi		  = new  QuanLi		(this); 
 		final TroGiup		 TroGiup	  = new  TroGiup	(this); 
-
-
+		JStatusBar = new JStatusBar();
+		
 		VerticalMenuBar verticalMenuBar = new VerticalMenuBar();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_action_bookmark.png"));
 		setTitle("Phần mềm quản lí bán hàng Hợp tác xã công nghiệp Nhật Quang");
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 	
-
-
 		getContentPane().setLayout(new BorderLayout());
 		panelMenu = new JPanel();
 		//panelMenu.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
@@ -140,41 +148,145 @@ public class Home extends JFrame implements ActionListener {
 		paneCenter.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		
 		panel_Banner = new JPanel();
-		image = ImageIO.read(new File("media/images/NhatQuangBanner.png")); 
-		BufferedImage myPicture = image; 
-
+		panel_Banner.setBackground(Color.DARK_GRAY);
 		getContentPane().add(panel_Banner, BorderLayout.NORTH);
 		panel_Banner.setLayout(new BorderLayout(0, 0));
 		
-		verticalBox = Box.createVerticalBox();
-		panel_Banner.add(verticalBox, BorderLayout.SOUTH);
+		panel_2 = new JPanel();
+		panel_2.setBackground(SystemColor.activeCaption);
+		panel_Banner.add(panel_2, BorderLayout.NORTH);
+		GridBagLayout gbl_panel_2 = new GridBagLayout();
+		gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel_2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_2.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		panel_2.setLayout(gbl_panel_2);
 		
-		panelImg = new JPanel();
-		verticalBox.add(panelImg);
-		panelImg.setLayout(new BorderLayout(0, 0));
-		JLabel picLabel = new JLabel(new ImageIcon( myPicture )) ;
-		panelImg.add(picLabel);
+		icon = new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\NhatQuangBanner.png");
+		panelImg = new JPanel(){
+			public void paintComponent(Graphics g)	{	
+				Dimension d = getSize();
+				g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+				setOpaque( false );
+				super.paintComponent(g);
+			}
+			};
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.gridheight = 7;
+		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 0;
+		panel_2.add(panelImg, gbc_lblNewLabel);
 		
-		panel_tyGia = new JPanel();
-		panel_tyGia.setLayout(new BorderLayout(0, 0));
+		lblDgdgdgd = new JLabel(" ");
+		GridBagConstraints gbc_lblDgdgdgd = new GridBagConstraints();
+		gbc_lblDgdgdgd.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDgdgdgd.gridx = 0;
+		gbc_lblDgdgdgd.gridy = 1;
+		panel_2.add(lblDgdgdgd, gbc_lblDgdgdgd);
 		
-		panel = new JPanel();
-		panel_tyGia.add(panel, BorderLayout.NORTH);
+		lblNewLabel_1 = new JLabel(" ");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel_1.gridx = 2;
+		gbc_lblNewLabel_1.gridy = 1;
+		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		label_8 = new JLabel(" ");
+		GridBagConstraints gbc_label_8 = new GridBagConstraints();
+		gbc_label_8.insets = new Insets(0, 0, 5, 5);
+		gbc_label_8.gridx = 0;
+		gbc_label_8.gridy = 2;
+		panel_2.add(label_8, gbc_label_8);
+		
+		label_3 = new JLabel(" ");
+		GridBagConstraints gbc_label_3 = new GridBagConstraints();
+		gbc_label_3.insets = new Insets(0, 0, 5, 0);
+		gbc_label_3.gridx = 2;
+		gbc_label_3.gridy = 2;
+		panel_2.add(label_3, gbc_label_3);
+		
+		label_9 = new JLabel(" ");
+		GridBagConstraints gbc_label_9 = new GridBagConstraints();
+		gbc_label_9.insets = new Insets(0, 0, 5, 5);
+		gbc_label_9.gridx = 0;
+		gbc_label_9.gridy = 3;
+		panel_2.add(label_9, gbc_label_9);
+		
+		label_4 = new JLabel(" ");
+		GridBagConstraints gbc_label_4 = new GridBagConstraints();
+		gbc_label_4.insets = new Insets(0, 0, 5, 0);
+		gbc_label_4.gridx = 2;
+		gbc_label_4.gridy = 3;
+		panel_2.add(label_4, gbc_label_4);
+		
+		label_10 = new JLabel(" ");
+		GridBagConstraints gbc_label_10 = new GridBagConstraints();
+		gbc_label_10.insets = new Insets(0, 0, 5, 5);
+		gbc_label_10.gridx = 0;
+		gbc_label_10.gridy = 4;
+		panel_2.add(label_10, gbc_label_10);
+		
+		label_5 = new JLabel(" ");
+		GridBagConstraints gbc_label_5 = new GridBagConstraints();
+		gbc_label_5.insets = new Insets(0, 0, 5, 0);
+		gbc_label_5.gridx = 2;
+		gbc_label_5.gridy = 4;
+		panel_2.add(label_5, gbc_label_5);
+		
+		label_11 = new JLabel(" ");
+		GridBagConstraints gbc_label_11 = new GridBagConstraints();
+		gbc_label_11.insets = new Insets(0, 0, 5, 5);
+		gbc_label_11.gridx = 0;
+		gbc_label_11.gridy = 5;
+		panel_2.add(label_11, gbc_label_11);
+		
+		label_6 = new JLabel(" ");
+		GridBagConstraints gbc_label_6 = new GridBagConstraints();
+		gbc_label_6.insets = new Insets(0, 0, 5, 0);
+		gbc_label_6.gridx = 2;
+		gbc_label_6.gridy = 5;
+		panel_2.add(label_6, gbc_label_6);
+		
+		label_12 = new JLabel(" ");
+		GridBagConstraints gbc_label_12 = new GridBagConstraints();
+		gbc_label_12.insets = new Insets(0, 0, 5, 5);
+		gbc_label_12.gridx = 0;
+		gbc_label_12.gridy = 6;
+		panel_2.add(label_12, gbc_label_12);
+		
+		label_7 = new JLabel(" ");
+		GridBagConstraints gbc_label_7 = new GridBagConstraints();
+		gbc_label_7.insets = new Insets(0, 0, 5, 0);
+		gbc_label_7.gridx = 2;
+		gbc_label_7.gridy = 6;
+		panel_2.add(label_7, gbc_label_7);
+		
+		label_13 = new JLabel("");
+		GridBagConstraints gbc_label_13 = new GridBagConstraints();
+		gbc_label_13.insets = new Insets(0, 0, 0, 5);
+		gbc_label_13.gridx = 1;
+		gbc_label_13.gridy = 7;
+		panel_2.add(label_13, gbc_label_13);
+		
+		panel_TyGia = new JPanel();
+		panel_TyGia.setBackground(Color.DARK_GRAY);
+		panel_Banner.add(panel_TyGia, BorderLayout.SOUTH);
 		
 		marqueeTyGia = new MarqueeTyGia();
+		panel_TyGia.add(marqueeTyGia);
 		marqueeTyGia.setBackground(Color.DARK_GRAY);
-		panel_tyGia.add(marqueeTyGia);
 		timer = new Timer(400000, new ActionListener() {
 		      public void actionPerformed(ActionEvent e) {
 		    	  marqueeTyGia = new MarqueeTyGia();
-		    	  panel_tyGia.removeAll();
-		    	  panel_tyGia.add(marqueeTyGia);
+		    	  panel_TyGia.removeAll();
+		    	  marqueeTyGia.setBackground(Color.DARK_GRAY);
+		    	  panel_TyGia.add(marqueeTyGia);
 		        repaint();
 		      }
 		    });
 		    timer.start();
-		
-		verticalBox.add(panel_tyGia);
 		
 		
 		GridBagLayout gbl_panelMenu = new GridBagLayout();
@@ -446,6 +558,7 @@ public class Home extends JFrame implements ActionListener {
 		QuanLi.setVisible(false);  
 		TroGiup.setVisible(false);
 		paneCenter.addTab(new TrangChu(), "Trang chủ");
+		getContentPane().add(JStatusBar,BorderLayout.SOUTH);
 	}
 
 	private static void installLnF() {
