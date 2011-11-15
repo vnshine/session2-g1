@@ -127,7 +127,7 @@ public class NhapXuatProcess
     
     public static void main(String[] args) throws SQLException {
     	NhapXuatProcess a = new NhapXuatProcess();
-    	System.out.println(a.checkTenNhomHang("bdff"));
+//    	System.out.println(a.checkTenNhomHang("bdff"));
 //    	System.out.println(a.getListNhomHang(1));
 //    	System.out.println(a.getListSearched(1, "dgdsb"));
 //    	System.out.println(a.getSoLuongKQ("hsdhjd"));

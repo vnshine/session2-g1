@@ -58,7 +58,8 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	private NhapXuat NhapXuat = new NhapXuat();
+	public Integer a;
+	private NhapXuat NhapXuat;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -428,14 +429,22 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		JButton button_3 = new JButton("");
 		menuBar.add(button_3);
 		
+		
+		
+		
+		
 		JMenu mnThm = new JMenu("Thêm mặt hàng");
 		mnThm.setForeground(new Color(0, 0, 255));
 		mnThm.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnThm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				NhapXuat.setModal(true);
-				NhapXuat.setVisible(true);
+				try {
+					formNhapXuat();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -545,6 +554,11 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		panel_NhanVien.add(button_1);
 	}
 
+	public void formNhapXuat() throws Exception {
+		NhapXuat = new NhapXuat(this);
+		NhapXuat.setModal(true);
+		NhapXuat.setVisible(true);
+	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
