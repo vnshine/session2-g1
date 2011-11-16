@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 
 import module.SetCenter;
+import module.MD5;
 
 import process.LoginProcess;
 import sun.font.FontManager.FamilyDescription;
@@ -31,6 +32,7 @@ import view.LostPassword;
 import view.ThongTinCongTyView;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class LoginForm extends JFrame {
 	private JTextField textField;
 	private LoginProcess pro;
 	private String name, pass;
+	private JCheckBox chckbxRememberPassword;
 	private JLabel lblName, lblPassword, lblLostPassword, label;
 //	private static Thread th1;
 //	private static Thread th2;
@@ -83,6 +86,9 @@ public class LoginForm extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginForm() {
+		pro = new LoginProcess();
+		String[] value = pro.Load();
+		
 		setTitle("Login");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,18 +121,19 @@ public class LoginForm extends JFrame {
 		lblPassword.setBounds(49, 61, 46, 14);
 		panel_1.add(lblPassword);
 		
-		passwordField = new JPasswordField();
+		passwordField = new JPasswordField(value[1]);
 		passwordField.setBounds(105, 58, 315, 20);
 		panel_1.add(passwordField);
 		
-		textField = new JTextField();
+		textField = new JTextField(value[0]);
 		textField.setBounds(105, 33, 315, 20);
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
-		JCheckBox chckbxRememberPassword = new JCheckBox("Ghi nhớ");
+		chckbxRememberPassword = new JCheckBox("Ghi nhớ");
 		chckbxRememberPassword.setBounds(49, 85, 182, 23);
 		panel_1.add(chckbxRememberPassword);
+		chckbxRememberPassword.setSelected(true);
 		
 		JButton btnOk = new JButton("Đăng nhập");
 		btnOk.setBounds(131, 115, 89, 23);
@@ -149,7 +156,7 @@ public class LoginForm extends JFrame {
 		lblLostPassword.setBounds(338, 89, 82, 14);
 		panel_1.add(lblLostPassword);
 		
-		pro = new LoginProcess();
+		
 		
 		btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,8 +177,20 @@ public class LoginForm extends JFrame {
             }
         });
 		
+		chckbxRememberPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	chckbxRememberPasswordActionPerformed(evt);
+            }
+		});
+		
+		
 	}
 	
+	private void chckbxRememberPasswordActionPerformed(ActionEvent evt) {
+		
+	
+	}
+
 	private Boolean valid(String name, String pass){
 		Boolean result = true;
 		if(name.equals("")){
@@ -190,20 +209,37 @@ public class LoginForm extends JFrame {
 	private void btnOkActionPerformed(java.awt.event.ActionEvent evt){
 		name = textField.getText();
 		pass = passwordField.getText();
+		
+		if (chckbxRememberPassword.isSelected() == true) {
+			pro.Ghi(name, pass);
+		} else {
+			pro.Del();
+		}
+		
 		name = name.replace(" ", "").toUpperCase();
 		pass = pass.replace(" ", "").toUpperCase();
+		//str = MD5.MD5Password(pass);
+		//System.out.println(str);
 		
 		if (valid(name, pass) == false) {
 			return;
 		}
+		
 		if (pro.Login(name, pass)) {
 			this.setVisible(false);
-			ThongTinCongTyView frame = new ThongTinCongTyView();
-			frame.setVisible(true);
-			frame.pack();
-			frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-			frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-		}else {
+			MainApp frame;
+			try {
+				frame = new MainApp();
+				frame.setVisible(true);
+				frame.pack();
+				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					}else {
 			label.setText("Sai mã đăng nhập hoặc mật khẩu");
 		}
 		
