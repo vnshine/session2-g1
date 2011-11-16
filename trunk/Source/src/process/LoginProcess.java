@@ -1,5 +1,11 @@
 package process;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,5 +50,51 @@ public class LoginProcess {
     public LoginProcess()
     {
         super();
+    }
+    public void Ghi(String name, String pass)
+    {
+    	try{
+    	File file = new File("D:\\Document\\BAI TAP\\Java\\data.dat");
+        FileOutputStream foStream = new FileOutputStream(file);
+        
+        PrintWriter pw= new PrintWriter(foStream);
+        pw.println(name); 
+        pw.println(pass); 
+        pw.close();
+        
+        
+        
+    	}catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+    
+    public void Del()
+    {
+    	try{
+    	File file = new File("D:\\Document\\BAI TAP\\Java\\data.dat");
+    	FileOutputStream foStream = new FileOutputStream(file);
+        
+        PrintWriter pw= new PrintWriter(foStream);
+        pw.println(""); 
+        pw.close();
+    	}catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+    
+    public String[] Load()
+    {
+    	String[] mang = new String[2];
+    	try{
+    	FileReader fr= new FileReader("D:\\Document\\BAI TAP\\Java\\data.dat"); 
+        BufferedReader input= new BufferedReader(fr); 
+        mang[0] = input.readLine();
+        mang[1] = input.readLine();
+        input.close();
+    	}catch (Exception e) {
+			// TODO: handle exception
+		}
+    	return mang;
     }
 }
