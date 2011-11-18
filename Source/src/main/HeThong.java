@@ -5,22 +5,15 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
-
-import com.zfqjava.swing.JSideBar;
-import java.awt.BorderLayout;
-import java.sql.SQLException;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 
-import view.QuanLiNhaSanXuat;
 import view.ThongTaiKhoan;
 
 

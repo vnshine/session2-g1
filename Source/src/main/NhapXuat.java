@@ -30,7 +30,7 @@ public class NhapXuat extends JPanel implements ActionListener {
         JLabel label = new JLabel("                                            ");
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         tbr.add(label);
-        btnDoiTac = new JButton("Quản lí Nhập Xuất",new ImageIcon("media/images/Phieu-thu-chi-nhap-xuat-A5-1-.png"));
+        btnDoiTac = new JButton("Quản lý Nhập Xuất",new ImageIcon("media/images/Phieu-thu-chi-nhap-xuat-A5-1-.png"));
         btnDoiTac.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);
         btnDoiTac.setHorizontalTextPosition(JButton.CENTER);

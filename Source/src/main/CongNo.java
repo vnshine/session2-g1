@@ -29,7 +29,7 @@ public class CongNo extends JPanel implements ActionListener {
         tbr.setEnabled(false);
         tbr.setOrientation(JToolBar.VERTICAL);
         /*
-        btnDoiTac = new JButton("Quản lí đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
+        btnDoiTac = new JButton("Quản lý đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
         btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);
         btnDoiTac.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnDoiTac);

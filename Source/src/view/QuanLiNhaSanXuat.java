@@ -157,7 +157,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 	}
 	public QuanLiNhaSanXuat() throws Exception {
 		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Factory.png"));
-		setTitle("Quản lí nhà sản xuất");
+		setTitle("Quản lý nhà sản xuất");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_DuLieu = new JPanel();

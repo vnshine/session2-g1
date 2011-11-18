@@ -1,49 +1,41 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
-import javax.swing.JTextArea;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.event.CaretListener;
-import javax.swing.event.CaretEvent;
-import java.awt.Button;
-import java.awt.Label;
-import javax.swing.JRadioButton;
-import net.miginfocom.swing.MigLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Font;
-import java.awt.SystemColor;
-import javax.swing.JCheckBox;
 
 public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 
@@ -51,11 +43,12 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 	private JTable table;
 	private JTextField textField;
 	private JTextField textField_4;
-	private NhapXuat NhapXuat = new NhapXuat();
-	private JTextField textField_10;
-	private JTextField textField_11;
+	//private NhapXuat NhapXuat = new NhapXuat();
+	private JPasswordField textField_10;
+	private JPasswordField textField_11;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JCheckBox checkBox;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -90,7 +83,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 	}
 	public QuanLiNhanVien() throws Exception {
 		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\import_export-icon.png"));
-		setTitle("Quản lí Nhân Viên");
+		setTitle("Quản lý Nhân Viên");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_DuLieu = new JPanel();
@@ -147,7 +140,8 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		gbc_lblTniTc.gridy = 1;
 		panel_DuLieu.add(lblTniTc, gbc_lblTniTc);
 		
-		textField_10 = new JTextField();
+		textField_10 = new JPasswordField();
+		textField_10.setFont(new Font("Tahoma", Font.BOLD, 13));
 		GridBagConstraints gbc_textField_10 = new GridBagConstraints();
 		gbc_textField_10.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_10.fill = GridBagConstraints.HORIZONTAL;
@@ -156,8 +150,25 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		panel_DuLieu.add(textField_10, gbc_textField_10);
 		textField_10.setColumns(10);
 		
-		JCheckBox checkBox = new JCheckBox("123456");
+		checkBox = new JCheckBox("123456");
 		checkBox.setSelected(true);
+		checkBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (checkBox.isSelected()) {
+					textField_10.setEditable(false);
+					textField_11.setEditable(false);
+					textField_10.setText("123456");
+					textField_11.setText("123456");
+				}else {
+					textField_10.setEditable(true);
+					textField_10.setText("");
+					textField_11.setEditable(true);
+					textField_11.setText("");
+				}
+			}
+		});
+		textField_10.setEditable(false);
+		
 		GridBagConstraints gbc_checkBox = new GridBagConstraints();
 		gbc_checkBox.insets = new Insets(0, 0, 5, 5);
 		gbc_checkBox.gridx = 2;
@@ -191,7 +202,8 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		gbc_lblTnNhnVin.gridy = 2;
 		panel_DuLieu.add(lblTnNhnVin, gbc_lblTnNhnVin);
 		
-		textField_11 = new JTextField();
+		textField_11 = new JPasswordField();
+		textField_11.setFont(new Font("Tahoma", Font.BOLD, 13));
 		GridBagConstraints gbc_textField_11 = new GridBagConstraints();
 		gbc_textField_11.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_11.fill = GridBagConstraints.HORIZONTAL;
@@ -199,6 +211,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		gbc_textField_11.gridy = 2;
 		panel_DuLieu.add(textField_11, gbc_textField_11);
 		textField_11.setColumns(10);
+		textField_11.setEditable(false);
 		
 		JLabel lblSinThoi = new JLabel("Số điện thoại : ");
 		lblSinThoi.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -300,8 +313,8 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		mnThm.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				NhapXuat.setModal(true);
-				NhapXuat.setVisible(true);
+				//NhapXuat.setModal(true);
+				//NhapXuat.setVisible(true);
 			}
 		});
 		
@@ -338,7 +351,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		JButton button_6 = new JButton("");
 		menuBar.add(button_6);
 		
-		JMenu mnXutRacl = new JMenu("Xuất Phiếu");
+		JMenu mnXutRacl = new JMenu("Xuất Danh Sách");
 		mnXutRacl.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnXutRacl.setForeground(new Color(0, 0, 255));
 		mnXutRacl.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\excel.png"));
@@ -354,42 +367,43 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 			new Object[][] {
 			},
 			new String[] {
-				"", "ID", "STT", "ID H\u00E0ng h\u00F3a", "T\u00EAn h\u00E0ng h\u00F3a", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1", "VAT(%)", "Th\u00E0nh ti\u1EC1n"
+				"", "ID", "STT", "ID", "T\u00EAn nh\u00E2n vi\u00EAn", "Ng\u00E0y sinh", "Gi\u1EDBi t\u00EDnh", "\u0110\u1ECBa ch\u1EC9", "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i", "Ghi ch\u00FA"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Boolean.class, Integer.class, Object.class, String.class, Float.class, Float.class, Object.class, String.class, Object.class
+				Boolean.class, Integer.class, Object.class, String.class, Float.class, Float.class, Object.class, String.class, Object.class, Object.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(60);
-		table.getColumnModel().getColumn(0).setMinWidth(60);
+		table.getColumnModel().getColumn(0).setPreferredWidth(50);
+		table.getColumnModel().getColumn(0).setMinWidth(50);
 		table.getColumnModel().getColumn(0).setMaxWidth(999);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(1).setPreferredWidth(0);
 		table.getColumnModel().getColumn(1).setMinWidth(0);
 		table.getColumnModel().getColumn(1).setMaxWidth(0);
-		table.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table.getColumnModel().getColumn(2).setMinWidth(60);
+		table.getColumnModel().getColumn(2).setPreferredWidth(50);
+		table.getColumnModel().getColumn(2).setMinWidth(50);
 		table.getColumnModel().getColumn(2).setMaxWidth(999);
-		table.getColumnModel().getColumn(3).setPreferredWidth(70);
-		table.getColumnModel().getColumn(3).setMinWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(50);
+		table.getColumnModel().getColumn(3).setMinWidth(50);
 		table.getColumnModel().getColumn(3).setMaxWidth(999);
-		table.getColumnModel().getColumn(4).setPreferredWidth(250);
-		table.getColumnModel().getColumn(4).setMinWidth(250);
+		table.getColumnModel().getColumn(4).setPreferredWidth(150);
+		table.getColumnModel().getColumn(4).setMinWidth(150);
 		table.getColumnModel().getColumn(4).setMaxWidth(999);
-		table.getColumnModel().getColumn(5).setPreferredWidth(150);
-		table.getColumnModel().getColumn(5).setMinWidth(150);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setMinWidth(100);
 		table.getColumnModel().getColumn(5).setMaxWidth(999);
-		table.getColumnModel().getColumn(6).setPreferredWidth(150);
-		table.getColumnModel().getColumn(6).setMinWidth(150);
+		table.getColumnModel().getColumn(6).setPreferredWidth(50);
+		table.getColumnModel().getColumn(6).setMinWidth(50);
 		table.getColumnModel().getColumn(7).setPreferredWidth(150);
 		table.getColumnModel().getColumn(7).setMinWidth(150);
 		table.getColumnModel().getColumn(7).setMaxWidth(950);
-		table.getColumnModel().getColumn(8).setPreferredWidth(150);
-		table.getColumnModel().getColumn(8).setMinWidth(150);
+		table.getColumnModel().getColumn(8).setPreferredWidth(80);
+		table.getColumnModel().getColumn(8).setMinWidth(80);
+		table.getColumnModel().getColumn(9).setMinWidth(250);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -409,6 +423,9 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		JButton button_1 = new JButton("");
 		button_1.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
 		panel_NhanVien.add(button_1);
+		
+		textField_10.setText("123456");
+		textField_11.setText("123456");
 	}
 
 	@Override

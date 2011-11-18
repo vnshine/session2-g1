@@ -32,14 +32,14 @@ public class HangHoa extends JPanel implements ActionListener {
         tbr.setEnabled(false);
         tbr.setOrientation(JToolBar.VERTICAL);
 
-        btnNhomHang = new JButton("Quản lí nhóm hàng",new ImageIcon("media/images/nhomhang-icon.png"));
+        btnNhomHang = new JButton("Quản lý nhóm hàng",new ImageIcon("media/images/nhomhang-icon.png"));
         btnNhomHang.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnNhomHang.setVerticalTextPosition(JButton.BOTTOM);
         btnNhomHang.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnNhomHang);
         btnNhomHang.addActionListener(this);
 
-        btnHangHoa = new JButton("Quản lí hàng hóa",new ImageIcon("media/images/hanghoa -icon.png"));
+        btnHangHoa = new JButton("Quản lý hàng hóa",new ImageIcon("media/images/hanghoa -icon.png"));
         btnHangHoa.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnHangHoa.setVerticalTextPosition(JButton.BOTTOM);
         btnHangHoa.setHorizontalTextPosition(JButton.CENTER);

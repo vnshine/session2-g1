@@ -118,7 +118,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 	}
 	public ThongTaiKhoan() throws Exception {
 		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\NhanVien-icon.png"));
-		setTitle("Quản lí Tài khoản");
+		setTitle("Quản lý Tài khoản");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_DuLieu = new JPanel();

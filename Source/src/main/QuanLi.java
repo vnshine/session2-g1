@@ -27,7 +27,7 @@ public class QuanLi extends JPanel implements ActionListener {
         tbr.setOrientation(JToolBar.VERTICAL);
         tbr.setEnabled(false);
         /*
-        btnDoiTac = new JButton("Quản lí đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
+        btnDoiTac = new JButton("Quản lý đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
         btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);
         btnDoiTac.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnDoiTac);

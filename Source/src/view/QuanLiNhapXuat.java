@@ -94,7 +94,7 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 	}
 	public QuanLiNhapXuat() throws Exception {
 		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\import_export-icon.png"));
-		setTitle("Quản lí Nhập xuất");
+		setTitle("Quản lý Nhập xuất");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_DuLieu = new JPanel();
