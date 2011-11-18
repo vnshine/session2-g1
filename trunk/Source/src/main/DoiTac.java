@@ -32,7 +32,7 @@ public class DoiTac extends JPanel implements ActionListener {
         this.add(tbr);
         tbr.setEnabled(false);
         tbr.setOrientation(JToolBar.VERTICAL);
-        btnDoiTac = new JButton("Quản lí đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
+        btnDoiTac = new JButton("Quản lý đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
         btnDoiTac.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);
         btnDoiTac.setHorizontalTextPosition(JButton.CENTER);

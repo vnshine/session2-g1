@@ -25,13 +25,13 @@ public class ChucNang extends JPanel implements ActionListener {
         this.add(tbr);
         tbr.setEnabled(false);
         tbr.setOrientation(JToolBar.VERTICAL);
-        btnDoiTac = new JButton("Quản lí đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
+        btnDoiTac = new JButton("Quản lý đối tác",new ImageIcon("media/images/icon-DoiTac.png"));
         btnDoiTac.setVerticalTextPosition(JButton.BOTTOM);
         btnDoiTac.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnDoiTac);
         btnDoiTac.addActionListener(this);
         
-        btnNhanVien = new JButton("Quản lí nhân viên",new ImageIcon("media/images/icon-NhanVien.png"));
+        btnNhanVien = new JButton("Quản lý nhân viên",new ImageIcon("media/images/icon-NhanVien.png"));
         btnNhanVien.setVerticalTextPosition(JButton.BOTTOM);
         btnNhanVien.setHorizontalTextPosition(JButton.CENTER);
         tbr.add(this.btnNhanVien);

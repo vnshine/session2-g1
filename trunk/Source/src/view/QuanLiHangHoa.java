@@ -111,7 +111,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 	}
 	public QuanLiHangHoa() throws Exception {
 		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\hanghoa -icon.png"));
-		setTitle("Quản lí hàng hóa");
+		setTitle("Quản lý hàng hóa");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_DuLieu = new JPanel();

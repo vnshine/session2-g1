@@ -34,18 +34,19 @@ import java.awt.event.MouseEvent;
 public class NhapXuat extends JDialog {
 
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-	public final JPanel contentPanel = new JPanel();
-	public JTextField textField,comboBox;
-	public JTextField textField_1;
-	public JTextField textField_2;
-	public JTable table;
-	public JTextField textField_3;
-	public JPanel panel_NhanVien,panel;
-	public JButton btnng,btnBQua,btnTmKim,button_1;
-	public JComboBox comboBox_2,comboBoxpt;
-	public JScrollPane scrollPane;
+	private final JPanel contentPanel = new JPanel();
+	private JTextField textField,comboBox;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTable table;
+	private JTextField textField_3;
+	private JPanel panel_NhanVien,panel;
+	private JButton btnng,btnBQua,btnTmKim,button_1;
+	private JComboBox comboBox_2,comboBoxpt;
+	private JScrollPane scrollPane;
 	private JLabel lblMMtHng;
 	private JTextField txtMMtHng;
+	private Integer loi;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -73,6 +74,14 @@ public class NhapXuat extends JDialog {
 	}
 	public void closeDialog(){
 		this.setVisible(false);
+	}
+	public void check() {
+		loi = 0;
+		if (loi == 0) {
+			closeDialog();
+		}else {
+			JOptionPane.showMessageDialog(this, "Lỗi dữ liệu nhập vào !\n", "Lỗi", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	/**
 	 * Create the dialog.
@@ -210,12 +219,9 @@ public class NhapXuat extends JDialog {
 		btnng = new JButton("Đồng ý");
 		btnng.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Integer loi = 0;
+				check();
 				if (loi == 0) {
 					
-					closeDialog();
-				}else {
-					//JOptionPane.showMessageDialog(this, "Lỗi dữ liệu nhập vào !\n", "Lỗi", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -394,9 +400,5 @@ public class NhapXuat extends JDialog {
 		gbc_panel8.gridx = 0;
 		gbc_panel8.gridy = 7;
 		contentPanel.add(panel_NhanVien, gbc_panel8);
-		
-		
 	}
-	
-
 }

@@ -63,7 +63,7 @@ class MarqueePanel extends JPanel implements ActionListener {
         }
         this.s = sb + s + sb;
         this.n = n;
-        label.setFont(new Font("VfFree08", Font.BOLD, 16));
+        label.setFont(new Font("Tahoma", Font.BOLD, 16));
         label.setForeground(Color.RED);
         label.setText(sb.toString());
         this.add(label);

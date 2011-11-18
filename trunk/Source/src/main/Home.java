@@ -27,8 +27,6 @@ import javax.swing.UIManager;
 import module.MarqueeTyGia;
 import view.QuanLiBaoCao;
 import view.TrangChu;
-
-import com.zfqjava.swing.JStatusBar;
 import java.awt.SystemColor;
 
 public class Home extends JFrame implements ActionListener {
@@ -76,7 +74,7 @@ public class Home extends JFrame implements ActionListener {
 	private JButton button_3;
 	private JButton button_4;
 	private JButton button_5;
-	private JStatusBar JStatusBar;
+//	private JStatusBar JStatusBar;
 	private JPanel panel_2;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -132,11 +130,11 @@ public class Home extends JFrame implements ActionListener {
 //		final BaoCao		 BaoCao		  = new  BaoCao		(this); 
 		final QuanLi		 QuanLi		  = new  QuanLi		(this); 
 		final TroGiup		 TroGiup	  = new  TroGiup	(this); 
-		JStatusBar = new JStatusBar();
+//		JStatusBar = new JStatusBar();
 		
 		VerticalMenuBar verticalMenuBar = new VerticalMenuBar();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_action_bookmark.png"));
-		setTitle("Phần mềm quản lí bán hàng Hợp tác xã công nghiệp Nhật Quang");
+		setTitle("Phần mềm quản lý bán hàng Hợp tác xã công nghiệp Nhật Quang");
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 	
@@ -489,7 +487,7 @@ public class Home extends JFrame implements ActionListener {
 		gbc_button_5.gridy = 16;
 //		panelMenu.add(BaoCao, gbc_button_6);
 		
-		btnQunL = new JButton("Quản lí");
+		btnQunL = new JButton("Quản lý");
 		btnQunL.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (QuanLi.isVisible()) {
@@ -558,7 +556,7 @@ public class Home extends JFrame implements ActionListener {
 		QuanLi.setVisible(false);  
 		TroGiup.setVisible(false);
 		paneCenter.addTab(new TrangChu(), "Trang chủ");
-		getContentPane().add(JStatusBar,BorderLayout.SOUTH);
+//		getContentPane().add(JStatusBar,BorderLayout.SOUTH);
 	}
 
 	private static void installLnF() {
