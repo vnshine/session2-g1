@@ -28,7 +28,7 @@ import module.MD5;
 
 import process.LoginProcess;
 import sun.font.FontManager.FamilyDescription;
-import view.LostPassword;
+//import view.LostPassword;
 import view.ThongTinCongTyView;
 
 import java.awt.Font;
@@ -170,12 +170,12 @@ public class LoginForm extends JFrame {
             }
 		});
 		
-		lblLostPassword.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-            	lblLostPasswordMouseClicked(evt);
-            }
-        });
+//		lblLostPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+//            @Override
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//            	lblLostPasswordMouseClicked(evt);
+//            }
+//        });
 		
 		chckbxRememberPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,19 +227,18 @@ public class LoginForm extends JFrame {
 		
 		if (pro.Login(name, pass)) {
 			this.setVisible(false);
-			MainApp frame;
-			try {
-				frame = new MainApp();
+			Home frame;
+			try{
+				frame = new Home();
 				frame.setVisible(true);
 				frame.pack();
 				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}catch (Exception e) {
+				// TODO: handle exception
 			}
-					}else {
+			
+		}else {
 			label.setText("Sai mã đăng nhập hoặc mật khẩu");
 		}
 		
@@ -249,12 +248,12 @@ public class LoginForm extends JFrame {
 		System.exit(0);		
 	}
 	
-	private void lblLostPasswordMouseClicked(MouseEvent evt){
-		this.setVisible(false);
-		LostPassword frame = new LostPassword();
-		frame.setVisible(true);
-		frame.pack();
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		SetCenter setCenter = new SetCenter(frame);
-	}
+//	private void lblLostPasswordMouseClicked(MouseEvent evt){
+//		this.setVisible(false);
+//		LostPassword frame = new LostPassword();
+//		frame.setVisible(true);
+//		frame.pack();
+//		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//		SetCenter setCenter = new SetCenter(frame);
+//	}
 }
