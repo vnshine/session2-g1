@@ -1,4 +1,4 @@
--- =============================================
+﻿-- =============================================
 -- Co so du lieu: NHAT QUANG
 -- =============================================
 USE master
@@ -83,7 +83,10 @@ create table tbl_NhanVien
 	iTrangThai int
 )
 go
-
+ALTER table tbl_NhanVien alter column FK_iQuyenID int null
+ALTER table tbl_NhanVien drop column sNgaySinh
+ALTER table tbl_NhanVien add dNgaySinh datetime
+GO
 -----------Bang tbl_NhanVien_Quyen
 if(OBJECT_ID('tbl_NhanVien_Quyen','U') is not null)
 begin
@@ -185,6 +188,10 @@ create table tbl_HangHoa
 )
 go
 
+--Đặt lại giá trị của cột là null
+ALTER TABLE tbl_HangHoa alter column sNgayHetHan datetime NULL
+
+
 -----------Bang tbl_PhieuNhapXuat
 if(OBJECT_ID('tbl_PhieuNhapXuat','U') is not null)
 begin
@@ -193,17 +200,15 @@ end
 create table tbl_PhieuNhapXuat
 (
 	PK_sPhieuNhapXuatID varchar(6) primary key,
-	iTrangThaiID int not null,
-	sNgayNhapXuat varchar(10) not null,
-	sGioNhapXuat varchar(8) not null,
+	iTrangThai int default 0,
+	dNgayNhapXuat datetime default(GETDATE()),
 	FK_sNhanVienID varchar(6) references tbl_NhanVien(PK_sNhanVienID) not null,
 	FK_sDoiTacID varchar(6) references tbl_DoiTac(PK_sDoiTacID) not null,
-	iTongTien int not null,
-	iConNo int not null,
+	fTongTien int,
+	fConNo int,
 	sGhiChu nvarchar(100)
 )
-go
-
+GO
 -----------Bang tbl_ChiTietPhieuNhapXuat
 if(OBJECT_ID('tbl_ChiTietPhieuNhapXuat','U') is not null)
 begin
@@ -213,11 +218,12 @@ create table tbl_ChiTietPhieuNhapXuat
 (
 	FK_sPhieuNhapXuatID varchar(6) references tbl_PhieuNhapXuat(PK_sPhieuNhapXuatID) not null,
 	FK_iHangHoaID int references tbl_HangHoa(PK_iHangHoaID) not null,
-	iSoLuong int not null
+	iSoLuong int not null,
+	fGiaGoc float,
+	fGiaBan float,
 	primary key(FK_sPhieuNhapXuatID, FK_iHangHoaID),
 )
 go
-
 -----------Bang tbl_PhieuThuChi
 if(OBJECT_ID('tbl_PhieuThuChi','U') is not null)
 begin
@@ -226,11 +232,10 @@ end
 create table tbl_PhieuThuChi
 (
 	PK_sPhieuThuChiID varchar(6) primary key,
-	iTrangThaiID int not null,
+	iTrangThai int not null,
 	sLyDo nvarchar(150) not null,
-	sSoTien int not null,
-	sNgayThuChi varchar(10) not null,
-	sGioThuChi varchar(10) not null,
+	fSoTien float,
+	sNgayThuChi datetime default(GETDATE()),
 	sGhiChu nvarchar(150),
 	FK_sNhanVienID varchar(6) references tbl_NhanVien(PK_sNhanVienID) not null,
 	FK_sPhieuNhapXuatID varchar(6) references tbl_PhieuNhapXuat(PK_sPhieuNhapXuatID) not null,
@@ -261,16 +266,16 @@ begin
 end
 create table tbl_ThongTinCongTy
 (
-	PK_sCongTyID varchar(6) primary key,
+	PK_sCongTyID varchar(10) primary key,
 	sTenCongTy nvarchar(100) not null,
-	sTenCongTyEng varchar(100) not null,
+	sTenCongTyEng varchar(100),
 	sDiaChi nvarchar(100),
 	sDiaChiEng varchar(100),
-	sSoDienThoai varchar(12),
+	sSoDienThoai varchar(15),
 	sEmail varchar(45),
 	sWebsite varchar(45),
-	FK_sTienTeID varchar(3) references tbl_TienTe(PK_sTienTeID) not null,
-	iTienMat int
+	FK_sTienTeID varchar(3) references tbl_TienTe(PK_sTienTeID),
+	fTienMat float
 )
 go
 
