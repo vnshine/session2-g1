@@ -2,31 +2,26 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.Timer;
 import javax.swing.UIManager;
+import javax.swing.Box;
 
 import module.MarqueeTyGia;
 
 public class MainApp extends JFrame {
+
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-//	private JPanel contentPane;
+	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	public static ClosableTabbedPane paneCenter;
 	//public JTabbedPane paneCenter;
@@ -36,9 +31,7 @@ public class MainApp extends JFrame {
 	private JPanel panelImg;
 	private JPanel panel_tyGia;
 	private Box verticalBox;
-	private JScrollPane scrollPane;
-	private Timer timer;
-	private MarqueeTyGia marqueeTyGia;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -51,6 +44,8 @@ public class MainApp extends JFrame {
 					frame.setVisible(true);
 					frame.pack();
 					//frame.getContentPane().add(frame);
+
+					
 					frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 					frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 				} catch (Exception e) {
@@ -66,10 +61,7 @@ public class MainApp extends JFrame {
 	 */
 
 
-	public MainApp() throws Exception {
-		VerticalMenuBar verticalMenuBar = new VerticalMenuBar();
-		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_action_bookmark.png"));
-		setTitle("Phần mềm quản lí bán hàng Hợp tác xã công nghiệp Nhật Quang");
+	public MainApp() throws IOException {
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 	
@@ -85,7 +77,7 @@ public class MainApp extends JFrame {
 
 		//JPanel  pnlProducts = new JPanel();
 		tabbedPane.add(null, new javax.swing.ImageIcon("media/images/Windows.png"));
-		tabbedPane.addTab("Hệ Thống", new javax.swing.ImageIcon("media/images/Home.png"), new HeThong(this)); // NOI18N
+		tabbedPane.addTab("Há»‡ Thá»‘ng", new javax.swing.ImageIcon("media/images/Home.png"), new HeThong(this)); // NOI18N
 
 //        javax.swing.GroupLayout pnlProductsLayout = new javax.swing.GroupLayout(pnlProducts);
 //        pnlProducts.setLayout(pnlProductsLayout);
@@ -97,32 +89,31 @@ public class MainApp extends JFrame {
 //            pnlProductsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 //            .addGap(0, 418, Short.MAX_VALUE)
 //        );
-		tabbedPane.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
-		tabbedPane.addTab("Nhập/Xuất", 
+		tabbedPane.addTab("Nháº­p/Xuáº¥t", 
 				new javax.swing.ImageIcon("media/images/import_export-icon.png"), 
 				new NhapXuat(this));
 		tabbedPane.addTab("Thu/Chi"  , 
 				new javax.swing.ImageIcon("media/images/money-icon.png"),         
 				new ThuChi(this));
-		tabbedPane.addTab("Công nợ"  , 
+		tabbedPane.addTab("CÃ´ng ná»£"  , 
 				new javax.swing.ImageIcon("media/images/ConNO-icon.png"),         
 				new CongNo(this));
-		tabbedPane.addTab("Hàng hóa" , 
+		tabbedPane.addTab("HÃ ng hÃ³a" , 
 				new javax.swing.ImageIcon("media/images/hanghoa-icon.png"),       
 				new HangHoa(this));
-		tabbedPane.addTab("Đối tác"  , 
+		tabbedPane.addTab("Ä�á»‘i tÃ¡c"  , 
 				new javax.swing.ImageIcon("media/images/icon-DoiTac.png"),        
 				new DoiTac(this));
-		tabbedPane.addTab("Nhân viên", 
+		tabbedPane.addTab("NhÃ¢n viÃªn", 
 				new javax.swing.ImageIcon("media/images/icon-NhanVien.png"),      
 				new NhanVien(this));
-		tabbedPane.addTab("Báo cáo"  , 
+		tabbedPane.addTab("BÃ¡o cÃ¡o"  , 
 				new javax.swing.ImageIcon("media/images/ReportsIcon.png"),        
 				new BaoCao(this));
-		tabbedPane.addTab("Quản lí"  , 
+		tabbedPane.addTab("Quáº£n lÃ­"  , 
 				new javax.swing.ImageIcon("media/images/Manager-Icon.png"),       
 				new QuanLi(this));
-		tabbedPane.addTab("Trợ giúp" , 
+		tabbedPane.addTab("Trá»£ giÃºp" , 
 				new javax.swing.ImageIcon("media/images/help-icon.png"),          
 				new TroGiup(this));
 		
@@ -148,23 +139,10 @@ public class MainApp extends JFrame {
 		panelImg.add(picLabel);
 		
 		panel_tyGia = new JPanel();
-		
-		marqueeTyGia = new MarqueeTyGia();
+		MarqueeTyGia marqueeTyGia = new MarqueeTyGia();
 		panel_tyGia.add(marqueeTyGia);
-		timer = new Timer(400000, new ActionListener() {
-		      public void actionPerformed(ActionEvent e) {
-		    	  marqueeTyGia = new MarqueeTyGia();
-		    	  panel_tyGia.removeAll();
-		    	  panel_tyGia.add(marqueeTyGia);
-		        repaint();
-		      }
-		    });
-		    timer.start();
-		
 		verticalBox.add(panel_tyGia);
-		
 		getContentPane().add(this.panelMenu,BorderLayout.WEST);
-		//getContentPane().add(verticalMenuBar);
 		getContentPane().add(this.paneCenter,BorderLayout.CENTER);
 		
 	}

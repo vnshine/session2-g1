@@ -156,7 +156,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 		});
 	}
 	public QuanLiNhaSanXuat() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Factory.png"));
+		setFrameIcon(new ImageIcon("media/images/Factory.png"));
 		setTitle("Quản lý nhà sản xuất");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -248,7 +248,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 		menuBar.add(spr);
 		
 		mnThm = new JMenu("Thêm");
-		mnThm.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		mnThm.setIcon(new ImageIcon("media/images/add.png"));
 		menuBar.add(mnThm);
 		
 		lblId_2 = new JLabel("ID:");
@@ -295,7 +295,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 				}
 			}
 		});
-		button_8.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Save.png"));
+		button_8.setIcon(new ImageIcon("media/images/Save.png"));
 		button_8.setAlignmentX(1.0f);
 		mnThm.add(button_8);
 		
@@ -304,7 +304,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 		
 		menu = new JMenu("Sửa");
 		menu.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		menu.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Edit.png"));
+		menu.setIcon(new ImageIcon("media/images/Edit.png"));
 		menuBar.add(menu);
 		
 		lblId_3 = new JLabel("ID:");
@@ -351,7 +351,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 				}
 			}
 		});
-		button.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Save.png"));
+		button.setIcon(new ImageIcon("media/images/Save.png"));
 		button.setAlignmentX(1.0f);
 		menu.add(button);
 		
@@ -370,7 +370,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 				}
 			}
 		});
-		mnXa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\delete.png"));
+		mnXa.setIcon(new ImageIcon("media/images/delete.png"));
 		menuBar.add(mnXa);
 		spr4 = new JButton("");
 		menuBar.add(spr4);
@@ -386,7 +386,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 				}
 			}
 		});
-		mnXutExcel.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\excel.png"));
+		mnXutExcel.setIcon(new ImageIcon("media/images/excel.png"));
 		menuBar.add(mnXutExcel);
 		spr5 = new JButton("");
 		menuBar.add(spr5);
@@ -502,7 +502,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 			}
 		});
 		btnTrc = new JButton("");
-		btnTrc.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\prev.png"));
+		btnTrc.setIcon(new ImageIcon("media/images/prev.png"));
 		btnTrc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox_SoTrang.setSelectedItem(soTrang-1);
@@ -512,7 +512,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 		panel_PhanTrang.add(comboBox_SoTrang);
 		
 		btnSau = new JButton("");
-		btnSau.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
+		btnSau.setIcon(new ImageIcon("media/images/next.png"));
 		btnSau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox_SoTrang.setSelectedItem(soTrang+1);
@@ -535,7 +535,7 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 		});
 		
 		mnThm_1 = new JMenu("Thêm");
-		mnThm_1.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		mnThm_1.setIcon(new ImageIcon("media/images/add.png"));
 		popupMenu.add(mnThm_1);
 		
 		lblId_1 = new JLabel("ID: ");
@@ -582,12 +582,12 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 				}
 			}
 		});
-		button_luupt.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Save.png"));
+		button_luupt.setIcon(new ImageIcon("media/images/Save.png"));
 		button_luupt.setAlignmentX(1.0f);
 		mnThm_1.add(button_luupt);
 		
 		mnSa = new JMenu("Sửa");
-		mnSa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Edit.png"));
+		mnSa.setIcon(new ImageIcon("media/images/Edit.png"));
 		popupMenu.add(mnSa);
 		
 		lblId_4 = new JLabel("ID:");
@@ -635,9 +635,9 @@ public class QuanLiNhaSanXuat extends JInternalFrame implements ActionListener {
 			}
 		});
 		btnluups.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		btnluups.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Save.png"));
+		btnluups.setIcon(new ImageIcon("media/images/Save.png"));
 		mnSa.add(btnluups);
-		mntmXa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\delete.png"));
+		mntmXa.setIcon(new ImageIcon("media/images/delete.png"));
 		mntmXa.setAccelerator(KeyStroke.getKeyStroke("DELETE"));
 		popupMenu.add(mntmXa);
 		panel_PhanTrang.add(btnSau);

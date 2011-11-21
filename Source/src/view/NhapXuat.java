@@ -92,7 +92,7 @@ public class NhapXuat extends JDialog {
 	}
 	public NhapXuat(QuanLiNhapXuat quanLiNhapXuat) throws Exception {
 		setTitle("Thêm hàng vào danh sách Nhập/Xuất");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("media/images/add.png"));
 		setBounds(200, 200, 803, 496);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -227,7 +227,7 @@ public class NhapXuat extends JDialog {
 		});
 		btnng.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnng.setForeground(new Color(0, 0, 255));
-		btnng.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\apply.png"));
+		btnng.setIcon(new ImageIcon("media/images/apply.png"));
 		GridBagConstraints gbc_btnng = new GridBagConstraints();
 		gbc_btnng.anchor = GridBagConstraints.EAST;
 		gbc_btnng.insets = new Insets(0, 0, 5, 5);
@@ -243,7 +243,7 @@ public class NhapXuat extends JDialog {
 				closeDialog();
 			}
 		});
-		btnBQua.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Cancel2.png"));
+		btnBQua.setIcon(new ImageIcon("media/images/Cancel2.png"));
 		GridBagConstraints gbc_btnBQua = new GridBagConstraints();
 		gbc_btnBQua.anchor = GridBagConstraints.WEST;
 		gbc_btnBQua.insets = new Insets(0, 0, 5, 5);
@@ -280,7 +280,7 @@ public class NhapXuat extends JDialog {
 		btnTmKim = new JButton("Tìm kiếm");
 		btnTmKim.setForeground(new Color(0, 0, 255));
 		btnTmKim.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnTmKim.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\search-icon.png"));
+		btnTmKim.setIcon(new ImageIcon("media/images/search-icon.png"));
 		btnTmKim.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				comboBox_2.showPopup();
@@ -385,14 +385,14 @@ public class NhapXuat extends JDialog {
 		panel_NhanVien = new JPanel();
 		JButton button = new JButton("");
 		
-		button.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\prev.png"));
+		button.setIcon(new ImageIcon("media/images/prev.png"));
 		panel_NhanVien.add(button);
 		
 		comboBoxpt = new JComboBox();
 		panel_NhanVien.add(comboBoxpt);
 		
 		button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
+		button_1.setIcon(new ImageIcon("media/images/next.png"));
 		panel_NhanVien.add(button_1);
 		GridBagConstraints gbc_panel8 = new GridBagConstraints();
 		gbc_panel8.gridwidth = 5;

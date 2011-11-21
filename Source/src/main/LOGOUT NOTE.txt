@@ -1,0 +1,26 @@
+BUTTON TRONG MAINAPP DE LOGOUT
+
+MAINAPP la cai chuong trinh
+
+AN VAO BUTTON THUC HIEN DOAN CODE
+
+			this.setVisible(false);
+			LoginForm frame;
+			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
+			if (lnfClassname == null){
+				lnfClassname = UIManager.getCrossPlatformLookAndFeelClassName();
+			}
+			UIManager.setLookAndFeel(lnfClassname);
+			try {
+				frame = new Login();
+				frame.setVisible(true);
+				frame.pack();
+				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				SetCenter setCenter = new SetCenter(frame);
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			

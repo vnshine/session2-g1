@@ -117,7 +117,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		});
 	}
 	public ThongTaiKhoan() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\NhanVien-icon.png"));
+		setFrameIcon(new ImageIcon("media/images/NhanVien-icon.png"));
 		setTitle("Quản lý Tài khoản");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -170,7 +170,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		panel_DuLieu.add(lblTVitTho, gbc_lblTVitTho);
 		
 		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\NhanVien-icon.png"));
+		lblNewLabel.setIcon(new ImageIcon("media/images/NhanVien-icon.png"));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridheight = 6;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
@@ -363,7 +363,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		textField_2.setColumns(10);
 		
 		button = new JButton("Đổi mật khẩu");
-		button.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\change_pass.png"));
+		button.setIcon(new ImageIcon("media/images/change_pass.png"));
 		button.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.insets = new Insets(0, 0, 0, 5);

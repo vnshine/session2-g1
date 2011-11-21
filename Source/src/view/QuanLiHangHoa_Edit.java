@@ -50,7 +50,7 @@ public class QuanLiHangHoa_Edit extends JDialog {
 	 */
 	public QuanLiHangHoa_Edit() throws Exception {
 		setTitle("Thêm hàng vào danh sách Nhập/Xuất");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("media/images/add.png"));
 		this.setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -144,7 +144,7 @@ public class QuanLiHangHoa_Edit extends JDialog {
 		textField_2.setColumns(10);
 		
 		JButton btnng = new JButton("Đồng ý");
-		btnng.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\apply.png"));
+		btnng.setIcon(new ImageIcon("media/images/apply.png"));
 		GridBagConstraints gbc_btnng = new GridBagConstraints();
 		gbc_btnng.insets = new Insets(0, 0, 0, 5);
 		gbc_btnng.gridx = 0;
@@ -157,7 +157,7 @@ public class QuanLiHangHoa_Edit extends JDialog {
 				closeDialog();
 			}
 		});
-		btnBQua.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Cancel2.png"));
+		btnBQua.setIcon(new ImageIcon("media/images/Cancel2.png"));
 		GridBagConstraints gbc_btnBQua = new GridBagConstraints();
 		gbc_btnBQua.anchor = GridBagConstraints.WEST;
 		gbc_btnBQua.insets = new Insets(0, 0, 0, 5);
