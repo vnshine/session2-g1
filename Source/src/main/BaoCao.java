@@ -20,7 +20,7 @@ import view.ThongTaiKhoan;
 
 public class BaoCao extends JPanel implements ActionListener {
     private JToolBar tbr;
-    private JButton btnlogout,btnMyAcc,btnTheme;
+    private JButton btnBaoCaoDoanhThuThang;
     private Home trangchu;
     private JLabel lblNewLabel;
     public BaoCao(Home home){
@@ -32,12 +32,12 @@ public class BaoCao extends JPanel implements ActionListener {
         add(tbr);
         tbr.setOrientation(JToolBar.VERTICAL);
         
-        btnMyAcc = new JButton("Thông tin tài khoản",new ImageIcon("media/images/User-icon.png"));
-        btnMyAcc.setAlignmentX(Component.CENTER_ALIGNMENT);
-        btnMyAcc.setVerticalTextPosition(JButton.BOTTOM);
-        btnMyAcc.setHorizontalTextPosition(JButton.CENTER);
-        tbr.add(this.btnMyAcc);
-        btnMyAcc.addActionListener(this);
+        btnBaoCaoDoanhThuThang = new JButton("Báo cáo doanh thu theo tháng",new ImageIcon("media/images/User-icon.png"));
+        btnBaoCaoDoanhThuThang.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnBaoCaoDoanhThuThang.setVerticalTextPosition(JButton.BOTTOM);
+        btnBaoCaoDoanhThuThang.setHorizontalTextPosition(JButton.CENTER);
+        tbr.add(this.btnBaoCaoDoanhThuThang);
+        btnBaoCaoDoanhThuThang.addActionListener(this);
         
         lblNewLabel = new JLabel("                                       ");
         lblNewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -49,17 +49,13 @@ public class BaoCao extends JPanel implements ActionListener {
 	}
     @Override
     public void actionPerformed(ActionEvent e) {
-    	
-        if(e.getSource()== this.btnlogout){
-        	
-        }
-        
-        if(e.getSource()== this.btnMyAcc){
-            	if(this.trangchu.paneCenter.positionTab("Tài khoản") > -1){
+
+        if(e.getSource()== this.btnBaoCaoDoanhThuThang){
+            	if(this.trangchu.paneCenter.positionTab("Báo cáo") > -1){
             		return;
-            		}else if(this.trangchu.paneCenter.positionTab("Tài khoản") == -1){
+            		}else if(this.trangchu.paneCenter.positionTab("Báo cáo") == -1){
             			try {
-    						this.trangchu.paneCenter.addTab(new BaoCaoDoanhThuTheoThang(), "Tài khoản");
+    						this.trangchu.paneCenter.addTab(new BaoCaoDoanhThuTheoThang(), "Báo cáo");
     					} catch (SQLException e1) {
     						// TODO Auto-generated catch block
     						e1.printStackTrace();
