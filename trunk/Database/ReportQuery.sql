@@ -17,4 +17,3 @@ WHERE tbl_PhieuNhapXuat.iTrangThai = 1 AND datepart(mm,tbl_PhieuNhapXuat.dNgayNh
 --Tách tháng từ ngày tháng
 --select datepart(mm,getdate())
 --*/
-SELECT * FROM tbl_ThongTinCongTy
