@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDoanhThu" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="28"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#F3F6F8"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFEFEF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#D5CBBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#FFF4E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFCF8"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#C3CFD9">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#E6F3FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#F8FCFF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="datLoiNhuan">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     tbl_ChiTietPhieuNhapXuat.fGiaBan*tbl_ChiTietPhieuNhapXuat.iSoLuong AS fThanhTien,round(tbl_ChiTietPhieuNhapXuat.iSoLuong*(tbl_ChiTietPhieuNhapXuat.fGiaBan-tbl_ChiTietPhieuNhapXuat.fGiaGoc),2) AS fLoiNhuan,
+     tbl_PhieuNhapXuat."PK_sPhieuNhapXuatID",
+     convert(varchar, tbl_PhieuNhapXuat."dNgayNhapXuat", 3) as dNgayNhapXuat,
+     tbl_HangHoa."PK_iHangHoaID",
+     tbl_HangHoa."sTenHangHoa",
+     tbl_ChiTietPhieuNhapXuat."iSoLuong",
+     tbl_ChiTietPhieuNhapXuat."fGiaGoc",
+     tbl_ChiTietPhieuNhapXuat."fGiaBan",
+     tbl_HangHoa."sTenHangHoa" AS tbl_HangHoa_sTenHangHoa, tbl_ThongTinCongTy.sTenCongTy,tbl_ThongTinCongTy.sDiaChi,tbl_ThongTinCongTy.sSoDienThoai,tbl_ThongTinCongTy.sEmail, datepart(mm,getdate()) as iThangBaoCao ,datepart(yyyy,getdate()) as iNamBaoCao
+FROM
+     "tbl_PhieuNhapXuat" tbl_PhieuNhapXuat INNER JOIN "tbl_ChiTietPhieuNhapXuat" tbl_ChiTietPhieuNhapXuat ON tbl_PhieuNhapXuat."PK_sPhieuNhapXuatID" = tbl_ChiTietPhieuNhapXuat."FK_sPhieuNhapXuatID"
+     INNER JOIN "tbl_HangHoa" tbl_HangHoa ON tbl_ChiTietPhieuNhapXuat."FK_iHangHoaID" = tbl_HangHoa."PK_iHangHoaID", "tbl_ThongTinCongTy"
+WHERE
+     tbl_PhieuNhapXuat.iTrangThai = 1AND datepart(mm,tbl_PhieuNhapXuat.dNgayNhapXuat) = datepart(mm,getdate())]]>
+		</queryString>
+		<field name="PK_sPhieuNhapXuatID" class="java.lang.String"/>
+		<field name="dNgayNhapXuat" class="java.lang.String"/>
+		<field name="PK_iHangHoaID" class="java.lang.Integer"/>
+		<field name="sTenHangHoa" class="java.lang.String"/>
+		<field name="iSoLuong" class="java.lang.Integer"/>
+		<field name="fGiaGoc" class="java.lang.Double"/>
+		<field name="fGiaBan" class="java.lang.Double"/>
+		<field name="fThanhTien" class="java.lang.Double"/>
+		<field name="fLoiNhuan" class="java.lang.Double"/>
+		<group name="PK_sPhieuNhapXuatID">
+			<groupExpression><![CDATA[$F{PK_sPhieuNhapXuatID}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT
+     tbl_ChiTietPhieuNhapXuat.fGiaBan*tbl_ChiTietPhieuNhapXuat.iSoLuong AS fThanhTien,round(tbl_ChiTietPhieuNhapXuat.iSoLuong*(tbl_ChiTietPhieuNhapXuat.fGiaBan-tbl_ChiTietPhieuNhapXuat.fGiaGoc),2) AS fLoiNhuan,
+     tbl_PhieuNhapXuat."PK_sPhieuNhapXuatID",
+     convert(varchar, tbl_PhieuNhapXuat."dNgayNhapXuat", 3) as dNgayNhapXuat,
+     tbl_HangHoa."PK_iHangHoaID",
+     tbl_HangHoa."sTenHangHoa",
+     tbl_ChiTietPhieuNhapXuat."iSoLuong",
+     tbl_ChiTietPhieuNhapXuat."fGiaGoc",
+     tbl_ChiTietPhieuNhapXuat."fGiaBan",
+     tbl_HangHoa."sTenHangHoa" AS tbl_HangHoa_sTenHangHoa, tbl_ThongTinCongTy.sTenCongTy,tbl_ThongTinCongTy.sDiaChi,tbl_ThongTinCongTy.sSoDienThoai,tbl_ThongTinCongTy.sEmail, datepart(mm,getdate()) as iThangBaoCao ,datepart(yyyy,getdate()) as iNamBaoCao
+FROM
+     "tbl_PhieuNhapXuat" tbl_PhieuNhapXuat INNER JOIN "tbl_ChiTietPhieuNhapXuat" tbl_ChiTietPhieuNhapXuat ON tbl_PhieuNhapXuat."PK_sPhieuNhapXuatID" = tbl_ChiTietPhieuNhapXuat."FK_sPhieuNhapXuatID"
+     INNER JOIN "tbl_HangHoa" tbl_HangHoa ON tbl_ChiTietPhieuNhapXuat."FK_iHangHoaID" = tbl_HangHoa."PK_iHangHoaID", "tbl_ThongTinCongTy"
+WHERE
+     tbl_PhieuNhapXuat.iTrangThai = 1AND datepart(mm,tbl_PhieuNhapXuat.dNgayNhapXuat) = datepart(mm,getdate())]]>
+	</queryString>
+	<field name="fThanhTien" class="java.lang.Double"/>
+	<field name="fLoiNhuan" class="java.lang.Double"/>
+	<field name="PK_sPhieuNhapXuatID" class="java.lang.String"/>
+	<field name="dNgayNhapXuat" class="java.lang.String"/>
+	<field name="PK_iHangHoaID" class="java.lang.Integer"/>
+	<field name="sTenHangHoa" class="java.lang.String"/>
+	<field name="iSoLuong" class="java.lang.Integer"/>
+	<field name="fGiaGoc" class="java.lang.Double"/>
+	<field name="fGiaBan" class="java.lang.Double"/>
+	<field name="tbl_HangHoa_sTenHangHoa" class="java.lang.String"/>
+	<field name="sTenCongTy" class="java.lang.String"/>
+	<field name="sDiaChi" class="java.lang.String"/>
+	<field name="sSoDienThoai" class="java.lang.String"/>
+	<field name="sEmail" class="java.lang.String"/>
+	<field name="iThangBaoCao" class="java.lang.Integer"/>
+	<field name="iNamBaoCao" class="java.lang.Integer"/>
+	<variable name="iTongSoLuong" class="java.lang.Integer" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$F{iSoLuong}]]></variableExpression>
+	</variable>
+	<variable name="fTongThanhTien" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{fThanhTien}]]></variableExpression>
+	</variable>
+	<variable name="fTongLoiNhuan" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{fLoiNhuan}]]></variableExpression>
+	</variable>
+	<group name="PK_sPhieuNhapXuatID">
+		<groupExpression><![CDATA[$F{PK_sPhieuNhapXuatID}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="165" splitType="Stretch">
+			<line>
+				<reportElement mode="Opaque" x="0" y="90" width="802" height="1" forecolor="#FF0000"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="456" y="21" width="73" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="41" width="73" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Số điện thoại:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="62" width="73" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="456" y="1" width="346" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sTenCongTy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="529" y="21" width="273" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sDiaChi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="529" y="41" width="273" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sSoDienThoai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="529" y="62" width="273" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sEmail}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="1" width="329" height="81"/>
+				<imageExpression><![CDATA["E:\\CloudDocument\\Dropbox\\MyProject\\NhatQuangSalesManager\\Source\\media\\images\\LogoNhatQuang.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="102" width="802" height="28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="24"/>
+				</textElement>
+				<text><![CDATA[BÁO  CÁO DOANH THU]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="133" width="39" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Tháng]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="371" y="133" width="21" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iThangBaoCao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="133" width="26" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Năm]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="418" y="133" width="37" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iNamBaoCao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="157" splitType="Stretch">
+			<elementGroup/>
+			<componentElement>
+				<reportElement key="table 5" style="table 5" x="0" y="0" width="802" height="140"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="datLoiNhuan">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Số phiếu]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PK_sPhieuNhapXuatID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Ngày xuất hàng]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{dNgayNhapXuat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Mã hàng]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PK_iHangHoaID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Tên hàng]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sTenHangHoa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Số lượng]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{iSoLuong}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Giá vốn]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fGiaGoc}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Giá bán]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fGiaBan}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Thành tiền]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fThanhTien}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Lợi nhuận]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center">
+									<font fontName="Times New Roman" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{fLoiNhuan}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
