@@ -49,8 +49,8 @@ public class TrangChu extends JInternalFrame{
 		});
 	}
 	public TrangChu() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_action_bookmark.png"));
-		icon = new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\TrangChu.png");
+		setFrameIcon(new ImageIcon("media/images/48px-Crystal_Clear_action_bookmark.png"));
+		icon = new ImageIcon("media/images/TrangChu.png");
 		JPanel panel = new JPanel(){
 		public void paintComponent(Graphics g)	{	
 			Dimension d = getSize();

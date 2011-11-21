@@ -10,11 +10,12 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import javax.swing.Box;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,10 +25,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+
 import module.MarqueeTyGia;
 import view.QuanLiBaoCao;
 import view.TrangChu;
-import java.awt.SystemColor;
 
 public class Home extends JFrame implements ActionListener {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
@@ -133,7 +134,7 @@ public class Home extends JFrame implements ActionListener {
 //		JStatusBar = new JStatusBar();
 		
 		VerticalMenuBar verticalMenuBar = new VerticalMenuBar();
-		setIconImage(Toolkit.getDefaultToolkit().getImage("T:\\BT\\PJQLBH\\Source\\media\\images\\48px-Crystal_Clear_action_bookmark.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("media/images/48px-Crystal_Clear_action_bookmark.png"));
 		setTitle("Phần mềm quản lý bán hàng Hợp tác xã công nghiệp Nhật Quang");
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -160,7 +161,7 @@ public class Home extends JFrame implements ActionListener {
 		gbl_panel_2.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
-		icon = new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\NhatQuangBanner.png");
+		icon = new ImageIcon("media/images/NhatQuangBanner.png");
 		panelImg = new JPanel(){
 			public void paintComponent(Graphics g)	{	
 				Dimension d = getSize();
@@ -295,7 +296,7 @@ public class Home extends JFrame implements ActionListener {
 		panelMenu.setLayout(gbl_panelMenu);
 		
 		btnHThng = new JButton("Hệ thống");
-		btnHThng.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Home.png"));
+		btnHThng.setIcon(new ImageIcon("media/images/Home.png"));
 		btnHThng.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnHThng.addActionListener(new ActionListener() {
 
@@ -340,7 +341,7 @@ public class Home extends JFrame implements ActionListener {
 					NhapXuat.setVisible(true);
 			}
 		});
-		btnNhpxut.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\import_export-icon.png"));
+		btnNhpxut.setIcon(new ImageIcon("media/images/import_export-icon.png"));
 		btnNhpxut.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btnNhpxut = new GridBagConstraints();
 		gbc_btnNhpxut.fill = GridBagConstraints.HORIZONTAL;
@@ -364,7 +365,7 @@ public class Home extends JFrame implements ActionListener {
 			}
 		});
 		btnThuChi.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnThuChi.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\money-icon.png"));
+		btnThuChi.setIcon(new ImageIcon("media/images/money-icon.png"));
 		GridBagConstraints gbc_btnThuChi = new GridBagConstraints();
 		gbc_btnThuChi.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnThuChi.insets = new Insets(0, 0, 5, 5);
@@ -386,7 +387,7 @@ public class Home extends JFrame implements ActionListener {
 					CongNo.setVisible(true);
 			}
 		});
-		btnCngN.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\ConNO-icon.png"));
+		btnCngN.setIcon(new ImageIcon("media/images/ConNO-icon.png"));
 		btnCngN.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btnCngN = new GridBagConstraints();
 		gbc_btnCngN.fill = GridBagConstraints.HORIZONTAL;
@@ -410,7 +411,7 @@ public class Home extends JFrame implements ActionListener {
 			}
 		});
 		btnHngHa.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnHngHa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\hanghoa-icon.png"));
+		btnHngHa.setIcon(new ImageIcon("media/images/hanghoa-icon.png"));
 		GridBagConstraints gbc_btnHngHa = new GridBagConstraints();
 		gbc_btnHngHa.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnHngHa.insets = new Insets(0, 0, 5, 5);
@@ -432,7 +433,7 @@ public class Home extends JFrame implements ActionListener {
 					DoiTac.setVisible(true);
 			}
 		});
-		btniTc.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\icon-DoiTac.png"));
+		btniTc.setIcon(new ImageIcon("media/images/icon-DoiTac.png"));
 		btniTc.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btniTc = new GridBagConstraints();
 		gbc_btniTc.fill = GridBagConstraints.HORIZONTAL;
@@ -456,7 +457,7 @@ public class Home extends JFrame implements ActionListener {
 			}
 		});
 		btnNhnVin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNhnVin.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\icon-NhanVien.png"));
+		btnNhnVin.setIcon(new ImageIcon("media/images/icon-NhanVien.png"));
 		GridBagConstraints gbc_btnNhnVin = new GridBagConstraints();
 		gbc_btnNhnVin.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNhnVin.insets = new Insets(0, 0, 5, 5);
@@ -472,7 +473,7 @@ public class Home extends JFrame implements ActionListener {
 		
 		btnBaoCao = new JButton("Báo cáo");
 		btnBaoCao.addActionListener(this);
-		btnBaoCao.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\ReportsIcon.png"));
+		btnBaoCao.setIcon(new ImageIcon("media/images/ReportsIcon.png"));
 		btnBaoCao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btnBaoCao = new GridBagConstraints();
 		gbc_btnBaoCao.fill = GridBagConstraints.HORIZONTAL;
@@ -496,7 +497,7 @@ public class Home extends JFrame implements ActionListener {
 			}
 		});
 		btnQunL.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnQunL.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Manager-Icon.png"));
+		btnQunL.setIcon(new ImageIcon("media/images/Manager-Icon.png"));
 		GridBagConstraints gbc_btnQunL = new GridBagConstraints();
 		gbc_btnQunL.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnQunL.insets = new Insets(0, 0, 5, 5);
@@ -518,7 +519,7 @@ public class Home extends JFrame implements ActionListener {
 					TroGiup.setVisible(true);
 			}
 		});
-		btnTrGip.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\help-icon.png"));
+		btnTrGip.setIcon(new ImageIcon("media/images/help-icon.png"));
 		btnTrGip.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btnTrGip = new GridBagConstraints();
 		gbc_btnTrGip.fill = GridBagConstraints.HORIZONTAL;
@@ -537,7 +538,7 @@ public class Home extends JFrame implements ActionListener {
 		panelMenu.add(TroGiup, gbc_button_8);
 		
 		label_1 = new JButton("");
-		label_1.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\banner_02.png"));
+		label_1.setIcon(new ImageIcon("media/images/banner_02.png"));
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.insets = new Insets(0, 0, 0, 5);
 		gbc_label_1.gridx = 0;

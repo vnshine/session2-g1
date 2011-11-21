@@ -82,7 +82,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		});
 	}
 	public QuanLiNhanVien() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\import_export-icon.png"));
+		setFrameIcon(new ImageIcon("media/images/import_export-icon.png"));
 		setTitle("Quản lý Nhân Viên");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -318,7 +318,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 			}
 		});
 		
-		mnThm.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		mnThm.setIcon(new ImageIcon("media/images/add.png"));
 		menuBar.add(mnThm);
 		
 		JButton button_2 = new JButton("");
@@ -327,7 +327,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		JMenu mnSa = new JMenu("Sửa");
 		mnSa.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnSa.setForeground(new Color(0, 0, 255));
-		mnSa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Edit.png"));
+		mnSa.setIcon(new ImageIcon("media/images/Edit.png"));
 		menuBar.add(mnSa);
 		
 		JButton button_4 = new JButton("");
@@ -336,7 +336,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		JMenu mnXa = new JMenu("Xóa");
 		mnXa.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnXa.setForeground(new Color(0, 0, 255));
-		mnXa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\delete.png"));
+		mnXa.setIcon(new ImageIcon("media/images/delete.png"));
 		menuBar.add(mnXa);
 		
 		JButton button_5 = new JButton("");
@@ -345,7 +345,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		JMenu mnTmKim = new JMenu("Tìm kiếm");
 		mnTmKim.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnTmKim.setForeground(new Color(0, 0, 255));
-		mnTmKim.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\search-icon.png"));
+		mnTmKim.setIcon(new ImageIcon("media/images/search-icon.png"));
 		menuBar.add(mnTmKim);
 		
 		JButton button_6 = new JButton("");
@@ -354,7 +354,7 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		JMenu mnXutRacl = new JMenu("Xuất Danh Sách");
 		mnXutRacl.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnXutRacl.setForeground(new Color(0, 0, 255));
-		mnXutRacl.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\excel.png"));
+		mnXutRacl.setIcon(new ImageIcon("media/images/excel.png"));
 		menuBar.add(mnXutRacl);
 		
 		JButton button_7 = new JButton("");
@@ -414,14 +414,14 @@ public class QuanLiNhanVien extends JInternalFrame implements ActionListener {
 		getContentPane().add(panel_NhanVien, BorderLayout.SOUTH);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\prev.png"));
+		button.setIcon(new ImageIcon("media/images/prev.png"));
 		panel_NhanVien.add(button);
 		
 		JComboBox comboBox = new JComboBox();
 		panel_NhanVien.add(comboBox);
 		
 		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
+		button_1.setIcon(new ImageIcon("media/images/next.png"));
 		panel_NhanVien.add(button_1);
 		
 		textField_10.setText("123456");

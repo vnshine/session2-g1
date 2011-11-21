@@ -75,6 +75,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	private Integer loiDiaChi=0;
 	private Integer loiGhiChu=0;
 	private Integer onClickTable = 0;
+	private DoiTac_LuocSu DoiTac_LuocSu;
 	private JSuggestField textfJSuggestField;
 	private String[] columname = new String[] { "STT",
 															"M\u00E3 \u0111\u1ED1i t\u00E1c",
@@ -92,9 +93,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 	 * @throws SQLException 
 	 */
 	public QuanLiDoiTac() throws SQLException {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\icon-DoiTac.png"));
-		lblThongBao = new JLabel();
-		lblThongBao.setText("Kh\u00F4ng t\u1ED3n t\u1EA1i \u0111\u1ED1i t\u00E1c mu\u1ED1n x\u00F3a !");
+		setFrameIcon(new ImageIcon("media/images/icon-DoiTac.png"));
 		Toolkit tk = Toolkit.getDefaultToolkit();  
 		int xSize = ((int) tk.getScreenSize().getWidth());  
 		int ySize = ((int) tk.getScreenSize().getHeight());  
@@ -109,9 +108,15 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		Box verticalBox = Box.createVerticalBox();
 		panel_1.add(verticalBox);
 		
+		JPanel panel = new JPanel();
+		verticalBox.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		lblThongBao = new JLabel();
+		lblThongBao.setText("Kh\u00F4ng t\u1ED3n t\u1EA1i \u0111\u1ED1i t\u00E1c mu\u1ED1n x\u00F3a !");
+		
 		JPanel panel_DuLieu = new JPanel();
+		panel.add(panel_DuLieu, BorderLayout.NORTH);
 		panel_DuLieu.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "D\u1EEF li\u1EC7u", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
-		verticalBox.add(panel_DuLieu);
 		
 		Box verticalBox_1 = Box.createVerticalBox();
 		panel_DuLieu.add(verticalBox_1);
@@ -198,13 +203,26 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		panel_DL2.add(textField_GhiChuDT);
 		textField_GhiChuDT.setColumns(41);
 		
+		textField_DiaChiDT.setEditable(false);
+		textField_GhiChuDT.setEditable(false);
+		textField_MaDT.setEditable(false);
+		textField_NLH.setEditable(false);
+		textField_SoDT.setEditable(false);
+		textField_TenDT.setEditable(false);
+		
+		JPanel panel_Error = new JPanel();
+		verticalBox_1.add(panel_Error);
+		
+		new ThongBao(lblThongBao, Color.RED, " ");
+		panel_Error.add(lblThongBao);
+		
 		JPanel panel_TacVu = new JPanel();
+		panel.add(panel_TacVu, BorderLayout.SOUTH);
 		panel_TacVu.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "T\u00E1c v\u1EE5", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(128, 128, 128)));
-		verticalBox.add(panel_TacVu);
 		
 		btnAdd = new JButton("Th\u00EAm");
 		btnAdd.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnAdd.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		btnAdd.setIcon(new ImageIcon("media/images/add.png"));
 		btnAdd.setActionCommand("Add");
 		btnAdd.addActionListener(this);
 		
@@ -212,35 +230,44 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		
 		btnEdit = new JButton("S\u1EEDa");
 		btnEdit.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnEdit.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Edit.png"));
+		btnEdit.setIcon(new ImageIcon("media/images/Edit.png"));
 		btnEdit.setActionCommand("Edit");
 		btnEdit.addActionListener(this);
 		panel_TacVu.add(btnEdit);
 		
 		btnDelete = new JButton("X\u00F3a");
 		btnDelete.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnDelete.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\delete.png"));
+		btnDelete.setIcon(new ImageIcon("media/images/delete.png"));
 		btnDelete.setActionCommand("Delete");
 		btnDelete.addActionListener(this);
 		panel_TacVu.add(btnDelete);
 		
 		btnSave = new JButton("L\u01B0u");
-		btnSave.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Save.png"));
+		btnSave.setIcon(new ImageIcon("media/images/Save.png"));
 		btnSave.setActionCommand("Save");
 		btnSave.addActionListener(this);
 		panel_TacVu.add(btnSave);
 		
 		btnCancel = new JButton("H\u1EE7y");
-		btnCancel.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\cancel.png"));
+		btnCancel.setIcon(new ImageIcon("media/images/cancel.png"));
 		btnCancel.setActionCommand("Cancel");
 		btnCancel.addActionListener(this);
 		panel_TacVu.add(btnCancel);
 		
 		btnExport = new JButton("Xu\u1EA5t danh s\u00E1ch");
-		btnExport.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\excel.png"));
+		btnExport.setIcon(new ImageIcon("media/images/excel.png"));
 		btnExport.setActionCommand("Export");
 		btnExport.addActionListener(this);
 		panel_TacVu.add(btnExport);
+		
+		JButton btnLcSGiao = new JButton("Lịch sử giao dịch");
+		btnLcSGiao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dialogLuocSu();
+			}
+		});
+		btnLcSGiao.setIcon(new ImageIcon("media/images/wall_clock_1_green_T.png"));
+		panel_TacVu.add(btnLcSGiao);
 		
 		JPanel panel_TimKiem = new JPanel();
 		panel_TimKiem.setBorder(new TitledBorder(null, "T\u00ECm ki\u1EBFm", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -265,7 +292,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		textfJSuggestField.setColumns(10);
 		
 		btnFind = new JButton("T\u00ECm ki\u1EBFm");
-		btnFind.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\search-icon.png"));
+		btnFind.setIcon(new ImageIcon("media/images/search-icon.png"));
 		panel_TimKiem.add(btnFind);
 		btnFind.setActionCommand("Find");
 		btnFind.addActionListener(this);
@@ -323,10 +350,10 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		panel_DanhSach.add(scrollPane, BorderLayout.NORTH);
 		//panel_DanhSach.add(table, BorderLayout.NORTH);
 		JPanel panel_XemTrang = new JPanel();
-		verticalBox.add(panel_XemTrang);
+		panel_DanhSach.add(panel_XemTrang, BorderLayout.SOUTH);
 		
 		btnBack = new JButton("");
-		btnBack.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\prev.png"));
+		btnBack.setIcon(new ImageIcon("media/images/prev.png"));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				box_SoTrang.setSelectedItem(soTrang-1);
@@ -350,43 +377,13 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		panel_XemTrang.add(box_SoTrang);
 		
 		btnNext = new JButton("");
-		btnNext.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
+		btnNext.setIcon(new ImageIcon("media/images/next.png"));
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				box_SoTrang.setSelectedItem(soTrang+1);
 			}
 		});
 		panel_XemTrang.add(btnNext);
-		
-		JPanel panel_2 = new JPanel();
-		getContentPane().add(panel_2, BorderLayout.SOUTH);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{643, 63, 0};
-		gbl_panel_2.rowHeights = new int[]{14, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_2.setLayout(gbl_panel_2);
-		
-		JLabel lblCreateBy = new JLabel("....................................");
-		GridBagConstraints gbc_lblCreateBy = new GridBagConstraints();
-		gbc_lblCreateBy.insets = new Insets(0, 0, 0, 5);
-		gbc_lblCreateBy.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblCreateBy.gridx = 0;
-		gbc_lblCreateBy.gridy = 0;
-		panel_2.add(lblCreateBy, gbc_lblCreateBy);
-		
-		textField_DiaChiDT.setEditable(false);
-		textField_GhiChuDT.setEditable(false);
-		textField_MaDT.setEditable(false);
-		textField_NLH.setEditable(false);
-		textField_SoDT.setEditable(false);
-		textField_TenDT.setEditable(false);
-		
-		JPanel panel_Error = new JPanel();
-		verticalBox_1.add(panel_Error);
-		
-		new ThongBao(lblThongBao, Color.RED, " ");
-		panel_Error.add(lblThongBao);
 		loaddata();
 //		JFrame ad = new JFrame();
 //		ad.add(panel_XemTrang);
@@ -922,7 +919,16 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 		}
 	
 	}
-	
+	public void dialogLuocSu() {
+		try {
+			DoiTac_LuocSu = new DoiTac_LuocSu(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DoiTac_LuocSu.setModal(true);
+		DoiTac_LuocSu.setVisible(true);
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

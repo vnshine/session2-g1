@@ -70,7 +70,7 @@ public class QuanLiBaoCao extends JInternalFrame implements ActionListener {
 		});
 	}
 	public QuanLiBaoCao() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\ReportsIcon.png"));
+		setFrameIcon(new ImageIcon("media/images/ReportsIcon.png"));
 		setTitle("Báo Cáo");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		

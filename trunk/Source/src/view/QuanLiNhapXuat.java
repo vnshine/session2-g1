@@ -49,9 +49,8 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 	private JTable table;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JLabel maDoiTac;
+	private JLabel maNhanVien;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
@@ -93,7 +92,7 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		});
 	}
 	public QuanLiNhapXuat() throws Exception {
-		setFrameIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\import_export-icon.png"));
+		setFrameIcon(new ImageIcon("media/images/import_export-icon.png"));
 		setTitle("Quản lý Nhập xuất");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -135,29 +134,12 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		
 		final JDateChooser dateChooser = new JDateChooser();
 		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
+		gbc_dateChooser.gridwidth = 3;
 		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
 		gbc_dateChooser.fill = GridBagConstraints.BOTH;
 		gbc_dateChooser.gridx = 3;
 		gbc_dateChooser.gridy = 0;
 		panel_DuLieu.add(dateChooser, gbc_dateChooser);
-		
-		JLabel lblGiNhpXut = new JLabel("Giờ nhập/ xuất : ");
-		lblGiNhpXut.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-		GridBagConstraints gbc_lblGiNhpXut = new GridBagConstraints();
-		gbc_lblGiNhpXut.anchor = GridBagConstraints.EAST;
-		gbc_lblGiNhpXut.insets = new Insets(0, 0, 5, 5);
-		gbc_lblGiNhpXut.gridx = 4;
-		gbc_lblGiNhpXut.gridy = 0;
-		panel_DuLieu.add(lblGiNhpXut, gbc_lblGiNhpXut);
-		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 5;
-		gbc_textField_1.gridy = 0;
-		panel_DuLieu.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
 		
 		JLabel lblTniTc = new JLabel("Tên đối tác: ");
 		lblTniTc.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -168,13 +150,13 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		gbc_lblTniTc.gridy = 1;
 		panel_DuLieu.add(lblTniTc, gbc_lblTniTc);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 1;
-		gbc_comboBox_1.gridy = 1;
-		panel_DuLieu.add(comboBox_1, gbc_comboBox_1);
+		JTextField tenDoiTac = new JTextField();
+		GridBagConstraints gbc_tenDoiTac = new GridBagConstraints();
+		gbc_tenDoiTac.insets = new Insets(0, 0, 5, 5);
+		gbc_tenDoiTac.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tenDoiTac.gridx = 1;
+		gbc_tenDoiTac.gridy = 1;
+		panel_DuLieu.add(tenDoiTac, gbc_tenDoiTac);
 		
 		JLabel lblMiTc = new JLabel("Mã đối tác: ");
 		lblMiTc.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -185,19 +167,14 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		gbc_lblMiTc.gridy = 1;
 		panel_DuLieu.add(lblMiTc, gbc_lblMiTc);
 		
-		textField_2 = new JTextField();
-		textField_2.addCaretListener(new CaretListener() {
-			public void caretUpdate(CaretEvent arg0) {
-				System.out.println(dateChooser.getDateFormatString());
-			}
-		});
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 3;
-		gbc_textField_2.gridy = 1;
-		panel_DuLieu.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		maDoiTac = new JLabel();
+		maDoiTac.setText("Mã Đối tác");
+		GridBagConstraints gbc_maDoiTac = new GridBagConstraints();
+		gbc_maDoiTac.insets = new Insets(0, 0, 5, 5);
+		gbc_maDoiTac.fill = GridBagConstraints.HORIZONTAL;
+		gbc_maDoiTac.gridx = 3;
+		gbc_maDoiTac.gridy = 1;
+		panel_DuLieu.add(maDoiTac, gbc_maDoiTac);
 		
 		JLabel lblGhiCh = new JLabel("Ghi chú: ");
 		lblGhiCh.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -229,13 +206,14 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		gbc_lblTnNhnVin.gridy = 2;
 		panel_DuLieu.add(lblTnNhnVin, gbc_lblTnNhnVin);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 1;
-		gbc_comboBox_2.gridy = 2;
-		panel_DuLieu.add(comboBox_2, gbc_comboBox_2);
+		JLabel tenNhanVien = new JLabel();
+		tenNhanVien.setText("Tên Nhân Viên");
+		GridBagConstraints gbc_tenNhanVien = new GridBagConstraints();
+		gbc_tenNhanVien.insets = new Insets(0, 0, 5, 5);
+		gbc_tenNhanVien.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tenNhanVien.gridx = 1;
+		gbc_tenNhanVien.gridy = 2;
+		panel_DuLieu.add(tenNhanVien, gbc_tenNhanVien);
 		
 		JLabel lblMNhnVin = new JLabel("Mã nhân viên: ");
 		lblMNhnVin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -246,14 +224,14 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		gbc_lblMNhnVin.gridy = 2;
 		panel_DuLieu.add(lblMNhnVin, gbc_lblMNhnVin);
 		
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 3;
-		gbc_textField_3.gridy = 2;
-		panel_DuLieu.add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		maNhanVien = new JLabel();
+		maNhanVien.setText("Mã");
+		GridBagConstraints gbc_maNhanVien = new GridBagConstraints();
+		gbc_maNhanVien.insets = new Insets(0, 0, 5, 5);
+		gbc_maNhanVien.fill = GridBagConstraints.HORIZONTAL;
+		gbc_maNhanVien.gridx = 3;
+		gbc_maNhanVien.gridy = 2;
+		panel_DuLieu.add(maNhanVien, gbc_maNhanVien);
 		
 		JLabel lblTngTin = new JLabel("Tổng tiền: ");
 		lblTngTin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -448,7 +426,7 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 			}
 		});
 		
-		mnThm.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\add.png"));
+		mnThm.setIcon(new ImageIcon("media/images/add.png"));
 		menuBar.add(mnThm);
 		
 		JButton button_2 = new JButton("");
@@ -457,7 +435,7 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		JMenu mnSa = new JMenu("Sửa");
 		mnSa.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnSa.setForeground(new Color(0, 0, 255));
-		mnSa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\Edit.png"));
+		mnSa.setIcon(new ImageIcon("media/images/Edit.png"));
 		menuBar.add(mnSa);
 		
 		JButton button_4 = new JButton("");
@@ -466,25 +444,16 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		JMenu mnXa = new JMenu("Xóa");
 		mnXa.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnXa.setForeground(new Color(0, 0, 255));
-		mnXa.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\delete.png"));
+		mnXa.setIcon(new ImageIcon("media/images/delete.png"));
 		menuBar.add(mnXa);
 		
 		JButton button_5 = new JButton("");
 		menuBar.add(button_5);
 		
-		JMenu mnTmKim = new JMenu("Tìm kiếm");
-		mnTmKim.setFont(new Font("Segoe UI", Font.BOLD, 12));
-		mnTmKim.setForeground(new Color(0, 0, 255));
-		mnTmKim.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\search-icon.png"));
-		menuBar.add(mnTmKim);
-		
-		JButton button_6 = new JButton("");
-		menuBar.add(button_6);
-		
 		JMenu mnXutRacl = new JMenu("Xuất Phiếu");
 		mnXutRacl.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnXutRacl.setForeground(new Color(0, 0, 255));
-		mnXutRacl.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\excel.png"));
+		mnXutRacl.setIcon(new ImageIcon("media/images/excel.png"));
 		menuBar.add(mnXutRacl);
 		
 		JButton button_7 = new JButton("");
@@ -543,14 +512,14 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		getContentPane().add(panel_NhanVien, BorderLayout.SOUTH);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\prev.png"));
+		button.setIcon(new ImageIcon("media/images/prev.png"));
 		panel_NhanVien.add(button);
 		
 		JComboBox comboBox = new JComboBox();
 		panel_NhanVien.add(comboBox);
 		
 		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon("T:\\BT\\PJQLBH\\Source\\media\\images\\next.png"));
+		button_1.setIcon(new ImageIcon("media/images/next.png"));
 		panel_NhanVien.add(button_1);
 	}
 

@@ -18,21 +18,21 @@ public class MarqueeTyGia extends JPanel {
 	public MarqueeTyGia() {
 		//String s = "T\u1EF7 gi\u00E1 ch\u00E9m gi\u00F3 h\u00F4m nay l\u00E0 Vi\u1EC7t nam ch\u00E9m 1 = M\u1EF9 ch\u00E9m 100 = Trung qu\u1ED1c ch\u00E9m 100 = Nh\u1EADt b\u1EA3n ch\u00E9m 99,5 = EU ch\u00E9m 98.75  t\u1EF7 gi\u00E1 ch\u00E9m gi\u00F3 c\u1EE7a Vi\u1EC7t Nam t\u0103ng v\u1ECDt so v\u1EDBi c\u00F9ng k\u1EF3 n\u0103m tr\u01B0\u1EDBc";
 		Vector<TyGia> b = new LayTyGia().layTyGia();
-		String s = "tyû giaù ngoaïi teä theo ngaân haøng Vietconbank hoâm nay:   "+"               *   "+
-		b.get(0).getLoaiNgoaiTe() + " -    mua tieàn maët:  "+b.get(0).getMuaTienMat()+"    mua chuyeån khoaûn:  "+b.get(0).getMuaChuyenKhoan()
-		+"    baùn ra:  "+b.get(0).getBanRa()
-		+"               *   "+
-		b.get(1).getLoaiNgoaiTe() + " -    mua tieàn maët:  "+b.get(1).getMuaTienMat()+"    mua chuyeån khoaûn:  "+b.get(1).getMuaChuyenKhoan()
-		+"    baùn ra:  "+b.get(1).getBanRa()
-		+"               *   "+
-		b.get(2).getLoaiNgoaiTe() + " -    mua tieàn maët:  "+b.get(2).getMuaTienMat()+"    mua chuyeån khoaûn:  "+b.get(2).getMuaChuyenKhoan()
-		+"    baùn ra:  "+b.get(2).getBanRa()
-		+"               *   "+
-		b.get(3).getLoaiNgoaiTe() + " -    mua tieàn maët:  "+b.get(3).getMuaTienMat()+"    mua chuyeån khoaûn:  "+b.get(3).getMuaChuyenKhoan()
-		+"    baùn ra:  "+b.get(3).getBanRa()
-		+"               *   "+
-		b.get(4).getLoaiNgoaiTe() + " -    mua tieàn maët:  "+b.get(4).getMuaTienMat()+"    mua chuyeån khoaûn:  "+b.get(4).getMuaChuyenKhoan()
-		+"    baùn ra:  "+b.get(4).getBanRa();
+		String s = "Tỷ giá ngoại tệ theo ngân hàng vietcombank hôm nay :   "+"               .::   "+
+		b.get(0).getLoaiNgoaiTe() + " -    mua tiền mặt:  "+b.get(0).getMuaTienMat()+"  .:.  mua chuyển khoản:  "+b.get(0).getMuaChuyenKhoan()
+		+"  .:.  bán ra:  "+b.get(0).getBanRa()
+		+"               .::   "+
+		b.get(1).getLoaiNgoaiTe() + " -    mua tiền mặt:  "+b.get(1).getMuaTienMat()+"  .:.  mua chuyển khoản:  "+b.get(1).getMuaChuyenKhoan()
+		+"  .:.  bán ra:  "+b.get(1).getBanRa()
+		+"               .::   "+
+		b.get(2).getLoaiNgoaiTe() + " -    mua tiền mặt:  "+b.get(2).getMuaTienMat()+"  .:.  mua chuyển khoản:  "+b.get(2).getMuaChuyenKhoan()
+		+"  .:.  bán ra:  "+b.get(2).getBanRa()
+		+"               .::   "+
+		b.get(3).getLoaiNgoaiTe() + " -    mua tiền mặt:  "+b.get(3).getMuaTienMat()+"  .:.  mua chuyển khoản:  "+b.get(3).getMuaChuyenKhoan()
+		+"  .:.  bán ra:  "+b.get(3).getBanRa()
+		+"               .::   "+
+		b.get(4).getLoaiNgoaiTe() + " -    mua tiền mặt:  "+b.get(4).getMuaTienMat()+"  .:.  mua chuyển khoản:  "+b.get(4).getMuaChuyenKhoan()
+		+"  .:.      bán ra:  "+b.get(4).getBanRa();
 				//b.get(4).getLoaiNgoaiTe();
 		
 		MarqueePanel mp = new MarqueePanel(s, 200);
@@ -63,7 +63,7 @@ class MarqueePanel extends JPanel implements ActionListener {
         }
         this.s = sb + s + sb;
         this.n = n;
-        label.setFont(new Font("Tahoma", Font.BOLD, 16));
+        label.setFont(new Font("Tahoma", Font.BOLD, 17));
         label.setForeground(Color.RED);
         label.setText(sb.toString());
         this.add(label);
