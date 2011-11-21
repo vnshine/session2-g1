@@ -54,12 +54,6 @@ import javax.swing.JPasswordField;
 public class BaoCaoDoanhThuTheoThang extends JInternalFrame implements ActionListener {
 
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-	private Integer soTrang =0,sTT,soLuongNH = null,iLoi = 0;
-	private QLNhomHangProcess QLNhomHangProcess = new QLNhomHangProcess();
-	DefaultTableModel model;
-	private String err;
-	private Vector<Integer> ListChecked = new Vector<Integer>();
-	private Vector<NhomHang> danhSach;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -96,37 +90,17 @@ public class BaoCaoDoanhThuTheoThang extends JInternalFrame implements ActionLis
 		setFrameIcon(new ImageIcon("media/images/NhanVien-icon.png"));
 		setTitle("Quản lý jjjjjjjjjjjjjjj");
 		getContentPane().setLayout(new BorderLayout(0, 0));
-		
 		JPanel panel_DuLieu = new JPanel();
+		
+		
+		
+		
+		
+		
+		
 		getContentPane().add(panel_DuLieu, BorderLayout.CENTER);
 		panel_DuLieu.setLayout(new BorderLayout(0, 0));
-		model = (new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"", "STT", "T\u00EAn nh\u00F3m h\u00E0ng", "Ghi ch\u00FA", "ID"
-			}
-		) {
-
-			Class[] columnTypes = new Class[] {
-				Boolean.class, Object.class, Object.class, Object.class, Integer.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-					true, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		if (QLNhomHangProcess.getsoNhomHang() > 0) {
-			soTrang = 1;
-		}
 	}
-
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub	
