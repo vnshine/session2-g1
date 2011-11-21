@@ -186,7 +186,7 @@ create table tbl_HangHoa
 go
 
 --Đặt lại giá trị của cột là null
-ALTER TABLE tbl_HangHoa alter column sNgayHetHan datetime NULL
+--ALTER TABLE tbl_HangHoa alter column sNgayHetHan datetime NULL
 
 
 -----------Bang tbl_PhieuNhapXuat
