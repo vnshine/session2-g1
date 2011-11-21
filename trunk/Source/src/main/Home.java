@@ -128,7 +128,7 @@ public class Home extends JFrame implements ActionListener {
 		final HangHoa		 HangHoa	  = new  HangHoa	(this); 
 		final DoiTac		 DoiTac		  = new  DoiTac		(this); 
 		final NhanVien	    NhanVien	  = new  NhanVien	(this); 
-//		final BaoCao		 BaoCao		  = new  BaoCao		(this); 
+		final BaoCao		 BaoCao		  = new  BaoCao		(this); 
 		final QuanLi		 QuanLi		  = new  QuanLi		(this); 
 		final TroGiup		 TroGiup	  = new  TroGiup	(this); 
 //		JStatusBar = new JStatusBar();
@@ -471,8 +471,15 @@ public class Home extends JFrame implements ActionListener {
 		gbc_button_5.gridy = 14;
 		panelMenu.add(NhanVien, gbc_button_5);
 		
+		BaoCao.setVisible(false);
 		btnBaoCao = new JButton("Báo cáo");
-		btnBaoCao.addActionListener(this);
+		btnBaoCao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (BaoCao.isVisible()) {
+					BaoCao.setVisible(false);}else
+					BaoCao.setVisible(true);
+			}
+		});
 		btnBaoCao.setIcon(new ImageIcon("media/images/ReportsIcon.png"));
 		btnBaoCao.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btnBaoCao = new GridBagConstraints();
@@ -483,10 +490,12 @@ public class Home extends JFrame implements ActionListener {
 		panelMenu.add(btnBaoCao, gbc_btnBaoCao);
 		
 		GridBagConstraints gbc_button_6 = new GridBagConstraints();
-		gbc_button_5.insets = new Insets(0, 0, 5, 5);
-		gbc_button_5.gridx = 0;
-		gbc_button_5.gridy = 16;
-//		panelMenu.add(BaoCao, gbc_button_6);
+		gbc_button_6.insets = new Insets(0, 0, 5, 5);
+		gbc_button_6.gridx = 0;
+		gbc_button_6.gridy = 16;
+		panelMenu.add(BaoCao, gbc_button_6);
+		
+		
 		
 		btnQunL = new JButton("Quản lý");
 		btnQunL.addActionListener(new ActionListener() {
