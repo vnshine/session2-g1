@@ -231,7 +231,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblChcV.gridy = 5;
 		panel_DuLieu.add(lblChcV, gbc_lblChcV);
 		
-		lblCngDnC = new JLabel("Quản Lí");
+		lblCngDnC = new JLabel(a.get(6));
 		lblCngDnC.setFont(new Font("Dialog", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblCngDnC = new GridBagConstraints();
 		gbc_lblCngDnC.anchor = GridBagConstraints.WEST;
