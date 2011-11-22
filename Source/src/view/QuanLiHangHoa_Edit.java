@@ -21,6 +21,7 @@ import sun.java2d.ScreenUpdateManager;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class QuanLiHangHoa_Edit extends JDialog {
 
@@ -49,6 +50,7 @@ public class QuanLiHangHoa_Edit extends JDialog {
 	 * @throws Exception 
 	 */
 	public QuanLiHangHoa_Edit() throws Exception {
+		setMinimumSize(new Dimension(600, 205));
 		setTitle("Thêm hàng vào danh sách Nhập/Xuất");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("media/images/add.png"));
 		this.setModal(true);
@@ -105,21 +107,13 @@ public class QuanLiHangHoa_Edit extends JDialog {
 		gbc_lblnGi.gridy = 2;
 		contentPanel.add(lblnGi, gbc_lblnGi);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Giá bán lẻ", "Giá bán buôn", "Giá mua"}));
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 1;
-		gbc_comboBox_1.gridy = 2;
-		contentPanel.add(comboBox_1, gbc_comboBox_1);
-		
 		textField_1 = new JTextField();
 		textField_1.setEditable(false);
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.gridwidth = 2;
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 2;
+		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 2;
 		contentPanel.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);

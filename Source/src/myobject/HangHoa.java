@@ -3,19 +3,35 @@ package myobject;
 public class HangHoa {
 
 	private Integer PK_iHangHoaID;
-	private String sTenHangHoa;
-	private String sTenHangHoaEng;
-	private Integer iGiaMua;
-	private Integer iGiaBanBuon;
-	private Integer iGiaBanLe;
-	private String sNgayNhap;
-	private String sNgayHetHan;
-	private String sGhiChu;
-	private Integer iVAT;
-	private String FK_sDoiTacID;
-	private String FK_sNhaSanXuatID;
-	private Integer FK_iDonViTinhID;
-	private Integer FK_iNhomHangID;
+	private String sTenHangHoa        ;
+	private String sTenHangHoaEng     ;
+	private Integer iDonGia            ;
+	private String sNgayNhap          ;
+	private String sGhiChu            ;
+	private String FK_sDoiTacID       ;
+	private String FK_sNhaSanXuatID   ;
+	private Integer FK_iDonViTinhID    ;
+	private String FK_iNhomHangID     ;
+	private String sTenDoiTac         ;
+	private String sTenNhaSanXuat     ;
+	private String sTenDonViTinh      ;
+	private String sTenNhomHang       ;
+	private Integer iTrangThai;
+	private Integer iSoLuong;
+	
+	
+	public Integer getiTrangThai() {
+		return iTrangThai;
+	}
+	public void setiTrangThai(Integer iTrangThai) {
+		this.iTrangThai = iTrangThai;
+	}
+	public Integer getiSoLuong() {
+		return iSoLuong;
+	}
+	public void setiSoLuong(Integer iSoLuong) {
+		this.iSoLuong = iSoLuong;
+	}
 	public Integer getPK_iHangHoaID() {
 		return PK_iHangHoaID;
 	}
@@ -34,23 +50,11 @@ public class HangHoa {
 	public void setsTenHangHoaEng(String sTenHangHoaEng) {
 		this.sTenHangHoaEng = sTenHangHoaEng;
 	}
-	public Integer getiGiaMua() {
-		return iGiaMua;
+	public Integer getiDonGia() {
+		return iDonGia;
 	}
-	public void setiGiaMua(Integer iGiaMua) {
-		this.iGiaMua = iGiaMua;
-	}
-	public Integer getiGiaBanBuon() {
-		return iGiaBanBuon;
-	}
-	public void setiGiaBanBuon(Integer iGiaBanBuon) {
-		this.iGiaBanBuon = iGiaBanBuon;
-	}
-	public Integer getiGiaBanLe() {
-		return iGiaBanLe;
-	}
-	public void setiGiaBanLe(Integer iGiaBanLe) {
-		this.iGiaBanLe = iGiaBanLe;
+	public void setiDonGia(Integer iDonGia) {
+		this.iDonGia = iDonGia;
 	}
 	public String getsNgayNhap() {
 		return sNgayNhap;
@@ -58,23 +62,11 @@ public class HangHoa {
 	public void setsNgayNhap(String sNgayNhap) {
 		this.sNgayNhap = sNgayNhap;
 	}
-	public String getsNgayHetHan() {
-		return sNgayHetHan;
-	}
-	public void setsNgayHetHan(String sNgayHetHan) {
-		this.sNgayHetHan = sNgayHetHan;
-	}
 	public String getsGhiChu() {
 		return sGhiChu;
 	}
 	public void setsGhiChu(String sGhiChu) {
 		this.sGhiChu = sGhiChu;
-	}
-	public Integer getiVAT() {
-		return iVAT;
-	}
-	public void setiVAT(Integer iVAT) {
-		this.iVAT = iVAT;
 	}
 	public String getFK_sDoiTacID() {
 		return FK_sDoiTacID;
@@ -94,11 +86,37 @@ public class HangHoa {
 	public void setFK_iDonViTinhID(Integer fK_iDonViTinhID) {
 		FK_iDonViTinhID = fK_iDonViTinhID;
 	}
-	public Integer getFK_iNhomHangID() {
+	public String getFK_iNhomHangID() {
 		return FK_iNhomHangID;
 	}
-	public void setFK_iNhomHangID(Integer fK_iNhomHangID) {
+	public void setFK_iNhomHangID(String fK_iNhomHangID) {
 		FK_iNhomHangID = fK_iNhomHangID;
 	}
+	public String getsTenDoiTac() {
+		return sTenDoiTac;
+	}
+	public void setsTenDoiTac(String sTenDoiTac) {
+		this.sTenDoiTac = sTenDoiTac;
+	}
+	public String getsTenNhaSanXuat() {
+		return sTenNhaSanXuat;
+	}
+	public void setsTenNhaSanXuat(String sTenNhaSanXuat) {
+		this.sTenNhaSanXuat = sTenNhaSanXuat;
+	}
+	public String getsTenDonViTinh() {
+		return sTenDonViTinh;
+	}
+	public void setsTenDonViTinh(String sTenDonViTinh) {
+		this.sTenDonViTinh = sTenDonViTinh;
+	}
+	public String getsTenNhomHang() {
+		return sTenNhomHang;
+	}
+	public void setsTenNhomHang(String sTenNhomHang) {
+		this.sTenNhomHang = sTenNhomHang;
+	}
+
+	
 	
 }

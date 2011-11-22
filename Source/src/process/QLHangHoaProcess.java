@@ -7,12 +7,108 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import myobject.DonViTinh;
 import myobject.HangHoa;
+import myobject.NhaSanXuat;
+import myobject.NhomHang;
 import connect.ioconnection;
 
 
 public class QLHangHoaProcess 
 {
+	
+	public Vector<NhomHang> getListNhomHang() throws Exception
+    {
+            Vector<NhomHang> result = new Vector<NhomHang>();
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("SELECT *  FROM tbl_NhomHang where iTrangThai <2");
+                    ResultSet rs =  cst.executeQuery();
+
+                    while(rs.next())
+                    {
+                    	NhomHang varNhomHang = new NhomHang();
+                    	varNhomHang.setID(rs.getInt("PK_iNhomHangID"));
+                    	varNhomHang.setsTenNhomHang(rs.getString("sTenNhomHang"));
+                    	varNhomHang.setsTenNhomHangEng(rs.getString("sTenNhomHangEng"));
+                    	varNhomHang.setsGhiChu(rs.getString("sGhiChu"));
+                        result.add(varNhomHang);
+                    }
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
+	
+	public Vector<NhaSanXuat> getListNhaSanXuat() throws Exception
+    {
+            Vector<NhaSanXuat> result = new Vector<NhaSanXuat>();
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("SELECT * FROM tbl_NhaSanXuat where iTrangThai<2");
+                    ResultSet rs =  cst.executeQuery();
+
+                    while(rs.next())
+                    {
+                    	NhaSanXuat varNhaSanXuat = new NhaSanXuat();
+                    	varNhaSanXuat.setPK_sNhaSanXuatID(rs.getString("PK_sNhaSanXuatID"));
+                    	varNhaSanXuat.setsTenNhaSanXuat(rs.getString("sTenNhaSanXuat"));
+                    	varNhaSanXuat.setsTenNhaSanXuatEng(rs.getString("sTenNhaSanXuatEng"));
+                    	varNhaSanXuat.setsGhiChu(rs.getString("sGhiChu"));
+                        result.add(varNhaSanXuat);
+                    }
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
+	
+	public Vector<DonViTinh> getListDonViTinh() throws Exception
+    {
+            Vector<DonViTinh> result = new Vector<DonViTinh>();
+            Connection con = ioconnection.getConnection();
+            try
+            {
+                    CallableStatement cst = con.prepareCall("SELECT * FROM tbl_DonViTinh");
+                    ResultSet rs =  cst.executeQuery();
+
+                    while(rs.next())
+                    {
+                    	DonViTinh varDonViTinh = new DonViTinh();
+                    	varDonViTinh.setPK_sDonViTinhID(rs.getString("PK_iDonViTinhID"));
+                    	varDonViTinh.setsTenDonViTinh(rs.getString("sTenDonViTinh"));
+                    	varDonViTinh.setsTenDonViTinhEng(rs.getString("sTenDonViTinhEng"));
+                    	varDonViTinh.setsGhiChu(rs.getString("sGhiChu"));
+                        result.add(varDonViTinh);
+                    }
+            }
+            catch (Exception e)
+            {
+                    e.printStackTrace();
+                    result = null;
+            }
+            finally
+            {
+                    ioconnection.closeConnection(con);	
+                    return result;
+            }
+    }
 	public Vector<HangHoa> getListHangHoa(Integer soTrang) throws SQLException
     {
             Vector<HangHoa> result = new Vector<HangHoa>();

@@ -675,7 +675,7 @@ public class QuanLiNhomHang extends JInternalFrame implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "Lỗi dữ liệu nhập vào:"+err, "Không thực hiện được thao tác!", JOptionPane.ERROR_MESSAGE);
 		}
 		if (iLoi == 0) {
-			JOptionPane.showMessageDialog(new JFrame(), "Ngon !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), "thành công !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 			NhomHang nhomHang = new NhomHang();
 			nhomHang.setsTenNhomHang(textField_TenNhomHT.getText());
 			nhomHang.setsTenNhomHangEng(TiengVietToEg.convert(textField_TenNhomHT.getText()));
@@ -707,7 +707,7 @@ public class QuanLiNhomHang extends JInternalFrame implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "Lỗi dữ liệu nhập vào:"+err, "Không thực hiện được thao tác!", JOptionPane.ERROR_MESSAGE);
 		}
 		if (iLoi == 0) {
-			JOptionPane.showMessageDialog(new JFrame(), "Ngon !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), "thành công !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 			NhomHang nhomHang = new NhomHang();
 			nhomHang.setsTenNhomHang(textField_TenNhomHT2.getText());
 			nhomHang.setsTenNhomHangEng(TiengVietToEg.convert(textField_TenNhomHT2.getText()));
@@ -749,7 +749,7 @@ public class QuanLiNhomHang extends JInternalFrame implements ActionListener {
 				JOptionPane.showMessageDialog(new JFrame(), "Lỗi dữ liệu nhập vào:"+err, "Không thực hiện được thao tác!", JOptionPane.ERROR_MESSAGE);
 			}
 			if (iLoi == 0) {
-				JOptionPane.showMessageDialog(new JFrame(), "Ngon !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), "thành công !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 				NhomHang nhomHang = new NhomHang();
 				nhomHang.setsTenNhomHang(textField_TenNhomHS.getText());
 				nhomHang.setsTenNhomHangEng(TiengVietToEg.convert(textField_TenNhomHS.getText()));
@@ -792,7 +792,7 @@ public class QuanLiNhomHang extends JInternalFrame implements ActionListener {
 				JOptionPane.showMessageDialog(new JFrame(), "Lỗi dữ liệu nhập vào:"+err, "Không thực hiện được thao tác!", JOptionPane.ERROR_MESSAGE);
 			}
 			if (iLoi == 0) {
-				JOptionPane.showMessageDialog(new JFrame(), "Ngon !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(), "thành công !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
 				NhomHang nhomHang = new NhomHang();
 				nhomHang.setsTenNhomHang(textField_TenNHS2.getText());
 				nhomHang.setsTenNhomHangEng(TiengVietToEg.convert(textField_TenNHS2.getText()));
