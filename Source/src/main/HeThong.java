@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -12,12 +13,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
+
+import module.SetCenter;
 
 import view.ThongTaiKhoan;
 
 
 public class HeThong extends JPanel implements ActionListener {
+	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
     private JToolBar tbr;
     private JButton btnlogout,btnMyAcc,btnTheme;
     private Home trangchu;
@@ -64,7 +70,33 @@ public class HeThong extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
     	
         if(e.getSource()== this.btnlogout){
-        	
+        	this.setVisible(false);
+			LoginForm frame;
+			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
+			if (lnfClassname == null){
+				lnfClassname = UIManager.getCrossPlatformLookAndFeelClassName();
+			}
+				try {
+					UIManager.setLookAndFeel(lnfClassname);
+					frame = new LoginForm();
+					frame.setVisible(true);
+					frame.pack();
+					SetCenter setCenter = new SetCenter(frame);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (InstantiationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedLookAndFeelException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			
         }
         
         if(e.getSource()== this.btnMyAcc){
