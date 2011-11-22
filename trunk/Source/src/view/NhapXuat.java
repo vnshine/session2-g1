@@ -36,25 +36,28 @@ import process.NhapXuatProcess;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
+import javax.swing.event.CaretListener;
+import javax.swing.event.CaretEvent;
 
 public class NhapXuat extends JDialog {
 
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField,comboBox;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textFieldSoLuong,tenMatHang;
+	private JTextField textField_DonGia;
+	private JTextField textField_TongTien;
 	private JTable table;
 	private JTextField textField_3;
 	private JPanel panel_NhanVien,panel;
-	private JButton btnng,btnBQua,btnTmKim,button_1;
+	private JButton btnng,btnBQua,btnTmKim,button_1,button;
 	private JComboBox comboBox_2,comboBox_SoTrang;
 	private JScrollPane scrollPane;
 	private JLabel lblMMtHng;
-	private JTextField txtMMtHng;
-	private Integer loi,soLuongHH,sTT,soTrang = 0;
+	private JTextField maMatHang;
+	private Integer loi,soLuongHH,soLuong,sTT,soTrang = 1;
+	private Float donGia;
 	private JLabel lblng;
-	private Vector<HangHoa> danhSach;
+	private Vector<HangHoa> danhSach = new Vector<HangHoa>();
 	private Vector<Integer> ListChecked = new Vector<Integer>();
 	private DefaultTableModel model;
 	private NhapXuatProcess NhapXuatProcess = new NhapXuatProcess();
@@ -121,17 +124,17 @@ public class NhapXuat extends JDialog {
 		gbc_lblMMtHng.gridy = 0;
 		contentPanel.add(lblMMtHng, gbc_lblMMtHng);
 		
-		txtMMtHng = new JTextField();
-		txtMMtHng.setText("Mã mặt hàng");
-		txtMMtHng.setEditable(false);
-		txtMMtHng.setDisabledTextColor(Color.BLACK);
-		GridBagConstraints gbc_txtMMtHng = new GridBagConstraints();
-		gbc_txtMMtHng.gridwidth = 4;
-		gbc_txtMMtHng.insets = new Insets(0, 0, 5, 0);
-		gbc_txtMMtHng.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtMMtHng.gridx = 1;
-		gbc_txtMMtHng.gridy = 0;
-		contentPanel.add(txtMMtHng, gbc_txtMMtHng);
+		maMatHang = new JTextField();
+		maMatHang.setText("Mã mặt hàng");
+		maMatHang.setEditable(false);
+		maMatHang.setDisabledTextColor(Color.BLACK);
+		GridBagConstraints gbc_maMatHang = new GridBagConstraints();
+		gbc_maMatHang.gridwidth = 4;
+		gbc_maMatHang.insets = new Insets(0, 0, 5, 0);
+		gbc_maMatHang.fill = GridBagConstraints.HORIZONTAL;
+		gbc_maMatHang.gridx = 1;
+		gbc_maMatHang.gridy = 0;
+		contentPanel.add(maMatHang, gbc_maMatHang);
 		
 		JLabel lblTnMtHng = new JLabel("Tên mặt hàng:");
 		lblTnMtHng.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -142,17 +145,17 @@ public class NhapXuat extends JDialog {
 		gbc_lblTnMtHng.gridy = 1;
 		contentPanel.add(lblTnMtHng, gbc_lblTnMtHng);
 		
-		comboBox = new JTextField();
-		comboBox.setText("Tên mặt hàng");
-		comboBox.setEditable(false);
-		comboBox.setDisabledTextColor(new Color(0, 0, 0));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.gridwidth = 4;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 1;
-		contentPanel.add(comboBox, gbc_comboBox);
+		tenMatHang = new JTextField();
+		tenMatHang.setText("Tên mặt hàng");
+		tenMatHang.setEditable(false);
+		tenMatHang.setDisabledTextColor(new Color(0, 0, 0));
+		GridBagConstraints gbc_tenMatHang = new GridBagConstraints();
+		gbc_tenMatHang.gridwidth = 4;
+		gbc_tenMatHang.insets = new Insets(0, 0, 5, 0);
+		gbc_tenMatHang.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tenMatHang.gridx = 1;
+		gbc_tenMatHang.gridy = 1;
+		contentPanel.add(tenMatHang, gbc_tenMatHang);
 		
 		JLabel lblSLng = new JLabel("Số lượng: ");
 		lblSLng.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -163,16 +166,21 @@ public class NhapXuat extends JDialog {
 		gbc_lblSLng.gridy = 2;
 		contentPanel.add(lblSLng, gbc_lblSLng);
 		
-		textField = new JTextField();
-		textField.setDisabledTextColor(new Color(0, 0, 0));
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 4;
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 2;
-		contentPanel.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textFieldSoLuong = new JTextField();
+		textFieldSoLuong.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent arg0) {
+				tinhTong();
+			}
+		});
+		textFieldSoLuong.setDisabledTextColor(new Color(0, 0, 0));
+		GridBagConstraints gbc_textFieldSoLuong = new GridBagConstraints();
+		gbc_textFieldSoLuong.gridwidth = 4;
+		gbc_textFieldSoLuong.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldSoLuong.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldSoLuong.gridx = 1;
+		gbc_textFieldSoLuong.gridy = 2;
+		contentPanel.add(textFieldSoLuong, gbc_textFieldSoLuong);
+		textFieldSoLuong.setColumns(10);
 		
 		JLabel lblnGi = new JLabel("Đơn giá: ");
 		lblnGi.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
@@ -183,16 +191,21 @@ public class NhapXuat extends JDialog {
 		gbc_lblnGi.gridy = 3;
 		contentPanel.add(lblnGi, gbc_lblnGi);
 		
-		textField_1 = new JTextField();
-		textField_1.setDisabledTextColor(new Color(0, 0, 0));
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.gridwidth = 3;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 3;
-		contentPanel.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		textField_DonGia = new JTextField();
+		textField_DonGia.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent e) {
+				tinhTong();
+			}
+		});
+		textField_DonGia.setDisabledTextColor(new Color(0, 0, 0));
+		GridBagConstraints gbc_textField_DonGia = new GridBagConstraints();
+		gbc_textField_DonGia.gridwidth = 3;
+		gbc_textField_DonGia.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_DonGia.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_DonGia.gridx = 1;
+		gbc_textField_DonGia.gridy = 3;
+		contentPanel.add(textField_DonGia, gbc_textField_DonGia);
+		textField_DonGia.setColumns(10);
 		
 		lblng = new JLabel("đồng");
 		GridBagConstraints gbc_lblng = new GridBagConstraints();
@@ -211,17 +224,17 @@ public class NhapXuat extends JDialog {
 		gbc_lblTngTin.gridy = 4;
 		contentPanel.add(lblTngTin, gbc_lblTngTin);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setDisabledTextColor(new Color(0, 0, 0));
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.gridwidth = 4;
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 4;
-		contentPanel.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		textField_TongTien = new JTextField();
+		textField_TongTien.setEditable(false);
+		textField_TongTien.setDisabledTextColor(new Color(0, 0, 0));
+		GridBagConstraints gbc_textField_TongTien = new GridBagConstraints();
+		gbc_textField_TongTien.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_TongTien.gridwidth = 4;
+		gbc_textField_TongTien.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_TongTien.gridx = 1;
+		gbc_textField_TongTien.gridy = 4;
+		contentPanel.add(textField_TongTien, gbc_textField_TongTien);
+		textField_TongTien.setColumns(10);
 		
 		btnng = new JButton("Đồng ý");
 		btnng.addActionListener(new ActionListener() {
@@ -300,16 +313,6 @@ public class NhapXuat extends JDialog {
 		panel.add(btnTmKim, gbc_btnTmKim);
 		
 		comboBox_2 = new JComboBox();
-		comboBox_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					loaddata();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
 		comboBox_2.setFont(new Font("Tahoma", Font.BOLD, 10));
 		comboBox_2.setEnabled(false);
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Theo tên hàng hóa", "Theo nhà sản xuất", "Theo đối tác", "Theo giá"}));
@@ -329,59 +332,104 @@ public class NhapXuat extends JDialog {
 		contentPanel.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				loadLuoiTable();
+			}
+		});
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		model =	new DefaultTableModel(
 				new Object[][] {
-				},
-				new String[] {
-					"", "STT", "T\u00EAn m\u1EB7t h\u00E0ng", "Nh\u00F3m H\u00E0ng", "Nh\u00E0 s\u1EA3n xu\u1EA5t", "\u0110\u01A1n v\u1ECB t\u00EDnh", "\u0110\u01A1n gi\u00E1", "S\u1ED1 l\u01B0\u1EE3ng"
-				}
-			) {
-				Class[] columnTypes = new Class[] {
-					Boolean.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+						{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+					},
+					new String[] {
+						"", "STT", "PK_iHangHoaID", "T\u00EAn h\u00E0ng h\u00F3a", "sTenHangHoaEng", "\u0110\u01A1n gi\u00E1", "sNgayNhap", "Ghi ch\u00FA", "FK_sDoiTacID", "FK_sNhaSanXuatID", "FK_iDonViTinhID", "FK_iNhomHangID", "T\u00EAn \u0111\u1ED1i t\u00E1c", "T\u00EAn nh\u00E0 s\u1EA3n xu\u1EA5t", "T\u00EAn \u0111\u01A1n v\u1ECB t\u00EDnh", "T\u00EAn nh\u00F3m h\u00E0ng", "S\u1ED1 l\u01B0\u1EE3ng c\u00F2n"
+					}
+				) {
+					Class[] columnTypes = new Class[] {
+						Boolean.class, Object.class, Object.class, Object.class, Object.class, Float.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+					};
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
 				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-				boolean[] columnEditables = new boolean[] {
-					true, false, false, false, false, false, false, false
-				};
-				public boolean isCellEditable(int row, int column) {
-					return columnEditables[column];
-				}
-			};
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"", "STT", "PK_iHangHoaID", "sTenHangHoa", "sTenHangHoaEng", "iDonGia", "sNgayNhap", "sGhiChu", "FK_sDoiTacID", "FK_sNhaSanXuatID", "FK_iDonViTinhID", "FK_iNhomHangID", "sTenDoiTac", "sTenNhaSanXuat", "sTenDonViTinh", "sTenNhomHang", "iSoLuong"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Boolean.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		table.setModel(model);
 		table.getColumnModel().getColumn(0).setMinWidth(45);
 		table.getColumnModel().getColumn(1).setMinWidth(45);
+		table.getColumnModel().getColumn(2).setPreferredWidth(0);
+		table.getColumnModel().getColumn(2).setMinWidth(0);
+		table.getColumnModel().getColumn(2).setMaxWidth(0);
+		table.getColumnModel().getColumn(3).setPreferredWidth(250);
+		table.getColumnModel().getColumn(3).setMinWidth(250);
+		table.getColumnModel().getColumn(4).setPreferredWidth(0);
+		table.getColumnModel().getColumn(4).setMinWidth(0);
+		table.getColumnModel().getColumn(4).setMaxWidth(0);
+		table.getColumnModel().getColumn(5).setMinWidth(75);
+		table.getColumnModel().getColumn(6).setPreferredWidth(0);
+		table.getColumnModel().getColumn(6).setMinWidth(0);
+		table.getColumnModel().getColumn(6).setMaxWidth(0);
+		table.getColumnModel().getColumn(7).setPreferredWidth(250);
+		table.getColumnModel().getColumn(7).setMinWidth(250);
+		table.getColumnModel().getColumn(7).setMaxWidth(250);
+		table.getColumnModel().getColumn(8).setPreferredWidth(0);
+		table.getColumnModel().getColumn(8).setMinWidth(0);
+		table.getColumnModel().getColumn(8).setMaxWidth(0);
+		table.getColumnModel().getColumn(9).setPreferredWidth(0);
+		table.getColumnModel().getColumn(9).setMinWidth(0);
+		table.getColumnModel().getColumn(9).setMaxWidth(0);
+		table.getColumnModel().getColumn(10).setPreferredWidth(0);
+		table.getColumnModel().getColumn(10).setMinWidth(0);
+		table.getColumnModel().getColumn(10).setMaxWidth(0);
+		table.getColumnModel().getColumn(11).setPreferredWidth(0);
+		table.getColumnModel().getColumn(11).setMinWidth(0);
+		table.getColumnModel().getColumn(11).setMaxWidth(0);
+		table.getColumnModel().getColumn(12).setPreferredWidth(250);
+		table.getColumnModel().getColumn(12).setMinWidth(250);
+		table.getColumnModel().getColumn(13).setPreferredWidth(150);
+		table.getColumnModel().getColumn(13).setMinWidth(150);
+		table.getColumnModel().getColumn(14).setPreferredWidth(100);
+		table.getColumnModel().getColumn(14).setMinWidth(100);
+		table.getColumnModel().getColumn(15).setPreferredWidth(150);
+		table.getColumnModel().getColumn(15).setMinWidth(150);
+		table.getColumnModel().getColumn(16).setMinWidth(75);
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		scrollPane.setViewportView(table);
 		
 
 		panel_NhanVien = new JPanel();
-		JButton button = new JButton("");
+		button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox_SoTrang.setSelectedItem(soTrang-1);
+			}
+		});
 		
 		button.setIcon(new ImageIcon("media/images/prev.png"));
 		panel_NhanVien.add(button);
 		
 		comboBox_SoTrang = new JComboBox();
+		comboBox_SoTrang.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				soTrang = (Integer) comboBox_SoTrang.getSelectedItem();
+				try {
+					loaddata();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				comboBox_SoTrang.setSelectedItem(soTrang);
+			}
+		});
 		panel_NhanVien.add(comboBox_SoTrang);
 		
 		button_1 = new JButton("");
 		button_1.setIcon(new ImageIcon("media/images/next.png"));
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox_SoTrang.setSelectedItem(soTrang+1);
+			}
+		});
 		panel_NhanVien.add(button_1);
 		GridBagConstraints gbc_panel8 = new GridBagConstraints();
 		gbc_panel8.gridwidth = 5;
@@ -401,7 +449,7 @@ public void loaddata() throws Exception {
 		model.getDataVector().removeAllElements();
 		model.fireTableDataChanged();
 		danhSach = NhapXuatProcess.getListHangHoa(soTrang);
-		//System.out.println(danhSach.size());
+		System.out.println(danhSach.size());
 		sTT = (soTrang-1)*10+1;
 		if (ListChecked.size() == 0) {
 			for (int i = 0; i < danhSach.size(); i++) {
@@ -420,7 +468,7 @@ public void loaddata() throws Exception {
 									danhSach.get(i).getsTenNhaSanXuat  () ,
 									danhSach.get(i).getsTenDonViTinh   () ,
 									danhSach.get(i).getsTenNhomHang    () ,
-									danhSach.get(i).getiSoLuong         () 
+									danhSach.get(i).getiSoLuong        () 
 									};
 				sTT++;
 				model.insertRow(i, oPerson);
@@ -445,7 +493,7 @@ public void loaddata() throws Exception {
 								danhSach.get(i).getsTenNhaSanXuat  () ,
 								danhSach.get(i).getsTenDonViTinh   () ,
 								danhSach.get(i).getsTenNhomHang    () ,
-								danhSach.get(i).getiSoLuong         () 
+								danhSach.get(i).getiSoLuong        () 
 								};
 						sTT++;
 						model.insertRow(i, oPerson);
@@ -469,7 +517,7 @@ public void loaddata() throws Exception {
 						danhSach.get(i).getsTenNhaSanXuat  () ,
 						danhSach.get(i).getsTenDonViTinh   () ,
 						danhSach.get(i).getsTenNhomHang    () ,
-						danhSach.get(i).getiSoLuong         ()
+						danhSach.get(i).getiSoLuong        ()
 						};
 				sTT++;
 				model.insertRow(i, oPerson);
@@ -479,11 +527,34 @@ public void loaddata() throws Exception {
 		model.fireTableDataChanged();
 	}
 	public void loadLuoiTable(){ 
-//		int row = table.getSelectedRow();  
-//		String i = (table.getModel().getValueAt(row, 2)).toString();
-//		textField_TenNhomHang.setText(i);
-//		textArea_GhiChu.setText(((String)table.getModel().getValueAt(row, 3)));
+		int row = table.getSelectedRow();  
+		String i = (table.getModel().getValueAt(row, 2)).toString();
+		maMatHang.setText(i);
+		String i2 = (String)table.getModel().getValueAt(row, 3);
+		tenMatHang.setText(i2);
+		Integer i3 = (Integer)table.getModel().getValueAt(row, 16);
+		textFieldSoLuong.setText(i3.toString());
+		Float i4 = (Float) table.getModel().getValueAt(row, 5);
+		textField_DonGia.setText(i4.toString());
+	
 //		saveChecked();
+	}
+	public void tinhTong() {
+		try {
+			if (textFieldSoLuong.getText() != "") {
+				soLuong = Integer.getInteger(textFieldSoLuong.getText());
+			}
+			if (textField_DonGia.getText() != "") {
+				donGia = Float.parseFloat(textField_DonGia.getText());
+			}
+			
+     		System.out.println(soLuong+"cjhchkjvkjvbk" + donGia);
+//			Float a = b * donGia;
+//			textField_TongTien.setText(a.toString());
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	public void Combo(int numItems)
 	{
