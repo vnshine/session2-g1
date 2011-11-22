@@ -17,6 +17,29 @@ import module.MD5;
 import connect.ioconnection;
 
 public class LoginProcess {
+	
+	public String Name(String userName)
+	{
+		String name = null;
+		Connection con = ioconnection.getConnection();
+		try {
+			CallableStatement cst = con.prepareCall("{call sp_tblNhanVien_Login (?,?)}");
+            cst.setString(1, userName);
+            ResultSet rs = cst.executeQuery();
+            
+            if(rs.next())
+            {
+                name = rs.getString(1);
+            }
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Lỗi kết nối cơ sở dữ liệu",JOptionPane.ERROR_MESSAGE);
+		}finally
+        {
+            ioconnection.closeConnection(con);
+            return name;
+        }
+	}
+	
 	public boolean Login(String userName, String passWord)
     {
         Boolean result = false;
@@ -54,7 +77,7 @@ public class LoginProcess {
     public void Ghi(String name, String pass)
     {
     	try{
-    	File file = new File("D:\\Document\\BAI TAP\\Java\\data.dat");
+    	File file = new File("\\data.dat");
         FileOutputStream foStream = new FileOutputStream(file);
         
         PrintWriter pw= new PrintWriter(foStream);
@@ -72,7 +95,7 @@ public class LoginProcess {
     public void Del()
     {
     	try{
-    	File file = new File("D:\\Document\\BAI TAP\\Java\\data.dat");
+    	File file = new File("\\data.dat");
     	FileOutputStream foStream = new FileOutputStream(file);
         
         PrintWriter pw= new PrintWriter(foStream);
@@ -87,7 +110,7 @@ public class LoginProcess {
     {
     	String[] mang = new String[2];
     	try{
-    	FileReader fr= new FileReader("D:\\Document\\BAI TAP\\Java\\data.dat"); 
+    	FileReader fr= new FileReader("\\data.dat"); 
         BufferedReader input= new BufferedReader(fr); 
         mang[0] = input.readLine();
         mang[1] = input.readLine();

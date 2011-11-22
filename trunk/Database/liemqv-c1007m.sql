@@ -15,6 +15,21 @@ begin
 end
 go
 
+-----------Proc Lấy Tên
+if(OBJECT_ID('sp_tblNhanVien_Name','p') is not null)
+begin
+	drop proc  sp_tblNhanVien_Name
+end
+GO
+
+CREATE proc sp_tblNhanVien_Name
+	@MaNhanVien varchar(6)
+as
+begin
+	select sHoTen FROM tbl_NhanVien WHERE PK_sNhanVienID = @MaNhanVien
+end
+go
+
 --------------------------------
 --Bảng chức năng
 --------------------------------
