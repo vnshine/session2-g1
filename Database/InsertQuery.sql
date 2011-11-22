@@ -8,11 +8,11 @@ INSERT INTO tbl_ThongTinCongTy(PK_sCongTyID,sTenCongTy,sTenCongTyEng,sDiaChi,sDi
 GO
 ----Nhân viên
 SELECT * FROM tbl_NhanVien
-INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0001','123','Quang Liêm','QUANG LIEM','0989320758',1,'',0,'05/02/1990')
-INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0002','123','Việt Anh','VIET ANH','0989320758',1,'',0,'06/02/1990')
-INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0003','123','Tạ Việt Thảo','TA VIET THAO','0989320758',1,'',0,'03/02/1991')
-INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0004','123','Trần Tuấn Sơn','TRAN TUAN SON','0989320758',1,'',0,'06/02/1990')
-INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0005','123','Nguyễn Thế Vinh','NGUYEN THE VINH','0989320358',1,'',0,'05/06/1990')
+INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0001','123',N'Quang Liêm','QUANG LIEM','0989320758',1,'',0,'05/02/1990')
+INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0002','123',N'Việt Anh','VIET ANH','0989320758',1,'',0,'06/02/1990')
+INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0003','123',N'Tạ Việt Thảo','TA VIET THAO','0989320758',1,'',0,'03/02/1991')
+INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0004','123',N'Trần Tuấn Sơn','TRAN TUAN SON','0989320758',1,'',0,'06/02/1990')
+INSERT INTO tbl_NhanVien(PK_sNhanVienID,sMatKhau,sHoTen,sHoTenEng,sSoDienThoai,bGioiTinh,sGhiChu,iTrangThai,dNgaySinh) VALUES('NV0005','123',N'Nguyễn Thế Vinh','NGUYEN THE VINH','0989320358',1,'',0,'05/06/1990')
 ----Nhom hang
 INSERT INTO tbl_NhomHang(sTenNhomHang,sTenNhomHangEng,sGhiChu,iTrangThai) VALUES(N'Đồ gia dụng','DO GIA DUNG','',0)
 INSERT INTO tbl_NhomHang(sTenNhomHang,sTenNhomHangEng,sGhiChu,iTrangThai) VALUES(N'Vật liệu xây dựng','Vat lieu xay dung','',0)
@@ -66,6 +66,19 @@ INSERT INTO tbl_ChiTietPhieuNhapXuat(FK_sPhieuNhapXuatID,FK_iHangHoaID,iSoLuong)
 INSERT INTO tbl_ChiTietPhieuNhapXuat(FK_sPhieuNhapXuatID,FK_iHangHoaID,iSoLuong) VALUES('PN0001',11,5)
 INSERT INTO tbl_ChiTietPhieuNhapXuat(FK_sPhieuNhapXuatID,FK_iHangHoaID,iSoLuong) VALUES('PN0001',12,20)
 
+------Phiếu thu chi
+SELECT fTienMat from tbl_ThongTinCongTy
+DELETE tbl_PhieuThuChi
+SET dateformat dmy
+go
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID,dNgayThuChi) VALUES('PT0001',0,'Thu tiền xuất hàng',24700000,'','NV0001','PX0001','DT0001','21/11/2011')
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID,dNgayThuChi) VALUES('PT0002',0,'Thu tiền xuất hàng',12000000,'','NV0002','PX0003','DT0002','21/11/2011')
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID) VALUES('PT0003',0,'Thu tiền nợ khách hàng',300,'','NV0001','PX0001','DT0001')
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID) VALUES('PT0004',0,'Thu tiền nợ khách hàng',500000,'','NV0002','PX0003','DT0002')
+
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID,dNgayThuChi) VALUES('PC0001',0,'Trả tiền nhập hàng',780000,'','NV0001','PN0001','DT0001','21/11/2011')
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID,dNgayThuChi) VALUES('PC0002',0,'Trả tiền nhập hàng',500000,'','NV0002','PN0002','DT0002','21/11/2011')
+INSERT INTO tbl_PhieuThuChi(PK_sPhieuThuChiID,iTrangThai,sLyDo,fSoTien,sGhiChu,FK_sNhanVienID,FK_sPhieuNhapXuatID,FK_sDoiTacID,dNgayThuChi) VALUES('PC0003',0,'Trả tiền nhập hàng',200000,'','NV0003','PN0003','DT0003','21/11/2011')
 
 
 
