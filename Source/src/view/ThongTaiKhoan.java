@@ -44,9 +44,11 @@ import javax.swing.table.DefaultTableModel;
 
 import UsingExcelTemplates.WriteExcel;
 
+import main.LoginForm;
 import module.TiengVietToEg;
 import myobject.NhomHang;
 import process.QLNhomHangProcess;
+import process.ThongTinProcess;
 import validate.CheckString;
 import java.awt.Font;
 import javax.swing.JPasswordField;
@@ -121,6 +123,9 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		setTitle("Quản lý Tài khoản");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		ThongTinProcess pro = new ThongTinProcess();
+		Vector<String> a = pro.Thongtin(LoginForm.userName);
+		
 		JPanel panel_DuLieu = new JPanel();
 		getContentPane().add(panel_DuLieu, BorderLayout.CENTER);
 		panel_DuLieu.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "D\u1EEF Li\u1EC7u", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -141,7 +146,9 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblM.gridy = 1;
 		panel_DuLieu.add(lblM, gbc_lblM);
 		
-		lblA = new JLabel("A00166");
+		
+		System.out.println(a.get(0));
+		lblA = new JLabel(a.get(0));
 		lblA.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblA = new GridBagConstraints();
 		gbc_lblA.anchor = GridBagConstraints.WEST;
@@ -160,7 +167,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblHVTn.gridy = 2;
 		panel_DuLieu.add(lblHVTn, gbc_lblHVTn);
 		
-		lblTVitTho = new JLabel("Lò Văn Son");
+		lblTVitTho = new JLabel(a.get(1));
 		lblTVitTho.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblTVitTho = new GridBagConstraints();
 		gbc_lblTVitTho.anchor = GridBagConstraints.WEST;
@@ -188,7 +195,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblNgySinh.gridy = 3;
 		panel_DuLieu.add(lblNgySinh, gbc_lblNgySinh);
 		
-		label = new JLabel("01/01/1991");
+		label = new JLabel(a.get(2));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.WEST;
@@ -207,7 +214,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblGiiTnh.gridy = 4;
 		panel_DuLieu.add(lblGiiTnh, gbc_lblGiiTnh);
 		
-		lblNam = new JLabel("Nam");
+		lblNam = new JLabel(a.get(3));
 		lblNam.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblNam = new GridBagConstraints();
 		gbc_lblNam.anchor = GridBagConstraints.WEST;
@@ -264,7 +271,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblSinThoi.gridy = 7;
 		panel_DuLieu.add(lblSinThoi, gbc_lblSinThoi);
 		
-		label_1 = new JLabel("01666679449");
+		label_1 = new JLabel(a.get(4));
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.anchor = GridBagConstraints.WEST;
@@ -283,7 +290,7 @@ public class ThongTaiKhoan extends JInternalFrame implements ActionListener {
 		gbc_lblGhiCh.gridy = 8;
 		panel_DuLieu.add(lblGhiCh, gbc_lblGhiCh);
 		
-		lblDiTrngNng = new JLabel("Dưới trăng nâng chén tiêu sầu, 1 câu thơ vịnh hết 2 đĩa mồi");
+		lblDiTrngNng = new JLabel(a.get(5));
 		lblDiTrngNng.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblDiTrngNng = new GridBagConstraints();
 		gbc_lblDiTrngNng.anchor = GridBagConstraints.WEST;

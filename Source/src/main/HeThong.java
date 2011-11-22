@@ -10,7 +10,10 @@ import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -70,32 +73,12 @@ public class HeThong extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
     	
         if(e.getSource()== this.btnlogout){
-        	this.setVisible(false);
-			LoginForm frame;
-			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
-			if (lnfClassname == null){
-				lnfClassname = UIManager.getCrossPlatformLookAndFeelClassName();
-			}
-				try {
-					UIManager.setLookAndFeel(lnfClassname);
-					frame = new LoginForm();
-					frame.setVisible(true);
-					frame.pack();
-					SetCenter setCenter = new SetCenter(frame);
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (InstantiationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedLookAndFeelException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
+        	int yN = JOptionPane.showConfirmDialog(new JFrame(), "Bạn có chắc chắn muốn thoát", "Thoát", JOptionPane.YES_NO_OPTION);
+        	if(yN == 0)
+        	{
+        		System.exit(0);
+        	}
+        		
 			
         }
         

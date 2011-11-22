@@ -47,7 +47,7 @@ public class LoginForm extends JFrame {
 	private String name, pass;
 	private JCheckBox chckbxRememberPassword;
 	private JLabel lblName, lblPassword, lblLostPassword, label;
-	private static String userName;
+	public static String userName;
 //	private static Thread th1;
 //	private static Thread th2;
 	
@@ -230,7 +230,7 @@ public class LoginForm extends JFrame {
 			this.setVisible(false);
 			Home frame;
 			try{
-				userName = pro.Name(name);
+				userName = name;
 				frame = new Home();
 				frame.setVisible(true);
 				frame.pack();

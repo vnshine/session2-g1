@@ -18,27 +18,27 @@ import connect.ioconnection;
 
 public class LoginProcess {
 	
-	public String Name(String userName)
-	{
-		String name = null;
-		Connection con = ioconnection.getConnection();
-		try {
-			CallableStatement cst = con.prepareCall("{call sp_tblNhanVien_Login (?,?)}");
-            cst.setString(1, userName);
-            ResultSet rs = cst.executeQuery();
-            
-            if(rs.next())
-            {
-                name = rs.getString(1);
-            }
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Lỗi kết nối cơ sở dữ liệu",JOptionPane.ERROR_MESSAGE);
-		}finally
-        {
-            ioconnection.closeConnection(con);
-            return name;
-        }
-	}
+//	public String Name(String userName)
+//	{
+//		String name = null;
+//		Connection con = ioconnection.getConnection();
+//		try {
+//			CallableStatement cst = con.prepareCall("{call sp_tblNhanVien_Login (?,?)}");
+//            cst.setString(1, userName);
+//            ResultSet rs = cst.executeQuery();
+//            
+//            if(rs.next())
+//            {
+//                name = rs.getString(1);
+//            }
+//		} catch (Exception e) {
+//			JOptionPane.showMessageDialog(null, e.getMessage(), "Lỗi kết nối cơ sở dữ liệu",JOptionPane.ERROR_MESSAGE);
+//		}finally
+//        {
+//            ioconnection.closeConnection(con);
+//            return name;
+//        }
+//	}
 	
 	public boolean Login(String userName, String passWord)
     {
