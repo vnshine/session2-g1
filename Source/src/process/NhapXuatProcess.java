@@ -29,17 +29,17 @@ public class NhapXuatProcess
                     	varHangHoa.setPK_iHangHoaID    (rs.getInt("PK_iHangHoaID"))  ;  
                     	varHangHoa.setsTenHangHoa       (rs.getString("sTenHangHoa")) ;   
                     	varHangHoa.setsTenHangHoaEng    (rs.getString("sTenHangHoaEng")) ;   
-                    	varHangHoa.setiDonGia          (rs.getInt("iDonGia"))  ;  
+                    	varHangHoa.setiDonGia          (rs.getFloat("iDonGia"))  ;  
                     	varHangHoa.setsNgayNhap         (rs.getString("sNgayNhap")) ;   
                     	varHangHoa.setsGhiChu           (rs.getString("sGhiChu")) ;   
                     	varHangHoa.setFK_sDoiTacID      (rs.getString("FK_sDoiTacID")) ;   
-                    	varHangHoa.setFK_sNhaSanXuatID  (rs.getString("FK_sNhaSanXuatID ")) ;   
+                    	varHangHoa.setFK_sNhaSanXuatID  (rs.getString("FK_sNhaSanXuatID")) ;   
                     	varHangHoa.setFK_iDonViTinhID  (rs.getInt("FK_iDonViTinhID"))  ;  
-                    	varHangHoa.setFK_iNhomHangID    (rs.getString("FK_iNhomHangID   ")) ;   
-                    	varHangHoa.setsTenDoiTac        (rs.getString("sTenDoiTac       ")) ;   
-                    	varHangHoa.setsTenNhaSanXuat    (rs.getString("sTenNhaSanXuat   ")) ;   
-                    	varHangHoa.setsTenDonViTinh     (rs.getString("sTenDonViTinh    ")) ;   
-                    	varHangHoa.setsTenNhomHang      (rs.getString("sTenNhomHang     ")) ; 	
+                    	varHangHoa.setFK_iNhomHangID    (rs.getString("FK_iNhomHangID")) ;   
+                    	varHangHoa.setsTenDoiTac        (rs.getString("sTenDoiTac")) ;   
+                    	varHangHoa.setsTenNhaSanXuat    (rs.getString("sTenNhaSanXuat")) ;   
+                    	varHangHoa.setsTenDonViTinh     (rs.getString("sTenDonViTinh")) ;   
+                    	varHangHoa.setsTenNhomHang      (rs.getString("sTenNhomHang")) ; 	
                     	varHangHoa.setiSoLuong          (rs.getInt("iSoLuong"))  ;  
                         result.add(varHangHoa);
                     }
@@ -110,10 +110,10 @@ public class NhapXuatProcess
     public static void main(String[] args) throws SQLException {
     	NhapXuatProcess a = new NhapXuatProcess();
 //    	System.out.println(a.checkTenHangHoa("bdff"));
-//    	System.out.println(a.getListHangHoa(1));
+    	System.out.println(a.getListHangHoa(1).get(0).getsTenHangHoa());
 //    	System.out.println(a.getListSearched(1, "dgdsb"));
 //    	System.out.println(a.getSoLuongKQ("hsdhjd"));
-//    	System.out.println(a.getsoHangHoa());
+    	System.out.println(a.getsoHangHoa());
 //    	System.out.println(a.getSuggestData("shsh"));
     }
 }

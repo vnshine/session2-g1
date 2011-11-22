@@ -5,7 +5,7 @@ public class HangHoa {
 	private Integer PK_iHangHoaID;
 	private String sTenHangHoa        ;
 	private String sTenHangHoaEng     ;
-	private Integer iDonGia            ;
+	private Float iDonGia            ;
 	private String sNgayNhap          ;
 	private String sGhiChu            ;
 	private String FK_sDoiTacID       ;
@@ -50,10 +50,10 @@ public class HangHoa {
 	public void setsTenHangHoaEng(String sTenHangHoaEng) {
 		this.sTenHangHoaEng = sTenHangHoaEng;
 	}
-	public Integer getiDonGia() {
+	public Float getiDonGia() {
 		return iDonGia;
 	}
-	public void setiDonGia(Integer iDonGia) {
+	public void setiDonGia(Float iDonGia) {
 		this.iDonGia = iDonGia;
 	}
 	public String getsNgayNhap() {
