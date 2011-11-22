@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptDoanhThu" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.1"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="28"/>
+	<property name="ireport.y" value="34"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -216,6 +216,9 @@ WHERE
 	<variable name="fTongLoiNhuan" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{fLoiNhuan}]]></variableExpression>
 	</variable>
+	<variable name="TongSoLuong" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{iSoLuong}]]></variableExpression>
+	</variable>
 	<group name="PK_sPhieuNhapXuatID">
 		<groupExpression><![CDATA[$F{PK_sPhieuNhapXuatID}]]></groupExpression>
 	</group>
@@ -336,9 +339,9 @@ WHERE
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -347,8 +350,8 @@ WHERE
 								<text><![CDATA[Số phiếu]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -359,9 +362,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -370,8 +373,8 @@ WHERE
 								<text><![CDATA[Ngày xuất hàng]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -382,9 +385,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -393,8 +396,8 @@ WHERE
 								<text><![CDATA[Mã hàng]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -405,9 +408,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -416,8 +419,8 @@ WHERE
 								<text><![CDATA[Tên hàng]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -428,9 +431,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -439,8 +442,8 @@ WHERE
 								<text><![CDATA[Số lượng]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -451,9 +454,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -462,8 +465,8 @@ WHERE
 								<text><![CDATA[Giá vốn]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -474,9 +477,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -485,8 +488,8 @@ WHERE
 								<text><![CDATA[Giá bán]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -497,9 +500,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -508,8 +511,8 @@ WHERE
 								<text><![CDATA[Thành tiền]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -520,9 +523,9 @@ WHERE
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="90">
-						<jr:tableHeader style="table 5_TH" height="0" rowSpan="1"/>
-						<jr:tableFooter style="table 5_TH" height="17" rowSpan="1"/>
-						<jr:columnHeader style="table 5_CH" height="22" rowSpan="1">
+						<jr:tableHeader style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="table 5_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 5_CH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -531,8 +534,8 @@ WHERE
 								<text><![CDATA[Lợi nhuận]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter style="table 5_CH" height="15" rowSpan="1"/>
-						<jr:detailCell style="table 5_TD" height="20" rowSpan="1">
+						<jr:columnFooter style="table 5_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 5_TD" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="90" height="20"/>
 								<textElement textAlignment="Center">
@@ -547,12 +550,41 @@ WHERE
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="12" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="584" y="0" width="36" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="620" y="0" width="95" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="584" y="20" width="131" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập phiếu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="584" y="40" width="131" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Ký và ghi rõ họ tên)]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="18" splitType="Stretch"/>
 	</summary>
 </jasperReport>

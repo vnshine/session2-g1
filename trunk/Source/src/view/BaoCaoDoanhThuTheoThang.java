@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -46,10 +47,15 @@ import UsingExcelTemplates.WriteExcel;
 
 import module.TiengVietToEg;
 import myobject.NhomHang;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JRViewer;
 import process.QLNhomHangProcess;
 import validate.CheckString;
 import java.awt.Font;
 import javax.swing.JPasswordField;
+
+import connect.ioconnection;
 
 public class BaoCaoDoanhThuTheoThang extends JInternalFrame implements ActionListener {
 
@@ -88,18 +94,25 @@ public class BaoCaoDoanhThuTheoThang extends JInternalFrame implements ActionLis
 	}
 	public BaoCaoDoanhThuTheoThang() throws Exception {
 		setFrameIcon(new ImageIcon("media/images/NhanVien-icon.png"));
-		setTitle("Quản lý jjjjjjjjjjjjjjj");
+		setTitle("Báo cáo doanh thu theo tháng");
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		JPanel panel_DuLieu = new JPanel();
 		
 		
-		
+		//anh nhấc cái vừa code vào trong panel này
 		
 		
 		
 		
 		getContentPane().add(panel_DuLieu, BorderLayout.CENTER);
 		panel_DuLieu.setLayout(new BorderLayout(0, 0));
+		
+		Connection con = ioconnection.getConnection();
+		JasperPrint print = JasperFillManager.fillReport("report/rptDoanhThu.jasper", null, con);
+		
+		JRViewer viewer=new JRViewer(print);
+		
+		panel_DuLieu.add(viewer, BorderLayout.CENTER);
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
