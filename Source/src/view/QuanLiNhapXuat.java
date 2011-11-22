@@ -41,16 +41,18 @@ import javax.swing.JRadioButton;
 
 import module.MoneyConvert;
 import module.TextConverter;
+import myobject.HangHoa;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.util.Vector;
 
 public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-	private JTable table;
+	public JTable table;
 	private JTextField textField;
 	private JLabel maDoiTac,lblSum;
 	private JLabel maNhanVien;
@@ -60,8 +62,10 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 	private JTextField textField_7;
 	private JTextField textField_8;
 	private JTextField textField_9;
-	public Integer a;
+	public DefaultTableModel model;
+	public Integer STT;
 	private NhapXuat NhapXuat;
+	public Vector<HangHoa> dsHang = new Vector<HangHoa>();
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -503,15 +507,31 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		
 		table = new JTable();
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		model = new DefaultTableModel(
+				new Object[][] {
+						{null, null, null, null, null, null, null, null},
+					},
+					new String[] {
+						"", "ID", "STT", "ID H\u00E0ng h\u00F3a", "T\u00EAn h\u00E0ng h\u00F3a", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1", "Th\u00E0nh ti\u1EC1n"
+					}
+				) {
+					Class[] columnTypes = new Class[] {
+						Boolean.class, Integer.class, Object.class, String.class, Float.class, Float.class, Object.class, Object.class
+					};
+					public Class getColumnClass(int columnIndex) {
+						return columnTypes[columnIndex];
+					}
+				};
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"", "ID", "STT", "ID H\u00E0ng h\u00F3a", "T\u00EAn h\u00E0ng h\u00F3a", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1", "VAT(%)", "Th\u00E0nh ti\u1EC1n"
+				"", "STT", "ID H\u00E0ng h\u00F3a", "T\u00EAn h\u00E0ng h\u00F3a", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1", "Th\u00E0nh ti\u1EC1n"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Boolean.class, Integer.class, Object.class, String.class, Float.class, Float.class, Object.class, String.class, Object.class
+				Boolean.class, Object.class, String.class, Float.class, Float.class, Object.class, Object.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -520,29 +540,22 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		table.getColumnModel().getColumn(0).setPreferredWidth(60);
 		table.getColumnModel().getColumn(0).setMinWidth(60);
 		table.getColumnModel().getColumn(0).setMaxWidth(999);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(0);
-		table.getColumnModel().getColumn(1).setMinWidth(0);
-		table.getColumnModel().getColumn(1).setMaxWidth(0);
-		table.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table.getColumnModel().getColumn(2).setMinWidth(60);
+		table.getColumnModel().getColumn(1).setPreferredWidth(60);
+		table.getColumnModel().getColumn(1).setMinWidth(60);
+		table.getColumnModel().getColumn(1).setMaxWidth(999);
+		table.getColumnModel().getColumn(2).setPreferredWidth(150);
+		table.getColumnModel().getColumn(2).setMinWidth(150);
 		table.getColumnModel().getColumn(2).setMaxWidth(999);
-		table.getColumnModel().getColumn(3).setPreferredWidth(70);
-		table.getColumnModel().getColumn(3).setMinWidth(150);
+		table.getColumnModel().getColumn(3).setPreferredWidth(250);
+		table.getColumnModel().getColumn(3).setMinWidth(250);
 		table.getColumnModel().getColumn(3).setMaxWidth(999);
-		table.getColumnModel().getColumn(4).setPreferredWidth(250);
-		table.getColumnModel().getColumn(4).setMinWidth(250);
+		table.getColumnModel().getColumn(4).setPreferredWidth(150);
+		table.getColumnModel().getColumn(4).setMinWidth(150);
 		table.getColumnModel().getColumn(4).setMaxWidth(999);
 		table.getColumnModel().getColumn(5).setPreferredWidth(150);
 		table.getColumnModel().getColumn(5).setMinWidth(150);
-		table.getColumnModel().getColumn(5).setMaxWidth(999);
 		table.getColumnModel().getColumn(6).setPreferredWidth(150);
 		table.getColumnModel().getColumn(6).setMinWidth(150);
-		table.getColumnModel().getColumn(7).setPreferredWidth(150);
-		table.getColumnModel().getColumn(7).setMinWidth(150);
-		table.getColumnModel().getColumn(7).setMaxWidth(950);
-		table.getColumnModel().getColumn(8).setPreferredWidth(150);
-		table.getColumnModel().getColumn(8).setMinWidth(150);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
