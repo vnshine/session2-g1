@@ -2,6 +2,7 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,6 +30,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.Timer;
 import javax.swing.UIManager;
+
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JRViewer;
+import connect.ioconnection;
 
 import module.MarqueeTyGia;
 import view.QuanLiBaoCao;
@@ -66,7 +73,7 @@ public class Home extends JFrame implements ActionListener {
 	private HangHoa HangHoa;
 	private DoiTac DoiTac;
 	private NhanVien NhanVien;
-//	private BaoCao BaoCao;
+	private BaoCao BaoCao;
 	private QuanLi QuanLi;
 	private TroGiup TroGiup;
 	private JLabel label;
@@ -131,7 +138,7 @@ public class Home extends JFrame implements ActionListener {
 		final HangHoa		 HangHoa	  = new  HangHoa	(this); 
 		final DoiTac		 DoiTac		  = new  DoiTac		(this); 
 		final NhanVien	    NhanVien	  = new  NhanVien	(this); 
-		//final BaoCao		 BaoCao		  = new  BaoCao		(this); 
+		final BaoCao		 BaoCao		  = new  BaoCao		(this); 
 		final QuanLi		 QuanLi		  = new  QuanLi		(this); 
 		final TroGiup		 TroGiup	  = new  TroGiup	(this); 
 //		JStatusBar = new JStatusBar();
@@ -474,13 +481,13 @@ public class Home extends JFrame implements ActionListener {
 		gbc_button_5.gridy = 14;
 		panelMenu.add(NhanVien, gbc_button_5);
 		
-		//BaoCao.setVisible(false);
+		BaoCao.setVisible(false);
 		btnBaoCao = new JButton("Báo cáo");
 		btnBaoCao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				if (BaoCao.isVisible()) {
-//					BaoCao.setVisible(false);}else
-//					BaoCao.setVisible(true);
+				if (BaoCao.isVisible()) {
+					BaoCao.setVisible(false);}else
+					BaoCao.setVisible(true);
 			}
 		});
 		btnBaoCao.setIcon(new ImageIcon("media/images/ReportsIcon.png"));
@@ -496,7 +503,7 @@ public class Home extends JFrame implements ActionListener {
 		gbc_button_6.insets = new Insets(0, 0, 5, 5);
 		gbc_button_6.gridx = 0;
 		gbc_button_6.gridy = 16;
-		//panelMenu.add(BaoCao, gbc_button_6);
+		panelMenu.add(BaoCao, gbc_button_6);
 		
 		
 		
@@ -592,7 +599,11 @@ public class Home extends JFrame implements ActionListener {
         		return;
         		}else if(paneCenter.positionTab("Báo cáo") == -1){
         			try {
-						paneCenter.addTab(new QuanLiBaoCao(), "Báo cáo");
+        				Connection con = ioconnection.getConnection();
+        				JasperPrint print = JasperFillManager.fillReport("report/rptDoanhThu.jasper", null, con);
+        				
+        				JRViewer viewer=new JRViewer(print);
+						paneCenter.addTab(viewer, "Báo cáo doanh thu theo tháng");
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
