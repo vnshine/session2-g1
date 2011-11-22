@@ -44,9 +44,9 @@ INSERT INTO tbl_DoiTac VALUES('DT0006','Công ty M&C','CONG TY M&C', '043123980'
 SELECT * FROM tbl_HangHoa
 
 -------Hàng hóa
-INSERT INTO tbl_HangHoa(sTenHangHoa,sTenHangHoaEng,iGiaMua,iGiaBanBuon,iGiaBanLe,sNgayNhap,sNgayHetHan,sGhiChu,FK_sDoiTacID,FK_sNhaSanXuatID,FK_iDonViTinhID,FK_iNhomHangID,iTrangThai,iSoLuong) VALUES(N'Ống nước PVC','ONG NUOC PVC', 50.0,51.0,53.0,'20/11/2011','20/12/2015','','DT0001','NSX001',8,2,0,200)
-INSERT INTO tbl_HangHoa(sTenHangHoa,sTenHangHoaEng,iGiaMua,iGiaBanBuon,iGiaBanLe,sNgayNhap,sNgayHetHan,sGhiChu,FK_sDoiTacID,FK_sNhaSanXuatID,FK_iDonViTinhID,FK_iNhomHangID,iTrangThai,iSoLuong) VALUES(N'Vòi hoa sen','VOI SEN', 50.0,51.0,53.0,'20/11/2011','20/12/2015','','DT0001','NSX004',1,2,0,100)
-INSERT INTO tbl_HangHoa(sTenHangHoa,sTenHangHoaEng,iGiaMua,iGiaBanBuon,iGiaBanLe,sNgayNhap,sNgayHetHan,sGhiChu,FK_sDoiTacID,FK_sNhaSanXuatID,FK_iDonViTinhID,FK_iNhomHangID,iTrangThai,iSoLuong) VALUES(N'Chậu rửa mặt','CHAU RUA MAT', 210.3,250.0,280.0,'20/11/2011','20/12/2011','','DT0002','NSX004',8,1,0,200)
+INSERT INTO tbl_HangHoa(sTenHangHoa,sTenHangHoaEng,iDonGia,sNgayNhap,sGhiChu,FK_sDoiTacID,FK_sNhaSanXuatID,FK_iDonViTinhID,FK_iNhomHangID,iTrangThai,iSoLuong) VALUES(N'Ống nước PVC','ONG NUOC PVC', 50.0,'20/11/2011','','DT0001','NSX001',8,2,0,200)
+INSERT INTO tbl_HangHoa(sTenHangHoa,sTenHangHoaEng,iDonGia,sNgayNhap,sGhiChu,FK_sDoiTacID,FK_sNhaSanXuatID,FK_iDonViTinhID,FK_iNhomHangID,iTrangThai,iSoLuong) VALUES(N'Vòi hoa sen','VOI SEN', 50.0,'20/11/2011','','DT0001','NSX004',1,2,0,100)
+INSERT INTO tbl_HangHoa(sTenHangHoa,sTenHangHoaEng,iDonGia,sNgayNhap,sGhiChu,FK_sDoiTacID,FK_sNhaSanXuatID,FK_iDonViTinhID,FK_iNhomHangID,iTrangThai,iSoLuong) VALUES(N'Chậu rửa mặt','CHAU RUA MAT', 210.3,'20/11/2011','','DT0002','NSX004',8,1,0,200)
 -------Phiếu nhập xuất
 INSERT INTO tbl_PhieuNhapXuat(PK_sPhieuNhapXuatID,iTrangThai,FK_sNhanVienID,FK_sDoiTacID,fTongTien,fConNo,sGhiChu) VALUES('PN0001',0,'NV0001','DT0001',780000,0,'')
 INSERT INTO tbl_PhieuNhapXuat(PK_sPhieuNhapXuatID,iTrangThai,FK_sNhanVienID,FK_sDoiTacID,fTongTien,fConNo,sGhiChu) VALUES('PN0002',0,'NV0002','DT0002',5000000,0,'')

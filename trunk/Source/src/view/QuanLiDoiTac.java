@@ -625,7 +625,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 						loaddata();
 						box_SoTrang.setSelectedItem(soTrang);
 					}
-					new ThongBao(lblThongBao, Color.BLUE, "Insert ngon !!!");
+					new ThongBao(lblThongBao, Color.BLUE, "Insert thành công !!!");
 				}
 				
 		} else {
@@ -669,7 +669,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 					      
 					 {
 						dtac.XoaDoiTac((textField_MaDT.getText()));
-						new ThongBao(lblThongBao, Color.BLUE,"Delete ngon !");
+						new ThongBao(lblThongBao, Color.BLUE,"Delete thành công !");
 						Integer soDT = dtac.getsoDoiTac();
 						if ((soDT % 10) == 0 ) {
 							Combo((soDT / 10));
@@ -736,7 +736,7 @@ public class QuanLiDoiTac extends JInternalFrame implements ActionListener {
 						
 						
 //						System.out.println((soDT / 10));
-						new ThongBao(lblThongBao, Color.BLUE, "Update ngon !!!");
+						new ThongBao(lblThongBao, Color.BLUE, "Update thành công !!!");
 						if ((soDT % 10) == 0 ) {
 							Combo((soDT / 10));
 							soTrang = (soDT / 10);

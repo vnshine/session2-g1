@@ -38,6 +38,9 @@ import javax.swing.event.CaretEvent;
 import java.awt.Button;
 import java.awt.Label;
 import javax.swing.JRadioButton;
+
+import module.MoneyConvert;
+import module.TextConverter;
 import net.miginfocom.swing.MigLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -49,7 +52,7 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 	private static final String PREFERRED_LOOK_AND_FEEL = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 	private JTable table;
 	private JTextField textField;
-	private JLabel maDoiTac;
+	private JLabel maDoiTac,lblSum;
 	private JLabel maNhanVien;
 	private JTextField textField_4;
 	private JTextField textField_5;
@@ -135,7 +138,7 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		final JDateChooser dateChooser = new JDateChooser();
 		GridBagConstraints gbc_dateChooser = new GridBagConstraints();
 		gbc_dateChooser.gridwidth = 3;
-		gbc_dateChooser.insets = new Insets(0, 0, 5, 5);
+		gbc_dateChooser.insets = new Insets(0, 0, 5, 0);
 		gbc_dateChooser.fill = GridBagConstraints.BOTH;
 		gbc_dateChooser.gridx = 3;
 		gbc_dateChooser.gridy = 0;
@@ -347,6 +350,18 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		panel.add(lblTngPhiTr, gbc_lblTngPhiTr);
 		
 		textField_9 = new JTextField();
+		textField_9.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent arg0) {
+				try {
+					Integer a = Integer.parseInt(textField_9.getText());
+					MoneyConvert MoneyConvert = new MoneyConvert();
+					lblSum.setText(MoneyConvert.tranlate(textField_9.getText()));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+			}
+		});
 		GridBagConstraints gbc_textField_9 = new GridBagConstraints();
 		gbc_textField_9.anchor = GridBagConstraints.WEST;
 		gbc_textField_9.insets = new Insets(0, 0, 0, 5);
@@ -389,6 +404,24 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		gbc_textField_6.gridy = 0;
 		panel.add(textField_6, gbc_textField_6);
 		textField_6.setColumns(10);
+		
+		JLabel lblTngTinbng = new JLabel("Tổng tiền (bằng chữ): ");
+		lblTngTinbng.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
+		GridBagConstraints gbc_lblTngTinbng = new GridBagConstraints();
+		gbc_lblTngTinbng.anchor = GridBagConstraints.EAST;
+		gbc_lblTngTinbng.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTngTinbng.gridx = 0;
+		gbc_lblTngTinbng.gridy = 5;
+		panel_DuLieu.add(lblTngTinbng, gbc_lblTngTinbng);
+		
+		lblSum = new JLabel("");
+		lblSum.setFont(new Font("Tahoma", Font.BOLD, 12));
+		GridBagConstraints gbc_lblSum = new GridBagConstraints();
+		gbc_lblSum.gridwidth = 5;
+		gbc_lblSum.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSum.gridx = 1;
+		gbc_lblSum.gridy = 5;
+		panel_DuLieu.add(lblSum, gbc_lblSum);
 		
 		JPanel panel_TacVu = new JPanel();
 		panel_TacVu.setForeground(new Color(0, 0, 255));
@@ -451,6 +484,14 @@ public class QuanLiNhapXuat extends JInternalFrame implements ActionListener {
 		menuBar.add(button_5);
 		
 		JMenu mnXutRacl = new JMenu("Xuất Phiếu");
+		mnXutRacl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				check();
+				luu();
+				export();
+			}
+		});
 		mnXutRacl.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		mnXutRacl.setForeground(new Color(0, 0, 255));
 		mnXutRacl.setIcon(new ImageIcon("media/images/excel.png"));

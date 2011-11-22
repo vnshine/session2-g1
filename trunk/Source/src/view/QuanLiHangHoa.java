@@ -32,10 +32,13 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import main.HangHoa;
+import myobject.DonViTinh;
+import myobject.NhaSanXuat;
 import myobject.NhomHang;
 import process.QLHangHoaProcess;
-import process.QLNhomHangProcess;
 import validate.CheckString;
+import ch.rakudave.suggest.JSuggestField;
 
 public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 
@@ -43,23 +46,28 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 	private JTextField textField_ID;
 	private JTextField textField_TenHang;
 	private JTextField textField_GiaBanB;
-	private JComboBox comboBox_DonViTInh,comboBox_NSX;
-	private JComboBox comboBox_NhomHang;
+	private JSuggestField comboBox_NhomHang,comboBox_DonViTInh,comboBox_NSX;
 	private JButton btnThoi,btnLuu,btnThem,btnSua,btnXoa,btnTimKiem,btnKtXutExcel;
 	private JPanel panel_TacVu;
 	private Integer iThem = 0;
 	private String err = null;
 	private JTable table;
-	private Integer loi,numItems;
+	private Integer loi,numItems,sTT;
 	private JTextField textField_6;
 	private QLHangHoaProcess QLHangHoaProcess = new QLHangHoaProcess();
-	private JTextField textField;
 	private JCheckBox chckbxNewCheckBox;
 	private JCheckBox checkBox;
 	private JCheckBox checkBox_1;
 	private JCheckBox checkBox_2;
 	private JCheckBox checkBox_3;
 	private JCheckBox checkBox_4;
+	private Vector<String> tenNhomH,tenNSX,tenDonViTinh;
+	private Vector<NhomHang> a;
+	private Vector<NhaSanXuat> c;
+	private Vector<DonViTinh> b;
+	private Vector<HangHoa> danhSach;
+	private Integer soLuongNH;
+	private DefaultTableModel model;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -101,7 +109,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		panel_DuLieu.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				comboNhomHang();
+				
 			}
 		});
 		panel_DuLieu.setBorder(new TitledBorder(null, "D\u1EEF li\u1EC7u", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -133,8 +141,8 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		textField_ID.setEnabled(false);
 		textField_ID.setEditable(false);
 		GridBagConstraints gbc_textField_ID = new GridBagConstraints();
-		gbc_textField_ID.gridwidth = 4;
-		gbc_textField_ID.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_ID.gridwidth = 5;
+		gbc_textField_ID.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_ID.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_ID.gridx = 2;
 		gbc_textField_ID.gridy = 0;
@@ -160,8 +168,8 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		textField_TenHang = new JTextField();
 		textField_TenHang.setEnabled(false);
 		GridBagConstraints gbc_textField_TenHang = new GridBagConstraints();
-		gbc_textField_TenHang.gridwidth = 4;
-		gbc_textField_TenHang.insets = new Insets(0, 0, 5, 5);
+		gbc_textField_TenHang.gridwidth = 5;
+		gbc_textField_TenHang.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_TenHang.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_TenHang.gridx = 2;
 		gbc_textField_TenHang.gridy = 1;
@@ -183,28 +191,23 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		gbc_lblNhmHng.gridx = 1;
 		gbc_lblNhmHng.gridy = 2;
 		panel_DuLieu.add(lblNhmHng, gbc_lblNhmHng);
-		comboBox_NhomHang = new JComboBox();
+		
+		tenNhomH = new Vector<String>();
+		a = QLHangHoaProcess.getListNhomHang();
+		for (int i = 0; i < QLHangHoaProcess.getListNhomHang().size(); i++) {
+			tenNhomH.add(a.get(i).getsTenNhomHang());
+		}
+		comboBox_NhomHang = new JSuggestField(new Frame(), tenNhomH);
 		//JTextComponent editor = (JTextComponent) comboBox_NhomHang.getEditor().getEditorComponent();
 		comboBox_NhomHang.setEnabled(false);
 		
 		GridBagConstraints gbc_comboBox_NhomHang = new GridBagConstraints();
-		gbc_comboBox_NhomHang.gridwidth = 2;
-		gbc_comboBox_NhomHang.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_NhomHang.gridwidth = 5;
+		gbc_comboBox_NhomHang.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_NhomHang.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_NhomHang.gridx = 2;
 		gbc_comboBox_NhomHang.gridy = 2;
 		panel_DuLieu.add(comboBox_NhomHang, gbc_comboBox_NhomHang);
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 2;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 4;
-		gbc_textField.gridy = 2;
-		panel_DuLieu.add(textField, gbc_textField);
-		textField.setColumns(10);
 		
 		checkBox_1 = new JCheckBox("");
 		checkBox_1.setEnabled(false);
@@ -214,24 +217,30 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		gbc_checkBox_1.gridy = 3;
 		panel_DuLieu.add(checkBox_1, gbc_checkBox_1);
 		
-		JLabel lblGiBnBun = new JLabel("Giá : ");
-		GridBagConstraints gbc_lblGiBnBun = new GridBagConstraints();
-		gbc_lblGiBnBun.anchor = GridBagConstraints.EAST;
-		gbc_lblGiBnBun.insets = new Insets(0, 0, 5, 5);
-		gbc_lblGiBnBun.gridx = 1;
-		gbc_lblGiBnBun.gridy = 3;
-		panel_DuLieu.add(lblGiBnBun, gbc_lblGiBnBun);
+		JLabel lblNhSnXut = new JLabel("Nhà sản xuất: ");
+		GridBagConstraints gbc_lblNhSnXut = new GridBagConstraints();
+		gbc_lblNhSnXut.anchor = GridBagConstraints.EAST;
+		gbc_lblNhSnXut.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNhSnXut.gridx = 1;
+		gbc_lblNhSnXut.gridy = 3;
+		panel_DuLieu.add(lblNhSnXut, gbc_lblNhSnXut);
 		
-		textField_GiaBanB = new JTextField();
-		textField_GiaBanB.setEnabled(false);
-		GridBagConstraints gbc_textField_GiaBanB = new GridBagConstraints();
-		gbc_textField_GiaBanB.gridwidth = 4;
-		gbc_textField_GiaBanB.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_GiaBanB.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_GiaBanB.gridx = 2;
-		gbc_textField_GiaBanB.gridy = 3;
-		panel_DuLieu.add(textField_GiaBanB, gbc_textField_GiaBanB);
-		textField_GiaBanB.setColumns(10);
+		
+		c = QLHangHoaProcess.getListNhaSanXuat();
+		tenNSX = new  Vector<String>();
+		for (int i = 0; i < QLHangHoaProcess.getListNhaSanXuat().size(); i++) {
+			tenNSX.add(c.get(i).getsTenNhaSanXuat());
+		}
+		
+		comboBox_NSX = new JSuggestField(new Frame(),tenNSX);
+		comboBox_NSX.setEnabled(false);
+		GridBagConstraints gbc_comboBox_NSX = new GridBagConstraints();
+		gbc_comboBox_NSX.gridwidth = 5;
+		gbc_comboBox_NSX.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox_NSX.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_NSX.gridx = 2;
+		gbc_comboBox_NSX.gridy = 3;
+		panel_DuLieu.add(comboBox_NSX, gbc_comboBox_NSX);
 		
 		checkBox_2 = new JCheckBox("");
 		checkBox_2.setEnabled(false);
@@ -249,12 +258,16 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		gbc_lblnVTnh.gridy = 4;
 		panel_DuLieu.add(lblnVTnh, gbc_lblnVTnh);
 		
-		comboBox_DonViTInh = new JComboBox();
+		b = QLHangHoaProcess.getListDonViTinh();
+		tenDonViTinh = new  Vector<String>();
+		for (int i = 0; i < QLHangHoaProcess.getListNhaSanXuat().size(); i++) {
+			tenDonViTinh.add(b.get(i).getsTenDonViTinh());
+		}
+		comboBox_DonViTInh = new JSuggestField(new Frame(),tenDonViTinh);
 		comboBox_DonViTInh.setEnabled(false);
-		comboBox_DonViTInh.setModel(new DefaultComboBoxModel(new String[] {"Chọn"}));
 		GridBagConstraints gbc_comboBox_DonViTInh = new GridBagConstraints();
-		gbc_comboBox_DonViTInh.gridwidth = 4;
-		gbc_comboBox_DonViTInh.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_DonViTInh.gridwidth = 5;
+		gbc_comboBox_DonViTInh.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox_DonViTInh.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_DonViTInh.gridx = 2;
 		gbc_comboBox_DonViTInh.gridy = 4;
@@ -268,24 +281,26 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		gbc_checkBox_3.gridy = 5;
 		panel_DuLieu.add(checkBox_3, gbc_checkBox_3);
 		
-		JLabel lblNhSnXut = new JLabel("Nhà sản xuất: ");
-		GridBagConstraints gbc_lblNhSnXut = new GridBagConstraints();
-		gbc_lblNhSnXut.anchor = GridBagConstraints.EAST;
-		gbc_lblNhSnXut.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNhSnXut.gridx = 1;
-		gbc_lblNhSnXut.gridy = 5;
-		panel_DuLieu.add(lblNhSnXut, gbc_lblNhSnXut);
 		
-		comboBox_NSX = new JComboBox();
-		comboBox_NSX.setEnabled(false);
-		comboBox_NSX.setModel(new DefaultComboBoxModel(new String[] {"Chọn"}));
-		GridBagConstraints gbc_comboBox_NSX = new GridBagConstraints();
-		gbc_comboBox_NSX.gridwidth = 4;
-		gbc_comboBox_NSX.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_NSX.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_NSX.gridx = 2;
-		gbc_comboBox_NSX.gridy = 5;
-		panel_DuLieu.add(comboBox_NSX, gbc_comboBox_NSX);
+		
+		JLabel lblGiBnBun = new JLabel("Đơn giá : ");
+		GridBagConstraints gbc_lblGiBnBun = new GridBagConstraints();
+		gbc_lblGiBnBun.anchor = GridBagConstraints.EAST;
+		gbc_lblGiBnBun.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGiBnBun.gridx = 1;
+		gbc_lblGiBnBun.gridy = 5;
+		panel_DuLieu.add(lblGiBnBun, gbc_lblGiBnBun);
+		
+		textField_GiaBanB = new JTextField();
+		textField_GiaBanB.setEnabled(false);
+		GridBagConstraints gbc_textField_GiaBanB = new GridBagConstraints();
+		gbc_textField_GiaBanB.gridwidth = 5;
+		gbc_textField_GiaBanB.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_GiaBanB.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_GiaBanB.gridx = 2;
+		gbc_textField_GiaBanB.gridy = 5;
+		panel_DuLieu.add(textField_GiaBanB, gbc_textField_GiaBanB);
+		textField_GiaBanB.setColumns(10);
 		
 		panel_TacVu = new JPanel();
 		panel_TacVu.setBorder(new TitledBorder(null, "T\u00E1c v\u1EE5", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -378,66 +393,44 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		
 		
 		table = new JTable();
-		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{Boolean.FALSE, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"", "ID", "T\u00EAn m\u1EB7t h\u00E0ng", "\u0110\u01A1n v\u1ECB t\u00EDnh", "Gi\u00E1 mua", "Gi\u00E1 b\u00E1n bu\u00F4n", "Gi\u00E1 b\u00E1n l\u1EBB", "VAT", "Ng\u00E0y nh\u1EADp", "Ng\u00E0y h\u1EBFt h\u1EA1n", "Nh\u00F3m h\u00E0ng", "\u0110\u1ED1i t\u00E1c", "Nh\u00E0 s\u1EA3n xu\u1EA5t"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Boolean.class, Integer.class, String.class, String.class, Float.class, Float.class, Float.class, Float.class, String.class, String.class, String.class, String.class, String.class
+		
+		model =	new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"", "STT", "T\u00EAn m\u1EB7t h\u00E0ng", "Nh\u00F3m H\u00E0ng", "Nh\u00E0 s\u1EA3n xu\u1EA5t", "\u0110\u01A1n v\u1ECB t\u00EDnh", "\u0110\u01A1n gi\u00E1", "S\u1ED1 l\u01B0\u1EE3ng"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					Boolean.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+				boolean[] columnEditables = new boolean[] {
+					true, false, false, false, false, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
 			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(30);
-		table.getColumnModel().getColumn(0).setMinWidth(30);
-		table.getColumnModel().getColumn(0).setMaxWidth(30);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(1).setPreferredWidth(0);
-		table.getColumnModel().getColumn(1).setMinWidth(0);
-		table.getColumnModel().getColumn(1).setMaxWidth(0);
-		table.getColumnModel().getColumn(2).setPreferredWidth(150);
-		table.getColumnModel().getColumn(2).setMinWidth(150);
-		table.getColumnModel().getColumn(2).setMaxWidth(999);
-		table.getColumnModel().getColumn(3).setMinWidth(1);
-		table.getColumnModel().getColumn(3).setMaxWidth(999);
-		table.getColumnModel().getColumn(4).setMinWidth(75);
-		table.getColumnModel().getColumn(4).setMaxWidth(999);
-		table.getColumnModel().getColumn(5).setMinWidth(75);
-		table.getColumnModel().getColumn(5).setMaxWidth(999);
-		table.getColumnModel().getColumn(6).setMinWidth(75);
-		table.getColumnModel().getColumn(6).setMaxWidth(975);
-		table.getColumnModel().getColumn(7).setMinWidth(75);
-		table.getColumnModel().getColumn(7).setMaxWidth(975);
-		table.getColumnModel().getColumn(8).setPreferredWidth(100);
-		table.getColumnModel().getColumn(8).setMinWidth(100);
-		table.getColumnModel().getColumn(8).setMaxWidth(900);
-		table.getColumnModel().getColumn(9).setPreferredWidth(100);
-		table.getColumnModel().getColumn(9).setMinWidth(100);
-		table.getColumnModel().getColumn(9).setMaxWidth(900);
-		table.getColumnModel().getColumn(10).setPreferredWidth(150);
-		table.getColumnModel().getColumn(10).setMinWidth(150);
-		table.getColumnModel().getColumn(10).setMaxWidth(950);
-		table.getColumnModel().getColumn(11).setPreferredWidth(150);
-		table.getColumnModel().getColumn(11).setMinWidth(150);
-		table.getColumnModel().getColumn(11).setMaxWidth(950);
-		table.getColumnModel().getColumn(12).setPreferredWidth(150);
-		table.getColumnModel().getColumn(12).setMinWidth(150);
-		table.getColumnModel().getColumn(12).setMaxWidth(990);
+		table.setModel(model);
+		table.getColumnModel().getColumn(0).setMinWidth(75);
+		table.getColumnModel().getColumn(1).setMinWidth(75);
+		table.getColumnModel().getColumn(2).setPreferredWidth(250);
+		table.getColumnModel().getColumn(2).setMinWidth(250);
+		table.getColumnModel().getColumn(3).setPreferredWidth(250);
+		table.getColumnModel().getColumn(3).setMinWidth(250);
+		table.getColumnModel().getColumn(4).setPreferredWidth(250);
+		table.getColumnModel().getColumn(4).setMinWidth(250);
+		table.getColumnModel().getColumn(5).setPreferredWidth(100);
+		table.getColumnModel().getColumn(5).setMinWidth(100);
+		table.getColumnModel().getColumn(6).setPreferredWidth(100);
+		table.getColumnModel().getColumn(6).setMinWidth(100);
+		table.getColumnModel().getColumn(7).setPreferredWidth(100);
+		table.getColumnModel().getColumn(7).setMinWidth(100);
+		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
 		panel_DanhSach.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -460,6 +453,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		button_1.setIcon(new ImageIcon("media/images/next.png"));
 		panel_NhanVien.add(button_1);
 		//comboNhomHang();
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -482,6 +476,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 	}
 	public void them() {
 		iThem = 1;
+		
 		btnLuu.setEnabled(true);
 		btnThoi.setEnabled(true);
 		btnSua.setEnabled(false);
@@ -505,23 +500,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		comboBox_NSX.setEnabled(false);
 		
 	}
-	public void comboNhomHang() {
-		try{
-			String selected = (String) comboBox_NhomHang.getSelectedItem();
-			QLNhomHangProcess QLNhomHangProcess = new QLNhomHangProcess();
-			Vector<NhomHang> VNhomHang =QLNhomHangProcess.getListNhomHangcombo();
-			Vector<String> vSNhomHang = new Vector<String>();
-			comboBox_NhomHang.removeAll();
-			for (int i = 0; i < VNhomHang.size(); i++) {
-				vSNhomHang.add(VNhomHang.get(i).getsTenNhomHang());
-			}
-			DefaultComboBoxModel model = new DefaultComboBoxModel(vSNhomHang);
-			comboBox_NhomHang.setModel(model);
-			comboBox_NhomHang.setSelectedItem(selected);
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
+
 	public void check() throws Exception {
 		loi = 0;
 		err = "";
@@ -546,6 +525,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 //		}
 		
 	}
+
 	public void luu() throws Exception {
 		check();
 		if (loi == 0) {

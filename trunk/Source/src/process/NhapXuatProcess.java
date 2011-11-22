@@ -7,30 +7,41 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import myobject.NhomHang;
+import myobject.HangHoa;
 import connect.ioconnection;
 
 
 public class NhapXuatProcess 
 {
-	public Vector<NhomHang> getListNhomHang(Integer soTrang) throws SQLException
+	public Vector<HangHoa> getListHangHoa(Integer soTrang) throws SQLException
     {
-            Vector<NhomHang> result = new Vector<NhomHang>();
+            Vector<HangHoa> result = new Vector<HangHoa>();
             Connection con = ioconnection.getConnection();
             try
             {
-                    CallableStatement cst = con.prepareCall("{call DanhSach_NhomHang(?)}");
+                    CallableStatement cst = con.prepareCall("{call ds_HangHoa(?)}");
 					cst.setInt(1, soTrang);
                     ResultSet rs =  cst.executeQuery();
 
                     while(rs.next())
                     {
-                    	NhomHang varNhomHang = new NhomHang();
-                    	varNhomHang.setID(rs.getInt("PK_iNhomHangID"));
-                    	varNhomHang.setsTenNhomHang(rs.getString("sTenNhomHang"));
-                    	varNhomHang.setsTenNhomHangEng(rs.getString("sTenNhomHangEng"));
-                    	varNhomHang.setsGhiChu(rs.getString("sGhiChu"));              
-                        result.add(varNhomHang);
+                    	HangHoa varHangHoa = new HangHoa();
+                    	varHangHoa.setPK_iHangHoaID    (rs.getInt("PK_iHangHoaID"))  ;  
+                    	varHangHoa.setsTenHangHoa       (rs.getString("sTenHangHoa")) ;   
+                    	varHangHoa.setsTenHangHoaEng    (rs.getString("sTenHangHoaEng")) ;   
+                    	varHangHoa.setiDonGia          (rs.getInt("iDonGia"))  ;  
+                    	varHangHoa.setsNgayNhap         (rs.getString("sNgayNhap")) ;   
+                    	varHangHoa.setsGhiChu           (rs.getString("sGhiChu")) ;   
+                    	varHangHoa.setFK_sDoiTacID      (rs.getString("FK_sDoiTacID")) ;   
+                    	varHangHoa.setFK_sNhaSanXuatID  (rs.getString("FK_sNhaSanXuatID ")) ;   
+                    	varHangHoa.setFK_iDonViTinhID  (rs.getInt("FK_iDonViTinhID"))  ;  
+                    	varHangHoa.setFK_iNhomHangID    (rs.getString("FK_iNhomHangID   ")) ;   
+                    	varHangHoa.setsTenDoiTac        (rs.getString("sTenDoiTac       ")) ;   
+                    	varHangHoa.setsTenNhaSanXuat    (rs.getString("sTenNhaSanXuat   ")) ;   
+                    	varHangHoa.setsTenDonViTinh     (rs.getString("sTenDonViTinh    ")) ;   
+                    	varHangHoa.setsTenNhomHang      (rs.getString("sTenNhomHang     ")) ; 	
+                    	varHangHoa.setiSoLuong          (rs.getInt("iSoLuong"))  ;  
+                        result.add(varHangHoa);
                     }
             }
             catch (Exception e)
@@ -45,13 +56,13 @@ public class NhapXuatProcess
             }
     }
 	
-	public Integer getsoNhomHang() throws SQLException
+	public Integer getsoHangHoa() throws SQLException
     {
     		Integer result = 0;
             Connection con = ioconnection.getConnection();
             try
             {           
-                    CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_NhomHang()}");
+                    CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_hh()}");
                     ResultSet rs1 =  soLuongRecod.executeQuery();
 					rs1.next();
 					result = rs1.getInt(1);
@@ -74,7 +85,7 @@ public class NhapXuatProcess
             Connection con = ioconnection.getConnection();
             try
             {                    
-	            	CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_KQ_nhomHang(?)}");
+	            	CallableStatement soLuongRecod = con.prepareCall("{call SoLuong_KQ_HangHoa(?)}");
 	            	soLuongRecod.setString(1, key);
                     ResultSet rs1 =  soLuongRecod.executeQuery();
 					rs1.next();
@@ -93,45 +104,16 @@ public class NhapXuatProcess
             }
     }
 	
-	public Vector<NhomHang> getListNhomHangcombo() throws SQLException
-    {
-            Vector<NhomHang> result = new Vector<NhomHang>();
-            Connection con = ioconnection.getConnection();
-            try
-            {
-                    CallableStatement cst = con.prepareCall("{call DanhSachall_NhomHang()}");
-                    ResultSet rs =  cst.executeQuery();
-
-                    while(rs.next())
-                    {
-                    	NhomHang varNhomHang = new NhomHang();
-                    	varNhomHang.setID(rs.getInt("PK_iNhomHangID"));
-                    	varNhomHang.setsTenNhomHang(rs.getString("sTenNhomHang"));
-                    	varNhomHang.setsTenNhomHangEng(rs.getString("sTenNhomHangEng"));
-                    	varNhomHang.setsGhiChu(rs.getString("sGhiChu"));              
-                        result.add(varNhomHang);
-                    }
-            }
-            catch (Exception e)
-            {
-                    e.printStackTrace();
-                    result = null;
-            }
-            finally
-            {
-                    ioconnection.closeConnection(con);	
-                    return result;
-            }
-    }
+	
     
     
     public static void main(String[] args) throws SQLException {
     	NhapXuatProcess a = new NhapXuatProcess();
-//    	System.out.println(a.checkTenNhomHang("bdff"));
-//    	System.out.println(a.getListNhomHang(1));
+//    	System.out.println(a.checkTenHangHoa("bdff"));
+//    	System.out.println(a.getListHangHoa(1));
 //    	System.out.println(a.getListSearched(1, "dgdsb"));
 //    	System.out.println(a.getSoLuongKQ("hsdhjd"));
-//    	System.out.println(a.getsoNhomHang());
+//    	System.out.println(a.getsoHangHoa());
 //    	System.out.println(a.getSuggestData("shsh"));
     }
 }
