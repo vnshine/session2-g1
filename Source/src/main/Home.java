@@ -184,7 +184,7 @@ public class Home extends JFrame implements ActionListener {
 		
 		VerticalMenuBar verticalMenuBar = new VerticalMenuBar();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("media/images/48px-Crystal_Clear_action_bookmark.png"));
-		setTitle("Phần mềm quản lý bán hàng Hợp tác xã công nghiệp Nhật Quang");
+		setTitle("NHAT QUANG SALES MANAGERMENT");
 		//this.setVisible(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 	
@@ -210,7 +210,7 @@ public class Home extends JFrame implements ActionListener {
 		gbl_panel_2.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
-		icon = new ImageIcon("media/images/NhatQuangBanner.png");
+		icon = new ImageIcon("media/images/NewBanner.png");
 		panelImg = new JPanel(){
 			public void paintComponent(Graphics g)	{	
 				Dimension d = getSize();
