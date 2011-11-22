@@ -30,6 +30,22 @@ begin
 end
 go
 
+
+-----------Proc thông tin
+if(OBJECT_ID('sp_tblNhanVien_Info','p') is not null)
+begin
+	drop proc  sp_tblNhanVien_Info
+end
+GO
+
+CREATE proc sp_tblNhanVien_Info
+	@MaNhanVien varchar(6)
+as
+begin
+	select * FROM tbl_NhanVien WHERE PK_sNhanVienID = @MaNhanVien
+end
+go
+
 --------------------------------
 --Bảng chức năng
 --------------------------------
