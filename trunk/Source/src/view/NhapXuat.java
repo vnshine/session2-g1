@@ -38,6 +38,7 @@ import java.awt.event.MouseEvent;
 import java.util.Vector;
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class NhapXuat extends JDialog {
 
@@ -61,6 +62,8 @@ public class NhapXuat extends JDialog {
 	private Vector<Integer> ListChecked = new Vector<Integer>();
 	private DefaultTableModel model;
 	private NhapXuatProcess NhapXuatProcess = new NhapXuatProcess();
+	private String err;
+	private QuanLiNhapXuat quanLiNhapXuat2;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -91,10 +94,82 @@ public class NhapXuat extends JDialog {
 	}
 	public void check() {
 		loi = 0;
+		err = "";
+		try {
+			int row = table.getSelectedRow();  
+			String i = (table.getModel().getValueAt(row, 2)).toString();
+
+			String i2 = (String)table.getModel().getValueAt(row, 3);
+
+			Integer i3 = (Integer)table.getModel().getValueAt(row, 16);
+			if (Integer.parseInt(textFieldSoLuong.getText()) > i3) {
+				
+				err = err + "Số lượng mặt hàng không đủ !\n";
+				loi = 1;
+			}
+		} catch (Exception e) {
+			loi = 1;
+			// TODO: handle exception
+		}
+		
+		
+		int row = table.getSelectedRow();
+		
 		if (loi == 0) {
+			HangHoa e = new HangHoa();
+			Integer a = Integer.parseInt((String)table.getModel().getValueAt(row, 2));
+			e.setPK_iHangHoaID(a);
+			e.setsTenHangHoa       ((table.getModel().getValueAt(row, 3)).toString());
+			e.setsTenHangHoaEng    ((table.getModel().getValueAt(row, 4)).toString());
+			Float b = Float.parseFloat(textField_DonGia.getText());
+			e.setiDonGia            (b);       
+			e.setsNgayNhap         ((table.getModel().getValueAt(row, 6)).toString()); 
+			e.setsGhiChu           ((table.getModel().getValueAt(row, 7)).toString()); 
+			e.setFK_sDoiTacID      ((table.getModel().getValueAt(row, 8)).toString()); 
+			e.setFK_sNhaSanXuatID  ((table.getModel().getValueAt(row, 9)).toString()); 
+			Integer c = Integer.parseInt((table.getModel().getValueAt(row, 10)).toString());
+			e.setFK_iDonViTinhID   (c);
+			e.setFK_iNhomHangID    ((table.getModel().getValueAt(row, 11)).toString());
+			e.setsTenDoiTac        ((table.getModel().getValueAt(row, 12)).toString());
+			e.setsTenNhaSanXuat    ((table.getModel().getValueAt(row, 13)).toString());
+			e.setsTenDonViTinh     ((table.getModel().getValueAt(row, 14)).toString());
+			e.setsTenNhomHang      ((table.getModel().getValueAt(row, 15)).toString());
+			Integer d = Integer.parseInt(textFieldSoLuong.getText());
+			e.setiSoLuong (d);
+			
+			
+
+			quanLiNhapXuat2.model.getDataVector().removeAllElements();
+			quanLiNhapXuat2.model.fireTableDataChanged();
+			quanLiNhapXuat2.dsHang.add(e);
+			
+			for (int i = 0; i < quanLiNhapXuat2.dsHang.size(); i++) {
+				Object[] oPerson = {true,quanLiNhapXuat2.STT,
+						quanLiNhapXuat2.dsHang.get(i).getPK_iHangHoaID   () ,
+						quanLiNhapXuat2.dsHang.get(i).getsTenHangHoa     () ,
+						quanLiNhapXuat2.dsHang.get(i).getiSoLuong        () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsTenHangHoaEng  () ,
+						quanLiNhapXuat2.dsHang.get(i).getiDonGia         () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsNgayNhap       () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsGhiChu         () ,
+						//quanLiNhapXuat2.dsHang.get(i).getFK_sDoiTacID    () ,
+						//quanLiNhapXuat2.dsHang.get(i).getFK_sNhaSanXuatID() ,
+						//quanLiNhapXuat2.dsHang.get(i).getFK_iDonViTinhID () ,
+						//quanLiNhapXuat2.dsHang.get(i).getFK_iNhomHangID  () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsTenDoiTac      () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsTenNhaSanXuat  () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsTenDonViTinh   () ,
+						//quanLiNhapXuat2.dsHang.get(i).getsTenNhomHang    () ,
+						100
+						
+						};
+				quanLiNhapXuat2.STT++;
+				quanLiNhapXuat2.model.insertRow(i, oPerson);
+				quanLiNhapXuat2.model.fireTableDataChanged();
+			}
 			closeDialog();
 		}else {
-			JOptionPane.showMessageDialog(this, "Lỗi dữ liệu nhập vào !\n", "Lỗi", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Lỗi dữ liệu nhập vào !\n"+err, "Lỗi", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	/**
@@ -102,10 +177,17 @@ public class NhapXuat extends JDialog {
 	 * @throws Exception 
 	 */
 	public NhapXuat(QuanLiNhapXuat quanLiNhapXuat) throws Exception {
+		quanLiNhapXuat2 = quanLiNhapXuat;
 		setTitle("Thêm hàng vào danh sách Nhập/Xuất");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("media/images/add.png"));
 		setBounds(200, 200, 803, 496);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				//tinhTong();
+			}
+		});
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
@@ -169,6 +251,7 @@ public class NhapXuat extends JDialog {
 		textFieldSoLuong = new JTextField();
 		textFieldSoLuong.addCaretListener(new CaretListener() {
 			public void caretUpdate(CaretEvent arg0) {
+				soLuong = Integer.getInteger(textFieldSoLuong.getText());
 				tinhTong();
 			}
 		});
@@ -541,10 +624,10 @@ public void loaddata() throws Exception {
 	}
 	public void tinhTong() {
 		try {
-			if (textFieldSoLuong.getText() != "") {
-				soLuong = Integer.getInteger(textFieldSoLuong.getText());
-			}
-			if (textField_DonGia.getText() != "") {
+//			if (textFieldSoLuong.getText().length() >= 1) {
+//				soLuong = Integer.getInteger(textFieldSoLuong.getText());
+//			}
+			if (textField_DonGia.getText().length() >= 1) {
 				donGia = Float.parseFloat(textField_DonGia.getText());
 			}
 			

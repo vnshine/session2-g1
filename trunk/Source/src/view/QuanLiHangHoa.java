@@ -68,6 +68,7 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 	private Vector<HangHoa> danhSach;
 	private Integer soLuongNH;
 	private DefaultTableModel model;
+	private JButton btnThmHngHa;
 	private static void installLnF() {
 		try {
 			String lnfClassname = PREFERRED_LOOK_AND_FEEL;
@@ -386,6 +387,10 @@ public class QuanLiHangHoa extends JInternalFrame implements ActionListener {
 		btnKtXutExcel = new JButton("Kết xuất Excel");
 		btnKtXutExcel.setIcon(new ImageIcon("media/images/excel.png"));
 		panel_TacVu.add(btnKtXutExcel);
+		
+		btnThmHngHa = new JButton("Thêm hàng hóa từ file Excel");
+		btnThmHngHa.setIcon(new ImageIcon("media/images/excel.png"));
+		panel_TacVu.add(btnThmHngHa);
 		
 		JPanel panel_DanhSach = new JPanel();
 		panel_DanhSach.setBorder(new TitledBorder(null, "Danh S\u00E1ch", TitledBorder.LEADING, TitledBorder.TOP, null, null));
